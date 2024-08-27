@@ -3,7 +3,6 @@
     <nav class="admin-header">
       <div class="main-logo">
         <nuxt-link :to="'/admin/projects'" class="">
-          <!-- <img src="~/assets/img/logo-birds.svg" class="dark-logo"> -->
         </nuxt-link>
       </div>
       <div class="logout">

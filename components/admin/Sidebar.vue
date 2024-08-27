@@ -20,7 +20,6 @@
 </template>
 
 <script>
-import logosign from "~/assets/img/logo.svg";
 
 export default {
   layout: "admin",
@@ -28,7 +27,6 @@ export default {
   components: {},
   data() {
     return {
-      logosign: logosign,
       menuItems: [
         {
           name: "Reservations",
