@@ -1,0 +1,69 @@
+////// /keyframes
+
+@keyframes fadeInStart {
+  0% { 
+    opacity: 0;
+    transform: translateY(0px); 
+    //animation-timing-function: cubic-bezier(0.42, 0, 0.58, 1.0);
+  }
+  100% { 
+    opacity: 1;
+    transform: translateY(0px);
+    // animation-timing-function: cubic-bezier(0.90, 0, 0.98, 1.0);
+   }
+}
+
+
+@keyframes fadeIn {
+  0% { 
+    opacity: 0;
+    transform: translateY(15px); 
+    //animation-timing-function: cubic-bezier(0.42, 0, 0.58, 1.0);
+  }
+  100% { 
+    opacity: 1;
+    transform: translateY(0px);
+    // animation-timing-function: cubic-bezier(0.90, 0, 0.98, 1.0);
+   }
+}
+
+@keyframes sweep {
+  from { 
+    transform: translateX(-1em)
+  }
+  to { 
+    transform: translateX(12.5em);
+    animation-timing-function: ease-out; 
+  }
+}
+
+@keyframes slideUpBtn {
+  0% {
+    height: 0%;
+    animation-timing-function: cubic-bezier(.565,.43,.24,.92);
+  }
+  100% {
+    height: 100%;
+    animation-timing-function: cubic-bezier(.565,.43,.24,.92);
+  }
+}
+
+@keyframes upAndDown {
+  0% {
+    opacity: 1;
+    -ms-transform: translate(0, 0);
+    -webkit-transform: translate(0, 0);
+    transform: translate(0, 0);
+  }
+  50% {
+      -ms-transform: translate(0, 5%);
+      -webkit-transform: translate(0, 5%);
+      transform: translate(0, 5%);
+  }
+  100% {
+    opacity: 1;
+    -ms-transform: translate(0, 0);
+    -webkit-transform: translate(0, 0);
+    transform: translate(0, 0);
+  }
+}

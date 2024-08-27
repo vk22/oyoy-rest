@@ -1,0 +1,382 @@
+@import 'assets/scss/variables.scss';
+@import 'assets/scss/keyframes.scss';
+
+
+
+@media print {
+  @page {
+    margin: 0;
+    background: red;
+  }
+
+  body {
+    margin: 0;
+    background: red;
+  }
+}
+
+@media screen {
+  body {
+    margin: 0;
+  }
+}
+
+html,
+body {
+  font-family: $font-sans;
+  color: #111;
+  background-color: #fff;
+  margin: 0;
+  word-spacing: 1px;
+  -ms-text-size-adjust: 100%;
+  -webkit-text-size-adjust: 100%;
+  -moz-osx-font-smoothing: grayscale;
+  -webkit-font-smoothing: antialiased;
+  box-sizing: border-box;
+  height: 100%;
+
+  //overflow: hidden;
+
+  @include for-small-phone-only {
+    font-size: 14px;
+  }
+
+  @include for-phone-only {
+    font-size: 14px;
+  }
+
+  @include for-tablet-portrait-up {
+    font-size: 16px;
+  }
+
+  @include for-big-desktop-up {
+    // font-size: 16px;
+  }
+}
+
+*,
+:after,
+:before {
+  box-sizing: border-box;
+}
+
+img {
+  width: 100%;
+  max-width: 100%;
+}
+
+.img-cover {
+  border: none;
+  height: 100%;
+  left: 0;
+  -o-object-fit: cover;
+  object-fit: cover;
+  position: absolute;
+  top: 0;
+  width: 100%;
+  z-index: 10;
+}
+
+.desktop-only {
+
+  @include for-phone-only {
+    display: none !important;
+  }
+
+  @include for-tablet-portrait-up {
+    display: flex !important;
+  }
+
+}
+
+.mobile-only {
+
+  @include for-phone-only {
+    display: flex !important;
+  }
+
+  @include for-tablet-portrait-up {
+    display: none !important;
+  }
+
+}
+
+
+button:focus {
+  outline: 0;
+}
+
+.v-enter-active,
+.v-leave-active {
+  transition: opacity 0.5s ease;
+}
+
+.v-enter-from,
+.v-leave-to {
+  opacity: 0;
+}
+
+.fade-enter-active,
+.fade-leave-active {
+  transition: all 1s ease;
+  visibility: visible;
+  opacity: 1;
+}
+
+.fade-enter,
+.fade-leave-to {
+  opacity: 0;
+  visibility: hidden;
+}
+
+
+////////////////////////////////////////////////////////////////////////
+////////////////////////////////////////////////////////////////////////
+////////////////////////////////////////////////////////////////////////
+/// 
+
+h1 {
+
+  @include for-phone-only {
+    font-size: 2.5rem;
+  }
+
+  @include for-tablet-portrait-up {
+    font-size: 3.5rem;
+  }
+}
+
+h2 {
+
+  @include for-phone-only {
+    font-size: 3.5rem;
+    margin-bottom: 1rem;
+    line-height: 3.5rem;
+  }
+
+  @include for-tablet-portrait-up {
+    font-size: 3.5rem;
+    line-height: 4rem;
+    margin-bottom: 1rem;
+
+  }
+}
+
+h3 {
+
+  @include for-phone-only {
+    font-size: 1rem;
+    margin-bottom: 1.5rem;
+  }
+
+  @include for-tablet-portrait-up {
+    font-size: 1.25rem;
+    margin-bottom: 1rem;
+  }
+}
+
+h1,
+h2,
+h3 {
+  font-family: $font-serif;
+  color: $mainColor;
+  // text-transform: uppercase;
+  font-weight: 400;
+  letter-spacing: 0px;
+}
+
+p {
+  font-weight: 400;
+  line-height: 1.5;
+  font-size: 1rem;
+  margin-bottom: 1.1rem;
+}
+
+.text-accent p {
+  font-weight: 400;
+  line-height: 1.35;
+  font-size: 1.5rem;
+}
+
+b,
+strong {
+  font-weight: 600;
+}
+
+a {
+  color: #efeff1;
+}
+
+
+////////////////////////////////////////////////////////////////////////
+////////////////////////////////////////////////////////////////////////
+////////////////////////////////////////////////////////////////////////
+
+ul {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+.center {
+  margin: 0 auto;
+}
+
+
+.loop {
+  animation: upAndDown 10s infinite;
+}
+
+.btn {
+  position: relative;
+  border: 1px solid rgba(0, 0, 0, 0.25);
+  border-radius: 1px;
+  color: #fff;
+  background: #111;
+  cursor: pointer;
+  font-size: 0.8rem;
+  font-weight: 500;
+  letter-spacing: 1px;
+  //padding: 1.25rem 2.25rem;
+  padding: 1rem 1.5rem;
+  text-align: center;
+  text-transform: uppercase;
+  @include base-transition(all, .25s);
+
+  &.btn-header {
+    border: 1px solid rgba(255, 255, 255, 0.25);
+    padding: 1rem 1.5rem;
+    margin-left: 2rem;
+    font-size: 0.8rem;
+
+    @include for-phone-only {
+      display: none;
+    }
+
+    @include for-tablet-portrait-up {
+      display: flex;
+    }
+
+    @include for-desktop-up {
+      display: flex;
+    }
+  }
+
+  &:hover {
+    color: #fff;
+    background: #333;
+  }
+
+  // &::before {
+  //   position: absolute;
+  //   content: "";
+  //   top: 0;
+  //   bottom: 0;
+  //   left: 0;
+  //   right: 0;
+  //   z-index: -1;
+  //   display: block;
+  //   background-color: #021D40;
+  //   transform: scaleY(0);
+  //   transform-origin: top right;
+  //   @include base-transition(transform);
+  // }
+
+
+  // &:hover::before {
+  //   transform: scaleY(1);
+  //   transform-origin: bottom left;
+  // }
+
+  &.white {
+    border: 1px solid rgba(255, 255, 255, 0.525);
+    color: #fff;
+
+    &:hover {
+      background: #ffffff29;
+    }
+
+  }
+
+  &.black {
+    color: #fff;
+    background: #111;
+
+    &:hover {
+      background: #333;
+    }
+
+  }
+}
+
+
+.page-content {
+
+
+  &__block {
+    display: flex;
+    flex-direction: column;
+
+    &.centered {
+      align-items: center;
+    }
+
+    &__title {
+      text-align: center;
+    }
+
+    &__text {
+      text-align: center;
+      margin-bottom: 1rem;
+    }
+  }
+}
+
+.index-section {
+  overflow: hidden;
+  padding: 2rem 0;
+}
+
+.modal-window {
+  z-index: 9999;
+  background: rgb(255, 255, 255)
+}
+
+.slideUp {
+  transform: translateY(15px);
+  opacity: 0;
+  @include base-transition(all, 1s, .25s);
+
+  &.show {
+    transform: translateY(0px);
+    opacity: 1;
+  }
+}
+
+.fadeIn-1 {
+  opacity: 0;
+  animation: fadeIn 1s;
+  animation-delay: 1s;
+  animation-fill-mode: forwards;
+}
+
+.fadeIn-2 {
+  opacity: 0;
+  animation: fadeIn 1s;
+  animation-delay: 1.25s;
+  animation-fill-mode: forwards;
+}
+
+.fadeIn-3 {
+  opacity: 0;
+  animation: fadeIn 1s;
+  animation-delay: 1.5s;
+  animation-fill-mode: forwards;
+}
+
+.fadeIn-4 {
+  opacity: 0;
+  animation: fadeIn 1s;
+  animation-delay: 1.75s;
+  animation-fill-mode: forwards;
+}

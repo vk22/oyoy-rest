@@ -1,0 +1,65 @@
+@font-face {
+    font-family: 'Melodrama';
+    src: url('/fonts/Melodrama-Bold.eot');
+    src: local('Melodrama Bold'), local('Melodrama-Bold'),
+        url('/fonts/Melodrama-Bold.eot?#iefix') format('embedded-opentype'),
+        url('/fonts/Melodrama-Bold.woff2') format('woff2'),
+        url('/fonts/Melodrama-Bold.woff') format('woff'),
+        url('/fonts/Melodrama-Bold.ttf') format('truetype');
+    font-weight: bold;
+    font-style: normal;
+    font-display: swap;
+}
+
+@font-face {
+    font-family: 'Melodrama';
+    src: url('/fonts/Melodrama-Medium.eot');
+    src: local('Melodrama Medium'), local('Melodrama-Medium'),
+        url('/fonts/Melodrama-Medium.eot?#iefix') format('embedded-opentype'),
+        url('/fonts/Melodrama-Medium.woff2') format('woff2'),
+        url('/fonts/Melodrama-Medium.woff') format('woff'),
+        url('/fonts/Melodrama-Medium.ttf') format('truetype');
+    font-weight: 500;
+    font-style: normal;
+    font-display: swap;
+}
+
+@font-face {
+    font-family: 'Melodrama';
+    src: url('/fonts/Melodrama-Semibold.eot');
+    src: local('Melodrama Semibold'), local('Melodrama-Semibold'),
+        url('/fonts/Melodrama-Semibold.eot?#iefix') format('embedded-opentype'),
+        url('/fonts/Melodrama-Semibold.woff2') format('woff2'),
+        url('/fonts/Melodrama-Semibold.woff') format('woff'),
+        url('/fonts/Melodrama-Semibold.ttf') format('truetype');
+    font-weight: 600;
+    font-style: normal;
+    font-display: swap;
+}
+
+@font-face {
+    font-family: 'Melodrama';
+    src: url('/fonts/Melodrama-Regular.eot');
+    src: local('Melodrama Regular'), local('Melodrama-Regular'),
+        url('/fonts/Melodrama-Regular.eot?#iefix') format('embedded-opentype'),
+        url('/fonts/Melodrama-Regular.woff2') format('woff2'),
+        url('/fonts/Melodrama-Regular.woff') format('woff'),
+        url('/fonts/Melodrama-Regular.ttf') format('truetype');
+    font-weight: normal;
+    font-style: normal;
+    font-display: swap;
+}
+
+@font-face {
+    font-family: 'Melodrama';
+    src: url('/fonts/Melodrama-Light.eot');
+    src: local('Melodrama Light'), local('Melodrama-Light'),
+        url('/fonts/Melodrama-Light.eot?#iefix') format('embedded-opentype'),
+        url('/fonts/Melodrama-Light.woff2') format('woff2'),
+        url('/fonts/Melodrama-Light.woff') format('woff'),
+        url('/fonts/Melodrama-Light.ttf') format('truetype');
+    font-weight: 300;
+    font-style: normal;
+    font-display: swap;
+}
+
