@@ -238,9 +238,9 @@ onMounted(() => {
         }
 
         @include for-tablet-portrait-up {
-          font-size: 4rem;
+          font-size: 5rem;
           letter-spacing: 1px;
-          line-height: 4.5rem;
+          line-height: 5.5rem;
           padding: 0.25rem 0 0.45rem;
         }
 
