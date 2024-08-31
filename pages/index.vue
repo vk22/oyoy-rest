@@ -1,6 +1,5 @@
 <template>
   <v-app>
-    <div class="wrapper">
       <SendEmailResponse></SendEmailResponse>
       <transition>
         <FormModal></FormModal>
@@ -23,7 +22,6 @@
         <NewsIndex></NewsIndex>
       </section>
       <Footer></Footer>
-    </div>
   </v-app>
 </template>
 

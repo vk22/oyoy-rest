@@ -231,16 +231,16 @@ onMounted(() => {
         text-shadow: 1px 1px 10px #0000003f;
 
         @include for-phone-only {
-          font-size: 5rem;
+          font-size: 4rem;
           letter-spacing: 1px;
-          line-height: 5.5rem;
+          line-height: 4.5rem;
           padding: 0.25rem 0 0.45rem;
         }
 
         @include for-tablet-portrait-up {
-          font-size: 5rem;
-          letter-spacing: 3px;
-          line-height: 1em;
+          font-size: 4rem;
+          letter-spacing: 1px;
+          line-height: 4.5rem;
           padding: 0.25rem 0 0.45rem;
         }
 
@@ -252,7 +252,7 @@ onMounted(() => {
         }
 
         @include for-700-height-only {
-          font-size: 5rem;
+          font-size: 4rem;
           letter-spacing: 1px;
           line-height: 4.5rem;
           padding: 0.25rem 0 0.45rem;

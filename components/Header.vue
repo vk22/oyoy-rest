@@ -138,7 +138,7 @@ const company = companyStore.getCompany
   align-items: center;
   position: fixed;
   z-index: 999;
-  width: 100%;
+  width: 100vw;
   padding: 2rem;
 
   .header-l,
