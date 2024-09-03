@@ -2,7 +2,7 @@
   <section class="top-banner">
     <div class="top-banner__container">
       <div class="center">
-        <div class="headline" :class="{'fadeIn-2': dataReady}">
+        <div class="headline" :class="{ 'fadeIn-2': dataReady }">
           <div class="big">{{ topslideText.title }}</div>
           <div class="medium">{{ topslideText.subtitle }}</div>
         </div>
@@ -15,27 +15,19 @@
         <img src="/img/arrow-down.svg" alt="" />
       </div> -->
     </div>
-    <div class="gallery" @click="toggleGallery()" :class="{'show': dataReady, 'active': galleryIsActive}">
-      <div
-        class="gallery__wrap"
-        :class="{
-          'slide-active': galleryItem.index === activeIndex,
-          'slide-to-left': galleryItem.index === activeNext && galleryIsWork,
-        }"
-        v-for="galleryItem in gallery"
-        :key="galleryItem.index"
-      >
-        <div
-          class="gallery__item"
-          :class="'image-' + galleryItem.index"
-          :style="{ backgroundImage: 'url(' + galleryItem.url + ')' }"
-        ></div>
+    <div class="gallery" @click="toggleGallery()" :class="{ 'show': dataReady, 'active': galleryIsActive }">
+      <div class="gallery__wrap" :class="{
+        'slide-active': galleryItem.index === activeIndex,
+        'slide-to-left': galleryItem.index === activeNext && galleryIsWork,
+      }" v-for="galleryItem in gallery" :key="galleryItem.index">
+        <div class="gallery__item" :class="'image-' + galleryItem.index"
+          :style="{ backgroundImage: 'url(' + galleryItem.url + ')' }"></div>
       </div>
     </div>
   </section>
 </template>
 
-<script setup> 
+<script setup>
 useHead({
   link: [
     {
@@ -56,12 +48,12 @@ useHead({
   ]
 })
 import { ref } from 'vue'
-import { useMainStore }  from '@/store/index'
+import { useMainStore } from '@/store/index'
 const mainStore = useMainStore()
 let dataReady = computed(() => mainStore.getDataReady)
-import { useCustomGalleryStore }  from '@/store/galleryCustom'
+import { useCustomGalleryStore } from '@/store/galleryCustom'
 const customGalleryStore = useCustomGalleryStore()
-customGalleryStore.fetchData('top')
+//customGalleryStore.fetchData('top')
 
 let galleryIsActive = ref(0)
 let activeIndex = computed(() => customGalleryStore.activeIndex)
@@ -85,13 +77,16 @@ const goToSlide = (index) => {
 /// 
 const gallery = customGalleryStore.getGallery
 if (gallery[0]) {
-  const imageUrl = gallery[0].url
-  let preloaderImg = document.createElement("img");
-  preloaderImg.src = imageUrl;
-  preloaderImg.addEventListener('load', (event) => {
-    console.log('image loaded!!!')
-    readyToGo()
-  });
+  if (process.client) {
+    const imageUrl = gallery[0].url
+    let preloaderImg = document.createElement("img");
+    preloaderImg.src = imageUrl;
+    preloaderImg.addEventListener('load', (event) => {
+      console.log('image loaded!!!')
+      readyToGo()
+    });
+  }
+
 }
 
 const readyToGo = () => {
@@ -110,17 +105,19 @@ const readyToGo = () => {
 //// about
 import { useTopslideStore } from "@/store/topslide";
 const topslideStore = useTopslideStore();
-topslideStore.fetchData()
 const topslideText = topslideStore.getData
 
 onMounted(() => {
-  document.addEventListener('visibilitychange', () => {
-    if (document.hidden) {
-      stopGallery()
-    } else {
-      startGallery(6000)
-    }
-  });
+  if (process.client) {
+    document.addEventListener('visibilitychange', () => {
+      if (document.hidden) {
+        stopGallery()
+      } else {
+        startGallery(6000)
+      }
+    });
+  }
+
 });
 
 </script>
@@ -194,14 +191,10 @@ onMounted(() => {
       margin-bottom: 1rem;
       padding: 0 1rem;
 
-        
-      @include for-phone-only {
 
-      }
+      @include for-phone-only {}
 
-      @include for-tablet-portrait-up {
-
-      }
+      @include for-tablet-portrait-up {}
     }
 
     .headline {
@@ -245,32 +238,20 @@ onMounted(() => {
         }
 
         @include for-desktop-up {
-          font-size: 7rem;
+          font-size: 5rem;
           letter-spacing: 3px;
-          line-height: 1em;
+          line-height: 5rem;
           padding: 0.45rem 0 0.65rem;
         }
 
-        @include for-700-height-only {
-          font-size: 4rem;
-          letter-spacing: 1px;
-          line-height: 4.5rem;
-          padding: 0.25rem 0 0.45rem;
+        @include for-big-desktop-up {
+          font-size: 7rem;
+          letter-spacing: 3px;
+          line-height: 7rem;
+          padding: 0.45rem 0 0.65rem;
         }
-
-        // @include for-700-height-only {
-        //   font-size: 2.5em;
-        //   letter-spacing: 0px;
-        //   line-height: .85em;
-        //   padding: 0.25rem 0 0.45rem;
-        // }
-        // @include for-800-height-only {
-        //   font-size: 3.5em;
-        //   letter-spacing: 0px;
-        //   line-height: .85em;
-        //   padding: 0.45rem 0 0.65rem;
-        // }
       }
+
       .medium {
         font-weight: 500;
         text-shadow: 1px 1px 10px #0000003f;
@@ -308,8 +289,7 @@ onMounted(() => {
       }
 
 
-      div {
-      }
+      div {}
     }
 
     .nav {
@@ -321,9 +301,9 @@ onMounted(() => {
       cursor: pointer;
       position: absolute;
       bottom: 3rem;
-  
+
       &.loop {
-         animation: arDownLoop 2s steps(20) infinite;
+        animation: arDownLoop 2s steps(20) infinite;
       }
 
       img {
@@ -347,6 +327,7 @@ onMounted(() => {
   z-index: 1;
   overflow: hidden;
   opacity: 0;
+
   &.show {
     animation: fadeInStart 1s;
     animation-fill-mode: forwards;
@@ -382,6 +363,7 @@ onMounted(() => {
   overflow: hidden;
   animation: slideToLeft 1s;
   animation-fill-mode: forwards;
+
   .gallery__item {
     right: 0;
     animation: slideInL 1s;
@@ -396,6 +378,7 @@ onMounted(() => {
   overflow: hidden;
   animation: slideToRight 1s;
   animation-fill-mode: forwards;
+
   .gallery__item {
     left: 0;
     animation: slideInR 1s;
@@ -427,11 +410,13 @@ onMounted(() => {
     -webkit-transform: translate(0, 0);
     transform: translate(0, 0);
   }
+
   50% {
-      -ms-transform: translate(0, 20%);
-      -webkit-transform: translate(0, 20%);
-      transform: translate(0, 20%);
+    -ms-transform: translate(0, 20%);
+    -webkit-transform: translate(0, 20%);
+    transform: translate(0, 20%);
   }
+
   100% {
     opacity: 1;
     -ms-transform: translate(0, 0);
@@ -443,33 +428,36 @@ onMounted(() => {
 @keyframes scaleIn {
   0% {
     transform: scale(1);
-    animation-timing-function: cubic-bezier(.565,.43,.24,.92);
+    animation-timing-function: cubic-bezier(.565, .43, .24, .92);
   }
+
   100% {
     transform: scale(1.05);
-    animation-timing-function: cubic-bezier(.565,.43,.24,.92);
+    animation-timing-function: cubic-bezier(.565, .43, .24, .92);
   }
 }
 
 @keyframes slideToLeft {
   0% {
     width: 0%;
-    animation-timing-function: cubic-bezier(.565,.43,.24,.92);
+    animation-timing-function: cubic-bezier(.565, .43, .24, .92);
   }
+
   100% {
     width: 100%;
-    animation-timing-function: cubic-bezier(.565,.43,.24,.92);
+    animation-timing-function: cubic-bezier(.565, .43, .24, .92);
   }
 }
 
 @keyframes slideToRight {
   0% {
     width: 0;
-    animation-timing-function: cubic-bezier(.565,.43,.24,.92);
+    animation-timing-function: cubic-bezier(.565, .43, .24, .92);
   }
+
   100% {
     width: 100%;
-    animation-timing-function: cubic-bezier(.565,.43,.24,.92);
+    animation-timing-function: cubic-bezier(.565, .43, .24, .92);
   }
 }
 
@@ -477,8 +465,9 @@ onMounted(() => {
   0% {
     transform: translateX(-45px) scale(1.01);
     transform-style: preserve-3d;
-    animation-timing-function: cubic-bezier(.565,.43,.24,.92);
+    animation-timing-function: cubic-bezier(.565, .43, .24, .92);
   }
+
   100% {
     transform: translateX(0px) scale(1);
     transform-style: preserve-3d;
@@ -489,14 +478,12 @@ onMounted(() => {
   0% {
     transform: translateX(45px) scale(1.01);
     transform-style: preserve-3d;
-    animation-timing-function: cubic-bezier(.565,.43,.24,.92);
+    animation-timing-function: cubic-bezier(.565, .43, .24, .92);
   }
+
   100% {
     transform: translateX(0px) scale(1);
     transform-style: preserve-3d;
   }
 }
-
-
-
 </style>

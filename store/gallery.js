@@ -16,7 +16,7 @@ export const useGalleryStore = defineStore("galleryStore", {
           const { data } = await useFetch('/api/gallery')
           // console.log('getItems data ', data._rawValue.items[0].images)
           this.items = data._rawValue.items
-          console.log('this.items ', this.items)
+          // console.log('this.items ', this.items)
         },
         setModalState(data) {
             this.modalState.isOpen = !this.modalState.isOpen

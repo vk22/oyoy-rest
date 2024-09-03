@@ -142,14 +142,6 @@ const selectTime = (event) => {
 <style lang="scss">
 @import "assets/scss/variables.scss";
 
-:root {
-  --primary-color: #0071fe;
-  --error-color: #f23648;
-  --error-bg-color: #fddfe2;
-  --success-color: #21a67a;
-  --success-bg-color: #e0eee4;
-}
-
 .feedback-form {
 
   @include for-phone-only {

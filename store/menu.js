@@ -1,5 +1,4 @@
 import { defineStore } from "pinia";
-// import { useCommentStore } from "./CommentStore";
 
 export const useMenuStore = defineStore("menuStore", {
     state: () => {
@@ -8,9 +7,11 @@ export const useMenuStore = defineStore("menuStore", {
         };
     },
     actions: {
-        async getMenu(category) {
+        async fetchMenu() {
           const { data } = await useFetch('/api/menu')
-          this.items = data._rawValue.items
+          if (data) {
+            this.items = data._rawValue.items
+          }
         }
     },
     getters: {

@@ -1,7 +1,7 @@
 <template>
   <div>
-    <AdminHeader/>
-    <AdminSidebar/>
+    <AdminHeader />
+    <AdminSidebar />
     <div class="admin-container">
       <slot />
     </div>
@@ -12,5 +12,4 @@
 
 <style lang="scss" scoped>
 @import "assets/scss/admin.scss";
-
 </style>

@@ -55,28 +55,25 @@
 </template>
   
 <script setup>
+import { useNavigationStore } from "@/store/nav";
+import { useCompanyStore } from "@/store/company";
 /// menu
-import { useMenuStore } from "@/store/nav";
-const menuStore = useMenuStore();
+const menuStore = useNavigationStore();
 const menu = computed(() => menuStore.getItems);
+//// getcompany
+const companyStore = useCompanyStore();
+const company = companyStore.getCompany
 
 ////
 function manualSmoothScroll(event) {
   event.preventDefault();
-  console.log("manualSmoothScroll event ", event);
-  // находим хэш ссылу по которой мы кликнули
   const id = event.target.dataset.href;
-  console.log("id ", id);
-  // если клик куда-то ещё - ничего не делаем
   if (!id) return;
-  // отменяем стандартный переход
 
-  // находим цель куда будем скроллить по хэшу
   const target = document.getElementById(id);
   if (!target) return;
   const yOffset = -100;
   const y = target.getBoundingClientRect().top + window.pageYOffset + yOffset;
-
   window.scrollTo({ top: y, behavior: "smooth" });
 
   setTimeout(() => {
@@ -87,24 +84,15 @@ function manualSmoothScroll(event) {
     toggleMenu();
   }, 500);
 
-  // // едем руками
-  // target.scrollIntoView({ behavior: "smooth" });
-  //$gsap.to(id, { duration: 2, scrollTo: 250 });
 }
-const { $handleScroll } = useNuxtApp();
+
 onMounted(() => {
-  document.addEventListener("scroll", $handleScroll);
   document.querySelectorAll(".nav .menu-item").forEach((link, index) => {
-    // console.log("link ", link);
     link.addEventListener("click", manualSmoothScroll);
   });
 });
 
-//// getcompany
-import { useCompanyStore } from "@/store/company";
-const companyStore = useCompanyStore();
-companyStore.fetchCompany()
-const company = companyStore.getCompany
+
 </script>
 
 <style lang="scss" scoped>

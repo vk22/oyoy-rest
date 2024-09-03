@@ -1,5 +1,5 @@
 <template>
-  <section class="menu index-section" :id="props.category" v-if="menuData">
+  <section class="menu index-section" :id="props.category" v-if="menuData.length">
     <v-container>
       <v-row>
         <v-col class="d-flex justify-center">
@@ -47,11 +47,6 @@
           </div>
         </v-col>
         <v-col cols="12" md="6">
-          <!-- <div class="menu-image slideUp fade-in">
-            <Transition>
-              <img v-if="loaded" :src="'/img/' + menuData[acviveMenuIndex].image" alt="" />
-            </Transition>
-          </div> -->
           <div class="menu-content">
             <div
               class="menu-content__item"
@@ -81,12 +76,11 @@ import { ref } from "vue";
 import { useMenuStore } from "@/store/menu";
 const store = useMenuStore();
 const menuData = computed(() => store.getItems(props.category))
-
+// console.log('menuData ', menuData)
 
 let acviveMenuIndex = ref(0);
 let loaded = ref(true)
 function activeMenu(index) {
-  console.log("activeMenu ", index);
   loaded.value = !loaded.value;
   acviveMenuIndex.value = index;
   setTimeout(() => {
@@ -99,7 +93,7 @@ function getMiddleOfList(list) {
 </script>
 
 <style lang="scss">
-@import "assets/scss/main.scss";
+@import "assets/scss/variables.scss";
 
 .myfade-enter-active,
 .myfade-leave-active {

@@ -12,7 +12,7 @@ export const useEventStore = defineStore("EventStore", {
         };
     },
     actions: {
-        async getEvents() {
+        async fetchEvents() {
           const { data } = await useFetch('/api/events')
           this.items = data._rawValue.events
           // console.log('getEvents ', data._rawValue.events)

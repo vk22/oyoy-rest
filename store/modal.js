@@ -1,5 +1,4 @@
 import { defineStore } from "pinia";
-import { useEventStore } from "./events";
 
 export const useModalStore = defineStore("ModalStore", {
     state: () => {

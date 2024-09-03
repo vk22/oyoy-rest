@@ -1,6 +1,6 @@
 <template>
   
-  <div class="main-menu" :class="{ show: mainMenuIsOpened }">
+  <div class="main-menu" :class="{ show: mainNavIsOpened }">
     <div class="main-menu__sidebar">
       <div class="close-icon" @click="toggleMenu()">
         <div class="line"></div>
@@ -9,7 +9,7 @@
       </div>
       <div class="m-top">
         <ul>
-          <li v-for="(item, index) in menu" :key="index">
+          <li v-for="(item, index) in navigation" :key="index">
             <a
               class="menu-item"
               :key="item.href"
@@ -66,29 +66,29 @@
   
 <script setup>
 import { onMounted, ref } from "vue";
-const { $gsap, $ScrollTrigger } = useNuxtApp();
+import { useCompanyStore } from "@/store/company";
+import { useMainStore }  from '@/store/index'
+import { useReservationStore } from "@/store/reservation";
+import { useNavigationStore } from "@/store/nav";
 
 /// main store
-import { useMainStore }  from '@/store/index'
 const mainStore = useMainStore()
-let dataReady = computed(() => mainStore.getDataReady)
-
+const dataReady = computed(() => mainStore.getDataReady)
 /// reservation
-import { useReservationStore } from "@/store/reservation";
 const reservationStore = useReservationStore();
 const getFormModalStateToggle = () => {
   reservationStore.setFormModalState();
 };
-
 /// menu
-import { useMenuStore } from "@/store/nav";
-const menuStore = useMenuStore();
-const menu = computed(() => menuStore.getItems);
-const mainMenuIsOpened = computed(() => menuStore.getMainMenuState);
+const navigationStore = useNavigationStore();
+const navigation = computed(() => navigationStore.getItems);
+const mainNavIsOpened = computed(() => navigationStore.getMainMenuState);
 const toggleMenu = () => {
-  menuStore.toggleMenu();
+  navigationStore.toggleMenu();
 };
-
+//// getcompany
+const companyStore = useCompanyStore();
+const company = companyStore.getCompany
 ///
 const headerHandler = () => {
   //console.log('window ', window.scrollY)
@@ -122,11 +122,7 @@ onMounted(() => {
   });
 });
 
-//// getcompany
-import { useCompanyStore } from "@/store/company";
-const companyStore = useCompanyStore();
-companyStore.fetchCompany()
-const company = companyStore.getCompany
+
 </script>
 
 <style lang="scss" scoped>
@@ -140,6 +136,7 @@ const company = companyStore.getCompany
   z-index: 999;
   width: 100vw;
   padding: 2rem;
+  opacity: 0;
 
   .header-l,
   .header-r {

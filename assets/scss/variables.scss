@@ -20,7 +20,6 @@
 @mixin for-big-desktop-up {
   @media (min-width: 1800px) { @content; }
 }
-
 @mixin for-700-height-only {
   @media (max-height: 699px) { @content; }
 }

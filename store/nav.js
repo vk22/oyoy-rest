@@ -1,6 +1,6 @@
 import { defineStore } from 'pinia'
 
-export const useMenuStore = defineStore('nav', {
+export const useNavigationStore = defineStore('nav', {
   state: () => ({
     mainMenulIsOpen: false,
     items: [

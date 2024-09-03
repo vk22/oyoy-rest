@@ -1,5 +1,5 @@
 <template>
-  <ClientOnly>
+
     <section class="about-index index-section" id="startContent" ref="intoContent" >
       <v-container fluid>
         <v-row>
@@ -33,7 +33,6 @@
         </v-row>
       </v-container>
     </section>
-  </ClientOnly>
 </template>
 
 <script setup>
@@ -47,13 +46,13 @@ const getFormModalStateToggle = () => {
 //// about
 import { useAboutStore } from "@/store/about";
 const aboutStore = useAboutStore();
-aboutStore.fetchData()
 const about = aboutStore.getData;
+console.log('about ', about)
 
 </script>
 
 <style lang="scss">
-@import "assets/scss/main.scss";
+@import "assets/scss/variables.scss";
 
 .about-index {
   display: flex;

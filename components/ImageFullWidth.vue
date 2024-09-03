@@ -20,7 +20,7 @@ defineProps(["type","path", "title"]);
 </script>
 
 <style lang="scss">
-@import "assets/scss/main.scss";
+@import "assets/scss/variables.scss";
 
 .full-w-banner {
   display: flex;

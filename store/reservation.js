@@ -1,5 +1,5 @@
 import { defineStore } from 'pinia'
-import { useMenuStore } from "./nav";
+import { useNavigationStore } from "./nav";
 
 export const useReservationStore = defineStore('reservation', {
   state: () => ({
@@ -52,7 +52,7 @@ export const useReservationStore = defineStore('reservation', {
     setFormModalState(state) {
       this.formModalIsOpen = !this.formModalIsOpen
       if (this.formModalIsOpen) {
-        const menuStore = useMenuStore();
+        const menuStore = useNavigationStore();
         menuStore.closeMenu();
       }
     },

@@ -42,8 +42,8 @@ const props = defineProps({
   </script>
     
   <style scoped>
-  
-  @import "../assets/scss/main.scss";
+
+  @import "assets/scss/variables.scss";
   .custom-select {
     position: relative;
     width: 100%;

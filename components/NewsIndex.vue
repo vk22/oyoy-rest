@@ -32,7 +32,6 @@
 <script setup>
 import { useEventStore }  from '@/store/events'
 const store = useEventStore()
-await store.getEvents()
 const events = computed(() => store.getItems)
 const modalToggle = (index) => {
     store.setModalState({index: index})
@@ -41,7 +40,7 @@ const modalToggle = (index) => {
 </script>
 
 <style lang="scss">
-@import "assets/scss/main.scss";
+@import "assets/scss/variables.scss";
 
 .events-index {
   display: flex;
@@ -66,7 +65,7 @@ const modalToggle = (index) => {
 
     .img-wrap {
       position: relative;
-      height: 50vh;
+      height: 70vh;
       margin-bottom: 1rem;
     }   
 
