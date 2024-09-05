@@ -1,8 +1,4 @@
 export default defineNuxtPlugin(nuxtApp => {
-  // now available on `nuxtApp.$injected`
-  // nuxtApp.provide('injected', () => 'my injected function')
-
-  // You can alternatively use this format, which comes with automatic type support
   return {
     provide: {
       handleScroll() {
@@ -17,11 +13,8 @@ export default defineNuxtPlugin(nuxtApp => {
             function () {
               var elem = fadeInElements[i];
               if (isElemVisible(elem)) {
-                // console.log('elem ', elem)
                 elem.style.opacity = "1";
                 elem.style.transform = "translateY(0px)";
-                //elem.classList.add("show")
-                //fadeInElements.splice(i, 1) // only allow it to run once
               }
             }.bind(this),
             i * interval
@@ -33,16 +26,13 @@ export default defineNuxtPlugin(nuxtApp => {
             function () {
               var elem = fadeInElements1[i];
               if (isElemVisible(elem)) {
-                //console.log('elem ', elem)
                 elem.style.opacity = "1";
                 if (window.outerWidth < 668) {
                   elem.style.transform = "translateY(0px) translateX(0%)";
                 } else {
                   elem.style.transform = "translateY(0px) translateX(-50%)";
                 }
-    
-                //elem.classList.add("show")
-                //fadeInElements.splice(i, 1) // only allow it to run once
+  
               }
             }.bind(this),
             interval3

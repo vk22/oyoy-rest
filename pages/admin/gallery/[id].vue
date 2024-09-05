@@ -71,39 +71,27 @@ const uploaderRef = ref(null);
 const dragging = ref(false);
 
 function addFiles(files) {
-  console.log("addFiles ", files);
   gallery.value.imageNew = files;
 }
 
 const draggEnd = async () => {
-  console.log("draggEnd gallery ", gallery.value.images);
   await editItem();
 };
 
 const editItem = async () => {
-  console.log("gallery ", gallery);
   const { data } = await useFetch(`/api/gallery`, {
     method: "put",
     body: gallery,
   });
 
-  console.log("data ", data.value.data);
-
-  // if (gallery.value.imageNew) {
-  //   const responseFileUpload = await uploaderRef.value.startUpload();
-  //   console.log("responseFileUpload ", responseFileUpload);
-  // }
-  // gallery.value = data.value.data
 };
 
 const deleteItem = async () => {
-  console.log("gallery ", gallery);
   const { data } = await useFetch(`/api/gallery`, {
     method: "delete",
     body: gallery,
   });
 
-  console.log("data ", data.value);
   if (data.value) {
     router.push({ path: "/admin/gallery" });
   }

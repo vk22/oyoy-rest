@@ -47,7 +47,6 @@ const getFormModalStateToggle = () => {
 import { useAboutStore } from "@/store/about";
 const aboutStore = useAboutStore();
 const about = aboutStore.getData;
-console.log('about ', about)
 
 </script>
 

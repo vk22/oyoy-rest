@@ -48,7 +48,6 @@ const gallery = ref({
 const uploaderRef = ref(null);
 
 function addFiles(files) {
-	console.log('addFiles ', files )
   files.forEach((el, index) => {
     gallery.value.images.push({filename: el.name, index: index})
   })
@@ -56,36 +55,14 @@ function addFiles(files) {
 }
 
 const addEvent = async () => {
-  console.log("gallery ", gallery);
   const { data } = await useFetch(`/api/gallery`, {
         method: 'post',
         body: gallery
     } );
-
-  console.log("data ", data._rawValue.data);
   uploaderRef.value.startUpload();
   router.push({ path: "/admin/gallery" })
 }
 
-
-
-// const startFileUpload = async () => {
-//   console.log(file);
-//   const body = new FormData();
-//   body.append("file", file.value);
-//   await useFetch("/api/uploadfile", {
-//     method: "POST",
-//     body: body,
-//     onResponse(context) {
-//       // this.$refs.form.resetForm();
-//       afterSubmit();
-//     },
-//   });
-//   return true;
-// };
-
-
-//store.autoGalleryStart()
 
 </script>
 

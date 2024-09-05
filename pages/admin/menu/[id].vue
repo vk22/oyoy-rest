@@ -70,24 +70,19 @@ function removeItem(index) {
 }
 
 const editEvent = async () => {
-  console.log("menu ", menu);
   const { data } = await useFetch(`/api/menu`, {
     method: 'put',
     body: menu
   });
-
-  console.log("data ", data._rawValue.data);
   menu.value = data._rawValue.data
 }
 
 const deleteEvent = async () => {
-  console.log("menu ", menu);
   const { data } = await useFetch(`/api/menu`, {
     method: 'delete',
     body: menu
   });
 
-  console.log("data ", data._rawValue);
   if (data._rawValue) {
     router.push({ path: "/admin/menu" })
   }

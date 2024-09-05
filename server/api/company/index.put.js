@@ -2,7 +2,6 @@ import { Company } from "~~/server/models/company-model";
 
 export default defineEventHandler( async (event) => {
     const body = await readBody(event)
-    console.log('body: ' + JSON.stringify(body))
     const company = await Company.findById(body._id)
     if (!company) return false
     company.address = body.address
@@ -12,7 +11,6 @@ export default defineEventHandler( async (event) => {
     company.coords = body.coords
 
     const saveItem = await company.save()
-    console.log('saveItem ', saveItem)
     
     return {
       success: true,

@@ -34,7 +34,6 @@ function filesDropped(files) {
 }
 
 function onInputChange(e) {
-	// console.log('e.target.files ', e.target.files)
 	addFiles(e.target.files, props.type)
 	e.target.value = null // reset so that selecting the same file again will still cause it to fire this change
 	emit('files-dropped2', files._rawValue)
@@ -48,9 +47,7 @@ const { uploadFiles } = createUploader()
 
 /// handler from Parent
 const startUpload = async () => {
-	console.log('startUpload ', props.type)
 	const response = await uploadFiles(files._rawValue, props.type)
-	console.log('response ', response[0].ok)
 	removeFiles()
 	if (response[0].ok) {
 		return true

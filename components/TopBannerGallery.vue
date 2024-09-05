@@ -82,7 +82,6 @@ if (gallery[0]) {
     let preloaderImg = document.createElement("img");
     preloaderImg.src = imageUrl;
     preloaderImg.addEventListener('load', (event) => {
-      console.log('image loaded!!!')
       readyToGo()
     });
   }

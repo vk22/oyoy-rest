@@ -38,7 +38,6 @@ const topslide = ref();
 const { data } = await useFetch("/api/topslide", {
   method: "get",
 });
-console.log("data ", data);
 topslide.value = data._rawValue.data;
 
 
@@ -47,7 +46,6 @@ const save = async () => {
     method: "put",
     body: topslide,
   });
-  console.log("data ", data);
 };
 
 //store.autoGalleryStart()

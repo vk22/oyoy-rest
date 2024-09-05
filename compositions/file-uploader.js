@@ -18,8 +18,6 @@ export async function uploadFile(file, type) {
 }
 
 export function uploadFiles(files, type) {
-	console.log('uploadFiles files', files)
-	console.log('uploadFiles type', type)
 	return Promise.all(files.map((file) => uploadFile(file, type)))
 }
 

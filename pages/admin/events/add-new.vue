@@ -54,42 +54,19 @@ const event = ref({
 const uploaderRef = ref(null);
 
 function addFiles(files) {
-	console.log('addFiles ', files )
   event.value.image = files[0].name
 }
 
 const addEvent = async () => {
-  console.log("event ", event);
   event.value.test = 'kuku'
   const { data } = await useFetch(`/api/events`, {
         method: 'post',
         body: event
     } );
-
-  console.log("data ", data._rawValue.data);
   uploaderRef.value.startUpload();
   router.push({ path: "/admin/events" })
 }
 
-
-
-// const startFileUpload = async () => {
-//   console.log(file);
-//   const body = new FormData();
-//   body.append("file", file.value);
-//   await useFetch("/api/uploadfile", {
-//     method: "POST",
-//     body: body,
-//     onResponse(context) {
-//       // this.$refs.form.resetForm();
-//       afterSubmit();
-//     },
-//   });
-//   return true;
-// };
-
-
-//store.autoGalleryStart()
 
 </script>
 

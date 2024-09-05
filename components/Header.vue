@@ -91,7 +91,6 @@ const companyStore = useCompanyStore();
 const company = companyStore.getCompany
 ///
 const headerHandler = () => {
-  //console.log('window ', window.scrollY)
   if (window.scrollY > 50) {
     isScrolled.value = true;
   } else {

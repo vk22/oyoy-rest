@@ -77,10 +77,6 @@ function manualSmoothScroll(event) {
   window.scrollTo({ top: y, behavior: "smooth" });
 
   setTimeout(() => {
-    // if (window.innerWidth < 500) {
-    //   console.log("window.innerWidth", store);
-    //   toggleMenu();
-    // }
     toggleMenu();
   }, 500);
 

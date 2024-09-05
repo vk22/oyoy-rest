@@ -45,7 +45,6 @@ const gallery = store.getItems;
 const modalIsOpen =  computed(() => store.getModalState.isOpen)
 const galleryModalInitialSlide =  computed(() => store.getModalState.item)
 const modalToggle = (slide) => {
-    console.log('modalToggle ', slide)
     store.setModalState({item: slide.index})
 }
 
@@ -53,12 +52,10 @@ let slidesCount = ref(0);
 let activeSlide = ref(0);
 
 const onSwiper = (swiper) => {
-  console.log(swiper.slides.length);
   slidesCount.value = swiper.slides.length;
 };
 
 const onSlideChange = (swiper) => {
-  console.log("slide change", swiper.activeIndex);
   activeSlide.value = swiper.realIndex;
 };
 </script>

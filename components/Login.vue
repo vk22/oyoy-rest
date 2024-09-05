@@ -51,7 +51,6 @@ export default {
           `${this.$store.state.host.baseURL}api/user/login/`,
           { username: this.username, password: this.password }
         );
-        // console.log("response: " + JSON.stringify(response));
         if (response.success) {
           this.$store.commit("SET_USER", response.username);
           this.$cookies.set("tokenLocal", response.token);
@@ -59,12 +58,10 @@ export default {
           this.error = "Неверный пароль";
         }
       } catch (e) {
-        console.log("e", e);
         this.error = "Неверный пароль";
       }
     },
     check() {
-      // console.log(this.$auth.loggedIn);
     },
     logout() {
       this.$toast.show("Logging out...");

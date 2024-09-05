@@ -131,7 +131,6 @@ const reservationItems = ref();
 const { data } = await useFetch("/api/reservations", {
   method: "get",
 });
-console.log("data ", data);
 reservationItems.value = data._rawValue.reservations;
 reservationItems.value.map((item) => {
   item.date = $formatDate(item.date);
@@ -146,7 +145,6 @@ const deleteItem = async (item) => {
     method: "delete",
     body: item,
   });
-  console.log("data ", data);
   if (data._rawValue.success) {
     reservationDialogIsOpen.value = false;
     reservationItems.value = data._rawValue.reservations;

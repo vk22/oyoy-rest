@@ -56,35 +56,27 @@ const event = ref(data._rawValue)
 const uploaderRef = ref(null);
 
 function addFiles(files) {
-	console.log('addFiles ', files )
   event.value.imageNew = files[0].name
 }
 
 const editEvent = async () => {
-  console.log("event ", event);
   const { data } = await useFetch(`/api/events`, {
         method: 'put',
         body: event
     } );
 
-  console.log("data ", data._rawValue.data);
-
   if (event.value.imageNew) {
     const responseFileUpload = await uploaderRef.value.startUpload();
-    console.log("responseFileUpload ", responseFileUpload);
   }
   event.value = data._rawValue.data
 
 }
 
 const deleteEvent = async () => {
-  console.log("event ", event);
   const { data } = await useFetch(`/api/events`, {
         method: 'delete',
         body: event
     } );
-
-  console.log("data ", data._rawValue);
   if (data._rawValue) {
     router.push({ path: "/admin/events" })
   }
@@ -92,14 +84,8 @@ const deleteEvent = async () => {
   //
 }
 
-
-
 </script>
 
-
-
 <style lang="scss" scoped>
-@import "assets/scss/admin.scss";
-
 
 </style>

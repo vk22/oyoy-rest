@@ -13,14 +13,11 @@ export const useCustomGalleryStore = defineStore('customGalleryStore', {
   actions: {
     async fetchData(name) {
       const { data } = await useFetch('/api/gallery')
-      // console.log('getItems data ', data._rawValue.items[0].images)
       const res = data._rawValue.items
       const images = res.find(item => item.name == name).images
       this.gallery = images
-      // console.log('this.gallery ', this.gallery)
     },
     autoGalleryNext() {
-        // console.log('autoGalleryNext')
         this.galleryIsWork = true
         if (this.activeIndex >= this.gallery.length - 1) {
             this.activeNext = 0;

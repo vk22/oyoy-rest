@@ -59,9 +59,7 @@ definePageMeta({
   //middleware: ["auth"]
   // or middleware: 'auth'
 })
-
 const { data } = await useFetch('/api/events')
-console.log("data ", data);
 const events = data._rawValue.events
 
 //store.autoGalleryStart()

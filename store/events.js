@@ -15,12 +15,10 @@ export const useEventStore = defineStore("EventStore", {
         async fetchEvents() {
           const { data } = await useFetch('/api/events')
           this.items = data._rawValue.events
-          // console.log('getEvents ', data._rawValue.events)
         },
         setModalState(data) {
             this.modalState.isOpen = !this.modalState.isOpen
             this.modalState.item = this.items[data.index]
-            // console.log('modalState ', this.modalState)
         },
         resetModalState() {
             this.modalState.isOpen = false

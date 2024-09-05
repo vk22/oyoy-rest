@@ -21,10 +21,8 @@ const result = {
 
 export default defineEventHandler( async (event) => {
     const body = await readBody(event)
-    console.log('body: ' + JSON.stringify(body))
     const newReservation = new Reservation(body);
     const saving = await newReservation.save();
-    console.log('saving ', saving)
     if (saving) {
       return result.success
     } else {

@@ -24,7 +24,6 @@ AuthSchema.methods.validPassword = function(password) {
 };
 
 AuthSchema.virtual("password").set(function(value) {
-  console.log('virtual ', value)
   this.passwordHash = bcrypt.hashSync(value, 12);
 });
 

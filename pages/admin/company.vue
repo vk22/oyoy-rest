@@ -47,7 +47,6 @@ const company = ref();
 const { data } = await useFetch("/api/company", {
   method: "get",
 });
-console.log("data ", data);
 company.value = data._rawValue.data;
 
 
@@ -56,7 +55,6 @@ const save = async () => {
     method: "put",
     body: company,
   });
-  console.log("data ", data);
 };
 
 //store.autoGalleryStart()

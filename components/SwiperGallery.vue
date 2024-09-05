@@ -66,7 +66,6 @@ let slidesCount = ref(0);
 let activeSlide = ref(0);
 
 const onSwiper = (swiper) => {
-  console.log(swiper.slides.length);
   slidesCount.value = swiper.slides.length;
 };
 
@@ -84,7 +83,6 @@ onMounted(() => nextTick(() => {
 
 const slidesPerView = computed(() => {
   if (process.browser) {
-    console.log('window.innerWidth ', window.innerWidth)
     if (window.innerWidth < 700) {
       return 1
     } else {

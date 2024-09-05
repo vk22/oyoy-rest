@@ -39,7 +39,6 @@ const about = ref();
 const { data } = await useFetch("/api/about", {
   method: "get",
 });
-console.log("data ", data);
 about.value = data._rawValue.data;
 
 function textUpdate(text) {
@@ -51,7 +50,6 @@ const save = async () => {
     method: "put",
     body: about,
   });
-  console.log("data ", data);
 };
 
 //store.autoGalleryStart()

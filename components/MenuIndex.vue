@@ -76,7 +76,6 @@ import { ref } from "vue";
 import { useMenuStore } from "@/store/menu";
 const store = useMenuStore();
 const menuData = computed(() => store.getItems(props.category))
-// console.log('menuData ', menuData)
 
 let acviveMenuIndex = ref(0);
 let loaded = ref(true)

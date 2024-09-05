@@ -28,7 +28,6 @@ export const useReservationStore = defineStore('reservation', {
         headers: { "cache-control": "no-cache" }
       });
       let response = data._rawValue
-      console.log('response ', response)
       this.afterSubmit({
         mode: true,
         status: response.status,

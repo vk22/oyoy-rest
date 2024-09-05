@@ -58,7 +58,6 @@ definePageMeta({
 });
 
 const { data } = await useFetch("/api/getreservation");
-console.log("data ", data);
 const items = data._rawValue.reservations;
 
 //store.autoGalleryStart()
