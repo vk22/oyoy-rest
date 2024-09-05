@@ -192,9 +192,10 @@ const deleteItem = async (item) => {
 .orders-table {
   margin-top: 1rem;
   &__header {
-    background: #f0f0f0;
+    background: $colorBlue;
     margin-bottom: 0rem;
     border-radius: 4px;
+    color: #fff;
   }
 
   &__item {

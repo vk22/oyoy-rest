@@ -78,6 +78,9 @@ const modalToggle = () => {
   }
 
   &__container {
+    overflow: auto;
+    max-height: 100%;
+    padding: 1rem 0;
     @include for-phone-only {
       width: 95%;
       max-width: 1200px;

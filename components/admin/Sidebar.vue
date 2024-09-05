@@ -63,36 +63,6 @@ export default {
           route: '/admin/about',
           icon: 'mdi-format-list-bulleted'
         },
-        // {
-        //   name: 'Компания',
-        //   route: '/admin/about',
-        //   icon: 'gear'
-        // },
-        // {
-        //   name: 'Категории',
-        //   route: '/admin/lots-category',
-        //   icon: 'columns'
-        // },
-        // {
-        //   name: 'Заявки',
-        //   route: '/admin/orders',
-        //   icon: 'headset'
-        // },
-        // {
-        //   name: 'Интересы',
-        //   route: '/admin/interes',
-        //   icon: 'headphones'
-        // },
-        // {
-        //   name: 'Обратная связь',
-        //   route: '/admin/feedbacks',
-        //   icon: 'chat-text-fill'
-        // },
-        // {
-        //   name: 'Контакты',
-        //   route: '/admin/contacts',
-        //   icon: 'gear'
-        // }
       ],
       navRightIsActive: false,
       toggleNavStyle: "",
