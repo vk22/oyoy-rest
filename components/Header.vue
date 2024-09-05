@@ -29,7 +29,7 @@
           >
         </div>
         <div class="btn" @click="getFormModalStateToggle">
-          Reservation
+          Reservations
         </div>
       </div>
     </div>

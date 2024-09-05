@@ -76,42 +76,33 @@
 
 <script setup>
 import { Form, useField, ErrorMessage } from "vee-validate";
-import { useMainStore } from "@/store/index";
 import { useReservationStore } from "@/store/reservation";
 const storeReservaton = useReservationStore();
-const storeMain = useMainStore();
 const props = defineProps(["mode", "title"]);
-//console.log("props.mode ", props.mode);
 
 const file = useField("file");
 const filename = ref(undefined);
 const date = ref();
 const time = ref();
 
-
 const schema = {
   name(value) {
-    //console.log("name value ", value);
     if (value?.length >= 2) return true;
     return "Name needs to be at least 2 characters.";
   },
   phone(value) {
-    //console.log("phone value ", value);
     if (value?.length > 6 && /[0-9-]+/.test(value)) return true;
     return "Phone number needs to be at least 6 digits.";
   },
   persons(value) {
-    //console.log("persons value ", value);
     if (value) return true;
     return "Name needs to be at least 2 characters.";
   },
   date(value) {
-    //console.log("schema date value ", value);
     if (value) return true;
     return "Select date";
   },
   time(value) {
-    //console.log("m value ", value);
     if (value) return true;
     return "Select date";
   },
@@ -130,13 +121,11 @@ function onInvalidSubmit() {
   }, 1000);
 }
 
-
 const selectTime = (event) => {
   time = event;
 };
 
 </script>
-
 
 
 <style lang="scss">

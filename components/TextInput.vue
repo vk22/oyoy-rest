@@ -118,7 +118,7 @@ const selectTime = (event) => {
     <label :for="name">{{ label }}</label>
     <SelectInput
       :name="name"
-      :options="['10:00', '11:00', '12:00']"
+      :options="['18:00', '19:00', '20:00', '21:00', '22:00', '23:00']"
       :default="value"
       class="select"
       @input="selectTime($event)"

@@ -127,8 +127,12 @@ const slidesPerView = computed(() => {
     margin: 0 1rem;
     position: absolute;
     top: 50%;
-    width: 25px;
+    width: 42px;
     z-index: 99;
+    background-color: rgba(255, 255, 255, 0.5);
+    padding: 10px;
+    display: flex;
+    @include base-transition(background-color, 0.25s);
 
     &.swiper-next {
       right: 2rem;
@@ -144,7 +148,8 @@ const slidesPerView = computed(() => {
     }
 
     &:hover {
-      opacity: 0.5;
+      // opacity: 0.5;
+      background-color: rgba(255, 255, 255, 0.75);
     }
   }
 }
