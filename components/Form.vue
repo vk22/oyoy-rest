@@ -32,6 +32,15 @@
       </div>
       <div class="form-block">
         <TextInput
+          name="email"
+          type="email"
+          label="Email"
+          placeholder="Your email"
+          success-message="Got it!"
+        />
+      </div>
+      <div class="form-block">
+        <TextInput
           name="persons"
           type="number-range"
           label="Persons"
@@ -94,9 +103,13 @@ const schema = {
     if (value?.length > 6 && /[0-9-]+/.test(value)) return true;
     return "Phone number needs to be at least 6 digits.";
   },
+  email(value) {
+    if (value.match(/^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|.(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/)) return true;
+    return "The email field must be a valid email.";
+  },
   persons(value) {
     if (value) return true;
-    return "Name needs to be at least 2 characters.";
+    return "Choose persons count";
   },
   date(value) {
     if (value) return true;

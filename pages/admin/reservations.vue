@@ -28,6 +28,14 @@
           </v-row>
           <v-row>
             <v-col cols="3">
+              <span>Email:</span>
+            </v-col>
+            <v-col>
+              <span>{{ reservationSelected.email }}</span>
+            </v-col>
+          </v-row>
+          <v-row>
+            <v-col cols="3">
               <span>Persons:</span>
             </v-col>
             <v-col>
@@ -91,10 +99,11 @@
           <!-- <v-col cols="1"></v-col> -->
           <v-col cols="2">Name</v-col>
           <v-col cols="2">Phone</v-col>
+          <v-col cols="2">Email</v-col>
           <v-col cols="2">Persons</v-col>
           <v-col cols="2">Message</v-col>
-          <v-col cols="2">Date</v-col>
-          <v-col cols="2">Time</v-col>
+          <v-col cols="1">Date</v-col>
+          <v-col cols="1">Time</v-col>
         </v-row>
         <div
           class="orders-table__item"
@@ -106,10 +115,11 @@
             <!-- <v-col cols="1"><v-checkbox></v-checkbox></v-col> -->
             <v-col cols="2">{{ item.name }}</v-col>
             <v-col cols="2">{{ item.phone }}</v-col>
+            <v-col cols="2">{{ item.email }}</v-col>
             <v-col cols="2">{{ item.persons }}</v-col>
             <v-col cols="2"> {{ item.message }}</v-col>
-            <v-col cols="2"> {{ item.date }}</v-col>
-            <v-col cols="2">{{ item.time }}</v-col>
+            <v-col cols="1"> {{ item.date }}</v-col>
+            <v-col cols="1">{{ item.time }}</v-col>
           </v-row>
         </div>
       </div>

@@ -71,6 +71,25 @@ const selectTime = (event) => {
     </p>
   </div>
 
+  <div v-if="type == 'email'"
+    class="text-input"
+    :class="{ 'has-error': !!errorMessage, success: meta.valid }"
+  >
+    <label :for="name">{{ label }}</label>
+    <input
+      :name="name"
+      :id="name"
+      :type="type"
+      :value="value"
+      :placeholder="placeholder"
+      @input="handleChange"
+      @blur="handleBlur"
+    />
+    <p class="help-message" v-show="errorMessage">
+      {{ errorMessage }}
+    </p>
+  </div>
+
   <div v-else-if="type == 'number-range'"
     class="text-input"
     :class="{ 'has-error': !!errorMessage, success: meta.valid }"
