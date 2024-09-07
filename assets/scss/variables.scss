@@ -31,6 +31,15 @@
 }
 
 
+:root {
+  --primary-color: #0071fe;
+  --error-color: #de172b;
+  --error-bg-color: #fddfe2;
+  --success-color: #21a67a;
+  --success-bg-color: #e0eee4;
+}
+
+
 $font-sans: 'Montserrat', sans-serif;
 $font-serif: 'Melodrama', "Libre Caslon Display", serif;
 $mainColor: #111;
@@ -41,6 +50,13 @@ $colorBrownL: #af8e72;
 $colorGreen: #323E3C;
 $colorGreenL: #607d8b;
 $grey: #9B9B9B;
+
+//// Forms colors
+$colorPrimary: #0071fe;
+$colorError: #de172b;
+$colorErrorBg: #fddfe2;
+$colorSuccess: #21a67a;
+$colorSuccessBg: #e0eee4;
 
 $text-color: #111;
 

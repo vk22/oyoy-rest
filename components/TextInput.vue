@@ -151,34 +151,35 @@ const selectTime = (event) => {
 </template>
 
 <style lang="scss" scoped>
+@import "assets/scss/variables.scss";
 .text-input {
   position: relative;
   width: 100%;
 
     &.has-error input {
-    background-color: var(--error-bg-color);
-    color: var(--error-color);
+    background-color: $colorErrorBg;
+    color: $colorError;
     }
 
     &.has-error input:focus {
-    border-color: var(--error-color);
+    border-color: $colorError;
     }
 
     &.has-error .help-message {
-    color: var(--error-color);
+    color: $colorError;
     }
 
     /* &.success input {
-    background-color: var(--success-bg-color);
-    color: var(--success-color);
+    background-color: $colorSuccessBg;
+    color: $colorSuccess;
     } */
 
     /* &.success input:focus {
-    border-color: var(--success-color);
+    border-color: $colorSuccess;
     } */
 
     &.success .help-message {
-    color: var(--success-color);
+    color: $colorSuccess;
     }
 }
 
@@ -201,7 +202,7 @@ textarea {
     background-color 0.3s ease-in-out;
 
     &:focus {
-        border-color: var(--primary-color);
+        border-color: $colorPrimary;
     }
 }
 

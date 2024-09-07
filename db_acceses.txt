@@ -1,0 +1,15 @@
+mongodb+srv://vkushnir22:ZwH36e7AitUFObaV@cluster0.ly3sl.mongodb.net/?retryWrites=true&w=majority&appName=Cluster0
+
+mongodb+srv://vkushnir22:ZwH36e7AitUFObaV@cluster0.ly3sl.mongodb.net/
+mongodb+srv://vkushnir22:ZwH36e7AitUFObaV@cluster0.ly3sl.mongodb.net/
+
+
+mongosh "mongodb+srv://oyoyrestaurant.uewyp.mongodb.net/" --apiVersion 1 --username <db_username>
+
+
+mongodb+srv://oyoyrestaurant.uewyp.mongodb.net
+
+mongodb+srv://viktor:boKDYP6dnS3pN83V4s@oyoyrestaurant.uewyp.mongodb.net/
+
+MONGO_URI=mongodb://127.0.0.1:27017/oyoy
+UPLOAD_DIR=/var/www/oyoy/www/public/uploads
