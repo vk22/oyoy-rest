@@ -5,12 +5,12 @@ export const useReservationStore = defineStore('reservation', {
   state: () => ({
     messages: {
       'success': {
-        title: "Your reserve has been accepted",
-        subtitle: "We look forward to seeing you in our restaurant"
+        title: "Your reservation has been accepted",
+        subtitle: "We look forward to seeing you in our restaurant."
       },
       'error': {
         title: "There was an error",
-        subtitle: "We're already dealing with her"
+        subtitle: "The error has been sent to our quality officer."
       },
     },
     sendEmailResponse: {

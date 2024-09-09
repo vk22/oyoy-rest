@@ -4,7 +4,7 @@
       <v-row>
         <v-col class="d-flex justify-center">
           <div class="section-title fadeIn-2">
-            <h2 v-if="props.category === 'food'">Our menu</h2>
+            <h2 v-if="props.category === 'food'">Our Menu</h2>
             <h2 v-else>Wine List</h2>
           </div>
         </v-col>

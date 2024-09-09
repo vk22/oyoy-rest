@@ -120,7 +120,7 @@ const schema = {
   },
   time(value) {
     if (value) return true;
-    return "Select date";
+    return "Select time";
   },
 };
 

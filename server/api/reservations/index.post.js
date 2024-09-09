@@ -5,7 +5,7 @@ const result = {
     success: true,
     status: 'success',
     message: {
-      title: "Your reserve has been accepted",
+      title: "Your reservation has been accepted",
       subtitle: "We look forward to seeing you in our restaurant"
     }
   },
@@ -14,7 +14,7 @@ const result = {
     status: 'error',
     message: {
       title: "There was an error",
-      subtitle: "We're already dealing with her"
+      subtitle: "We're already dealing with it"
     }
   }
 }
