@@ -96,6 +96,7 @@ const selectTime = (event) => {
   >
     <label :for="name">{{ label }}</label>
     <v-number-input
+        class="number-range"
         :name="name"
         v-model="value" 
         :reverse="false"
@@ -234,6 +235,11 @@ textarea {
   font-size: 14px;
 }
 
+.has-error {
+  .number-range {
+    background-color: $colorErrorBg!important;
+  }
+}
 
 
 </style>

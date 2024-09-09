@@ -406,4 +406,10 @@ input.dp__input, .v-field, input, textarea {
     border-radius: 0px!important;
 }
 
+.has-error {
+  .dp__input{
+    background-color: $colorErrorBg!important;
+  }
+}
+
 </style>

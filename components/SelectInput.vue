@@ -37,7 +37,7 @@ let open = ref()
 let selected = computed(() => props.default ? props.default : props.options.length > 0 ? props.options[0] : null)
 </script>
 
-<style scoped>
+<style lang="scss" scoped>
 @import "assets/scss/variables.scss";
 
 .custom-select {
@@ -47,68 +47,72 @@ let selected = computed(() => props.default ? props.default : props.options.leng
   outline: none;
   height: 57px;
   line-height: 56px;
-}
 
-.custom-select .selected {
-  background-color: #fff;
-  border-radius: 0px;
-  border: 1px solid #BDBDBD;
-  color: #111;
-  padding-left: .75rem;
-  cursor: pointer;
-  user-select: none;
-  font-weight: 400;
-  display: flex;
-  align-items: center;
-  height: 100%;
-  
-}
+  .selected {
+    /* background-color: #fff; */
+    border-radius: 0px;
+    border: 1px solid #BDBDBD;
+    color: #111;
+    padding-left: .75rem;
+    cursor: pointer;
+    user-select: none;
+    font-weight: 400;
+    display: flex;
+    align-items: center;
+    height: 100%;
+  }
 
-.custom-select .selected.open {
-  border: 1px solid #a9a9a9;
-  border-radius: 4px 4px 0px 0px;
-}
+  .selected.open {
+    border: 1px solid #a9a9a9;
+    border-radius: 4px 4px 0px 0px;
+  }
 
-.custom-select .selected:after {
-  position: absolute;
-  content: "";
-  top: 27px;
-  right: 1em;
-  width: 0;
-  height: 0;
-  border: 5px solid transparent;
-  border-color: #000000 transparent transparent transparent;
-}
+  .selected:after {
+    position: absolute;
+    content: "";
+    top: 27px;
+    right: 1em;
+    width: 0;
+    height: 0;
+    border: 5px solid transparent;
+    border-color: #000000 transparent transparent transparent;
+  }
 
-.custom-select .items {
-  color: #fff;
-  border-radius: 0px 0px 4px 4px;
-  overflow: scroll;
-  position: absolute;
-  background-color: #ffffff;
-  width: 100%;
-  height: 240px;
-  left: 0;
-  right: 0;
-  z-index: 99999;
-  box-shadow: 1px 1px 10px #00000024;
-}
+  .items {
+    color: #fff;
+    border-radius: 0px 0px 4px 4px;
+    overflow: scroll;
+    position: absolute;
+    background-color: #ffffff;
+    width: 100%;
+    height: 240px;
+    left: 0;
+    right: 0;
+    z-index: 99999;
+    box-shadow: 1px 1px 10px #00000024;
+  }
 
+  .items div {
+    color: #111;
+    padding-left: 1em;
+    cursor: pointer;
+    user-select: none;
+  }
 
+  .items div:hover {
+    background-color: #e0e0e0;
+  }
 
-
-.custom-select .items div {
-  color: #111;
-  padding-left: 1em;
-  cursor: pointer;
-  user-select: none;
-}
-
-.custom-select .items div:hover {
-  background-color: #e0e0e0;
 }
 
 .selectHide {
   display: none;
+}
+
+
+.has-error {
+  .custom-select {
+    background-color: $colorErrorBg !important;
+  }
 }
 </style>
