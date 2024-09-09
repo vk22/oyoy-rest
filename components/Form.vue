@@ -77,7 +77,7 @@
           success-message="Thank you!"
         />
       </div>
-      <button class="btn w-100 black" type="submit">Submit</button>
+      <button class="btn w-100 black submit-btn" type="submit">Submit</button>
     </div>
     </Form>
   </div>
@@ -104,8 +104,11 @@ const schema = {
     return "Phone number needs to be at least 6 digits.";
   },
   email(value) {
-    if (value.match(/^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|.(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/)) return true;
-    return "The email field must be a valid email.";
+    if (value) {
+      if (value.match(/^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|.(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/)) return true;
+      return "The email field must be a valid email.";
+    }
+
   },
   persons(value) {
     if (value) return true;
@@ -382,7 +385,7 @@ form {
 }
 
 input.dp__input {
-  padding: 15px 10px;
+  padding: 15px 10px 15px 40px;
   border: 1px solid #bdbdbd;
   border-radius: 4px;
   font-size: 1rem;
