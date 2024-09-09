@@ -6,7 +6,7 @@ const result = {
     status: 'success',
     message: {
       title: "Your reservation has been accepted",
-      subtitle: "We look forward to seeing you in our restaurant"
+      subtitle: "We look forward to seeing you in our restaurant."
     }
   },
   error: {
@@ -14,7 +14,7 @@ const result = {
     status: 'error',
     message: {
       title: "There was an error",
-      subtitle: "We're already dealing with it"
+      subtitle: "The error has been sent to our quality officer."
     }
   }
 }
