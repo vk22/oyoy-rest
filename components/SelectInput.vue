@@ -58,6 +58,10 @@ let selected = computed(() => props.default ? props.default : props.options.leng
   cursor: pointer;
   user-select: none;
   font-weight: 400;
+  display: flex;
+  align-items: center;
+  height: 100%;
+  
 }
 
 .custom-select .selected.open {

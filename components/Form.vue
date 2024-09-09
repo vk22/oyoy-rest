@@ -382,7 +382,7 @@ form {
 }
 
 input.dp__input {
-  padding: 1rem 1rem 1rem 3rem;
+  padding: 15px 10px;
   border: 1px solid #bdbdbd;
   border-radius: 4px;
   font-size: 1rem;
