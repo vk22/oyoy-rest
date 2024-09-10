@@ -1,6 +1,8 @@
 <template>
   <section class="login-page">
-    <div>
+    <div class="logo">
+      <img src="/img/logo-b.svg" alt="" />
+    </div>
       <div class="login-form">
         <div class="field">
           <input
@@ -21,10 +23,11 @@
           />
         </div>
         <div class="field">
-          <button @click="login" class="main-btn">Login</button>
+          <button @keyup.enter="login()" @click="login()" class="main-btn">Login</button>
         </div>
+        <div class="error-message">{{ errorMessage }}</div>
       </div>
-    </div>
+    
   </section>
 
 </template>
@@ -39,26 +42,34 @@ const user = ref({
   username: '',
   password: '',
 });
+const errorMessage = ref('')
 const router = useRouter();
 
 const login = async () => {
-  await authenticateUser(user.value);
+  const authenticate = await authenticateUser(user.value);
+  if (!authenticate.success) {
+    errorMessage.value = authenticate.message
+  } 
   // redirect to homepage if user is authenticated
-  if (authenticated) {
-    router.push('/reservations');
-  }
+  router.push('/admin/reservations');
 };
 </script>
 
-<style lang="scss">
+<style lang="scss" scoped>
 @import "assets/scss/main.scss";
 
 .login-page {
   display: flex;
+  flex-direction: column;
   justify-content: center;
   align-items: center;
   text-align: center;
   min-height: 100vh;
+
+  .logo {
+    width: 150px;
+    margin-bottom: 2rem;
+  }
 
   .login-form {
     width: 250px;
@@ -158,5 +169,9 @@ const login = async () => {
   .btn {
     width: 100%;
   }
+}
+.error-message {
+  color: red;
+  text-align: center;
 }
 </style>

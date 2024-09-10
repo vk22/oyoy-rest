@@ -56,13 +56,10 @@
 <script setup> 
 definePageMeta({
   layout: "admin",
-  //middleware: ["auth"]
-  // or middleware: 'auth'
-})
+  middleware: ["auth"]
+});
 const { data } = await useFetch('/api/events')
 const events = data._rawValue.events
-
-//store.autoGalleryStart()
 
 </script>
 

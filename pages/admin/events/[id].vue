@@ -47,9 +47,8 @@
 <script setup> 
 definePageMeta({
   layout: "admin",
-  //middleware: ["auth"]
-  // or middleware: 'auth'
-})
+  middleware: ["auth"]
+});
 const route = useRoute()
 const { data } = await useFetch(`/api/events/${route.params.id}`)
 const event = ref(data._rawValue)

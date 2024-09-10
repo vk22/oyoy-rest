@@ -16,17 +16,19 @@ export const useAuthStore = defineStore('auth', {
         },
       }); 
       this.loading = pending;
-      if (data.value) {
+      if (data.value.success) {
         const token = useCookie('token'); 
         token.value = data?.value?.token; 
         this.authenticated = true; 
+        return data.value
+      } else {
+        return data.value
       }
     },
     logOut() {
       const token = useCookie('token'); 
       this.authenticated = false; 
       token.value = null; 
-      console.log('this.authenticated? ', this.authenticated)
     }
   },
   getters: {

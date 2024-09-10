@@ -31,6 +31,7 @@
 <script setup>
 definePageMeta({
   layout: "admin",
+  middleware: ["auth"]
 });
 
 const topslide = ref();

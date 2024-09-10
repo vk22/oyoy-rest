@@ -130,8 +130,7 @@
 <script setup>
 definePageMeta({
   layout: "admin",
-  //middleware: ["auth"]
-  // or middleware: 'auth'
+  middleware: ["auth"]
 });
 const { $formatDate } = useNuxtApp();
 const reservationDialogIsOpen = ref(false);

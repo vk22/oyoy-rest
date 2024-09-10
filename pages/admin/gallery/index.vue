@@ -56,7 +56,8 @@
 <script setup> 
 definePageMeta({
   layout: "admin",
-})
+  middleware: ["auth"]
+});
 
 const { data } = await useFetch('/api/gallery')
 const gallery = data._rawValue.items

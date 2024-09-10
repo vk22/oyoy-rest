@@ -32,6 +32,7 @@
 <script setup>
 definePageMeta({
   layout: "admin",
+  middleware: ["auth"]
 });
 
 const about = ref();

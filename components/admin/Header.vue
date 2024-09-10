@@ -2,10 +2,10 @@
   <div class="admin-nav">
     <nav class="admin-header">
       <div class="main-logo">
-        <nuxt-link :to="'/admin/projects'" class="">
+        <nuxt-link :to="'/admin/reservations'" class="">
         </nuxt-link>
       </div>
-      <div class="logout">
+      <div class="logout" v-if="authenticated">
         <a href="#" class="admin-sm-btn" @click="logout()">
           <v-icon :icon="'mdi-logout-variant'" class="icon"></v-icon>  
           Logout
@@ -14,44 +14,15 @@
     </nav>
   </div>
 </template>
+<script lang="ts" setup>
+import { useAuthStore } from '~/store/auth';
+const authStore = useAuthStore();
+const authenticated = computed(() => authStore.isAuthenticated);
+const router = useRouter();
 
-<script>
-export default {
-  props: ['myData'],
-  name: 'mainNav',
-  data() {
-    return {
-      menuItems: [],
-      navRightIsActive: false,
-      toggleNavStyle: ''
-    }
-  },
-  methods: {
-    logout() {
-      this.$toast.show('Logging out...', { icon: "fingerprint" });
-      this.$auth.logout()
-      // this.$router.push({
-      //   name: 'login'
-      // })
-    }
-  },
-  created() {
-    if (process.browser) {
-      window.addEventListener('scroll', this.handleSCroll);
-    }
-
-  },
-  destroyed() {
-    if (process.browser) {
-      window.removeEventListener('scroll', this.handleSCroll);
-    }
-  },
-  mounted() {
-
-  },
-
-
-}
+const logout = async () => {
+  await authStore.logOut();
+};
 </script>
 
 

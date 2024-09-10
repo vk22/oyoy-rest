@@ -33,7 +33,8 @@
 <script setup> 
 definePageMeta({
   layout: "admin",
-})
+  middleware: ["auth"]
+});
 
 const { data } = await useFetch('/api/menu')
 const events = data._rawValue.items
