@@ -32,7 +32,7 @@ export default defineEventHandler(async (event) => {
     const formData = await readFormData(event);
     const file = formData.get('file');
     const blob = new Blob([file], { type: file.type });
-    const { url } = await put('test/test1.jpg', blob, { access: 'public' });
+    const { url } = await put('events/event.jpg', blob, { access: 'public' });
     console.log('url ', url)
     return { 
       success: true, 
