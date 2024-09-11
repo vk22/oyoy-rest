@@ -3,17 +3,13 @@ export async function uploadFile(file, type) {
 	let formData = new FormData()
 	formData.append('file', file.file)
 
-	// track status and upload file
-	file.status = 'loading'
 	let response;
 	if (type === 'gallery') {
-		response = await useFetch('/api/uploadgallery', { method: 'POST', body: formData })
+		response  = await useFetch('/api/uploadgallery', { method: 'POST', body: formData })
 	} else {
 		response = await useFetch('/api/uploadfile', { method: 'POST', body: formData })
 	}
 	
-	// change status to indicate the success of the upload request
-	file.status = response.ok
 	return response
 }
 

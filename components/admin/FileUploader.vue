@@ -49,9 +49,7 @@ const { uploadFiles } = createUploader()
 const startUpload = async () => {
 	const response = await uploadFiles(files._rawValue, props.type)
 	removeFiles()
-	if (response[0].ok) {
-		return true
-	}
+	return response
 }
 
 defineExpose({ startUpload });

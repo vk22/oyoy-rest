@@ -16,3 +16,4 @@ logs
 # Misc
 .DS_Store
 
+.vercel

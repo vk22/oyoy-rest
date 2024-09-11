@@ -10,7 +10,7 @@
       </v-row>
       <v-row>
         <v-col cols="2">
-          <img :src="'/uploads/'+event.image" />
+          <img :src="event.image" />
         </v-col>
       </v-row>
       <v-row>
@@ -48,7 +48,8 @@
 definePageMeta({
   layout: "admin",
   middleware: ["auth"]
-});
+  // or middleware: 'auth'
+})
 const route = useRoute()
 const { data } = await useFetch(`/api/events/${route.params.id}`)
 const event = ref(data._rawValue)
@@ -59,14 +60,21 @@ function addFiles(files) {
 }
 
 const editEvent = async () => {
+
+  //// upload image
+  if (event.value.imageNew) {
+    const responseFileUpload = await uploaderRef.value.startUpload();
+    const oneFileUpload = responseFileUpload[0].data._rawValue
+    // console.log('oneFileUpload ', oneFileUpload)
+    event.value.imageNew = oneFileUpload.url
+  }
+
   const { data } = await useFetch(`/api/events`, {
         method: 'put',
         body: event
     } );
 
-  if (event.value.imageNew) {
-    const responseFileUpload = await uploaderRef.value.startUpload();
-  }
+
   event.value = data._rawValue.data
 
 }

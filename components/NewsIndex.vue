@@ -12,7 +12,7 @@
         <v-col v-for="(oneevents, index) in events" :key="index" cols="12" sm="4">
           <div class="events-index__item" @click="modalToggle(index)">
             <div class="img-wrap img-1">
-              <img :src="'/uploads/'+oneevents.image" class="img-cover"/>
+              <NuxtImg :src="oneevents.image" class="img-cover" />
             </div>
             <div class="text-wrap">
               <div class="title">

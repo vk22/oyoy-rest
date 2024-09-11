@@ -1,4 +1,4 @@
-import { User } from "~~/server/models/user-model";
+import { put } from '@vercel/blob';
 import multer from 'multer';
 import { callNodeListener } from 'h3';
 import 'dotenv/config'
@@ -21,16 +21,29 @@ const upload = multer({
   },
 });
 
-export default defineEventHandler( async (event) => {
-    try {
-        await callNodeListener(upload.single('file'), event.node.req, event.node.res);
-        const path = `/public/cv/${originalFileName}`;
-        return path;
-      } catch (error) {
-        console.log(error);
-        return createError({
-          statusCode: 500,
-          statusMessage: 'Something went wrong.',
-        });
-      }
-  })
+
+export default defineEventHandler(async (event) => {
+  try {
+
+    /// local
+    //await callNodeListener(upload.single('file'), event.node.req, event.node.res);
+
+    /// vercel blob
+    const formData = await readFormData(event);
+    const file = formData.get('file');
+    const blob = new Blob([file], { type: file.type });
+    const { url } = await put('test/test1.jpg', blob, { access: 'public' });
+    console.log('url ', url)
+    return { 
+      success: true, 
+      message: 'File uploaded', 
+      url: url 
+    };
+  } catch (error) {
+    console.log(error);
+    return createError({
+      statusCode: 500,
+      statusMessage: 'Something went wrong.',
+    });
+  }
+})

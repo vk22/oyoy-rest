@@ -18,7 +18,7 @@
               <v-col md="2">
                 <nuxt-link :to="'/admin/events/' + promo._id">
                   <img
-                    :src="'/uploads/'+promo.image"
+                    :src="promo.image"
                     width="100"
                     alt=""
                   />

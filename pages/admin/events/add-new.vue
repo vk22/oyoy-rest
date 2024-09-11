@@ -57,12 +57,15 @@ function addFiles(files) {
 }
 
 const addEvent = async () => {
-  event.value.test = 'kuku'
+  //// upload image
+  const responseFileUpload = await uploaderRef.value.startUpload();
+  const oneFileUpload = responseFileUpload[0].data._rawValue
+  event.value.imageNew = oneFileUpload.url
+
   const { data } = await useFetch(`/api/events`, {
         method: 'post',
         body: event
     } );
-  uploaderRef.value.startUpload();
   router.push({ path: "/admin/events" })
 }
 
