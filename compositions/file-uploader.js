@@ -5,7 +5,7 @@ export async function uploadFile(file, type) {
 
 	let response;
 	if (type === 'gallery') {
-		response  = await useFetch('/api/uploadgallery', { method: 'POST', body: formData })
+		response = await useFetch('/api/uploadgallery', { method: 'POST', body: formData })
 	} else {
 		response = await useFetch('/api/uploadfile', { method: 'POST', body: formData })
 	}
@@ -13,9 +13,18 @@ export async function uploadFile(file, type) {
 	return response
 }
 
-export function uploadFiles(files, type) {
-	return Promise.all(files.map((file) => uploadFile(file, type)))
+export async function uploadFiles(files) {
+	// set up the request data
+	let formData = new FormData()
+	files.forEach((file, index) => {
+		formData.append(`file`, file.file)
+	});
+	return await useFetch('/api/uploadgallery', { method: 'POST', body: formData })
 }
+
+// export function uploadFiles(files, type) {
+// 	return Promise.all(files.map((file) => uploadFile(file, type)))
+// }
 
 export default function createUploader(type) {
 	return {

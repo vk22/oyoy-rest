@@ -51,6 +51,7 @@ const event = ref({
   image: ''
 })
 const uploaderRef = ref(null);
+const files = ref(null);
 
 function addFiles(files) {
   event.value.image = files[0].name

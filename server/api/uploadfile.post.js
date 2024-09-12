@@ -1,6 +1,6 @@
 import { put } from '@vercel/blob';
 import multer from 'multer';
-import { callNodeListener } from 'h3';
+// import { callNodeListener } from 'h3';
 import 'dotenv/config'
 
 let originalFileName = '';
@@ -32,6 +32,7 @@ export default defineEventHandler(async (event) => {
     const formData = await readFormData(event);
     const file = formData.get('file');
     const blob = new Blob([file], { type: file.type });
+    console.log('blob ', blob)
     const { url } = await put('events/event.jpg', blob, { access: 'public' });
     console.log('url ', url)
     return { 

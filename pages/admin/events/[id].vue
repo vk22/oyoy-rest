@@ -54,6 +54,7 @@ const route = useRoute()
 const { data } = await useFetch(`/api/events/${route.params.id}`)
 const event = ref(data._rawValue)
 const uploaderRef = ref(null);
+const files = ref(null);
 
 function addFiles(files) {
   event.value.imageNew = files[0].name

@@ -19,7 +19,7 @@
           <template #item="{ element: item }">
             <div class="gallery-item">
               <!-- <span>{{ item.index }}</span> -->
-              <img :src="'/uploads/gallery/' + item.filename" />
+              <img :src="item.filename" />
             </div>
           </template>
         </draggable>

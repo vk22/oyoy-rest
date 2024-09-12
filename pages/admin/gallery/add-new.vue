@@ -47,18 +47,24 @@ const gallery = ref({
 const uploaderRef = ref(null);
 
 function addFiles(files) {
-  files.forEach((el, index) => {
-    gallery.value.images.push({filename: el.name, index: index})
-  })
- 
+  // files.forEach((el, index) => {
+  //   gallery.value.images.push({filename: el.name, index: index})
+  // })
 }
 
 const addEvent = async () => {
+  /// clear images
+  gallery.value.images = []
+  //// upload image
+  const responseFilesUpload = await uploaderRef.value.startUpload();
+  responseFilesUpload.data._rawValue.forEach((file, index) => {
+    gallery.value.images.push({filename: file.url, index: index})
+  })
+
   const { data } = await useFetch(`/api/gallery`, {
         method: 'post',
         body: gallery
     } );
-  uploaderRef.value.startUpload();
   router.push({ path: "/admin/gallery" })
 }
 

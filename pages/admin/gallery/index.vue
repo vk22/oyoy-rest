@@ -18,7 +18,7 @@
               <v-col md="2">
                 <nuxt-link :to="'/admin/gallery/' + item._id">
                   <img
-                    :src="'/uploads/gallery/'+item.images[0].filename"
+                    :src="item.images[0].filename"
                     width="100"
                     alt=""
                   />

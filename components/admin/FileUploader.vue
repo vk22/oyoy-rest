@@ -39,7 +39,6 @@ function onInputChange(e) {
 	emit('files-dropped2', files._rawValue)
 }
 
-
 // Uploader
 import createUploader from '../../compositions/file-uploader'
 const { uploadFiles } = createUploader()
