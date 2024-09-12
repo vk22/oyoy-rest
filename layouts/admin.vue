@@ -1,5 +1,6 @@
 <template>
   <div>
+    <AdminLoading />
     <AdminHeader />
     <AdminSidebar />
     <div class="admin-container">

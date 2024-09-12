@@ -57,7 +57,7 @@ export const useCustomGalleryStore = defineStore('customGalleryStore', {
       const gallery = state.gallery.map(item => {
         return {
           index: item.index,
-          url: `/uploads/gallery/${item.filename}`
+          url: item.filename
         }
       }) 
       return gallery

@@ -34,6 +34,10 @@
 </template>
 
 <script setup> 
+import { useAdminStore } from "@/store/admin";
+const adminStore = useAdminStore();
+const loading = computed(() => adminStore.loading);
+
 definePageMeta({
   layout: "admin",
   middleware: ["auth"]
@@ -53,6 +57,7 @@ function addFiles(files) {
 }
 
 const addEvent = async () => {
+  adminStore.setLoading(true)
   /// clear images
   gallery.value.images = []
   //// upload image
@@ -62,10 +67,15 @@ const addEvent = async () => {
   })
 
   const { data } = await useFetch(`/api/gallery`, {
-        method: 'post',
-        body: gallery
-    } );
-  router.push({ path: "/admin/gallery" })
+    method: 'post',
+    body: gallery
+  });
+
+  setTimeout(() => {
+    adminStore.setLoading(false)
+    router.push({ path: "/admin/gallery" })
+  }, 1000);  
+  
 }
 
 

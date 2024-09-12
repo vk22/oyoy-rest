@@ -32,7 +32,7 @@ export const useGalleryStore = defineStore("galleryStore", {
           const images = gallery.images.map((item, index) => {
             return {
               index: index,
-              url: `/uploads/gallery/${item.filename}`
+              url: item.filename
             }
           })
           return images

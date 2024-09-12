@@ -39,6 +39,10 @@
 </template>
 
 <script setup> 
+import { useAdminStore } from "@/store/admin";
+const adminStore = useAdminStore();
+const loading = computed(() => adminStore.loading);
+
 definePageMeta({
   layout: "admin",
   middleware: ["auth"]
@@ -58,6 +62,7 @@ function addFiles(files) {
 }
 
 const addEvent = async () => {
+  adminStore.setLoading(true)
   //// upload image
   const responseFileUpload = await uploaderRef.value.startUpload();
   const oneFileUpload = responseFileUpload[0].data._rawValue
@@ -67,7 +72,12 @@ const addEvent = async () => {
         method: 'post',
         body: event
     } );
-  router.push({ path: "/admin/events" })
+
+  setTimeout(() => {
+    adminStore.setLoading(false)
+    router.push({ path: "/admin/events" })
+  }, 1000);  
+  
 }
 
 

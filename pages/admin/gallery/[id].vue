@@ -58,6 +58,10 @@
 </template>
 
 <script setup>
+import { useAdminStore } from "@/store/admin";
+const adminStore = useAdminStore();
+const loading = computed(() => adminStore.loading);
+
 definePageMeta({
   layout: "admin",
   middleware: ["auth"]
@@ -78,11 +82,14 @@ const draggEnd = async () => {
 };
 
 const editItem = async () => {
+  adminStore.setLoading(true)
   const { data } = await useFetch(`/api/gallery`, {
     method: "put",
     body: gallery,
   });
-
+  setTimeout(() => {
+    adminStore.setLoading(false)
+  }, 1000);
 };
 
 const deleteItem = async () => {

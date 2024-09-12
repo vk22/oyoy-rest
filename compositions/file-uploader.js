@@ -2,14 +2,12 @@ export async function uploadFile(file, type) {
 	// set up the request data
 	let formData = new FormData()
 	formData.append('file', file.file)
-
 	let response;
 	if (type === 'gallery') {
 		response = await useFetch('/api/uploadgallery', { method: 'POST', body: formData })
 	} else {
 		response = await useFetch('/api/uploadfile', { method: 'POST', body: formData })
 	}
-	
 	return response
 }
 
