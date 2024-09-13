@@ -55,6 +55,7 @@ definePageMeta({
   // or middleware: 'auth'
 })
 const route = useRoute()
+const router = useRouter()
 const { data } = await useFetch(`/api/events/${route.params.id}`)
 const event = ref(data._rawValue)
 const uploaderRef = ref(null);
