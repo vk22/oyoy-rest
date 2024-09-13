@@ -47,7 +47,6 @@ definePageMeta({
   layout: "admin",
   middleware: ["auth"]
 });
-const route = useRoute()
 const router = useRouter()
 const event = ref({
   title: '',
@@ -62,6 +61,11 @@ function addFiles(files) {
 }
 
 const addEvent = async () => {
+  let checkFormField = Object.values(event.value).every((i) => i !== '')
+  if (!checkFormField) {
+    alert ('Fill in all fields!');
+    return
+  };
   adminStore.setLoading(true)
   //// upload image
   const responseFileUpload = await uploaderRef.value.startUpload();

@@ -66,6 +66,11 @@ function addFiles(files) {
 }
 
 const editEvent = async () => {
+  let checkFormField = Object.values(event.value).every((i) => i !== '')
+  if (!checkFormField) {
+    alert ('Fill in all fields!');
+    return
+  };
   adminStore.setLoading(true)
   //// upload image
   if (event.value.imageNew) {
