@@ -11,7 +11,7 @@
       <v-row>
         <v-col>
           <label for=""></label>
-          <AdminFileUploader @files-dropped2="addFiles" ref="uploaderRef"></AdminFileUploader> 
+          <AdminFileUploader :type="'events'" @files-dropped2="addFiles" ref="uploaderRef"></AdminFileUploader> 
           {{ files }}
         </v-col>
       </v-row>
@@ -65,8 +65,9 @@ const addEvent = async () => {
   adminStore.setLoading(true)
   //// upload image
   const responseFileUpload = await uploaderRef.value.startUpload();
-  const oneFileUpload = responseFileUpload[0].data._rawValue
-  event.value.imageNew = oneFileUpload.url
+  console.log('responseFileUpload ', responseFileUpload)
+  const oneFileUpload = responseFileUpload.data._rawValue[0]
+  event.value.image = oneFileUpload.url
 
   const { data } = await useFetch(`/api/events`, {
         method: 'post',

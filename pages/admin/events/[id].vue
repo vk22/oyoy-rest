@@ -16,7 +16,7 @@
       <v-row>
         <v-col>
           <label for=""></label>
-          <AdminFileUploader @files-dropped2="addFiles" ref="uploaderRef"></AdminFileUploader> 
+          <AdminFileUploader :type="'events'" @files-dropped2="addFiles" ref="uploaderRef"></AdminFileUploader> 
           {{ files }}
         </v-col>
       </v-row>
@@ -69,7 +69,7 @@ const editEvent = async () => {
   //// upload image
   if (event.value.imageNew) {
     const responseFileUpload = await uploaderRef.value.startUpload();
-    const oneFileUpload = responseFileUpload[0].data._rawValue
+    const oneFileUpload = responseFileUpload.data._rawValue[0]
     // console.log('oneFileUpload ', oneFileUpload)
     event.value.imageNew = oneFileUpload.url
   }

@@ -12,7 +12,6 @@
         <v-col>
           <label for=""></label>
           <AdminFileUploader :type="'gallery'" @files-dropped2="addFiles" ref="uploaderRef"></AdminFileUploader> 
-   
         </v-col>
       </v-row>
       <v-row>
