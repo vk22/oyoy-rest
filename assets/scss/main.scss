@@ -1,8 +1,6 @@
 @import 'assets/scss/variables.scss';
 @import 'assets/scss/keyframes.scss';
 
-
-
 @media print {
   @page {
     margin: 0;
@@ -33,8 +31,6 @@ body {
   -moz-osx-font-smoothing: grayscale;
   -webkit-font-smoothing: antialiased;
   box-sizing: border-box;
-  height: 100%;
-  width: 100%;
 
   //overflow: hidden;
 
@@ -111,14 +107,16 @@ button:focus {
   outline: 0;
 }
 
+.v-move,
 .v-enter-active,
 .v-leave-active {
-  transition: opacity 0.5s ease;
+  transition: 0.3s ease;
 }
 
 .v-enter-from,
 .v-leave-to {
   opacity: 0;
+  transform: translateY(10px);
 }
 
 .fade-enter-active,

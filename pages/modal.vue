@@ -16,17 +16,17 @@
 <style lang="scss">
 @import "assets/scss/main.scss";
 
-.v-move,
-.v-enter-active,
-.v-leave-active {
-  transition: 0.3s ease;
-}
+// .v-move,
+// .v-enter-active,
+// .v-leave-active {
+//   transition: 0.3s ease;
+// }
 
-.v-enter-from,
-.v-leave-to {
-  opacity: 0;
-  transform: translateY(10px);
-}
+// .v-enter-from,
+// .v-leave-to {
+//   opacity: 0;
+//   transform: translateY(10px);
+// }
 
 
 .body h1 {

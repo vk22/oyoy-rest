@@ -26,17 +26,17 @@ const formModalStateToggle = () => {
 <style lang="scss">
 @import "assets/scss/variables.scss";
 
-.v-move,
-.v-enter-active,
-.v-leave-active {
-  transition: 0.3s ease;
-}
+// .v-move,
+// .v-enter-active,
+// .v-leave-active {
+//   transition: 0.3s ease;
+// }
 
-.v-enter-from,
-.v-leave-to {
-  opacity: 0;
-  transform: translateY(10px);
-}
+// .v-enter-from,
+// .v-leave-to {
+//   opacity: 0;
+//   transform: translateY(10px);
+// }
 
 .form-modal {
   background: #fff;
