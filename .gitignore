@@ -19,4 +19,6 @@ logs
 .vercel
 
 # env
+.env
+.env-client
 .env.development.local

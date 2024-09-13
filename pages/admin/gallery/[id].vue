@@ -32,10 +32,11 @@
         <v-col>
           <label for=""></label>
           <AdminFileUploader
+            :type="'gallery'"
             @files-dropped2="addFiles"
             ref="uploaderRef"
           ></AdminFileUploader>
-          {{ files }}
+          <!-- {{ files }} -->
         </v-col>
       </v-row>
       <v-row>
@@ -71,6 +72,7 @@ const router = useRouter()
 const { data } = await useFetch(`/api/gallery/${route.params.id}`);
 const gallery = ref(data.value);
 const uploaderRef = ref(null);
+const files = ref([]);
 const dragging = ref(false);
 
 function addFiles(files) {
@@ -83,10 +85,18 @@ const draggEnd = async () => {
 
 const editItem = async () => {
   adminStore.setLoading(true)
+
+  //// upload images
+  const responseFilesUpload = await uploaderRef.value.startUpload();
+  responseFilesUpload.data._rawValue.forEach((file, index) => {
+    gallery.value.images.push({filename: file.url, index: index})
+  })
+
   const { data } = await useFetch(`/api/gallery`, {
     method: "put",
     body: gallery,
   });
+
   setTimeout(() => {
     adminStore.setLoading(false)
   }, 1000);
