@@ -14,7 +14,7 @@ export default defineNuxtConfig({
   ],
   devtools: { enabled: true },
   build: {
-    transpile: ['vuetify', '@vuepic/vue-datepicker'] 
+    transpile: ['vuetify', '@vuepic/vue-datepicker']
   },
   modules: [
     (_options, nuxt) => {

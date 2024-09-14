@@ -44,7 +44,7 @@ definePageMeta({
 });
 
 const company = ref();
-
+const toast = useNuxtApp().$toast
 const { data } = await useFetch("/api/company", {
   method: "get",
 });
@@ -56,6 +56,19 @@ const save = async () => {
     method: "put",
     body: company,
   });
+  if (data) {
+    if (process.client) {
+      toast.success("Data saved", {
+        timeout: 2000
+      });
+    }
+  } else {
+    if (process.client) {
+      toast.error("Smth wrong", {
+        timeout: 2000
+      });
+    }
+  }
 };
 
 //store.autoGalleryStart()

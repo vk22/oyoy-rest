@@ -35,7 +35,7 @@ definePageMeta({
 });
 
 const topslide = ref();
-
+const toast = useNuxtApp().$toast
 const { data } = await useFetch("/api/topslide", {
   method: "get",
 });
@@ -47,6 +47,19 @@ const save = async () => {
     method: "put",
     body: topslide,
   });
+  if (data) {
+    if (process.client) {
+      toast.success("Data saved", {
+        timeout: 2000
+      });
+    }
+  } else {
+    if (process.client) {
+      toast.error("Smth wrong", {
+        timeout: 2000
+      });
+    }
+  }
 };
 
 //store.autoGalleryStart()

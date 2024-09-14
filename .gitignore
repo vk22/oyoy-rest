@@ -19,6 +19,6 @@ logs
 .vercel
 
 # env
-.env
 .env-client
+.env-my
 .env.development.local
