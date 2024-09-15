@@ -7,10 +7,17 @@ export default defineEventHandler( async (event) => {
     item.section = body.section
     item.content = body.content
     const saveItem = await item.save()    
-    return {
-      success: true,
-      message: 'Menu saved successfully',
-      data: saveItem
+    if (saveItem) {
+      return {
+        success: true,
+        message: 'Menu saved successfully',
+        data: saveItem
+      }
+    } else {
+      return {
+        success: false,
+        message: 'Something wrong'
+      }
     }
 
 })

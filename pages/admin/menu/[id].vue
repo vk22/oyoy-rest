@@ -57,9 +57,10 @@ definePageMeta({
   layout: "admin",
   middleware: ["auth"]
 });
+import { useAdminStore } from "@/store/admin";
+const adminStore = useAdminStore();
 const route = useRoute()
 const router = useRouter()
-const toast = useNuxtApp().$toast
 const { data } = await useFetch(`/api/menu/${route.params.id}`)
 const menu = ref(data._rawValue)
 
@@ -76,47 +77,19 @@ function removeItem(index) {
 }
 
 const editMenu = async () => {
-  const { data } = await useFetch(`/api/menu`, {
-    method: 'put',
-    body: menu
-  });
-  if (data) {
-    menu.value = data._rawValue.data
-    if (process.client) {
-      toast.success("Data saved", {
-        timeout: 2000
-      });
-    }
-  } else {
-    if (process.client) {
-      toast.error("Smth wrong", {
-        timeout: 2000
-      });
-    }
-  }
-
+  const { data } = await adminStore.fetchData('menu', 'put', menu)
+  // if (data) {
+  //   router.push({ path: "/admin/menu" })
+  // }
 }
+
 
 const deleteMenu = async () => {
-  const { data } = await useFetch(`/api/menu`, {
-    method: 'delete',
-    body: menu
-  });
-
-  if (data._rawValue) {
-    router.push({ path: "/admin/menu" })
+  const { success } = await adminStore.fetchData('menu', 'delete', menu); 
+  if (success) {
+    router.push({ path: "/admin/menu" });
   }
-
-  //
-}
-
-
-
-
-
-
-
-
+};
 
 </script>
 

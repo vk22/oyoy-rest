@@ -21,6 +21,8 @@
 
 <script setup>
 import { defineExpose } from 'vue';
+import { useAdminStore } from "@/store/admin";
+const adminStore = useAdminStore();
 const emit = defineEmits(['files-dropped2'])
 const props = defineProps(['type'])
 
@@ -39,14 +41,16 @@ function onInputChange(e) {
 	emit('files-dropped2', files._rawValue)
 }
 
+
+
 // Uploader
 import createUploader from '../../compositions/file-uploader'
-const { uploadFiles } = createUploader()
+const { uploadFiles } = createUploader(adminStore)
 
 
 /// handler from Parent
 const startUpload = async () => {
-	const response = await uploadFiles(files._rawValue, props.type)
+	const response = await uploadFiles(files._rawValue, props.type, adminStore)
 	removeFiles()
 	return response
 }

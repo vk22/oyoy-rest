@@ -65,46 +65,48 @@ function addFiles(files) {
   event.value.imageNew = files[0].name
 }
 
-const editEvent = async () => {
+const editEvent= async () => {
   let checkFormField = Object.values(event.value).every((i) => i !== '')
   if (!checkFormField) {
     alert ('Fill in all fields!');
     return
   };
-  adminStore.setLoading(true)
-  //// upload image
   if (event.value.imageNew) {
-    const responseFileUpload = await uploaderRef.value.startUpload();
-    const oneFileUpload = responseFileUpload.data._rawValue[0]
-    // console.log('oneFileUpload ', oneFileUpload)
-    event.value.imageNew = oneFileUpload.url
+    /// upload images
+    let filesUploadResponse = await uploaderRef.value.startUpload();
+    console.log('filesUploadResponse ', filesUploadResponse)
+    if (filesUploadResponse.success) {
+      let oneFileUpload = filesUploadResponse.data[0]
+      event.value.imageNew = oneFileUpload
+      /// save data
+      const { data } = await adminStore.fetchData('events', 'put', event) 
+      event.value = data
+    }
+  } else {
+    /// save data
+    const { data } = await adminStore.fetchData('events', 'put', event) 
+    event.value = data
   }
-
-  const { data } = await useFetch(`/api/events`, {
-        method: 'put',
-        body: event
-    } );
-
-
-  event.value = data._rawValue.data
-
-  setTimeout(() => {
-    adminStore.setLoading(false)
-  }, 1000);  
-
-}
+};
 
 const deleteEvent = async () => {
-  const { data } = await useFetch(`/api/events`, {
-        method: 'delete',
-        body: event
-    } );
-  if (data._rawValue) {
-    router.push({ path: "/admin/events" })
+  const { success } = await adminStore.fetchData('events', 'delete', event); 
+  if (success) {
+    router.push({ path: "/admin/events" });
   }
+};
 
-  //
-}
+// const deleteEvent = async () => {
+//   const { data } = await useFetch(`/api/events`, {
+//         method: 'delete',
+//         body: event
+//     } );
+//   if (data._rawValue) {
+//     router.push({ path: "/admin/events" })
+//   }
+
+//   //
+// }
 
 </script>
 

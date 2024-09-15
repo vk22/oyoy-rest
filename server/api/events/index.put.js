@@ -2,6 +2,7 @@ import { Event } from "~~/server/models/event-model";
 
 export default defineEventHandler( async (event) => {
     const body = await readBody(event)
+    console.log('body ', body)
     const eventOne = await Event.findById(body._id)
     if (!eventOne) return false
     eventOne.title = body.title
@@ -10,10 +11,17 @@ export default defineEventHandler( async (event) => {
       eventOne.image = body.imageNew
     }
     const saveItem = await eventOne.save()
-    return {
-      success: true,
-      message: 'Event saved successfully',
-      data: saveItem
+    if (saveItem) {
+      return {
+        success: true,
+        message: 'Event saved successfully',
+        data: saveItem
+      }
+    } else {
+      return {
+        success: false,
+        message: 'Something wrong'
+      }
     }
 
 })

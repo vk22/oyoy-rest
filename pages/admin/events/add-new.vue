@@ -11,17 +11,13 @@
       <v-row>
         <v-col>
           <label for=""></label>
-          <AdminFileUploader :type="'events'" @files-dropped2="addFiles" ref="uploaderRef"></AdminFileUploader> 
+          <AdminFileUploader :type="'events'" @files-dropped2="addFiles" ref="uploaderRef"></AdminFileUploader>
           {{ files }}
         </v-col>
       </v-row>
       <v-row>
         <v-col>
-          <v-text-field
-            v-model="event.title"
-            variant="outlined"
-            label="Title"
-          ></v-text-field>
+          <v-text-field v-model="event.title" variant="outlined" label="Title"></v-text-field>
         </v-col>
       </v-row>
       <v-row>
@@ -30,7 +26,7 @@
         </v-col>
       </v-row>
       <v-row>
-        <v-col> 
+        <v-col>
           <div class="admin-main-btn" @click="addEvent()">Save</div>
         </v-col>
       </v-row>
@@ -38,10 +34,9 @@
   </section>
 </template>
 
-<script setup> 
+<script setup>
 import { useAdminStore } from "@/store/admin";
 const adminStore = useAdminStore();
-const loading = computed(() => adminStore.loading);
 
 definePageMeta({
   layout: "admin",
@@ -63,27 +58,22 @@ function addFiles(files) {
 const addEvent = async () => {
   let checkFormField = Object.values(event.value).every((i) => i !== '')
   if (!checkFormField) {
-    alert ('Fill in all fields!');
+    alert('Fill in all fields!');
     return
   };
-  adminStore.setLoading(true)
-  //// upload image
-  const responseFileUpload = await uploaderRef.value.startUpload();
-  console.log('responseFileUpload ', responseFileUpload)
-  const oneFileUpload = responseFileUpload.data._rawValue[0]
-  event.value.image = oneFileUpload.url
-
-  const { data } = await useFetch(`/api/events`, {
-        method: 'post',
-        body: event
-    } );
-
-  setTimeout(() => {
-    adminStore.setLoading(false)
-    router.push({ path: "/admin/events" })
-  }, 1000);  
-  
-}
+  /// upload images
+  let filesUploadResponse = await uploaderRef.value.startUpload();
+  console.log('filesUploadResponse ', filesUploadResponse)
+  if (filesUploadResponse.success) {
+    let oneFileUpload = filesUploadResponse.data[0]
+    event.value.image = oneFileUpload
+    /// save data
+    const { data } = await adminStore.fetchData('events', 'post', event)
+    if (data) {
+      router.push({ path: "/admin/events" })
+    }
+  }
+};
 
 
 </script>
@@ -92,6 +82,4 @@ const addEvent = async () => {
 
 <style lang="scss" scoped>
 @import "assets/scss/admin.scss";
-
-
 </style>

@@ -11,28 +11,24 @@
       <v-row>
         <v-col>
           <label for=""></label>
-          <AdminFileUploader :type="'gallery'" @files-dropped2="addFiles" ref="uploaderRef"></AdminFileUploader> 
+          <AdminFileUploader :type="'gallery'" @files-dropped2="addFiles" ref="uploaderRef"></AdminFileUploader>
         </v-col>
       </v-row>
       <v-row>
         <v-col>
-          <v-text-field
-            v-model="gallery.name"
-            variant="outlined"
-            label="Name"
-          ></v-text-field>
+          <v-text-field v-model="gallery.name" variant="outlined" label="Name"></v-text-field>
         </v-col>
       </v-row>
       <v-row>
-        <v-col> 
-          <div class="admin-main-btn" @click="addEvent()">Save</div>
+        <v-col>
+          <div class="admin-main-btn" @click="addItem()">Save</div>
         </v-col>
       </v-row>
     </v-container>
   </section>
 </template>
 
-<script setup> 
+<script setup>
 import { useAdminStore } from "@/store/admin";
 const adminStore = useAdminStore();
 const loading = computed(() => adminStore.loading);
@@ -41,7 +37,6 @@ definePageMeta({
   layout: "admin",
   middleware: ["auth"]
 });
-const route = useRoute()
 const router = useRouter()
 const gallery = ref({
   name: '',
@@ -55,35 +50,25 @@ function addFiles(files) {
   // })
 }
 
-const addEvent = async () => {
-  adminStore.setLoading(true)
-  /// clear images
+const addItem = async () => {
   gallery.value.images = []
-  //// upload image
-  const responseFilesUpload = await uploaderRef.value.startUpload();
-  responseFilesUpload.data._rawValue.forEach((file, index) => {
-    gallery.value.images.push({filename: file.url, index: index})
-  })
+  /// upload images
+  let filesUploadResponse = await uploaderRef.value.startUpload();
+  if (filesUploadResponse.success) {
+    filesUploadResponse.data.forEach((url, index) => {
+      gallery.value.images.push({ filename: url, index: index })
+    })
+    /// save data
+    const { success } = await adminStore.fetchData('gallery', 'post', gallery)
+    if (success) {
+      router.push({ path: "/admin/gallery" })
+    }
+  }
 
-  const { data } = await useFetch(`/api/gallery`, {
-    method: 'post',
-    body: gallery
-  });
-
-  setTimeout(() => {
-    adminStore.setLoading(false)
-    router.push({ path: "/admin/gallery" })
-  }, 1000);  
-  
-}
-
+};
 
 </script>
 
-
-
 <style lang="scss" scoped>
 @import "assets/scss/admin.scss";
-
-
 </style>

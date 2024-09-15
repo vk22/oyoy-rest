@@ -42,36 +42,18 @@ definePageMeta({
   layout: "admin",
   middleware: ["auth"]
 });
-
+import { useAdminStore } from "@/store/admin";
+const adminStore = useAdminStore();
 const company = ref();
-const toast = useNuxtApp().$toast
 const { data } = await useFetch("/api/company", {
   method: "get",
 });
 company.value = data._rawValue.data;
 
-
 const save = async () => {
-  const { data } = await useFetch(`/api/company`, {
-    method: "put",
-    body: company,
-  });
-  if (data) {
-    if (process.client) {
-      toast.success("Data saved", {
-        timeout: 2000
-      });
-    }
-  } else {
-    if (process.client) {
-      toast.error("Smth wrong", {
-        timeout: 2000
-      });
-    }
-  }
-};
+  await adminStore.fetchData('company', 'put', company)
+}
 
-//store.autoGalleryStart()
 </script>
 
 

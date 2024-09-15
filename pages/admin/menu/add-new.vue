@@ -10,25 +10,16 @@
       </v-row>
       <v-row>
         <v-col>
-          <v-text-field
-            v-model="menu.section"
-            variant="outlined"
-            label="Title"
-          ></v-text-field>
+          <v-text-field v-model="menu.section" variant="outlined" label="Title"></v-text-field>
         </v-col>
       </v-row>
       <v-row>
         <v-col>
-          <v-select
-            v-model="menu.category"
-            label="Category"
-            :items="['food', 'drinks']"
-            variant="outlined"
-          ></v-select>
+          <v-select v-model="menu.category" label="Category" :items="['food', 'drinks']" variant="outlined"></v-select>
         </v-col>
       </v-row>
       <v-row>
-        <v-col> 
+        <v-col>
           <div class="admin-main-btn" @click="addMenu()">Save</div>
         </v-col>
       </v-row>
@@ -36,12 +27,13 @@
   </section>
 </template>
 
-<script setup> 
+<script setup>
 definePageMeta({
   layout: "admin",
   middleware: ["auth"]
 });
-
+import { useAdminStore } from "@/store/admin";
+const adminStore = useAdminStore();
 const router = useRouter()
 const menu = ref({
   section: '',
@@ -50,13 +42,11 @@ const menu = ref({
 })
 
 const addMenu = async () => {
-  const { data } = await useFetch(`/api/menu`, {
-        method: 'post',
-        body: menu
-    } );
-  router.push({ path: "/admin/menu" })
+  const { data } = await adminStore.fetchData('menu', 'post', menu)
+  if (data) {
+    router.push({ path: "/admin/menu" })
+  }
 }
-
 
 </script>
 
@@ -64,6 +54,4 @@ const addMenu = async () => {
 
 <style lang="scss" scoped>
 @import "assets/scss/admin.scss";
-
-
 </style>

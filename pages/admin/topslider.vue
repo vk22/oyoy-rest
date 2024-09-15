@@ -33,36 +33,19 @@ definePageMeta({
   layout: "admin",
   middleware: ["auth"]
 });
-
+import { useAdminStore } from "@/store/admin";
+const adminStore = useAdminStore();
 const topslide = ref();
-const toast = useNuxtApp().$toast
+
 const { data } = await useFetch("/api/topslide", {
   method: "get",
 });
 topslide.value = data._rawValue.data;
 
-
 const save = async () => {
-  const { data } = await useFetch(`/api/topslide`, {
-    method: "put",
-    body: topslide,
-  });
-  if (data) {
-    if (process.client) {
-      toast.success("Data saved", {
-        timeout: 2000
-      });
-    }
-  } else {
-    if (process.client) {
-      toast.error("Smth wrong", {
-        timeout: 2000
-      });
-    }
-  }
-};
+  await adminStore.fetchData('topslide', 'put', topslide)
+}
 
-//store.autoGalleryStart()
 </script>
 
 

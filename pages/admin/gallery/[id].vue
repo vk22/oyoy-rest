@@ -72,7 +72,7 @@ const router = useRouter()
 const { data } = await useFetch(`/api/gallery/${route.params.id}`);
 const gallery = ref(data.value);
 const uploaderRef = ref(null);
-const files = ref([]);
+// const files = ref([]);
 const dragging = ref(false);
 
 function addFiles(files) {
@@ -84,35 +84,27 @@ const draggEnd = async () => {
 };
 
 const editItem = async () => {
-  adminStore.setLoading(true)
-
-  //// upload images
-  const responseFilesUpload = await uploaderRef.value.startUpload();
-  responseFilesUpload.data._rawValue.forEach((file, index) => {
-    gallery.value.images.push({filename: file.url, index: index})
-  })
-
-  const { data } = await useFetch(`/api/gallery`, {
-    method: "put",
-    body: gallery,
-  });
-
-  setTimeout(() => {
-    adminStore.setLoading(false)
-  }, 1000);
+  if (gallery.value.imageNew) {
+    /// upload images
+    let filesUploadResponse = await uploaderRef.value.startUpload();
+    if (filesUploadResponse.success) {
+      filesUploadResponse.data.forEach((url, index) => {
+        gallery.value.images.push({filename: url, index: index})
+      })
+      /// save data
+      await adminStore.fetchData('gallery', 'put', gallery) 
+    }
+  } else {
+    /// save data
+    await adminStore.fetchData('gallery', 'put', gallery) 
+  }
 };
 
 const deleteItem = async () => {
-  const { data } = await useFetch(`/api/gallery`, {
-    method: "delete",
-    body: gallery,
-  });
-
-  if (data.value) {
+  const { success } = await adminStore.fetchData('gallery', 'delete', gallery); 
+  if (success) {
     router.push({ path: "/admin/gallery" });
   }
-
-  //
 };
 </script>
 

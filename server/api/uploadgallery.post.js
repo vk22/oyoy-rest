@@ -31,25 +31,24 @@ export default defineEventHandler(async (event) => {
     const formData = await readFormData(event);
     const type = formData.get('type');
     const files = formData.getAll('file');
-    let results = []
+    let urls = []
+    let success = true
     for (let file of files) {
       const blob = new Blob([file], { type: file.type });
       const { url } = await put(`${type}/${type}.jpg`, blob, { access: 'public' });
       console.log('url ', url)
       if (url) {
-        results.push({
-          success: true,
-          message: 'File uploaded',
-          url: url
-        })
+        urls.push(url)
       } else {
-        results.push({
-          success: false,
-          message: 'Something went wrong',
-        })
+        success = false
+        urls.push(undefined)
       }
     }
-    return results;
+    return {
+      success: success,
+      message: 'Files uploaded',
+      data: urls
+    };
 
   } catch (error) {
     console.log(error);

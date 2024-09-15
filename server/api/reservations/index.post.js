@@ -18,7 +18,6 @@ const result = {
     }
   }
 }
-
 export default defineEventHandler( async (event) => {
     const body = await readBody(event)
     const newReservation = new Reservation(body);
