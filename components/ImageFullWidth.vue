@@ -47,14 +47,13 @@ defineProps(["type","path", "title"]);
       font-weight: 300;
       height: 100%;
       justify-content: center;
-      left: 50%;
       letter-spacing: 2px;
       position: absolute;
       text-align: center;
       text-transform: uppercase;
       top: 0;
-      transform: translateX(-50%);
-      width: 650px;
+      left: 0;
+      width: 90%;
       z-index: 1;
   }
 
