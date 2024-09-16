@@ -195,15 +195,16 @@ const selectTime = (event) => {
 
     @include for-phone-only {
       flex-direction: column;
+      padding-bottom: 2rem;
     }
 
     @include for-tablet-portrait-up {
       flex-direction: row;
     }
 
-    @include for-700-height-only {
-      flex-direction: row;
-    }
+    // @include for-700-height-only {
+    //   flex-direction: row;
+    // }
 
     .form-half {
       padding: 0 1rem;

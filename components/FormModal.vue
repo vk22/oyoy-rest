@@ -73,7 +73,7 @@ const formModalStateToggle = () => {
     
 
     @include for-phone-only {
-      padding-top: 5rem;
+      padding-top: 4rem;
       align-items: flex-start;
       justify-content: flex-start;
     }
@@ -100,6 +100,7 @@ const formModalStateToggle = () => {
     @include for-phone-only {
       font-size: 3rem;
       text-align: left;
+      margin-bottom: 0rem;
     }
 
     @include for-tablet-portrait-up {

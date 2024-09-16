@@ -459,8 +459,8 @@ onMounted(() => {
         text-decoration: none;
 
         @include for-phone-only {
-          font-size: 2rem;
-          line-height: 2.25rem;
+          font-size: 2.25rem;
+          line-height: 2.5rem;
         }
 
         @include for-tablet-portrait-up {
