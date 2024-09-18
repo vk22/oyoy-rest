@@ -85,15 +85,15 @@
     align-items: center;
     flex-direction: column;
     img {
-      width: 225px;
+      width: 275px;
       border-radius: 6px;
       box-shadow: 1px 1px 10px rgba($color: #000000, $alpha: 0.25);
       @include base-transition(all, .15s);
       margin-bottom: 2rem;
 
       &:hover {
-        box-shadow: 1px 1px 12px rgba($color: #000000, $alpha: 0.25);
-        transform: translateY(-1px);
+        box-shadow: 1px 1px 20px rgba($color: #000000, $alpha: 0.25);
+        transform: translateY(-2px);
       }
     }
   }
