@@ -128,7 +128,7 @@ const slidesPerView = computed(() => {
     width: 42px;
     z-index: 99;
     background-color: rgba(255, 255, 255, 0.5);
-    padding: 10px;
+    padding: 15px;
     display: flex;
     @include base-transition(background-color, 0.25s);
 

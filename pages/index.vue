@@ -17,7 +17,8 @@
       <ImageFullWidth :type="'video'" :path="'/video/video2.mp4'" :title="''"></ImageFullWidth>
       <MenuIndex :category="'food'"></MenuIndex>
       <ImageFullWidth :type="'image'" :path="'/img/full-w-banner-3.jpg'" :title="''"></ImageFullWidth>
-      <MenuIndex :category="'drinks'"></MenuIndex>
+      <!-- <MenuIndex :category="'drinks'"></MenuIndex> -->
+      <WineListLink></WineListLink> 
       <SwiperGallery></SwiperGallery>
       <NewsIndex></NewsIndex>
     </section>
