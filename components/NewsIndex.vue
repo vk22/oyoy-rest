@@ -16,10 +16,28 @@
             </div>
             <div class="text-wrap">
               <div class="title">
-               {{ oneevents.title }}
+                {{ oneevents.title }}
               </div>
               <div class="date">
                 {{ oneevents.date }}
+              </div>
+            </div>
+          </div>
+        </v-col>
+
+        <v-col cols="12" sm="12">
+          <div class="events-index__item video" @click="modalToggle(index)">
+            <div class="video-wrap img-1">
+              <video muted="" autoplay="" playsinline="" loop="">
+                <source src="/video/NY2025.mp4" type="video/mp4">
+              </video>
+            </div>
+            <div class="text-wrap">
+              <div class="title">
+                New Year’s Dinner at OyOy Restaurant!
+              </div>
+              <div class="date">
+                27 December 2024
               </div>
             </div>
           </div>
@@ -30,11 +48,11 @@
 </template>
 
 <script setup>
-import { useEventStore }  from '@/store/events'
+import { useEventStore } from '@/store/events'
 const store = useEventStore()
 const events = computed(() => store.getItems)
 const modalToggle = (index) => {
-    store.setModalState({index: index})
+  store.setModalState({ index: index })
 }
 
 </script>
@@ -45,7 +63,7 @@ const modalToggle = (index) => {
 .events-index {
   display: flex;
   background: #f9fbff;
-  padding-top: 4rem!important;
+  padding-top: 4rem !important;
 
   @include for-phone-only {
     flex-direction: row;
@@ -67,17 +85,42 @@ const modalToggle = (index) => {
       position: relative;
       height: 70vh;
       margin-bottom: 1rem;
-    }   
+    }
+
+    .video-wrap {
+      position: relative;
+      margin-bottom: 1rem;
+
+      video {
+        width: 100%;
+      }
+    }
 
     .text-wrap {
       //padding: 0 2rem;
     }
+
     .title {
       font-size: 1.25rem;
       text-transform: uppercase;
     }
+
     .date {
       color: #999;
+    }
+
+
+    &.video {
+      margin: 0 auto;
+
+      @include for-phone-only {
+        width: 100%;
+      }
+
+      @include for-tablet-portrait-up {
+        width: 33%;
+      }
+
     }
   }
 
