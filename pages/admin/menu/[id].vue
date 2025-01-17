@@ -13,8 +13,52 @@
       </v-row>
       <v-row>
         <v-col>
+
+        </v-col>
+      </v-row>
+      <v-row>
+        <v-col>
           <div class="admin-list">
-            <div class="menu-content" v-for="(menuItem, index) in menu.content" :key="index">
+
+
+            <draggable :list="menu.content" handle=".handle">
+
+              <template #item="{ element, index }">
+                  <div class="menu-item" :class="{ 'not-draggable': !enabled }">
+
+                    <div class="d-flex justify-space-between">
+                      <div class="handle">
+                          {{ index + 1 }}
+                          <v-icon>mdi-drag</v-icon>  
+                      </div>
+                    </div>
+                    <div class="item-content">
+                      <div class="mb-3">
+                        <v-text-field v-model="element.title" variant="outlined" label="Title"
+                          density="compact"></v-text-field>
+                      </div>
+                      <div class="mb-3">
+                        <v-text-field v-model="element.ingredients" variant="outlined" label="Ingredients"
+                          density="compact"></v-text-field>
+                      </div>
+                      <div class="mb-3">
+                        <v-text-field v-model="element.price" variant="outlined" label="Price"
+                          density="compact"></v-text-field>
+                      </div>
+                    </div>
+                    <div class="d-flex justify-space-between mt-5">
+                      <div class="remove-item">
+                        <div class="admin-sec-btn btn-sm" @click="removeItem(index)">Remove</div>
+                      </div>
+                      
+                  </div>
+
+                  </div>  
+              </template>
+
+              </draggable>
+
+            <!-- <div class="menu-item" v-for="(menuItem, index) in menu.content" :key="index">
               <div class="item-content">
                 <div class="mb-3">
                   <v-text-field v-model="menuItem.title" variant="outlined" label="Title"
@@ -32,7 +76,8 @@
               <div class="remove-item">
                 <div class="admin-sec-btn btn-sm mr-2" @click="removeItem(index)">Remove</div>
               </div>
-            </div>
+            </div> -->
+
           </div>
         </v-col>
       </v-row>
@@ -98,8 +143,22 @@ const deleteMenu = async () => {
 <style lang="scss" scoped>
 @import "assets/scss/admin.scss";
 
-.menu-content {
-  padding: 2rem 0 1rem;
-  border-bottom: 1px solid #ddd;
+.menu-item {
+  padding: 2rem;
+  border: 1px dashed #ddd;
+  border-radius: 8px;
+  margin-bottom: 1rem;
+  max-width: 900px;
+
+  .handle {
+    cursor: grab;
+    margin-bottom: 2rem;
+    display: flex;
+
+    i {
+      margin-left: .5rem;
+    }
+
+  }
 }
 </style>

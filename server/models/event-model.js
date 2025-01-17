@@ -9,6 +9,14 @@ const SchemaData = new Schema({
   image: {
     type: String,
   },
+  file: {
+    url: {
+      type: String,
+    },
+    type: {
+      type: String,
+    }
+  },
   gallery: {
     type: Array,
   },

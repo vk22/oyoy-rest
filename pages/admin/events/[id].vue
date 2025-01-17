@@ -10,7 +10,10 @@
       </v-row>
       <v-row>
         <v-col cols="2">
-          <img :src="event.image" />
+          <img :src="event.file.url" v-if="event.file.type !== 'video/mp4'"/>
+          <video muted playsinline="" loop="" controls v-else >
+            <source :src="event.file.url" :type="event.file.type">
+          </video>
         </v-col>
       </v-row>
       <v-row>

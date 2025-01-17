@@ -10,9 +10,24 @@
       </v-row>
       <v-row>
         <v-col v-for="(oneevents, index) in events" :key="index" cols="12" sm="4">
-          <div class="events-index__item" @click="modalToggle(index)">
+          <div class="events-index__item" @click="modalToggle(index)" v-if="oneevents.file.type !== 'video/mp4'">
             <div class="img-wrap img-1">
-              <NuxtImg :src="oneevents.image" class="img-cover" />
+              <NuxtImg :src="oneevents.file.url" class="img-cover" />
+            </div>
+            <div class="text-wrap">
+              <div class="title">
+                {{ oneevents.title }}
+              </div>
+              <div class="date">
+                {{ oneevents.date }}
+              </div>
+            </div>
+          </div>
+          <div class="events-index__item video" @click="modalToggle(index)" v-else>
+            <div class="video-wrap img-1">
+              <video muted="" autoplay="" playsinline="" loop="">
+                <source :src="oneevents.file.url" :type="oneevents.file.type">
+              </video>
             </div>
             <div class="text-wrap">
               <div class="title">
@@ -25,23 +40,7 @@
           </div>
         </v-col>
 
-        <v-col cols="12" sm="12">
-          <div class="events-index__item video" @click="modalToggle(index)">
-            <div class="video-wrap img-1">
-              <video muted="" autoplay="" playsinline="" loop="">
-                <source src="/video/NY2025.mp4" type="video/mp4">
-              </video>
-            </div>
-            <div class="text-wrap">
-              <div class="title">
-                New Year’s Dinner at OyOy Restaurant!
-              </div>
-              <div class="date">
-                27 December 2024
-              </div>
-            </div>
-          </div>
-        </v-col>
+
       </v-row>
     </v-container>
   </section>
@@ -110,18 +109,18 @@ const modalToggle = (index) => {
     }
 
 
-    &.video {
-      margin: 0 auto;
+    // &.video {
+    //   margin: 0 auto;
 
-      @include for-phone-only {
-        width: 100%;
-      }
+    //   @include for-phone-only {
+    //     width: 100%;
+    //   }
 
-      @include for-tablet-portrait-up {
-        width: 33%;
-      }
+    //   @include for-tablet-portrait-up {
+    //     width: 33%;
+    //   }
 
-    }
+    // }
   }
 
   .section-title {

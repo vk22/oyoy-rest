@@ -18,10 +18,14 @@
               <v-col md="2">
                 <nuxt-link :to="'/admin/events/' + promo._id">
                   <img
-                    :src="promo.image"
-                    width="100"
+                    :src="promo.file.url"
+                    width="200"
                     alt=""
+                    v-if="promo.file.type !== 'video/mp4'"
                   />
+                  <video muted playsinline="" loop="" controls width="200" v-else>
+                    <source :src="promo.file.url" :type="promo.file.type">
+                  </video>
                 </nuxt-link>
               </v-col>
               <v-col md="4">

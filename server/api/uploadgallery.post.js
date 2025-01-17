@@ -29,16 +29,19 @@ export default defineEventHandler(async (event) => {
 
     /// vercel blob
     const formData = await readFormData(event);
+    console.log('formData ', formData);
     const type = formData.get('type');
     const files = formData.getAll('file');
     let urls = []
     let success = true
     for (let file of files) {
       const blob = new Blob([file], { type: file.type });
-      const { url } = await put(`${type}/${type}.jpg`, blob, { access: 'public' });
-      console.log('url ', url)
+      const { url } = await put(`${type}/${file.name}`, blob, { access: 'public' });
       if (url) {
-        urls.push(url)
+        urls.push({
+          url: url,
+          type: file.type
+        })
       } else {
         success = false
         urls.push(undefined)

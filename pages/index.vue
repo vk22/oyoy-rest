@@ -1,15 +1,19 @@
 <template>
   <v-app>
+    <Transition name="loading">
+      <LoadingComponent></LoadingComponent>  
+    </Transition>
+    <CookiePolicy></CookiePolicy>  
     <SendEmailResponse></SendEmailResponse>
-    <transition>
+    <Transition>
       <FormModal></FormModal>
-    </transition>
-    <transition>
+    </Transition>
+    <Transition>
       <SwiperGalleryModal></SwiperGalleryModal>
-    </transition>
-    <transition>
+    </Transition>
+    <Transition>
       <NewsModal></NewsModal>
-    </transition>
+    </Transition>
     <Header></Header>
     <TopBannerGallery></TopBannerGallery>
     <section class="page-content">

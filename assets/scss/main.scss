@@ -119,17 +119,14 @@ button:focus {
   transform: translateY(10px);
 }
 
-.fade-enter-active,
-.fade-leave-active {
-  transition: all 1s ease;
-  visibility: visible;
-  opacity: 1;
+.loading-enter-active,
+.loading-leave-active {
+  transition: opacity 1s ease;
 }
 
-.fade-enter,
-.fade-leave-to {
+.loading-enter-from,
+.loading-leave-to {
   opacity: 0;
-  visibility: hidden;
 }
 
 
@@ -311,10 +308,20 @@ ul {
     }
 
   }
+
+  &.inverse {
+    border: 1px solid rgb(207, 207, 207);
+    background: #fff;
+    color: #030303;
+
+    &:hover {
+      opacity: .5;
+    }
+  }
 }
 
 .btn2 {
-  color: rgb(3, 3, 3);
+  color: #030303;
   border: 1px solid rgb(207, 207, 207);
   border-radius: 0px;
   padding: 10px 36px;
@@ -335,7 +342,6 @@ ul {
 
 
 .page-content {
-
 
   &__block {
     display: flex;

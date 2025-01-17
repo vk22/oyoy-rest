@@ -4,9 +4,14 @@
       <div class="close" @click="modalToggle()">
         <svg width="30px" height="30px" viewBox="0 0 18 18" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"><g id="Page-1" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd" stroke-linecap="square"><g id="LandingPopup" transform="translate(-983.000000, -267.000000)" stroke="#111"><g id="Group-6"><g id="Group-5" transform="translate(420.000000, 243.000000)"><path d="M571.87315,32.8400752 L582.911677,32.8400752 L571.87315,32.8400752 L571.87315,21.6856907 L571.87315,32.8400752 Z M571.87315,32.8400752 L560.911677,32.8400752 L571.87315,32.8400752 L571.87315,44.0437203 L571.87315,32.8400752 Z" id="Combined-Shape" transform="translate(571.911677, 32.864706) rotate(-315.000000) translate(-571.911677, -32.864706) "></path></g></g></g></g></svg>
       </div>
-      <div class="news-block" v-if="newsType !== 'video'">
-        <div class="img-wrap img-1">
-          <img :src="newsModalState.item.image" />
+      <div class="news-block">
+        <div class="img-wrap img-1" v-if="newsModalState.item.file.type !== 'video/mp4'">
+          <img :src="newsModalState.item.file.url" />
+        </div>
+        <div class="video-wrap img-1" v-else>
+          <video autoplay="" playsinline="" loop="" controls v-if="newsModalState.item.file.url">
+            <source :src="newsModalState.item.file.url" :type="newsModalState.item.file.type">
+          </video>
         </div>
         <div class="text-wrap">
           <div class="title">
@@ -20,28 +25,7 @@
           </div>
         </div>
       </div>
-      <div class="news-block" v-else>
 
-        <div class="video-wrap img-1" >
-          <video autoplay="" playsinline="" loop="" controls>
-            <source src="/video/NY2025.mp4" type="video/mp4">
-          </video>
-        </div>
-
-        <div class="text-wrap">
-          <div class="title">
-            New Year’s Dinner at OyOy Restaurant! 
-          </div>
-          <div class="content">
-            <p>Come celebrate the start of a fresh year with delectable dishes, lively conversations, and great company. We look forward to sharing this special evening with you.</p>
-            <p>Our chef has crafted a special menu to ring in the New Year with an array of gourmet dishes, complemented by refreshing beverages and warm hospitality. Whether you’re looking to relax, unwind, or dance the night away, we’ve created a welcoming atmosphere for all to enjoy! </p>
-          </div>
-          <div class="date">
-            27 December 2024
-          </div>
-        </div>
-
-      </div>
     </div>
   </div>
 </template>

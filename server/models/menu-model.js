@@ -16,6 +16,9 @@ const SchemaData = new Schema({
       },
       type: {
         type: String
+      },
+      order: {
+        type: Number
       }
     }
   ],

@@ -2,11 +2,10 @@
   <section class="top-banner">
     <div class="top-banner__container">
       <div class="center">
-        <div class="headline" :class="{ 'fadeIn-2': dataReady }">
+        <div class="headline" :class="{ 'fadeIn-2': show }">
           <div class="big">{{ topslideText.title }}</div>
           <div class="medium">{{ topslideText.subtitle }}</div>
         </div>
-
       </div>
       <!-- <div class="nav fadeIn-4">
           <span class="dot" v-for="(item, index) in gallery" :key="index" :class="{'active': index === activeIndex}" @click="goToSlide(index)"></span>
@@ -15,7 +14,7 @@
         <img src="/img/arrow-down.svg" alt="" />
       </div> -->
     </div>
-    <div class="gallery" @click="toggleGallery()" :class="{ 'show': dataReady, 'active': galleryIsActive }">
+    <div class="gallery" @click="toggleGallery()" :class="{ 'show': show, 'active': galleryIsActive }">
       <div class="gallery__wrap" :class="{
         'slide-active': galleryItem.index === activeIndex,
         'slide-to-left': galleryItem.index === activeNext && galleryIsWork,
@@ -28,38 +27,38 @@
 </template>
 
 <script setup>
-useHead({
-  link: [
-    {
-      rel: "preload",
-      as: "image",
-      href: "/uploads/gallery/top-gallery-1.jpg"
-    },
-    {
-      rel: "preload",
-      as: "image",
-      href: "/uploads/gallery/top-gallery-2.jpg"
-    },
-    {
-      rel: "preload",
-      as: "image",
-      href: "/uploads/gallery/top-gallery-3.jpg"
-    }
-  ]
-})
+// useHead({
+//   link: [
+//     {
+//       rel: "preload",
+//       as: "image",
+//       href: "/uploads/gallery/top-gallery-1.jpg"
+//     },
+//     {
+//       rel: "preload",
+//       as: "image",
+//       href: "/uploads/gallery/top-gallery-2.jpg"
+//     },
+//     {
+//       rel: "preload",
+//       as: "image",
+//       href: "/uploads/gallery/top-gallery-3.jpg"
+//     }
+//   ]
+// })
 import { ref } from 'vue'
 import { useMainStore } from '@/store/index'
 const mainStore = useMainStore()
-let dataReady = computed(() => mainStore.getDataReady)
+const dataReady = computed(() => mainStore.getDataReady)
 import { useCustomGalleryStore } from '@/store/galleryCustom'
 const customGalleryStore = useCustomGalleryStore()
 //customGalleryStore.fetchData('top')
 
-let galleryIsActive = ref(0)
-let activeIndex = computed(() => customGalleryStore.activeIndex)
-let activeNext = computed(() => customGalleryStore.activeNext)
-let galleryIsWork = computed(() => customGalleryStore.galleryIsWork)
-let interval = ref(undefined);
+const galleryIsActive = ref(0)
+const activeIndex = computed(() => customGalleryStore.activeIndex)
+const activeNext = computed(() => customGalleryStore.activeNext)
+const galleryIsWork = computed(() => customGalleryStore.galleryIsWork)
+const interval = ref(undefined);
 const startGallery = (time) => {
   interval.value = setInterval(() => customGalleryStore.autoGalleryNext(), time);
 }
@@ -76,13 +75,18 @@ const goToSlide = (index) => {
 
 /// 
 const gallery = customGalleryStore.getGallery
+console.log('gallery ', gallery)
 if (gallery[0]) {
   if (process.client) {
     const imageUrl = gallery[0].url
-    let preloaderImg = document.createElement("img");
+    const preloaderImg = document.createElement("img");
     preloaderImg.src = imageUrl;
     preloaderImg.addEventListener('load', (event) => {
-      readyToGo()
+      console.log('event ', event.timeStamp)
+      setTimeout(() => {
+        readyToGo()
+      }, 2000);
+      
     });
   }
 
@@ -100,6 +104,14 @@ const readyToGo = () => {
 //   window.scrollTo({ top: startContentPos-100, behavior: "smooth" });  
 // }
 
+const show = ref(false);
+watch(dataReady, (newValue) => {
+  console.log('watch dataReady', newValue)
+  setTimeout(() => {
+    show.value = true
+  }, 1000);
+  
+})
 
 //// about
 import { useTopslideStore } from "@/store/topslide";
@@ -200,7 +212,7 @@ onMounted(() => {
       opacity: 0;
       font-size: 1.15rem;
       letter-spacing: 0.25px;
-      font-weight: 400;
+      font-weight: 600;
       color: #fff;
       text-align: center;
       // text-transform: uppercase;
@@ -216,7 +228,7 @@ onMounted(() => {
 
       .big {
         font-family: $font-serif;
-        font-weight: 400;
+        font-weight: 500;
         letter-spacing: 0.25px;
         padding: 1rem 0 1.35rem;
         margin-bottom: 1.5rem;
@@ -230,21 +242,21 @@ onMounted(() => {
         }
 
         @include for-tablet-portrait-up {
-          font-size: 5rem;
+          font-size: 5.5rem;
           letter-spacing: 1px;
           line-height: 5.5rem;
           padding: 0.25rem 0 0.45rem;
         }
 
         @include for-desktop-up {
-          font-size: 5rem;
+          font-size: 5.5rem;
           letter-spacing: 3px;
           line-height: 5rem;
           padding: 0.45rem 0 0.65rem;
         }
 
         @include for-big-desktop-up {
-          font-size: 7rem;
+          font-size: 7.5rem;
           letter-spacing: 3px;
           line-height: 7rem;
           padding: 0.45rem 0 0.65rem;
