@@ -19,11 +19,11 @@
                 <nuxt-link :to="'/admin/events/' + promo._id">
                   <img
                     :src="promo.file.url"
-                    width="200"
+                    width="100%"
                     alt=""
                     v-if="promo.file.type !== 'video/mp4'"
                   />
-                  <video muted playsinline="" loop="" controls width="200" v-else>
+                  <video muted playsinline="" loop="" controls width="100%" v-else>
                     <source :src="promo.file.url" :type="promo.file.type">
                   </video>
                 </nuxt-link>
