@@ -9,13 +9,17 @@ export default defineNuxtConfig({
       link: [{ rel: 'icon', type: 'image/png', href: "/favicon.png" }]
     }
   },
+
   css: [
     '@/assets/scss/font.css',
   ],
+
   devtools: { enabled: true },
+
   build: {
     transpile: ['vuetify', '@vuepic/vue-datepicker']
   },
+
   modules: [
     (_options, nuxt) => {
       nuxt.hooks.hook('vite:extendConfig', (config) => {
@@ -28,18 +32,22 @@ export default defineNuxtConfig({
     '@nuxt/image',
     'nuxt-tiptap-editor'
   ],
+
   tiptap: {
     lowlight: {
       theme: 'github-dark',
     },
   },
+
   image: {
     quality: 80,
     format: ['webp']
   },
+
   plugins: [
     // '~/plugins/vue-lazyload'
   ],
+
   vite: {
     vue: {
       template: {
@@ -47,9 +55,11 @@ export default defineNuxtConfig({
       },
     },
   },
+
   nitro: {
     plugins: ["~/server/plugins/mongodb.ts"],
   },
+
   runtimeConfig: {
     // mongodbUri
     mongodbUri: process.env.MONGO_URI,
@@ -58,5 +68,7 @@ export default defineNuxtConfig({
     public: {
       apiBase: process.env.NUXT_PUBLIC_API_BASE || '/api'
     }
-  }
+  },
+
+  compatibilityDate: '2025-01-18'
 })
