@@ -49,6 +49,7 @@ const eventsStore = useEventStore();
 const aboutStore = useAboutStore();
 const topslideStore = useTopslideStore();
 const reservationStore = useReservationStore();
+const modalsIsOpen =  computed(() => eventsStore.getModalState.isOpen || reservationStore.getFormModalState)
 
 await customGalleryStore.fetchData('top');
 await topslideStore.fetchData();
@@ -58,7 +59,7 @@ await menuStore.fetchMenu();
 await galleryStore.fetchData();
 await eventsStore.fetchEvents();
 
-const modalsIsOpen =  computed(() => eventsStore.getModalState.isOpen || reservationStore.getFormModalState)
+
 
 /// 
 const { $handleScroll } = useNuxtApp();
