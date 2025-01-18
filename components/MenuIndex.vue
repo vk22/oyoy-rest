@@ -1,9 +1,9 @@
 <template>
-  <section class="menu index-section" :id="props.category" v-if="menuData.length">
+  <section class="menu index-section slideUp fade-in" :id="props.category" v-if="menuData.length">
     <v-container>
       <v-row>
         <v-col class="d-flex justify-center">
-          <div class="section-title fadeIn-2">
+          <div class="section-title">
             <h2 v-if="props.category === 'food'">Our Menu</h2>
             <h2 v-else>Wine List</h2>
           </div>

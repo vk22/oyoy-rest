@@ -1,9 +1,9 @@
 <template>
-  <section class="wine-list index-section">
+  <section class="wine-list index-section slideUp fade-in">
     <v-container>
       <v-row>
         <v-col class="d-flex justify-center">
-          <div class="section-title fadeIn-2">
+          <div class="section-title">
             <h2>Wine List</h2>
             <p>Complementing your exquisite meal with a nice selection of wines from various parts of the world. Carefully chosen to satisfy everyone’s taste buds, from wine connoisseurs to a beginner wine enthusiast.</p>
           </div>

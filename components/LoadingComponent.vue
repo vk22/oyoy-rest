@@ -64,7 +64,7 @@ watch(dataReady, (newValue) => {
   flex-direction: column;
 
   svg.logo {
-    width: 30vw;
+    width: 25vw;
   }
 
   .spinners {
@@ -102,13 +102,16 @@ watch(dataReady, (newValue) => {
 
 @keyframes col {
   0% {
-    fill: #040078
+    fill: #880d1e
   }
-  50% {
-    fill: #a3169a
+  25% {
+    fill: #dd2d4a
+  }
+  75% {
+    fill: #f26a8d
   }
   100% {
-    fill: #040078
+    fill: #880d1e
   }
 }
 </style>

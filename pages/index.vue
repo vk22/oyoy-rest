@@ -17,7 +17,9 @@
     <Header></Header>
     <TopBannerGallery></TopBannerGallery>
     <section class="page-content">
-      <AboutUs></AboutUs>
+      <Transition>
+        <AboutUs v-if="showItem"></AboutUs>
+      </Transition>
       <ImageFullWidth :type="'video'" :path="'/video/video2.mp4'" :title="''"></ImageFullWidth>
       <MenuIndex :category="'food'"></MenuIndex>
       <ImageFullWidth :type="'image'" :path="'/img/full-w-banner-3.jpg'" :title="''"></ImageFullWidth>
@@ -31,7 +33,8 @@
 </template>
 
 <script setup>
-import { onMounted } from 'vue';
+import { onMounted, watch } from 'vue';
+import { useMainStore } from '@/store/index'
 import { useMenuStore } from "@/store/menu";
 import { useCompanyStore } from "@/store/company";
 import { useCustomGalleryStore } from '@/store/galleryCustom';
@@ -61,11 +64,31 @@ await eventsStore.fetchEvents();
 
 
 
+//// show after loading all data
+const mainStore = useMainStore()
+const dataReady = computed(() => mainStore.getDataReady)
+const showItem = ref(false);
+watch(dataReady, (newValue) => {
+  setTimeout(() => {
+    showItem.value = true
+  }, 1000);
+})
+
 /// 
 const { $handleScroll } = useNuxtApp();
 onMounted(() => {
   document.addEventListener("scroll", $handleScroll);
+  
 });
+
+if (process.client) {
+  window.scrollTo({
+    top: 0,
+    left: 0,
+    behavior: "smooth",
+  });
+}
+
 
 useHead({
   bodyAttrs: {

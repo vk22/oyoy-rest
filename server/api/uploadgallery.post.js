@@ -29,7 +29,7 @@ export default defineEventHandler(async (event) => {
 
     /// vercel blob
     const formData = await readFormData(event);
-    console.log('formData ', formData);
+    // console.log('formData ', formData);
     const type = formData.get('type');
     const files = formData.getAll('file');
     let urls = []

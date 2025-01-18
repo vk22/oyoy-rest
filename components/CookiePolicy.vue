@@ -10,8 +10,8 @@
             </p>
         </div>
         <div class="buttons">
-            <button class="btn inverse mr-3" @click="declineCookies">Decline cookies</button>
-            <button class="btn" @click="acceptCookies">Accept cookies</button>
+            <button class="btn sm inverse mr-3" @click="declineCookies">Decline cookies</button>
+            <button class="btn sm" @click="acceptCookies">Accept cookies</button>
         </div>
     </div>
     </Transition>
@@ -42,7 +42,7 @@ function declineCookies() {
         left: 0;
         width: 100vw;
         z-index: 9999;
-        padding: 1rem;
+        padding: 1.5rem;
         display: flex;
         justify-content: space-between;
         align-items: flex-end;
@@ -53,7 +53,12 @@ function declineCookies() {
             .title {
                 font-size: 1rem;
                 font-weight: 700;
-                margin-bottom: .5rem;
+                margin-bottom: .75rem;
+            }
+
+            p {
+                font-size: .9rem;
+                margin-bottom: 0;
             }
         }
 
