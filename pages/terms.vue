@@ -56,6 +56,8 @@
 
         <p>5.3. ODYC Ltd accepts no liability for accidents, injuries, or illnesses that occur within the restaurant premises or as a result of consuming our food or beverages. Guests are encouraged to notify staff of any dietary restrictions or allergies prior to ordering.</p>
 
+        <p>5.4. ODYC Ltd accepts no liability for events beyond its control, including but not limited to acts of force majeure, accidents related to construction errors or defects of the buildings including the boathouse on which the terrace is situated, defects or errors of the apartment building in which the restaurant is located, accidents involving gas or carbon monoxide, explosions, weather accidents, or any other accidents.</p>
+
         <p>6. Privacy Policy</p>
 
         <p>6.1. By using the Website, you acknowledge that you have read and understood our Privacy Policy, which explains how we collect, use, and protect your personal data.</p>
