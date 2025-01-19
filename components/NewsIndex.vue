@@ -4,7 +4,7 @@
       <v-row>
         <v-col class="d-flex justify-center">
           <div class="section-title fadeIn-2">
-            <h2>Events</h2>
+            <h2 v-if="events.length > 0">Events</h2>
           </div>
         </v-col>
       </v-row>

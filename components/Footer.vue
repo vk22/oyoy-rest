@@ -45,8 +45,8 @@
         </ul>
         <ul>
           <li>
-            <div><router-link to="/privacy">Privacy policy</router-link></div>
-            <div><router-link to="/terms">Terms & Conditions</router-link></div>
+            <div><router-link to="/privacy" target="_blank">Privacy Policy</router-link></div>
+            <div><router-link to="/terms" target="_blank">Terms & Conditions</router-link></div>
           </li>
         </ul>
       </div>
