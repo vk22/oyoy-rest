@@ -33,6 +33,9 @@ const SchemaData = new Schema({
   },
    category: {
     type: String
+  },
+  order: {
+    type: Number
   }
 }, { 
   versionKey: false 

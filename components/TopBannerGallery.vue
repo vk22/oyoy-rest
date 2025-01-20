@@ -2,7 +2,7 @@
   <section class="top-banner">
     <div class="top-banner__container">
       <div class="center">
-        <div class="headline" :class="{ 'fadeIn-2': show }">
+        <div class="headline" :class="{ 'fadeIn-2': showItem }">
           <div class="big">{{ topslideText.title }}</div>
           <div class="medium">{{ topslideText.subtitle }}</div>
         </div>
@@ -14,123 +14,128 @@
         <img src="/img/arrow-down.svg" alt="" />
       </div> -->
     </div>
-    <div class="gallery" @click="toggleGallery()" :class="{ 'show': show, 'active': galleryIsActive }">
+    <div class="gallery" @click="toggleGallery()" :class="{ show: showItem, active: galleryIsActive }">
       <div class="gallery__wrap" :class="{
         'slide-active': galleryItem.index === activeIndex,
         'slide-to-left': galleryItem.index === activeNext && galleryIsWork,
       }" v-for="galleryItem in gallery" :key="galleryItem.index">
         <div class="gallery__item" :class="'image-' + galleryItem.index"
           :style="{ backgroundImage: 'url(' + galleryItem.url + ')' }"></div>
+
       </div>
     </div>
   </section>
 </template>
 
 <script setup>
-// useHead({
-//   link: [
-//     {
-//       rel: "preload",
-//       as: "image",
-//       href: "/uploads/gallery/top-gallery-1.jpg"
-//     },
-//     {
-//       rel: "preload",
-//       as: "image",
-//       href: "/uploads/gallery/top-gallery-2.jpg"
-//     },
-//     {
-//       rel: "preload",
-//       as: "image",
-//       href: "/uploads/gallery/top-gallery-3.jpg"
-//     }
-//   ]
-// })
-import { ref } from 'vue'
-import { useMainStore } from '@/store/index'
-const mainStore = useMainStore()
-const dataReady = computed(() => mainStore.getDataReady)
-import { useCustomGalleryStore } from '@/store/galleryCustom'
-const customGalleryStore = useCustomGalleryStore()
+import { ref } from "vue";
+import { useMainStore } from "@/store/index";
+const mainStore = useMainStore();
+const dataReady = computed(() => mainStore.getDataReady);
+import { useCustomGalleryStore } from "@/store/galleryCustom";
+const customGalleryStore = useCustomGalleryStore();
 //customGalleryStore.fetchData('top')
 
-const galleryIsActive = ref(0)
-const activeIndex = computed(() => customGalleryStore.activeIndex)
-const activeNext = computed(() => customGalleryStore.activeNext)
-const galleryIsWork = computed(() => customGalleryStore.galleryIsWork)
+const galleryIsActive = ref(0);
+const activeIndex = computed(() => customGalleryStore.activeIndex);
+const activeNext = computed(() => customGalleryStore.activeNext);
+const galleryIsWork = computed(() => customGalleryStore.galleryIsWork);
 const interval = ref(undefined);
 const startGallery = (time) => {
-  interval.value = setInterval(() => customGalleryStore.autoGalleryNext(), time);
-}
+  interval.value = setInterval(
+    () => customGalleryStore.autoGalleryNext(),
+    time
+  );
+};
 const stopGallery = (time) => {
-  clearInterval(interval.value)
-}
+  clearInterval(interval.value);
+};
 const goToSlide = (index) => {
   if (interval) {
-    clearTimeout(interval)
+    clearTimeout(interval);
   }
-  customGalleryStore.goToSlide(index)
-}
+  customGalleryStore.goToSlide(index);
+};
 
+///
+const gallery = customGalleryStore.getGallery;
 
-/// 
-const gallery = customGalleryStore.getGallery
-console.log('gallery ', gallery)
-if (gallery[0]) {
+console.log("gallery ", gallery);
+
+let imageCheck = 0;
+for (const galleryImage of gallery) {
   if (process.client) {
-    const imageUrl = gallery[0].url
+    const imageUrl = galleryImage.url;
     const preloaderImg = document.createElement("img");
     preloaderImg.src = imageUrl;
-    preloaderImg.addEventListener('load', (event) => {
-      console.log('event ', event.timeStamp)
-      setTimeout(() => {
-        readyToGo()
-      }, 2000);
-      
+    preloaderImg.addEventListener("load", (event) => {
+      console.log("event ", event);
+      imageCheck++;
+      if (imageCheck === gallery.length) {
+        setTimeout(() => {
+          readyToGo();
+        }, 0);
+      }
     });
   }
+}
+// if (gallery[0]) {
+//   if (process.client) {
+//     const imageUrl = gallery[0].url
+//     const preloaderImg = document.createElement("img");
+//     preloaderImg.src = imageUrl;
+//     preloaderImg.addEventListener('load', (event) => {
+//       console.log('event ', event.timeStamp)
+//       setTimeout(() => {
+//         readyToGo()
+//       }, 2000);
 
+//     });
+//   }
+
+// }
+
+function handleImageLoaded(url) {
+  console.log('handleImageLoaded ', url)
 }
 
 const readyToGo = () => {
-  mainStore.setDataReady()
-  galleryIsActive.value = true
-  startGallery(6000)
-}
+  mainStore.setDataReady();
+  galleryIsActive.value = true;
+  startGallery(6000);
+};
 
 // const needToLoop = ref(null)
 // const scrollToElement = () => {
 //   const startContentPos = document.getElementById('startContent').offsetTop;
-//   window.scrollTo({ top: startContentPos-100, behavior: "smooth" });  
+//   window.scrollTo({ top: startContentPos-100, behavior: "smooth" });
 // }
 
-const show = ref(false);
+//// show after loading all data
+const showItem = ref(false);
 watch(dataReady, (newValue) => {
-  console.log('watch dataReady', newValue)
+  console.log("watch dataReady", newValue);
   setTimeout(() => {
-    show.value = true
+    showItem.value = true;
   }, 1000);
-  
-})
+});
 
 //// about
 import { useTopslideStore } from "@/store/topslide";
 const topslideStore = useTopslideStore();
-const topslideText = topslideStore.getData
+const topslideText = topslideStore.getData;
 
 onMounted(() => {
   if (process.client) {
-    document.addEventListener('visibilitychange', () => {
+    document.addEventListener("visibilitychange", () => {
       if (document.hidden) {
-        stopGallery()
+        stopGallery();
       } else {
-        startGallery(6000)
+        startGallery(6000);
       }
     });
   }
-
 });
-
 </script>
 
 <style lang="scss">
@@ -201,7 +206,6 @@ onMounted(() => {
       justify-content: center;
       margin-bottom: 1rem;
       padding: 0 1rem;
-
 
       @include for-phone-only {}
 
@@ -285,7 +289,6 @@ onMounted(() => {
           letter-spacing: 0.25px;
         }
 
-
         // @include for-700-height-only {
         //   font-size: .95rem;
         //   line-height: 1.15rem;
@@ -298,7 +301,6 @@ onMounted(() => {
         //   letter-spacing: 0.25px;
         // }
       }
-
 
       div {}
     }
@@ -322,7 +324,6 @@ onMounted(() => {
       }
     }
   }
-
 }
 
 .gallery {
@@ -345,10 +346,10 @@ onMounted(() => {
   }
 
   &__wrap {
-    // opacity: 0;
-    // visibility: hidden;
+    opacity: 0;
+    visibility: hidden;
     background: rgb(34, 35, 37);
-    display: none;
+    //display: none;
     position: absolute;
     top: 0;
     width: 100%;
@@ -363,13 +364,16 @@ onMounted(() => {
     background-size: cover;
     background-repeat: no-repeat;
     background-position: 50%;
-    opacity: .75;
+    opacity: 0.75;
+    transform: scale(1.1);
   }
 }
 
 .slide-to-left {
+  opacity: 1;
+  visibility: visible;
   right: 0;
-  display: block;
+  //display: block;
   z-index: 89;
   overflow: hidden;
   animation: slideToLeft 1s;
@@ -403,13 +407,13 @@ onMounted(() => {
 }
 
 .slide-active {
-  // opacity: 1;
-  // visibility: visible;
+  opacity: 1;
+  visibility: visible;
   display: block;
   z-index: 9;
 
   .gallery__item {
-    animation: scaleIn 6s;
+    animation: scaleIn 10s;
     animation-fill-mode: forwards;
   }
 }
@@ -439,36 +443,36 @@ onMounted(() => {
 @keyframes scaleIn {
   0% {
     transform: scale(1);
-    animation-timing-function: cubic-bezier(.565, .43, .24, .92);
+    animation-timing-function: ease-out;
   }
 
   100% {
-    transform: scale(1.05);
-    animation-timing-function: cubic-bezier(.565, .43, .24, .92);
+    transform: scale(1.1);
+    animation-timing-function: ease-out;
   }
 }
 
 @keyframes slideToLeft {
   0% {
     width: 0%;
-    animation-timing-function: cubic-bezier(.565, .43, .24, .92);
+    animation-timing-function: cubic-bezier(0.565, 0.43, 0.24, 0.92);
   }
 
   100% {
     width: 100%;
-    animation-timing-function: cubic-bezier(.565, .43, .24, .92);
+    animation-timing-function: cubic-bezier(0.565, 0.43, 0.24, 0.92);
   }
 }
 
 @keyframes slideToRight {
   0% {
     width: 0;
-    animation-timing-function: cubic-bezier(.565, .43, .24, .92);
+    animation-timing-function: cubic-bezier(0.565, 0.43, 0.24, 0.92);
   }
 
   100% {
     width: 100%;
-    animation-timing-function: cubic-bezier(.565, .43, .24, .92);
+    animation-timing-function: cubic-bezier(0.565, 0.43, 0.24, 0.92);
   }
 }
 
@@ -476,7 +480,7 @@ onMounted(() => {
   0% {
     transform: translateX(-45px) scale(1.01);
     transform-style: preserve-3d;
-    animation-timing-function: cubic-bezier(.565, .43, .24, .92);
+    animation-timing-function: cubic-bezier(0.565, 0.43, 0.24, 0.92);
   }
 
   100% {
@@ -489,7 +493,7 @@ onMounted(() => {
   0% {
     transform: translateX(45px) scale(1.01);
     transform-style: preserve-3d;
-    animation-timing-function: cubic-bezier(.565, .43, .24, .92);
+    animation-timing-function: cubic-bezier(0.565, 0.43, 0.24, 0.92);
   }
 
   100% {
