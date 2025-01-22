@@ -8,7 +8,7 @@
           </div>
         </v-col>
       </v-row>
-      <v-row>
+      <v-row class="justify-center">
         <v-col v-for="(oneevents, index) in events" :key="index" cols="12" sm="4">
           <div class="events-index__item" @click="modalToggle(index)" v-if="oneevents.file.type !== 'video/mp4'">
             <div class="img-wrap img-1">
