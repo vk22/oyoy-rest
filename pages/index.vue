@@ -1,7 +1,7 @@
 <template>
   <v-app>
     <Transition name="loading">
-      <LoadingComponent></LoadingComponent>  
+      <LoadingComponent :dataReady="dataReady"></LoadingComponent>  
     </Transition>
     <CookiePolicy></CookiePolicy>  
     <SendEmailResponse></SendEmailResponse>
@@ -16,14 +16,11 @@
     </Transition>
     <Header></Header>
     <TopBannerGallery></TopBannerGallery>
-    <section class="page-content">
-      <Transition>
-        <AboutUs v-if="showItem"></AboutUs>
-      </Transition>
+    <section class="page-content" v-if="show">
+      <AboutUs ></AboutUs>
       <ImageFullWidth :type="'video'" :path="'/video/video2.mp4'" :title="''"></ImageFullWidth>
       <MenuIndex :category="'food'"></MenuIndex>
       <ImageFullWidth :type="'image'" :path="'/img/full-w-banner-3.jpg'" :title="''"></ImageFullWidth>
-      <!-- <MenuIndex :category="'drinks'"></MenuIndex> -->
       <WineListLink></WineListLink> 
       <SwiperGallery></SwiperGallery>
       <NewsIndex></NewsIndex>
@@ -62,15 +59,13 @@ await menuStore.fetchMenu();
 await galleryStore.fetchData();
 await eventsStore.fetchEvents();
 
-
-
 //// show after loading all data
 const mainStore = useMainStore()
 const dataReady = computed(() => mainStore.getDataReady)
-const showItem = ref(false);
+const show = ref(false);
 watch(dataReady, (newValue) => {
   setTimeout(() => {
-    showItem.value = true
+    show.value = true
   }, 1000);
 })
 
@@ -80,14 +75,6 @@ onMounted(() => {
   document.addEventListener("scroll", $handleScroll);
   
 });
-
-if (process.client) {
-  window.scrollTo({
-    top: 0,
-    left: 0,
-    behavior: "smooth",
-  });
-}
 
 
 useHead({

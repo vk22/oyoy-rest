@@ -1,5 +1,5 @@
 <template>
-  <div class="progress-wrap" v-if="hidden">
+  <div class="progress-wrap" v-if="show">
     <svg viewBox="0 0 389 107" fill="none" xmlns="http://www.w3.org/2000/svg" class="logo">
       <path class="color-animate" fill-rule="evenodd" clip-rule="evenodd"
         d="M114.701 72.8001C111.801 79.9001 97.4006 96.4001 83.5005 92.5001C68.6005 88.4001 69.7005 66.9001 88.2005 64.5001C95.7005 63.6001 110.101 69.1001 114.701 72.8001ZM126.201 52.5001C125.201 55.9001 123.901 58.8001 121.401 61.2001C107.701 56.4001 96.8005 47.2001 78.7005 53.9001C44.8005 66.3001 62.3006 116.5 98.3006 104.1C113.601 98.8001 119.901 86.4001 127.101 78.5001C138.801 82.7001 147.201 87.5001 161.401 88.2001C174.101 88.8001 187.201 83.7001 194.101 76.9001L181.701 70.8001C166.201 78.0001 147.501 75.7001 133.701 67.1001L168.101 3.80008L154.001 3.6001L133.101 41.6001L98.5005 12.7001L87.1006 3.70007L69.3006 3.6001C70.9006 6.5001 123.901 51.3001 126.201 52.5001Z"
@@ -17,34 +17,21 @@
         d="M173.701 56.6C178.801 56.6 182.9 52.5 182.9 47.4C182.9 42.3 178.801 38.2 173.701 38.2C168.601 38.2 164.5 42.3 164.5 47.4C164.5 52.4 168.601 56.6 173.701 56.6Z"
         fill="black" />
     </svg>
-    
-     <!-- <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 200 200"><radialGradient id="a11" cx=".66" fx=".66" cy=".3125" fy=".3125" gradientTransform="scale(1.5)"><stop offset="0" stop-color="#FF156D"></stop><stop offset=".3" stop-color="#FF156D" stop-opacity=".9"></stop><stop offset=".6" stop-color="#FF156D" stop-opacity=".6"></stop><stop offset=".8" stop-color="#FF156D" stop-opacity=".3"></stop><stop offset="1" stop-color="#FF156D" stop-opacity="0"></stop></radialGradient><circle transform-origin="center" fill="none" stroke="url(#a11)" stroke-width="15" stroke-linecap="round" stroke-dasharray="200 1000" stroke-dashoffset="0" cx="100" cy="100" r="70"><animateTransform type="rotate" attributeName="transform" calcMode="spline" dur="2" values="360;0" keyTimes="0;1" keySplines="0 0 1 1" repeatCount="indefinite"></animateTransform></circle><circle transform-origin="center" fill="none" opacity=".2" stroke="#FF156D" stroke-width="15" stroke-linecap="round" cx="100" cy="100" r="70"></circle></svg> -->
 
-     <!-- 
-     <v-progress-circular
-      :size="50"
-      :width="3"
-      color="#111111"
-      indeterminate
-    ></v-progress-circular> -->
   </div>
 </template>
 
 <script setup>
 import { computed, ref, watch } from "vue";
-// import CloseBtn from "../components/CloseBtn.vue";
 import { useMainStore } from '@/store/index'
 const mainStore = useMainStore();
 const dataReady = computed(() => mainStore.getDataReady)
-const hidden = ref(false);
-
+const show = ref(false);
 setTimeout(() => {
-  hidden.value = true
-  }, 100);
-
+  show.value = true
+}, 100);
 watch(dataReady, (newValue) => {
-  console.log('watch dataReady', newValue)
-  hidden.value = false
+  show.value = false
 })
 </script>
 

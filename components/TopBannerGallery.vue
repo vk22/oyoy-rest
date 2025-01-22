@@ -74,7 +74,7 @@ for (const galleryImage of gallery) {
       if (imageCheck === gallery.length) {
         setTimeout(() => {
           readyToGo();
-        }, 0);
+        }, 2000);
       }
     });
   }
