@@ -220,19 +220,19 @@ onMounted(() => {
       color: #fff;
       text-align: center;
       // text-transform: uppercase;
-      margin-bottom: 7vh;
+      // margin-bottom: 7vh;
 
-      @include for-700-height-only {
-        margin-bottom: 8vh;
-      }
+      // @include for-700-height-only {
+      //   margin-bottom: 8vh;
+      // }
 
-      @include for-800-height-only {
-        margin-bottom: 10vh;
-      }
+      // @include for-800-height-only {
+      //   margin-bottom: 10vh;
+      // }
 
       .big {
         font-family: $font-serif;
-        font-weight: 500;
+        font-weight: 400;
         letter-spacing: 0.25px;
         padding: 1rem 0 1.35rem;
         margin-bottom: 1.5rem;
@@ -241,28 +241,28 @@ onMounted(() => {
         @include for-phone-only {
           font-size: 4rem;
           letter-spacing: 1px;
-          line-height: 4.5rem;
+          line-height: 4.25rem;
           padding: 0.25rem 0 0.45rem;
         }
 
         @include for-tablet-portrait-up {
-          font-size: 5.5rem;
+          font-size: 6.5rem;
           letter-spacing: 1px;
-          line-height: 5.5rem;
+          line-height: 7.5rem;
           padding: 0.25rem 0 0.45rem;
         }
 
         @include for-desktop-up {
-          font-size: 5.5rem;
+          font-size: 8.5rem;
           letter-spacing: 3px;
-          line-height: 5rem;
+          line-height: 8rem;
           padding: 0.45rem 0 0.65rem;
         }
 
         @include for-big-desktop-up {
-          font-size: 7.5rem;
+          font-size: 8.5rem;
           letter-spacing: 3px;
-          line-height: 7rem;
+          line-height: 8rem;
           padding: 0.45rem 0 0.65rem;
         }
       }
@@ -272,8 +272,8 @@ onMounted(() => {
         text-shadow: 1px 1px 10px #0000003f;
 
         @include for-phone-only {
-          font-size: 1.25rem;
-          line-height: 1.95rem;
+          font-size: 1.15rem;
+          line-height: 1.5rem;
           letter-spacing: 0.25px;
         }
 

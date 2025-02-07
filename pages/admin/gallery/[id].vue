@@ -16,12 +16,10 @@
           @start="dragging = true"
           @end="draggEnd()"
         >
-          <template #item="{ element: item }">
-            <div class="gallery-item">
+            <div class="gallery-item" v-for="image in gallery.images" :key="image.filename">
               <!-- <span>{{ item.index }}</span> -->
-              <img :src="item.filename" />
+              <img :src="image.filename" />
             </div>
-          </template>
         </draggable>
 
         <!-- <v-col cols="2" v-for="image in gallery.images" :key="image.filename">

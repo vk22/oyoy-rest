@@ -88,17 +88,29 @@ watch(dataReady, (newValue) => {
 }
 
 @keyframes col {
+  // 0% {
+  //   fill: #880d1e
+  // }
+  // 25% {
+  //   fill: #dd2d4a
+  // }
+  // 75% {
+  //   fill: #f26a8d
+  // }
+  // 100% {
+  //   fill: #880d1e
+  // }
   0% {
-    fill: #880d1e
+    fill: #000000
   }
   25% {
-    fill: #dd2d4a
+    fill: #525252
   }
   75% {
-    fill: #f26a8d
+    fill: #9a9a9a
   }
   100% {
-    fill: #880d1e
+    fill: #000000
   }
 }
 </style>

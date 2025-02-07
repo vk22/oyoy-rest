@@ -16,7 +16,7 @@
           <div class="list-item" v-for="(item, index) in gallery" :key="index">
             <v-row>
               <v-col md="2">
-                <nuxt-link :to="'/admin/gallery/' + item._id">
+                <nuxt-link :to="'/admin/gallery/' + item._id" v-if="item.images.length">
                   <img
                     :src="item.images[0].filename"
                     width="100"

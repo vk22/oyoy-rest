@@ -20,11 +20,9 @@
         <v-col>
           <div class="admin-list">
 
-
             <draggable :list="menu.content" handle=".handle">
 
-              <template #item="{ element, index }">
-                  <div class="menu-item" :class="{ 'not-draggable': !enabled }">
+                  <div v-for="(element, index) in menu.content" :key="element._id" class="menu-item" :class="{ 'not-draggable': !enabled }">
 
                     <div class="d-flex justify-space-between">
                       <div class="handle">
@@ -54,7 +52,6 @@
                   </div>
 
                   </div>  
-              </template>
 
               </draggable>
 

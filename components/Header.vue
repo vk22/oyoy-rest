@@ -148,8 +148,8 @@ onMounted(() => {
 
   .icon-nav {
     position: relative;
-    width: 35px;
-    height: 20px;
+    width: 45px;
+    height: 15px;
     cursor: pointer;
 
     @include for-phone-only {
