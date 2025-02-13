@@ -3,8 +3,9 @@
     <v-container>
       <v-row>
         <v-col>
-          <div class="admin-title">
-            <h1>{{ menu.section }}</h1>
+          <div class="admin-title mb-3">
+            <v-text-field v-model="menu.section" variant="outlined" label="Menu Title Section"></v-text-field>
+            <!-- <h1>{{ menu.section }}</h1> -->
           </div>
           <div>
             <p>Category: {{ menu.category }}</p>
