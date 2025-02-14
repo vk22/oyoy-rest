@@ -24,7 +24,7 @@
                     <span v-html="about.text"></span>
                   </div>
                   <div class="about-index__block__btn">
-                    <div class="btn" @click="getFormModalStateToggle">Reservations</div>
+                    <div class="btn" v-if="reservationAvailable" @click="getFormModalStateToggle">Reservations</div>
                   </div>
                 </div>
               </v-col>
@@ -39,6 +39,7 @@
 /// reservation
 import { useReservationStore } from "@/store/reservation";
 const reservationStore = useReservationStore();
+const reservationAvailable = reservationStore.reservationAvailable;
 const getFormModalStateToggle = () => {
   reservationStore.setFormModalState();
 };

@@ -28,7 +28,7 @@
             ><v-icon icon="mdi-phone"></v-icon> <span>{{ company.phone }}</span></a
           >
         </div>
-        <div class="btn" @click="getFormModalStateToggle">
+        <div class="btn" v-if="reservationAvailable" @click="getFormModalStateToggle">
           Reservations
         </div>
       </div>
@@ -59,7 +59,7 @@
       <!-- <div class="btn-quote-icon" @click="getFormModalStateToggle">
         <img src="/img/book-now.svg" alt="" />
       </div> -->
-      <div class="btn btn-header" @click="getFormModalStateToggle">Reservations</div>
+      <div class="btn btn-header" v-if="reservationAvailable" @click="getFormModalStateToggle">Reservations</div>
     </div>
   </header>
 </template>
@@ -76,6 +76,7 @@ const mainStore = useMainStore()
 const dataReady = computed(() => mainStore.getDataReady)
 /// reservation
 const reservationStore = useReservationStore();
+const reservationAvailable = reservationStore.reservationAvailable;
 const getFormModalStateToggle = () => {
   reservationStore.setFormModalState();
 };
