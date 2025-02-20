@@ -19,7 +19,7 @@ export const useReservationStore = defineStore('reservation', {
       message: ''
     },
     formModalIsOpen: false,
-    reservationAvailable: false
+    reservationAvailable: true
   }),
   actions: {
     async postData(values) {

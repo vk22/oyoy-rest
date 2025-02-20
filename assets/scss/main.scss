@@ -149,13 +149,13 @@ h1 {
 h2 {
 
   @include for-phone-only {
-    font-size: 3.5rem;
+    font-size: 4rem;
     margin-bottom: 1rem;
     line-height: 3.5rem;
   }
 
   @include for-tablet-portrait-up {
-    font-size: 3.5rem;
+    font-size: 4.5rem;
     line-height: 4rem;
     margin-bottom: 1rem;
 
@@ -245,7 +245,7 @@ ul {
   @include base-transition(all, .25s);
 
   &.btn-header {
-    border: 1px solid rgba(255, 255, 255, 0.25);
+    //border: 1px solid rgba(255, 255, 255, 0.25);
     padding: 1rem 1.5rem;
     margin-left: 2rem;
     font-size: 0.8rem;
