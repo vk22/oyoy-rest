@@ -4,7 +4,7 @@
       <AboutUs ></AboutUs>
       <ImageFullWidth :type="'video'" :path="'/video/video2.mp4'" :title="''"></ImageFullWidth>
       <MenuIndex :category="'food'"></MenuIndex>
-      <ImageFullWidth :type="'image'" :path="'/img/full-w-banner-3.jpg'" :title="''"></ImageFullWidth>
+      <ImageFullWidth :type="'image'" :path="'/img/full-w-banner-1.jpg'" :title="''"></ImageFullWidth>
       <WineListLink></WineListLink> 
       <SwiperGallery></SwiperGallery>
       <NewsIndex></NewsIndex>
