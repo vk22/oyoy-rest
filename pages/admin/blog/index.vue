@@ -16,7 +16,7 @@
           <div class="list-item" v-for="(item, index) in posts" :key="index">
             <v-row>
               <v-col md="2">
-                <nuxt-link :to="'/admin/blog/' + item.url">
+                <nuxt-link :to="'/admin/blog/' + item.url" v-if="item.images.length">
                   <img
                     :src="item.images[0].file.url"
                     width="100%"
@@ -60,7 +60,7 @@ definePageMeta({
   middleware: ["auth"]
 });
 const { data } = await useFetch('/api/blog')
-const posts = data._rawValue.posts
+const posts = data.value.data
 console.log('posts ', posts)
 
 </script>
