@@ -4,7 +4,7 @@ export default defineEventHandler( async (event) => {
     const body = await readBody(event)
     /// images map
     body.images = body.images.map((item, index) => {
-      item.filename = item.filename.url
+      item.file = item.file.url
       item.index = index
       return item
     })

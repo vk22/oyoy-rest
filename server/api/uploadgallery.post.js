@@ -1,35 +1,36 @@
 import { put } from '@vercel/blob';
-import multer from 'multer';
-// import { callNodeListener } from 'h3';
-import 'dotenv/config'
+//import multer from 'multer';
+//import { callNodeListener } from 'h3';
+//import 'dotenv/config'
 
-let originalFileName = '';
-const storage = multer.diskStorage({
-  destination: (req, file, cb) => {
-    cb(null, process.env.UPLOAD_DIR + '/gallery/');
-  },
-  filename: (req, file, cbd) => {
-    originalFileName = file.originalname;
-    cbd(null, file.originalname);
-  },
-});
+// let originalFileName = '';
+// const storage = multer.diskStorage({
+//   destination: (req, file, cb) => {
+//     cb(null, process.env.UPLOAD_DIR + '/csv/');
+//   },
+//   filename: (req, file, cbd) => {
+//     originalFileName = file.originalname;
+//     cbd(null, file.originalname);
+//   },
+// });
 
-const upload = multer({
-  storage: storage,
-  fileFilter: (req, file, cb) => {
-    cb(null, true);
-  },
-});
+// const upload = multer({
+//   storage: storage,
+//   fileFilter: (req, file, cb) => {
+//     cb(null, true);
+//   },
+// });
 
 export default defineEventHandler(async (event) => {
-
+  //console.log('process.env.UPLOAD_DIR ', process.env.UPLOAD_DIR)
   try {
     // const res = await callNodeListener(upload.array('file', 10), event.node.req, event.node.res);
+    // console.log('res ', res);
     // return {success: true, message: 'Files uploaded'};
 
     /// vercel blob
     const formData = await readFormData(event);
-    // console.log('formData ', formData);
+    console.log('formData ', formData);
     const type = formData.get('type');
     const files = formData.getAll('file');
     let urls = []

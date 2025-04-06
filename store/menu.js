@@ -7,10 +7,10 @@ export const useMenuStore = defineStore("menuStore", {
         };
     },
     actions: {
-        async fetchMenu() {
+        async fetchData() {
           const { data } = await useFetch('/api/menu')
           if (data) {
-            this.items = data._rawValue.items
+            this.items = data.value.data
           }
         }
     },

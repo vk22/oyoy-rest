@@ -11,30 +11,31 @@ export const useAdminStore = defineStore('admin', {
     async setLoading(state) {
       this.loading = state
     },
-    async fetchData(route, method, sendData) {
+    async fetchData(route, method, body) {
       this.setLoading(true)
+      console.log('fetchData STORE')
       const { data, status } = await useFetch(`/api/${route}`, {
         method: method,
-        body: sendData
+        body: body
       });
       this.setLoading(false)
       if (process.client) {
-        if (data._rawValue.success) {
-          toast.success(data._rawValue.message, {
+        if (data.value.success) {
+          toast.success(data.value.message, {
             timeout: 2000
           });
         } else {
-          toast.error(data._rawValue.message, {
+          toast.error(data.value.message, {
             timeout: 2000
           });
         }
       }
       
-      if (status._rawValue === 'success') {
+      if (status.value === 'success') {
         return {
-          success: data._rawValue.success,
-          message: data._rawValue.message,
-          data: data._rawValue.data
+          success: data.value.success,
+          message: data.value.message,
+          data: data.value.data
         }
         
       } else {

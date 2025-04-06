@@ -12,9 +12,9 @@ export const useEventStore = defineStore("EventStore", {
         };
     },
     actions: {
-        async fetchEvents() {
+        async fetchData() {
           const { data } = await useFetch('/api/events')
-          this.items = data._rawValue.events
+          this.items = data.value.data
         },
         setModalState(data) {
             this.modalState.isOpen = !this.modalState.isOpen

@@ -9,7 +9,7 @@
         </v-col>
       </v-row>
       <v-row>
-        <v-col cols="2">
+        <v-col cols="2" v-if="event.file">
           <img :src="event.file.url" v-if="event.file.type !== 'video/mp4'"/>
           <video muted playsinline="" loop="" controls v-else >
             <source :src="event.file.url" :type="event.file.type">
@@ -26,6 +26,15 @@
       <v-row>
         <v-col>
           <v-text-field
+            v-model="event.url"
+            variant="outlined"
+            label="URL"
+          ></v-text-field>
+        </v-col>
+      </v-row>
+      <v-row>
+        <v-col>
+          <v-text-field
             v-model="event.title"
             variant="outlined"
             label="Title"
@@ -34,7 +43,8 @@
       </v-row>
       <v-row>
         <v-col>
-          <v-textarea label="Text" variant="outlined" v-model="event.text"></v-textarea>
+          <!-- <v-textarea label="Text" variant="outlined" v-model="event.text"></v-textarea> -->
+          <AdminTiptapEditor v-model="event.text"></AdminTiptapEditor>
         </v-col>
       </v-row>
       <v-row>
@@ -48,6 +58,7 @@
 </template>
 
 <script setup> 
+import { onMounted, watch, computed } from 'vue';
 import { useAdminStore } from "@/store/admin";
 const adminStore = useAdminStore();
 const loading = computed(() => adminStore.loading);
@@ -57,6 +68,7 @@ definePageMeta({
   middleware: ["auth"]
   // or middleware: 'auth'
 })
+// console.log('params: ', `/api/events/${route.params.id}`)
 const route = useRoute()
 const router = useRouter()
 const { data } = await useFetch(`/api/events/${route.params.id}`)
@@ -81,15 +93,10 @@ const editEvent= async () => {
     if (filesUploadResponse.success) {
       let oneFileUpload = filesUploadResponse.data[0]
       event.value.imageNew = oneFileUpload
-      /// save data
-      const { data } = await adminStore.fetchData('events', 'put', event) 
-      event.value = data
     }
-  } else {
-    /// save data
-    const { data } = await adminStore.fetchData('events', 'put', event) 
-    event.value = data
-  }
+  } 
+  await adminStore.fetchData('events', 'put', event) 
+  // event.value = data
 };
 
 const deleteEvent = async () => {
@@ -99,17 +106,9 @@ const deleteEvent = async () => {
   }
 };
 
-// const deleteEvent = async () => {
-//   const { data } = await useFetch(`/api/events`, {
-//         method: 'delete',
-//         body: event
-//     } );
-//   if (data._rawValue) {
-//     router.push({ path: "/admin/events" })
-//   }
-
-//   //
-// }
+// watch(event.value.title, (newValue) => {
+//   console.log('newValue ', newValue)
+// })
 
 </script>
 

@@ -7,17 +7,26 @@
         <div class="line"></div>
         <div class="line"></div>
       </div>
-      <div class="m-top">
+      <div class="m-top" v-if="navigation.length">
         <ul>
           <li v-for="(item, index) in navigation" :key="index">
-            <a
+            <span v-if="item">
+              <NuxtLink
+              v-if="item.isHomePageAnchor"
               class="menu-item"
-              :key="item.href"
-              :href="item.href"
-              :data-href="item.href"
+              :to="{ path: '/', hash: item.href}"
             >
               {{ item.text }}
-            </a>
+            </NuxtLink>
+            <NuxtLink
+              v-else
+              class="menu-item"
+              :to="{ path: item.href }"
+            >
+              {{ item.text }}
+            </NuxtLink>
+            </span>  
+            
           </li>
         </ul>
       </div>
@@ -65,11 +74,14 @@
 </template>
   
 <script setup>
-import { onMounted, ref } from "vue";
+import { onMounted, ref, watch } from "vue";
 import { useCompanyStore } from "@/store/company";
 import { useMainStore }  from '@/store/index'
 import { useReservationStore } from "@/store/reservation";
 import { useNavigationStore } from "@/store/nav";
+import { useBlogStore } from "@/store/blog";
+
+const route = useRoute();
 
 /// main store
 const mainStore = useMainStore()
@@ -80,12 +92,21 @@ const reservationAvailable = reservationStore.reservationAvailable;
 const getFormModalStateToggle = () => {
   reservationStore.setFormModalState();
 };
+
+/// blog
+const blogStore = useBlogStore();
+const blogItems = computed(() => blogStore.getItems);
+
 /// menu
 const navigationStore = useNavigationStore();
 const navigation = computed(() => navigationStore.getItems);
+const navigationAll = computed(() => navigationStore.getAllItems);
 const mainNavIsOpened = computed(() => navigationStore.getMainMenuState);
 const toggleMenu = () => {
   navigationStore.toggleMenu();
+};
+const closeMenu = () => {
+  navigationStore.closeMenu();
 };
 //// getcompany
 const companyStore = useCompanyStore();
@@ -102,8 +123,10 @@ const headerHandler = () => {
 ////
 let isScrolled = ref(null);
 function manualSmoothScroll(event) {
+  console.log('event ', event)
   event.preventDefault();
-  const id = event.target.dataset.href;
+  const id = event.target.dataset.href.substring(1);
+  console.log('id ', id)
   if (!id) return;
   const target = document.getElementById(id);
   if (!target) return;
@@ -115,12 +138,45 @@ function manualSmoothScroll(event) {
   }, 500);
 }
 
+function smoothScrollTo(id) {
+  console.log('smoothScrollTo ', id)
+  if (!id) return;
+  const target = document.getElementById(id);
+  if (!target) return;
+  const yOffset = -75;
+  const y = target.getBoundingClientRect().top + window.pageYOffset + yOffset;
+  window.scrollTo({ top: y, behavior: "smooth" });
+  setTimeout(() => {
+    closeMenu();
+  }, 500);
+}
+
 onMounted(() => {
   document.addEventListener("scroll", headerHandler);
   document.querySelectorAll(".main-menu .menu-item").forEach((link, index) => {
-    link.addEventListener("click", manualSmoothScroll);
+    link.addEventListener("click", closeMenu);
   });
+  // console.log('onMounted route.hash ', route.hash.substring(1))
+;  
 });
+
+watch(dataReady, (newValue) => {
+  if (newValue) {
+    if (route.hash) {
+      setTimeout(() => {
+        smoothScrollTo(route.hash.substring(1))
+      }, 3000);
+    }
+
+  }
+})
+
+
+watch(() => route.hash, () => {
+    console.log('route.hash ', route.hash.substring(1))
+    // smoothScrollTo(route.hash.substring(1))
+});
+
 
 
 </script>
@@ -135,7 +191,7 @@ onMounted(() => {
   position: fixed;
   z-index: 999;
   width: 100vw;
-  padding: 2rem;
+  padding: 1.5rem 2rem;
   opacity: 0;
 
   .header-l,
@@ -224,19 +280,19 @@ onMounted(() => {
 
   .logo {
     img {
-      width: 200px;
+      width: 225px;
 
       @include for-phone-only {
-        width: 200px;
+        width: 225px;
       }
       @include for-tablet-portrait-up {
-        width: 200px;
+        width: 225px;
       }
       @include for-desktop-up {
-        width: 200px;
+        width: 225px;
       }
       @include for-700-height-only {
-        width: 200px;
+        width: 225px;
       }
     }
     .black {
@@ -551,7 +607,7 @@ onMounted(() => {
 
   .close-icon {
     position: absolute;
-    top: 3rem;
+    top: 2rem;
     left: 2rem;
     width: 35px;
     height: 18px;

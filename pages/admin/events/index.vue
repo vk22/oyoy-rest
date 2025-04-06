@@ -13,39 +13,39 @@
       </v-row>  
       <v-row>
         <v-col>
-          <div class="list-item" v-for="(promo, index) in events" :key="index">
+          <div class="list-item" v-for="(item, index) in events" :key="index">
             <v-row>
               <v-col md="2">
-                <nuxt-link :to="'/admin/events/' + promo._id">
+                <nuxt-link :to="'/admin/events/' + item.url">
                   <img
-                    :src="promo.file.url"
+                    :src="item.file.url"
                     width="100%"
                     alt=""
-                    v-if="promo.file.type !== 'video/mp4'"
+                    v-if="item.file.type !== 'video/mp4'"
                   />
                   <video muted playsinline="" loop="" controls width="100%" v-else>
-                    <source :src="promo.file.url" :type="promo.file.type">
+                    <source :src="item.file.url" :type="item.file.type">
                   </video>
                 </nuxt-link>
               </v-col>
               <v-col md="4">
-                <div class="one-promo-prev-info-block__title">
-                  <nuxt-link :to="'/admin/events/' + promo._id">{{
-                    promo.title
+                <div class="one-item-prev-info-block__title">
+                  <nuxt-link :to="'/admin/events/' + item._id">{{
+                    item.title
                   }}</nuxt-link>
                 </div>
               </v-col>
               <v-col md="3">
-                <div class="one-promo-prev-info-block__title">
-                  <span v-if="promo.date_start">
-                    Начало: {{ $formatDate(promo.date_start) }}</span
+                <div class="one-item-prev-info-block__title">
+                  <span v-if="item.date_start">
+                    Начало: {{ $formatDate(item.date_start) }}</span
                   >
                 </div>
               </v-col>
               <v-col md="3">
-                <div class="one-promo-prev-info-block__title">
-                  <span v-if="promo.date_end">
-                    Окончание: {{ $formatDate(promo.date_end) }}</span
+                <div class="one-item-prev-info-block__title">
+                  <span v-if="item.date_end">
+                    Окончание: {{ $formatDate(item.date_end) }}</span
                   >
                 </div>
               </v-col>

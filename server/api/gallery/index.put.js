@@ -2,17 +2,21 @@ import { Gallery } from "~~/server/models/gallery-model";
 
 export default defineEventHandler(async (gallery) => {
   const body = await readBody(gallery)
-  console.log('body ', body)
+  console.log('galleru put body ', body)
   const galleryItem = await Gallery.findById(body._id)
   if (!galleryItem) return false
   galleryItem.name = body.name
-  const images = body.images.map((item, index) => {
-    item.filename = item.filename.url
-    item.index = index
-    return item
+  const imagesFiltered = body.images.filter((item, index) => {
+    if (item) {
+      if (item.file) {
+        item.index = index
+        return item
+      }
+    }
+
   })
-  console.log('images ', images)
-  galleryItem.images = images
+  console.log('imagesFiltered ', imagesFiltered)
+  galleryItem.images = imagesFiltered
   const saveItem = await galleryItem.save()
   if (saveItem) {
     return {

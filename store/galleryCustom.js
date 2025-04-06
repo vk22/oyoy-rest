@@ -13,7 +13,7 @@ export const useCustomGalleryStore = defineStore('customGalleryStore', {
   actions: {
     async fetchData(name) {
       const { data } = await useFetch('/api/gallery')
-      const res = data._rawValue.items
+      const res = data.value.items
       const images = res.find(item => item.name == name).images
       this.gallery = images
     },
@@ -54,13 +54,13 @@ export const useCustomGalleryStore = defineStore('customGalleryStore', {
   },
   getters: {
     getGallery: (state) => {
-      const gallery = state.gallery.map(item => {
-        return {
-          index: item.index,
-          url: item.filename
-        }
-      }) 
-      return gallery
+      // const gallery = state.gallery.map(item => {
+      //   return {
+      //     index: item.index,
+      //     file: item.filename
+      //   }
+      // }) 
+      return state.gallery
     }
   }
 })

@@ -47,7 +47,7 @@
             }"
           >
             <SwiperSlide v-for="slide in gallery" :key="slide">
-              <img :src="slide.url" alt=""/>
+              <img :src="slide.file.url" alt=""/>
             </SwiperSlide>
           </Swiper>
         </v-col>

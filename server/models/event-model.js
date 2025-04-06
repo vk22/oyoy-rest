@@ -1,5 +1,8 @@
 import { Schema, model } from "mongoose";
 const SchemaData = new Schema({
+  url: {
+    type: String,
+  },
   title: {
     type: String
   },

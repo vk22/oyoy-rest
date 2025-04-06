@@ -14,7 +14,7 @@ export const useGalleryStore = defineStore("galleryStore", {
     actions: {
         async fetchData() {
           const { data } = await useFetch('/api/gallery')
-          this.items = data._rawValue.items
+          this.items = data.value.items
         },
         setModalState(data) {
             this.modalState.isOpen = !this.modalState.isOpen
@@ -29,13 +29,13 @@ export const useGalleryStore = defineStore("galleryStore", {
     getters: {
         getData: (state) => (name) => {
           const gallery = state.items.find(item => item.name === name)
-          const images = gallery.images.map((item, index) => {
-            return {
-              index: index,
-              url: item.filename
-            }
-          })
-          return images
+          // const images = gallery.images.map((item, index) => {
+          //   return {
+          //     index: index,
+          //     url: item.filename
+          //   }
+          // })
+          return gallery.images
         },
         getModalState(state) {
             return state.modalState

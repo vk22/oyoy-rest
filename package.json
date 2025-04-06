@@ -24,10 +24,12 @@
   "dependencies": {
     "@mdi/font": "^7.3.67",
     "@pinia/nuxt": "^0.5.1",
+    "@tiptap/extension-image": "^2.11.5",
     "@vercel/blob": "^0.23.4",
     "@vuepic/vue-datepicker": "^8.4.0",
     "axios": "^1.6.2",
     "bcrypt": "^5.1.1",
+    "csv-parse": "^5.6.0",
     "dotenv": "^16.4.5",
     "gsap": "^3.12.5",
     "jsonwebtoken": "^9.0.2",

@@ -12,7 +12,7 @@
 				<input type="file" id="file-input" multiple @change="onInputChange" />
 			</label>
 			<ul class="image-list" v-show="files.length">
-				<AdminFilePreview v-for="file of files" :key="file.id" :file="file" tag="li" @remove="removeFile" />
+				<AdminFilePreview v-for="file of files" :key="file.id" :file="file" :type="props.type" tag="li" @remove="removeFile" />
 			</ul>
 		</AdminDropZone>
 		<!-- <button @click.prevent="uploadFiles(files)" class="upload-button">Upload</button> -->
@@ -24,7 +24,9 @@ import { defineExpose } from 'vue';
 import { useAdminStore } from "@/store/admin";
 const adminStore = useAdminStore();
 const emit = defineEmits(['files-dropped2'])
-const props = defineProps(['type'])
+const props = defineProps({
+	type: { type: String, required: true }
+})
 
 // File Management
 import useFileList from '../../compositions/file-list'
@@ -38,9 +40,8 @@ function filesDropped(files) {
 function onInputChange(e) {
 	addFiles(e.target.files, props.type)
 	e.target.value = null // reset so that selecting the same file again will still cause it to fire this change
-	emit('files-dropped2', files._rawValue)
+	emit('files-dropped2', files.value)
 }
-
 
 
 // Uploader
@@ -50,7 +51,7 @@ const { uploadFiles } = createUploader(adminStore)
 
 /// handler from Parent
 const startUpload = async () => {
-	const response = await uploadFiles(files._rawValue, props.type, adminStore)
+	const response = await uploadFiles(files.value, props.type, adminStore)
 	removeFiles()
 	return response
 }

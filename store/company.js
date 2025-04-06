@@ -5,10 +5,10 @@ export const useCompanyStore = defineStore('company', {
     company: {}
   }),
   actions: {
-    async fetchCompany() {
+    async fetchData() {
       const { data } = await useFetch('/api/company')
       if (data) {
-        this.company = data._rawValue.data
+        this.company = data.value.data
       }
     },
   },

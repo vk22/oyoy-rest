@@ -16,9 +16,11 @@
           @start="dragging = true"
           @end="draggEnd()"
         >
-            <div class="gallery-item" v-for="image in gallery.images" :key="image.filename">
+            <div class="gallery-item" v-for="(image, index) in gallery.images" :key="index">
               <!-- <span>{{ item.index }}</span> -->
-              <img :src="image.filename" />
+              <span v-if="image">
+                <img v-if="image.file" :src="image.file.url"/>
+              </span>
             </div>
         </draggable>
 
@@ -69,12 +71,15 @@ const route = useRoute();
 const router = useRouter()
 const { data } = await useFetch(`/api/gallery/${route.params.id}`);
 const gallery = ref(data.value);
+gallery.value.imagesNew = [];
 const uploaderRef = ref(null);
 // const files = ref([]);
 const dragging = ref(false);
 
 function addFiles(files) {
-  gallery.value.imageNew = files;
+  console.log('files ', files)
+  gallery.value.imagesNew.push(files);
+  console.log('gallery.value.imagesNew ', gallery.value.imagesNew)
 }
 
 const draggEnd = async () => {
@@ -82,13 +87,17 @@ const draggEnd = async () => {
 };
 
 const editItem = async () => {
-  if (gallery.value.imageNew) {
+  if (gallery.value.imagesNew.length) {
     /// upload images
     let filesUploadResponse = await uploaderRef.value.startUpload();
+    console.log('filesUploadResponse ', filesUploadResponse)
     if (filesUploadResponse.success) {
-      filesUploadResponse.data.forEach((url, index) => {
-        gallery.value.images.push({filename: url, index: index})
+
+      filesUploadResponse.data.forEach((file, index) => {
+        // file: {url, type}
+        gallery.value.images.push({file: file, index: index})
       })
+      console.log('gallery ', gallery)
       /// save data
       await adminStore.fetchData('gallery', 'put', gallery) 
     }

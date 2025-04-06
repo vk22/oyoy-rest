@@ -3,7 +3,7 @@
     <div class="top-banner__container">
       <div class="center">
         <div class="headline" :class="{ 'fadeIn-2': showItem }">
-          <div class="big">{{ topslideText.title }}</div>
+          <div class="big"><h1>{{ topslideText.title }}</h1></div>
           <div class="medium">{{ topslideText.subtitle }}</div>
         </div>
       </div>
@@ -14,13 +14,13 @@
         <img src="/img/arrow-down.svg" alt="" />
       </div> -->
     </div>
-    <div class="gallery" @click="toggleGallery()" :class="{ show: showItem, active: galleryIsActive }">
+    <div class="gallery" @click="toggleGallery()" :class="{ show: showItem, active: galleryIsActive }" v-if="gallery.length">
       <div class="gallery__wrap" :class="{
         'slide-active': galleryItem.index === activeIndex,
         'slide-to-left': galleryItem.index === activeNext && galleryIsWork,
       }" v-for="galleryItem in gallery" :key="galleryItem.index">
         <div class="gallery__item" :class="'image-' + galleryItem.index"
-          :style="{ backgroundImage: 'url(' + galleryItem.url + ')' }"></div>
+          :style="{ backgroundImage: 'url(' + galleryItem.file.url + ')' }"></div>
 
       </div>
     </div>
@@ -60,47 +60,35 @@ const goToSlide = (index) => {
 ///
 const gallery = customGalleryStore.getGallery;
 
-console.log("gallery ", gallery);
+// console.log("gallery ", gallery);
 
 let imageCheck = 0;
 for (const galleryImage of gallery) {
   if (process.client) {
-    const imageUrl = galleryImage.url;
+    const imageUrl = galleryImage.file.url;
     const preloaderImg = document.createElement("img");
     preloaderImg.src = imageUrl;
     preloaderImg.addEventListener("load", (event) => {
-      console.log("event ", event);
+      // console.log("event ", event);
       imageCheck++;
       if (imageCheck === gallery.length) {
-        setTimeout(() => {
+        if (!dataReady.value) {
+          // setTimeout(() => {
+          //   readyToGo();
+          // }, 1000);
           readyToGo();
-        }, 2000);
+        }
       }
     });
   }
 }
-// if (gallery[0]) {
-//   if (process.client) {
-//     const imageUrl = gallery[0].url
-//     const preloaderImg = document.createElement("img");
-//     preloaderImg.src = imageUrl;
-//     preloaderImg.addEventListener('load', (event) => {
-//       console.log('event ', event.timeStamp)
-//       setTimeout(() => {
-//         readyToGo()
-//       }, 2000);
-
-//     });
-//   }
-
-// }
 
 function handleImageLoaded(url) {
   console.log('handleImageLoaded ', url)
 }
 
 const readyToGo = () => {
-  mainStore.setDataReady();
+  // mainStore.setDataReady();
   galleryIsActive.value = true;
   startGallery(6000);
 };
@@ -113,12 +101,18 @@ const readyToGo = () => {
 
 //// show after loading all data
 const showItem = ref(false);
-watch(dataReady, (newValue) => {
-  console.log("watch dataReady", newValue);
+if (!dataReady.value) {
+  watch(dataReady, (newValue) => {
+  setTimeout(() => {
+    showItem.value = newValue;
+  }, 1000);
+});
+} else {
   setTimeout(() => {
     showItem.value = true;
   }, 1000);
-});
+}
+
 
 //// about
 import { useTopslideStore } from "@/store/topslide";
@@ -231,40 +225,44 @@ onMounted(() => {
       // }
 
       .big {
-        font-family: $font-serif;
-        font-weight: 400;
-        letter-spacing: 0.25px;
         padding: 1rem 0 1.35rem;
         margin-bottom: 1.5rem;
         text-shadow: 1px 1px 10px #0000003f;
 
-        @include for-phone-only {
-          font-size: 4rem;
-          letter-spacing: 1px;
-          line-height: 4.25rem;
-          padding: 0.25rem 0 0.45rem;
+        h1 {
+          color: #fff;
+
+          @include for-phone-only {
+            font-size: 4rem;
+            letter-spacing: 1px;
+            line-height: 4.25rem;
+            padding: 0.25rem 0 0.45rem;
+          }
+
+          @include for-tablet-portrait-up {
+            font-size: 6.5rem;
+            letter-spacing: 1px;
+            line-height: 7.5rem;
+            padding: 0.25rem 0 0.45rem;
+          }
+
+          @include for-desktop-up {
+            font-size: 8.5rem;
+            letter-spacing: 3px;
+            line-height: 8rem;
+            padding: 0.45rem 0 0.65rem;
+          }
+
+          @include for-big-desktop-up {
+            font-size: 8.5rem;
+            letter-spacing: 3px;
+            line-height: 8rem;
+            padding: 0.45rem 0 0.65rem;
+          }
+
         }
 
-        @include for-tablet-portrait-up {
-          font-size: 6.5rem;
-          letter-spacing: 1px;
-          line-height: 7.5rem;
-          padding: 0.25rem 0 0.45rem;
-        }
 
-        @include for-desktop-up {
-          font-size: 8.5rem;
-          letter-spacing: 3px;
-          line-height: 8rem;
-          padding: 0.45rem 0 0.65rem;
-        }
-
-        @include for-big-desktop-up {
-          font-size: 8.5rem;
-          letter-spacing: 3px;
-          line-height: 8rem;
-          padding: 0.45rem 0 0.65rem;
-        }
       }
 
       .medium {

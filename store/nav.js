@@ -1,32 +1,47 @@
 import { defineStore } from 'pinia'
 
+
 export const useNavigationStore = defineStore('nav', {
   state: () => ({
     mainMenulIsOpen: false,
-    items: [
+    items: [],
+    homeItems: [
       {
         text: "About",
-        href: "startContent",
+        href: "#about",
       },
       {
         text: "Menu",
-        href: "food",
+        href: "#food",
       },
       {
         text: "Wine List",
-        href: "drinks",
+        href: "#drinks",
       },
       {
         text: "Gallery",
-        href: "gallery",
+        href: "#gallery",
       },
       {
         text: "Events",
-        href: "events",
+        href: "#events",
+      }
+    ],
+    allItems: [
+      {
+        text: "Blog",
+        href: "blog",
       },
-    ]
+    ],
+
   }),
   actions: {
+    async fetchData() {
+      const { data } = await useFetch('/api/nav')
+      if (data) {
+        this.items = data.value.data
+      }
+    },
     toggleMenu() {
       this.mainMenulIsOpen = !this.mainMenulIsOpen
     },
@@ -39,7 +54,16 @@ export const useNavigationStore = defineStore('nav', {
       return state.mainMenulIsOpen
     },
     getItems(state) {
-      return state.items
+      const itemsActive = state.items.map(item => {
+        if (item.isActive) return item;
+      });
+      return itemsActive
+    },
+    getHomeItems(state) {
+      return state.homeItems
+    },
+    getAllItems(state) {
+      return state.allItems
     },
   }
 })

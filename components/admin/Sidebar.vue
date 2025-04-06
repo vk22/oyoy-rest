@@ -34,6 +34,16 @@ export default {
           icon: "mdi-basket",
         },
         {
+          name: "Subscribers",
+          route: "/admin/subscribers",
+          icon: "mdi-format-list-bulleted",
+        },
+        {
+          name: "Blog",
+          route: "/admin/blog",
+          icon: "mdi-format-list-bulleted",
+        },
+        {
           name: "Events",
           route: "/admin/events",
           icon: "mdi-format-list-bulleted",

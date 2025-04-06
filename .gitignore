@@ -23,3 +23,7 @@ logs
 .env-client
 .env-my
 .env.development.local
+
+
+# uploads
+client/public/uploads

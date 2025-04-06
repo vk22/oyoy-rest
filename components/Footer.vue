@@ -30,10 +30,11 @@
 
     </div>
     <div class="right">
-      <div class="nav">
+      <div class="nav" v-if="navigation.length">
         <ul>
-          <li v-for="(item, index) in menu" :key="index">
+          <li v-for="(item, index) in navigation" :key="index">
             <a
+              v-if="item"
               class="menu-item"
               :key="item.href"
               :href="item.href"
@@ -58,8 +59,8 @@
 import { useNavigationStore } from "@/store/nav";
 import { useCompanyStore } from "@/store/company";
 /// menu
-const menuStore = useNavigationStore();
-const menu = computed(() => menuStore.getItems);
+const navStore = useNavigationStore();
+const navigation = computed(() => navStore.getItems);
 //// getcompany
 const companyStore = useCompanyStore();
 const company = companyStore.getCompany

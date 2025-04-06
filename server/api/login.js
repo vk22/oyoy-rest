@@ -7,8 +7,10 @@ export default defineEventHandler( async (event) => {
     try {
       const body = await readBody(event)
       const { username, password } = body;
+      console.log('username, password ', username, password)
       const users = await Auth.find();
       const user = await Auth.findOne({ username: username });
+      console.log('user ', users)
       if (!user) {
         return {
           success: false,

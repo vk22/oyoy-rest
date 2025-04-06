@@ -8,8 +8,13 @@ const SchemaData = new Schema({
       title: {
         type: String
       },
-      filename: {
-        type: String
+      file: {
+        url: {
+          type: String,
+        },
+        type: {
+          type: String,
+        }
       },
       index: {
         type: Number

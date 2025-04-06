@@ -56,7 +56,7 @@ const addItem = async () => {
   let filesUploadResponse = await uploaderRef.value.startUpload();
   if (filesUploadResponse.success) {
     filesUploadResponse.data.forEach((url, index) => {
-      gallery.value.images.push({ filename: url, index: index })
+      gallery.value.images.push({ file: url, index: index })
     })
     /// save data
     const { success } = await adminStore.fetchData('gallery', 'post', gallery)

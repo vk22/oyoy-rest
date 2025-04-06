@@ -66,7 +66,7 @@ const addEvent = async () => {
   console.log('filesUploadResponse ', filesUploadResponse)
   if (filesUploadResponse.success) {
     let oneFileUpload = filesUploadResponse.data[0]
-    event.value.file = oneFileUpload
+    event.value.imageMain = oneFileUpload
     /// save data
     const { data } = await adminStore.fetchData('events', 'post', event)
     if (data) {

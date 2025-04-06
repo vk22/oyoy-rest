@@ -7,7 +7,7 @@ export const useTopslideStore = defineStore('topslide', {
   actions: {
     async fetchData() {
       const { data } = await useFetch('/api/topslide')
-      this.data = data._rawValue.data
+      this.data = data.value.data
     },
   },
   getters: {

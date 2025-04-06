@@ -1,22 +1,6 @@
 <template>
-  <v-app>
-    <Transition name="loading">
-      <LoadingComponent :dataReady="dataReady"></LoadingComponent>  
-    </Transition>
-    <CookiePolicy></CookiePolicy>  
-    <SendEmailResponse></SendEmailResponse>
-    <Transition>
-      <FormModal></FormModal>
-    </Transition>
-    <Transition>
-      <SwiperGalleryModal></SwiperGalleryModal>
-    </Transition>
-    <Transition>
-      <NewsModal></NewsModal>
-    </Transition>
-    <Header></Header>
     <TopBannerGallery></TopBannerGallery>
-    <section class="page-content" v-if="show">
+    <section class="page-content" v-if="dataReady">
       <AboutUs ></AboutUs>
       <ImageFullWidth :type="'video'" :path="'/video/video2.mp4'" :title="''"></ImageFullWidth>
       <MenuIndex :category="'food'"></MenuIndex>
@@ -26,65 +10,28 @@
       <NewsIndex></NewsIndex>
     </section>
     <Footer></Footer>
-  </v-app>
 </template>
 
 <script setup>
-import { onMounted, watch } from 'vue';
+import { onMounted, watch, computed } from 'vue';
 import { useMainStore } from '@/store/index'
-import { useMenuStore } from "@/store/menu";
-import { useCompanyStore } from "@/store/company";
-import { useCustomGalleryStore } from '@/store/galleryCustom';
-import { useGalleryStore } from "@/store/gallery";
-import { useEventStore } from '@/store/events';
-import { useAboutStore } from "@/store/about";
-import { useTopslideStore } from "@/store/topslide";
-import { useReservationStore } from "@/store/reservation";
-
-const customGalleryStore = useCustomGalleryStore();
-const menuStore = useMenuStore();
-const companyStore = useCompanyStore();
-const galleryStore = useGalleryStore();
-const eventsStore = useEventStore();
-const aboutStore = useAboutStore();
-const topslideStore = useTopslideStore();
-const reservationStore = useReservationStore();
-const modalsIsOpen =  computed(() => eventsStore.getModalState.isOpen || reservationStore.getFormModalState)
-
-await customGalleryStore.fetchData('top');
-await topslideStore.fetchData();
-await aboutStore.fetchData();
-await companyStore.fetchCompany();
-await menuStore.fetchMenu();
-await galleryStore.fetchData();
-await eventsStore.fetchEvents();
 
 //// show after loading all data
 const mainStore = useMainStore()
 const dataReady = computed(() => mainStore.getDataReady)
-const show = ref(false);
-watch(dataReady, (newValue) => {
-  setTimeout(() => {
-    show.value = true
-  }, 1000);
-})
 
-/// 
-const { $handleScroll } = useNuxtApp();
-onMounted(() => {
-  document.addEventListener("scroll", $handleScroll);
-  
-});
+
 
 
 useHead({
-  bodyAttrs: {
-    class: computed(() => {
-      if (modalsIsOpen.value) return 'popup-is-open';
-      return '';
-    }),
-  },
-});
+  title: 'OyOy Restaurant',
+  meta: [
+    { name: 'description', content: 'OyOy Restaurant' },
+    { charset: 'utf-8' },
+    { name: 'viewport', content: 'width=device-width, initial-scale=1' }
+  ],
+  link: [{ rel: 'icon', type: 'image/png', href: "/favicon.png" }]
+})
 
 </script>
 

@@ -7,7 +7,7 @@ export const useAboutStore = defineStore('about', {
   actions: {
     async fetchData() {
       const { data } = await useFetch('/api/about')
-      this.data = data._rawValue.data
+      this.data = data.value.data
     },
   },
   getters: {

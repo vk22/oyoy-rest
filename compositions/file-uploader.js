@@ -7,7 +7,6 @@ async function uploadFiles(files, type, adminStore) {
 	});
 	formData.append(`type`, type)
 	const result = await adminStore.fetchData('uploadgallery', 'POST', formData)
-	console.log('result ', result)
 	return result
 }
 

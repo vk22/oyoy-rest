@@ -2,19 +2,20 @@
 import vuetify, { transformAssetUrls } from 'vite-plugin-vuetify'
 export default defineNuxtConfig({
   app: {
-    head: {
-      title: 'OyOy Restaurant',
-      charset: 'utf-8',
-      viewport: 'width=device-width, initial-scale=1',
-      link: [{ rel: 'icon', type: 'image/png', href: "/favicon.png" }]
-    }
+    // head: {
+    //   title: 'OyOy Restaurant',
+    //   charset: 'utf-8',
+    //   viewport: 'width=device-width, initial-scale=1',
+    //   link: [{ rel: 'icon', type: 'image/png', href: "/favicon.png" }]
+    // },
+    // pageTransition: { name: 'page', mode: 'out-in' }
   },
 
   css: [
     '@/assets/scss/font.css',
   ],
 
-  devtools: { enabled: true },
+  devtools: { enabled: false },
 
   build: {
     transpile: ['vuetify', '@vuepic/vue-datepicker']
@@ -61,6 +62,8 @@ export default defineNuxtConfig({
   },
 
   runtimeConfig: {
+    ///mode
+    mode: process.env.MODE,
     // mongodbUri
     mongodbUri: process.env.MONGO_URI,
 
@@ -68,6 +71,11 @@ export default defineNuxtConfig({
     public: {
       apiBase: process.env.NUXT_PUBLIC_API_BASE || '/api',
       gtagId: 'AW-16850949987',
+    }
+  },
+  router: {
+    options: {
+      scrollBehaviorType: 'smooth'
     }
   },
   compatibilityDate: '2025-01-18'

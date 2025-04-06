@@ -1,6 +1,6 @@
 <template>
 
-    <section class="about-index index-section" id="startContent" ref="intoContent" >
+    <section class="about-index index-section" id="about" ref="intoContent" >
       <v-container fluid>
         <v-row>
           <!-- col -->

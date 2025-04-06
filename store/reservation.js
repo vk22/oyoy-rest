@@ -28,7 +28,7 @@ export const useReservationStore = defineStore('reservation', {
         body: values,
         headers: { "cache-control": "no-cache" }
       });
-      let response = data._rawValue
+      let response = data.value
       this.afterSubmit({
         mode: true,
         status: response.status,

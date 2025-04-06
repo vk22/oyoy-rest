@@ -214,7 +214,7 @@ textarea {
   border-radius: 0px;
   border: 1px solid #BDBDBD;
   border-radius: 4px;
-  padding: 15px 10px;
+  padding: 12px 10px;
   outline: none;
   background-color: #ffffff;
   width: 100%;
@@ -228,11 +228,15 @@ textarea {
 
 
 .help-message {
-  position: absolute;
-  bottom: calc(-1.5 * 1em);
-  left: 0;
-  margin: 0;
-  font-size: 14px;
+  margin: 0!important;
+  padding: 0!important;
+  font-size: 12px!important;
+  // position: absolute;
+  // bottom: calc(-1.5 * 1em);
+  // left: 0;
+  // margin: 0;
+  // font-size: 14px;
+  
 }
 
 .has-error {

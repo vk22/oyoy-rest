@@ -24,15 +24,24 @@
 <script setup>
 import { computed, ref, watch } from "vue";
 import { useMainStore } from '@/store/index'
+const route = useRoute();
 const mainStore = useMainStore();
 const dataReady = computed(() => mainStore.getDataReady)
-const show = ref(false);
-setTimeout(() => {
-  show.value = true
-}, 100);
-watch(dataReady, (newValue) => {
-  show.value = false
-})
+console.log('LoadingComp route ', route)
+console.log('LoadingComp dataReady ', dataReady.value)
+const show = ref(true);
+
+/// if data ready
+if (!dataReady.value) {
+  // setTimeout(() => {
+  //   show.value = true
+  // }, 100);
+  watch(dataReady, (newValue) => {
+    console.log('loading comp newValue ', newValue)
+    show.value = !newValue
+  })
+} 
+
 </script>
 
 
@@ -42,7 +51,7 @@ watch(dataReady, (newValue) => {
   top: 0;
   left: 0;
   width: 100%;
-  background: hsla(0, 0%, 89%, 0.85);
+  background: hsla(0, 0%, 89%, 1);
   height: 100%;
   z-index: 9999;
   display: flex;
@@ -88,6 +97,7 @@ watch(dataReady, (newValue) => {
 }
 
 @keyframes col {
+
   // 0% {
   //   fill: #880d1e
   // }
@@ -103,12 +113,15 @@ watch(dataReady, (newValue) => {
   0% {
     fill: #000000
   }
+
   25% {
     fill: #525252
   }
+
   75% {
     fill: #9a9a9a
   }
+
   100% {
     fill: #000000
   }

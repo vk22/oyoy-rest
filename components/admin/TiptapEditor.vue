@@ -81,6 +81,7 @@
       <button class="tiptap-btn" @click="editor.chain().focus().redo().run()" :disabled="!editor.can().chain().focus().redo().run()">
         redo
       </button>
+      <button class="tiptap-btn" @click="addImage">Add image from URL</button>
     </div>
     <TiptapEditorContent :editor="editor" class="textarea"/>
   </div>
@@ -88,6 +89,7 @@
 
 <script setup>
 import { watch } from 'vue'
+import Image from '@tiptap/extension-image'
 const props = defineProps({
   modelValue: String
 })
@@ -96,7 +98,7 @@ const emit = defineEmits({
 })
 const editor = useEditor({
   content: props.modelValue,
-  extensions: [TiptapStarterKit],
+  extensions: [TiptapStarterKit, Image],
   onUpdate: () => {
         // HTML
         emit('update:modelValue', editor.value.getHTML())
@@ -105,6 +107,13 @@ const editor = useEditor({
         // this.$emit('update:modelValue', this.editor.getJSON())
       },
 });
+
+const addImage = () => {
+  const url = window.prompt('URL')
+  if (url) {
+    editor.value.chain().focus().setImage({ src: url }).run()
+  }
+}
 
 onBeforeUnmount(() => {
   unref(editor).destroy();
@@ -124,6 +133,7 @@ watch(() => props.modelValue, (value) => {
 .tiptap {
   border: 1px solid #a4a4a4;
   padding: 10px;
+  min-height: 200px;
 
   p {
     margin-bottom: 0;;
