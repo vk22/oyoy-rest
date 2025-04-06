@@ -13,7 +13,7 @@ export default defineEventHandler(async (event) => {
     const candidate = { name: element[0], email: element[1] }
     const result = await SubscribersService.add(candidate)
     console.log('result ', result)
-    await sleep(1000);
+    // await sleep(1000);
 
   }
   return {
