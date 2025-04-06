@@ -2,7 +2,8 @@ import CSVService from "~~/server/services/csvService.js"
 import SubscribersService from "~~/server/services/subscribersService.js"
 export default defineEventHandler(async (event) => {
   console.log('readcsv')
-  const csvData = await CSVService.fetchFile("https://8hdewv6u55ya8hjg.public.blob.vercel-storage.com/svg/file-Zdl8MggCHXz720ArkZ9tqPF4SP2WZG.csv")
+  const body = await readBody(event)
+  const csvData = await CSVService.fetchFile(body.fileUrl)
   for (let i = 0; i < csvData.length; i++) {
     if (i === 0) { 
       continue; 
@@ -14,7 +15,9 @@ export default defineEventHandler(async (event) => {
 
   }
   return {
-    csvData: true
+    success: true,
+    status: 'success',
+    data: true
   }
 
 })

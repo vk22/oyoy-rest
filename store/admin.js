@@ -18,6 +18,8 @@ export const useAdminStore = defineStore('admin', {
         method: method,
         body: body
       });
+      console.log('data ', data.value)
+      console.log('status ', status.value)
       this.setLoading(false)
       if (process.client) {
         if (data.value.success) {

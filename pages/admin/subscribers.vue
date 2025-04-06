@@ -85,6 +85,8 @@ definePageMeta({
   layout: "admin",
   middleware: ["auth"],
 });
+import { useAdminStore } from "@/store/admin";
+const adminStore = useAdminStore();
 const { $formatDate } = useNuxtApp();
 const dialogIsOpen = ref(false);
 const selected = ref();
@@ -94,7 +96,6 @@ const uploaderRef = ref(null);
 const { data } = await useFetch("/api/subscribers", {
   method: "get",
 });
-console.log("data.value ", data.value);
 subscribers.value = data.value.subscribers;
 
 const selectItem = (item) => {
@@ -123,7 +124,17 @@ function addFile(file) {
 
 async function uploadFile() {
   let filesUploadResponse = await uploaderRef.value.startUpload();
-  console.log('filesUploadResponse ', filesUploadResponse)
+  if (filesUploadResponse.success) {
+    const fileUrl = filesUploadResponse.data[0].url;
+    const sendData = { fileUrl: fileUrl };
+    const { data, success } = await adminStore.fetchData('parsecsv', 'post', sendData)
+    if (success) {
+      const { data } = await useFetch("/api/subscribers", {
+        method: "get",
+      });
+      subscribers.value = data.value.subscribers;
+    }
+  }
 }
 
 //store.autoGalleryStart()
