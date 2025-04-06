@@ -109,7 +109,12 @@ const posts = postsAll.value.slice(1)
 
 const dialogIsOpen = ref(false)
 
-console.log('posts ', posts)
+/// handleScroll
+const { $handleScroll } = useNuxtApp();
+onMounted(() => {
+  $handleScroll()
+});
+
 </script>
 
 <style lang="scss">
@@ -191,7 +196,7 @@ console.log('posts ', posts)
 
     .last-post-info {
       position: relative;
-      z-index: 999;
+      z-index: 99;
     }
 
     .blog-title {

@@ -87,7 +87,7 @@ useHead({
 
     .post-date {
       position: relative;
-      z-index: 999;
+      z-index: 99;
       color: #e7e7e7;
       text-align: center;
       font-weight: 500;

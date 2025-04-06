@@ -54,9 +54,7 @@ export const useNavigationStore = defineStore('nav', {
       return state.mainMenulIsOpen
     },
     getItems(state) {
-      const itemsActive = state.items.map(item => {
-        if (item.isActive) return item;
-      });
+      const itemsActive = state.items.filter(item => item.isActive);
       return itemsActive
     },
     getHomeItems(state) {

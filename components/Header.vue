@@ -21,7 +21,7 @@
             <NuxtLink
               v-else
               class="menu-item"
-              :to="{ path: item.href }"
+              :to="{ path: '/'+item.href }"
             >
               {{ item.text }}
             </NuxtLink>
