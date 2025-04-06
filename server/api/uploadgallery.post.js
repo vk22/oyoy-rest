@@ -37,10 +37,11 @@ export default defineEventHandler(async (event) => {
     let success = true
     for (let file of files) {
       const blob = new Blob([file], { type: file.type });
-      const { url } = await put(`${type}/${file.name}`, blob, { access: 'public' });
-      if (url) {
+      const data = await put(`${type}/${file.name}`, blob, { access: 'public' });
+      console.log('blob upload data ', data)
+      if (data.url) {
         urls.push({
-          url: url,
+          url: data.url,
           type: file.type
         })
       } else {

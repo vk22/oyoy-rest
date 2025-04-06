@@ -1,0 +1,60 @@
+[{
+  "_id": {
+    "$oid": "67f21efbb5415ef65be503b6"
+  },
+  "text": "About",
+  "href": "#about",
+  "isHomePageAnchor": true,
+  "isActive": true,
+  "order": 0
+},
+{
+  "_id": {
+    "$oid": "67f21f0cb5415ef65be503b8"
+  },
+  "text": "Menu",
+  "href": "#food",
+  "isHomePageAnchor": true,
+  "isActive": true,
+  "order": 1
+},
+{
+  "_id": {
+    "$oid": "67f22dd55c053f273060fa17"
+  },
+  "text": "Blog",
+  "href": "blog",
+  "isHomePageAnchor": false,
+  "isActive": true,
+  "order": 99
+},
+{
+  "_id": {
+    "$oid": "67f235a89af390b2f668d530"
+  },
+  "text": "Wine List",
+  "href": "#drinks",
+  "isHomePageAnchor": true,
+  "isActive": true,
+  "order": 2
+},
+{
+  "_id": {
+    "$oid": "67f235bc9af390b2f668d532"
+  },
+  "text": "Gallery",
+  "href": "#gallery",
+  "isHomePageAnchor": true,
+  "isActive": true,
+  "order": 3
+},
+{
+  "_id": {
+    "$oid": "67f235c89af390b2f668d534"
+  },
+  "text": "Events",
+  "href": "#events",
+  "isHomePageAnchor": true,
+  "isActive": true,
+  "order": 4
+}]
