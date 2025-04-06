@@ -1,5 +1,5 @@
 <template>
-  <section>
+  <section v-if="menuItems">
     <v-container>
       <v-row>
         <v-col>
@@ -81,7 +81,8 @@ import { useAdminStore } from "@/store/admin";
 const adminStore = useAdminStore();
 
 const { data } = await useFetch('/api/menu')
-const menu = data.value.items
+console.log('data ', data)
+const menu = data.value.data
 const foodItems = menu.filter(item => item.category === 'food')
 const food = ref(foodItems)
 const drinksItems = menu.filter(item => item.category === 'drinks')
