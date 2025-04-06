@@ -40,7 +40,7 @@
     <v-container class="blog-container">
       <v-row>
         <v-col>
-          <div class="subscribe-preview">
+          <div class="subscribe-preview slideUp fade-in">
             <div class="subscribe-preview__title">Sign up for our newsletter to receive all the latest news</div>
             <div class="subscribe-preview__btn">
               <div class="btn" @click="dialogIsOpen = true">Get the Newsletter</div>

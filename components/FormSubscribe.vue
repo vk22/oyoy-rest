@@ -12,7 +12,6 @@
       </div>
       <div class="form-block">
         <TextInput name="email" type="email" label="Email" placeholder="Your email" success-message="Got it!" />
-
       </div>
       <button class="btn w-100 black submit-btn" type="submit">Subscribe</button>
       <div class="subscribe-response-message" :class="response.status" v-if="response">
@@ -37,12 +36,12 @@ const response = ref(null);
 const schema = {
   name(value) {
     if (value?.length >= 2) return true;
-    return "Name needs to be at least 2 characters.";
+    return "Name needs to be at least 2 characters";
   },
   email(value) {
     if (value) {
       if (value.match(/^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|.(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/)) return true;
-      return "The email field must be a valid email.";
+      return "The email field must be a valid email";
     }
 
   }

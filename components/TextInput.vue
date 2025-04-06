@@ -86,7 +86,7 @@ const selectTime = (event) => {
       @blur="handleBlur"
     />
     <p class="help-message" v-show="errorMessage">
-      {{ errorMessage }}
+      The email field must be a valid email
     </p>
   </div>
 
