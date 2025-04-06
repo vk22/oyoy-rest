@@ -1,0 +1,874 @@
+[{
+  "_id": {
+    "$oid": "66b20b93eca6cef5c4790b0a"
+  },
+  "section": "Main Course",
+  "content": [
+    {
+      "title": "Salmon with Mix Seafood",
+      "ingredients": "Salmon, Mix Clams, Mussels, Kig Prown Steamed in Homemade Fresh Tomato Souce and Herbs",
+      "price": "28.9",
+      "type": "Vegetarian"
+    },
+    {
+      "title": "Seabass Fillet in a Asparagus-Truffle Souce",
+      "ingredients": "Seabass Fillet Steamed in Asparagus-Truffle Souce and Masroom",
+      "price": "27.9",
+      "type": "Vegetarian"
+    },
+    {
+      "title": "Tuna Steak in Pistachio",
+      "ingredients": "Tuna Steak in Pistachio Crust with Mediterranean Caponata & Caramelized Onion",
+      "price": "28.9",
+      "type": "Vegetarian"
+    },
+    {
+      "title": "Fresh Whole Fish of The Day",
+      "ingredients": "grilled / oven",
+      "price": "Market price",
+      "type": "Vegetarian"
+    },
+    {
+      "title": "Argentinian Ribeye Steak",
+      "ingredients": "270g- 300g served with Pan Fried Potatoes and Salad on the side",
+      "price": "30.9",
+      "type": "Meat"
+    }
+  ],
+  "image": "menu-img-2.jpg",
+  "category": "food"
+},
+{
+  "_id": {
+    "$oid": "66bb4fb60b8262deadfa470d"
+  },
+  "section": "Red Wine",
+  "content": [
+    {
+      "title": "1919 MARSOVIN 2022",
+      "ingredients": "",
+      "price": "35",
+      "type": "drinks",
+      "_id": {
+        "$oid": "66bdcffccaf3a628fcc8a132"
+      }
+    },
+    {
+      "title": "Feudi Salentini Gocce Primitivo di Manduria 2019",
+      "ingredients": "",
+      "price": "65",
+      "type": "drinks",
+      "_id": {
+        "$oid": "66bdcffccaf3a628fcc8a133"
+      }
+    },
+    {
+      "title": "Speri Amarone Della Valpolicella 2019",
+      "ingredients": "",
+      "price": "59",
+      "type": "drinks",
+      "_id": {
+        "$oid": "66bdcffccaf3a628fcc8a134"
+      }
+    },
+    {
+      "title": "Cavallotto Bricco Boschis Langhe Nebbiolo 2017",
+      "ingredients": "",
+      "price": "84",
+      "_id": {
+        "$oid": "66bdd089caf3a628fcc8a13c"
+      }
+    },
+    {
+      "title": "Enoitalia, Veneto Igt Rosso Appassimento Neroperso 2019",
+      "ingredients": "",
+      "price": "30",
+      "_id": {
+        "$oid": "66bdd089caf3a628fcc8a13d"
+      }
+    },
+    {
+      "title": "Castello Romitorio Brunello di Montalcino 2016",
+      "ingredients": "",
+      "price": "112.50",
+      "_id": {
+        "$oid": "66bdd089caf3a628fcc8a13e"
+      }
+    },
+    {
+      "title": "Cavallotto Langhe Nebbiolo 2017",
+      "ingredients": "",
+      "price": "75",
+      "_id": {
+        "$oid": "66bdd089caf3a628fcc8a13f"
+      }
+    },
+    {
+      "title": "Châteauneuf du Pape Rouge 2019",
+      "ingredients": "",
+      "price": "125",
+      "_id": {
+        "$oid": "66bdd089caf3a628fcc8a140"
+      }
+    },
+    {
+      "title": "Château Gruaud Larose 2016",
+      "ingredients": "",
+      "price": "242",
+      "_id": {
+        "$oid": "66bdd089caf3a628fcc8a141"
+      }
+    },
+    {
+      "title": "Combarels White Pays d'Oc 2021",
+      "ingredients": "",
+      "price": "50",
+      "_id": {
+        "$oid": "66bdd089caf3a628fcc8a142"
+      }
+    },
+    {
+      "title": "Chinon \"Le Domaine\" - Domaine Bernard Baudry 2020",
+      "ingredients": "",
+      "price": "35",
+      "_id": {
+        "$oid": "66bdd089caf3a628fcc8a143"
+      }
+    },
+    {
+      "title": "Château de Parenchère Cuvée Raphaël - Rouge - 2019",
+      "ingredients": "",
+      "price": "39",
+      "_id": {
+        "$oid": "66bdd089caf3a628fcc8a144"
+      }
+    },
+    {
+      "title": "Chateau Lamartine Cuvee Particuliere Cahors Malbec 2018",
+      "ingredients": "",
+      "price": "50",
+      "_id": {
+        "$oid": "66bdd089caf3a628fcc8a145"
+      }
+    },
+    {
+      "title": "L'ENVOL ROUGE - DOMAINE D'ESPEYRAN 2020",
+      "ingredients": "",
+      "price": "30",
+      "_id": {
+        "$oid": "66bdd089caf3a628fcc8a146"
+      }
+    },
+    {
+      "title": "Bourgueil \"Cote 50\" 2022",
+      "ingredients": "",
+      "price": "35",
+      "_id": {
+        "$oid": "66bdd089caf3a628fcc8a147"
+      }
+    },
+    {
+      "title": "Domaine d’Espeyran – L’Envol 2020",
+      "ingredients": "",
+      "price": "25",
+      "_id": {
+        "$oid": "66bdd089caf3a628fcc8a148"
+      }
+    },
+    {
+      "title": "Bernard Baudry Chinon 'Le Domaine' Cabernet 2020",
+      "ingredients": "",
+      "price": "137.50",
+      "_id": {
+        "$oid": "66bdd089caf3a628fcc8a149"
+      }
+    },
+    {
+      "title": "Bourgueil \"Cote 50\" 2022",
+      "ingredients": "",
+      "price": "32.50",
+      "_id": {
+        "$oid": "66bdd089caf3a628fcc8a14a"
+      }
+    }
+  ],
+  "image": "menu-img-1.jpg",
+  "category": "drinks",
+  "gallery": []
+},
+{
+  "_id": {
+    "$oid": "66b20b93eca6cef5c4790b06"
+  },
+  "section": "Crudo",
+  "content": [
+    {
+      "title": "Fresh Oyster Gillardeau",
+      "ingredients": "Served with Lemon",
+      "price": "4.9",
+      "type": "Seafood"
+    },
+    {
+      "title": "Five Fresh Oysters",
+      "ingredients": "Served with Lemon and a Variety of Sauces",
+      "price": "23.5",
+      "type": "Seafood"
+    },
+    {
+      "title": "Local Red Prawn",
+      "ingredients": "Served with Lemon",
+      "price": "4.9",
+      "type": "Seafood"
+    },
+    {
+      "title": "Salmon Ceviche in a Strawberry Mint Sauce & Sorbet on the Top",
+      "ingredients": "Served with Crispy Rice Chips on the side",
+      "price": "12.9",
+      "type": "Seafood"
+    },
+    {
+      "title": "Tuna Ceviche in a Pomegranate Sauce & Sorbet on the Top",
+      "ingredients": "Served with Crispy Rice Chips on the side",
+      "price": "13.9",
+      "type": "Seafood"
+    },
+    {
+      "title": "Sea Bass Ceviche in a Kiwi Citrus Souse & Sorbet on the Top",
+      "ingredients": "Served with Crispy Rice Chips on the side",
+      "price": "12.9",
+      "type": "Seafood"
+    },
+    {
+      "title": "Mix Ceviche Plate",
+      "ingredients": "Served with Crispy Rice Chips on the side",
+      "price": "35.9",
+      "type": "Seafood"
+    },
+    {
+      "title": "Full Fish Of The Day",
+      "ingredients": "Ceviche, Sashimi, Tacos served with variety of Sauces on the side",
+      "price": "27.9",
+      "type": "Seafood"
+    },
+    {
+      "title": "Salmon Tiradito in a Passion Fruit Sauce",
+      "ingredients": "Fresh Salmon marinated in Himalayan Salt and Herbs in a Fresh Passion Fruit Juice Sauce",
+      "price": "12.9",
+      "type": "Seafood"
+    },
+    {
+      "title": "Scallop Tiradito in a Passion Fruit Sauce ",
+      "ingredients": "Fresh Scallop marinated in Himalayan Salt and Herbs in a Fresh Passion Fruit Juice Sauce",
+      "price": "13.9",
+      "type": "Seafood"
+    },
+    {
+      "title": "Local Red Prawn Carpaccio with Coconut-Lime Sauce",
+      "ingredients": "Served with Spiced Coconut-Lime Sauce and Rice Chips on the side",
+      "price": "14.9",
+      "type": "Seafood"
+    },
+    {
+      "title": "Octopus Carpaccio in a Lemon & Extra Virgin Olive",
+      "ingredients": "Served with Sun-Dried Tomato, Capers & Maltese Olives on the Top",
+      "price": "13.9",
+      "type": "Seafood"
+    },
+    {
+      "title": "Salmon Tartare",
+      "ingredients": "Salmon, Avocado, Sesame Seeds, Green Onion, Coriander and Herbs",
+      "price": "12.9",
+      "type": "Seafood"
+    },
+    {
+      "title": "Tuna Tartare",
+      "ingredients": "Tuna, Avocado, Sesame Seeds, Green Onion, Coriander and Herbs",
+      "price": "12.9",
+      "type": "Seafood"
+    },
+    {
+      "title": "Salmon & Tuna Tartare",
+      "ingredients": "Salmon, Tuna, Avocado, Sesame Seeds, Green Onion, Coriander and Herbs",
+      "price": "13.9",
+      "type": "Seafood"
+    },
+    {
+      "title": "Red Prawn & Scallop Tartare with Coconut-Lime Sauce",
+      "ingredients": "Local Red Prawn,Scallop, Avocado, Green Onion, Coriander, Herbs & Spiced Coconut-Lime Sauce",
+      "price": "14.9",
+      "type": "Seafood"
+    },
+    {
+      "title": "Misto Crudo",
+      "ingredients": "Raw Seafood Platter",
+      "price": "28.9",
+      "type": "Seafood"
+    },
+    {
+      "title": "Crudo Mix Plate for Two",
+      "ingredients": "Five Fresh Oysters, Five Local Red Prawn, Two Scalops, Two Langostino, Salmon Tarare, Tuna Tartare, Sea Bass Tartare",
+      "price": "39.9",
+      "type": "Seafood"
+    }
+  ],
+  "image": "menu-img-1.jpg",
+  "category": "food"
+},
+{
+  "_id": {
+    "$oid": "66bb4fb60b8262deadfa470a"
+  },
+  "section": "Sparling Wine",
+  "content": [
+    {
+      "title": "Sparling Wine",
+      "ingredients": "",
+      "price": "26",
+      "type": "drinks"
+    },
+    {
+      "title": "COL SANDAGO CASE BIANCHE",
+      "ingredients": "",
+      "price": "50",
+      "type": "drinks"
+    },
+    {
+      "title": "Wildbacher Brut Rosé Col Sandago",
+      "ingredients": "",
+      "price": "28",
+      "type": "drinks"
+    }
+  ],
+  "image": "menu-img-1.jpg",
+  "category": "drinks"
+},
+{
+  "_id": {
+    "$oid": "66b20b93eca6cef5c4790b09"
+  },
+  "section": "Homemade Fresh Pasta",
+  "content": [
+    {
+      "title": "Red Prawn Linguine in a Yellow Datterini Tomato Souce & Crudo on Top",
+      "ingredients": "Homemade Fresh Linguine Pasta with Local Red Prawn, Onions, Garlicin in a Yellow Cherry Tomato Souce & Crudo on Top",
+      "price": "19.9",
+      "type": "Seafood"
+    },
+    {
+      "title": "Seafood Paccheri in a Semi-Dried Tomato Souce with Burrata on Top",
+      "ingredients": "Homemade Fresh Paccheri Pasta with Mix Seafood, Summer Herbs in a Semi-Dried Tomato Souce & Burrata on Top",
+      "price": "19.9",
+      "type": "Seafood"
+    },
+    {
+      "title": "Beef Fillet Tortelloni in a Creamy Cheese Souce",
+      "ingredients": "Homemade Tortelloni filled with a Tender Beef Fillet, Red Onion and Herbs in a Creamy Cheese Souce",
+      "price": "17.9",
+      "type": "Meat"
+    }
+  ],
+  "image": "menu-img-2.jpg",
+  "category": "food"
+},
+{
+  "_id": {
+    "$oid": "66bb4fb60b8262deadfa4709"
+  },
+  "section": "Champagne & Sparling Wine",
+  "content": [
+    {
+      "title": "Champagne Diebolt-Vallois Cuvée Prestige",
+      "ingredients": "",
+      "price": "145",
+      "type": "drinks"
+    },
+    {
+      "title": "Champagne Diebolt-Vallois Blanc de Blancs",
+      "ingredients": "",
+      "price": "122",
+      "type": "drinks"
+    },
+    {
+      "title": "M DE MONTGUÉRET SAUMUR BRUT",
+      "ingredients": "",
+      "price": "37.5",
+      "type": "drinks"
+    },
+    {
+      "title": "CHAMPAGNE MARC HEBRART PREMIER CRU",
+      "ingredients": "",
+      "price": "112.50",
+      "type": "drinks"
+    },
+    {
+      "title": "PIERRE MIGNON BRUT",
+      "ingredients": "",
+      "price": "100",
+      "type": "drinks"
+    },
+    {
+      "title": "SPUMANTE * METODO CLASSICO *",
+      "ingredients": "",
+      "price": "20",
+      "type": "drinks"
+    },
+    {
+      "title": "de BERNARD CU VÉE PRESTIGE MILLESIMATO",
+      "ingredients": "",
+      "price": "45",
+      "type": "drinks"
+    },
+    {
+      "title": "CHAMPAGNE ADRIEN RENOIR",
+      "ingredients": "",
+      "price": "125",
+      "type": "drinks"
+    },
+    {
+      "title": "CHEVALIER DE MALTE BRUT",
+      "ingredients": "",
+      "price": "15",
+      "type": "drinks"
+    },
+    {
+      "title": "Moet & Chandon - Brut Imperial",
+      "ingredients": "",
+      "price": "98",
+      "type": "drinks"
+    },
+    {
+      "title": "Moet & Chandon - Brut Imperial Magnum",
+      "ingredients": "",
+      "price": "300",
+      "type": "drinks"
+    },
+    {
+      "title": "Moet & Chandon - Ice Imperial",
+      "ingredients": "",
+      "price": "110",
+      "type": "drinks"
+    },
+    {
+      "title": "Bollinger Champagne Rose ",
+      "ingredients": "",
+      "price": "98",
+      "type": "drinks"
+    },
+    {
+      "title": "BOLLINGER Spécial Cuvée Magnum",
+      "ingredients": "",
+      "price": "300",
+      "type": "drinks"
+    },
+    {
+      "title": "Bollinger Champagne Rose Magnum",
+      "ingredients": "",
+      "price": "300",
+      "type": "drinks"
+    },
+    {
+      "title": "Dom Pérignon",
+      "ingredients": "",
+      "price": "390",
+      "type": "drinks"
+    }
+  ],
+  "image": "menu-img-1.jpg",
+  "category": "drinks"
+},
+{
+  "_id": {
+    "$oid": "66bb4fb60b8262deadfa470b"
+  },
+  "section": "White Wine",
+  "content": [
+    {
+      "title": "1919 Marsovin",
+      "ingredients": "",
+      "price": "39",
+      "type": "drinks",
+      "_id": {
+        "$oid": "66bdce8fcaf3a628fcc88f98"
+      }
+    },
+    {
+      "title": "Blanc De Cheval",
+      "ingredients": "",
+      "price": "39",
+      "type": "drinks",
+      "_id": {
+        "$oid": "66bdce8fcaf3a628fcc88f99"
+      }
+    },
+    {
+      "title": "Caravaggio Chenin Blanc",
+      "ingredients": "",
+      "price": "20",
+      "type": "drinks",
+      "_id": {
+        "$oid": "66bdce8fcaf3a628fcc88f9a"
+      }
+    },
+    {
+      "title": "Gavi di Gavi Villa Sparina",
+      "ingredients": "",
+      "price": "32",
+      "_id": {
+        "$oid": "66bdced9caf3a628fcc88fa2"
+      }
+    },
+    {
+      "title": "Bergspiel Riesling Kellerei St.Pauls",
+      "ingredients": "",
+      "price": "28",
+      "_id": {
+        "$oid": "66bdced9caf3a628fcc88fa3"
+      }
+    },
+    {
+      "title": "Chardonnay Kellerei St.Pauls",
+      "ingredients": "",
+      "price": "26",
+      "_id": {
+        "$oid": "66bdced9caf3a628fcc88fa4"
+      }
+    },
+    {
+      "title": "RECO DI TUFO DOCG 2022",
+      "ingredients": "",
+      "price": "50",
+      "_id": {
+        "$oid": "66bdced9caf3a628fcc88fa5"
+      }
+    },
+    {
+      "title": "Falanghina Puglia IGT 2022 - Antica Enotria",
+      "ingredients": "",
+      "price": "25",
+      "_id": {
+        "$oid": "66bdced9caf3a628fcc88fa6"
+      }
+    },
+    {
+      "title": "Sauvignon \"Sanct Valentin\" 2021",
+      "ingredients": "",
+      "price": "67.50",
+      "_id": {
+        "$oid": "66bdced9caf3a628fcc88fa7"
+      }
+    },
+    {
+      "title": "Sancerre Domaine du Pré Semelé",
+      "ingredients": "",
+      "price": "57",
+      "_id": {
+        "$oid": "66bdcfcbcaf3a628fcc89f6b"
+      }
+    },
+    {
+      "title": "Pouilly Fumé Domaine des Fines Caillottes",
+      "ingredients": "",
+      "price": "48",
+      "_id": {
+        "$oid": "66bdcfcbcaf3a628fcc89f6c"
+      }
+    },
+    {
+      "title": "Yves Cuilleron Saint-Joseph Lyseras 2019",
+      "ingredients": "",
+      "price": "77.50",
+      "_id": {
+        "$oid": "66bdcfcbcaf3a628fcc89f6d"
+      }
+    },
+    {
+      "title": "L'ARJOLLE PARADOXE 2021",
+      "ingredients": "",
+      "price": "50",
+      "_id": {
+        "$oid": "66bdcfcbcaf3a628fcc89f6e"
+      }
+    },
+    {
+      "title": "Domaine de la Bretonniere Muscadet Sevre-et-Maine Clisson Cru 2016",
+      "ingredients": "",
+      "price": "30",
+      "_id": {
+        "$oid": "66bdcfcbcaf3a628fcc89f6f"
+      }
+    },
+    {
+      "title": "Vigna Senza Nome 2022 Braida",
+      "ingredients": "",
+      "price": "35",
+      "_id": {
+        "$oid": "66bdcfcbcaf3a628fcc89f70"
+      }
+    },
+    {
+      "title": "Yves Cuilleron, Roussanne \"Les Vignes d'a Cote\" 2019",
+      "ingredients": "",
+      "price": "35",
+      "_id": {
+        "$oid": "66bdcfcbcaf3a628fcc89f71"
+      }
+    },
+    {
+      "title": "GHISLAIN KOHUT MARSANNAY BLANC",
+      "ingredients": "",
+      "price": "62.50",
+      "_id": {
+        "$oid": "66bdcfcbcaf3a628fcc89f72"
+      }
+    },
+    {
+      "title": "Cuvée Lise Le Bourgogne Blanc 2021",
+      "ingredients": "",
+      "price": "50",
+      "_id": {
+        "$oid": "66bdcfcbcaf3a628fcc89f73"
+      }
+    },
+    {
+      "title": "M de Montgueret Saumur Blanc",
+      "ingredients": "",
+      "price": "32.50",
+      "_id": {
+        "$oid": "66bdcfcbcaf3a628fcc89f74"
+      }
+    },
+    {
+      "title": "BOURILLON DORLÉANS Saint Martin•VOUVRAY 2009",
+      "ingredients": "",
+      "price": "57.50",
+      "_id": {
+        "$oid": "66bdcfcbcaf3a628fcc89f75"
+      }
+    },
+    {
+      "title": "DOMAINE BOURILLON DORLÉANS L'Indigène VOUVRAY 2019",
+      "ingredients": "",
+      "price": "30",
+      "_id": {
+        "$oid": "66bdcfcbcaf3a628fcc89f76"
+      }
+    },
+    {
+      "title": "BOURILLON DORLEANS La Levriere  2015",
+      "ingredients": "",
+      "price": "30",
+      "_id": {
+        "$oid": "66bdcfcbcaf3a628fcc89f77"
+      }
+    },
+    {
+      "title": "Pouilly Fuissé domaine Perrachon",
+      "ingredients": "",
+      "price": "62",
+      "_id": {
+        "$oid": "66bdcfcbcaf3a628fcc89f78"
+      }
+    },
+    {
+      "title": "Chateau d'Espeyran White 2023",
+      "ingredients": "",
+      "price": "30",
+      "_id": {
+        "$oid": "66bdcfcbcaf3a628fcc89f79"
+      }
+    },
+    {
+      "title": "Chateau de Fontenille Bordeaux Entre deux Mers",
+      "ingredients": "",
+      "price": "30",
+      "_id": {
+        "$oid": "66bdcfcbcaf3a628fcc89f7a"
+      }
+    },
+    {
+      "title": "Chablis \"Vieilles Vignes\" 2022",
+      "ingredients": "",
+      "price": "52",
+      "_id": {
+        "$oid": "66bdcfcbcaf3a628fcc89f7b"
+      }
+    },
+    {
+      "title": "Chablis Premier Cru \"Vosgros\"",
+      "ingredients": "",
+      "price": "65",
+      "_id": {
+        "$oid": "66bdcfcbcaf3a628fcc89f7c"
+      }
+    },
+    {
+      "title": "Château De Fontenille \"Les Survivantes\" 2021 ",
+      "ingredients": "",
+      "price": "46",
+      "_id": {
+        "$oid": "66bdcfcbcaf3a628fcc89f7d"
+      }
+    },
+    {
+      "title": "Cassagne et Vitailles - Combarels Pays d'Oc Blanc 2021",
+      "ingredients": "",
+      "price": "49",
+      "_id": {
+        "$oid": "66bdcfcbcaf3a628fcc89f7e"
+      }
+    }
+  ],
+  "image": "menu-img-1.jpg",
+  "category": "drinks",
+  "gallery": []
+},
+{
+  "_id": {
+    "$oid": "66bb4fb60b8262deadfa470c"
+  },
+  "section": "Rose",
+  "content": [
+    {
+      "title": "Chateau d'Espeyran Rose 2023",
+      "ingredients": "",
+      "price": "27",
+      "type": "drinks",
+      "_id": {
+        "$oid": "66bdcfdecaf3a628fcc8a0bb"
+      }
+    },
+    {
+      "title": "Martín Codax Albariño",
+      "ingredients": "",
+      "price": "24",
+      "type": "drinks",
+      "_id": {
+        "$oid": "66bdcfdecaf3a628fcc8a0bc"
+      }
+    },
+    {
+      "title": "Hans Greyl Sauvignon Blanc",
+      "ingredients": "",
+      "price": "26",
+      "type": "drinks",
+      "_id": {
+        "$oid": "66bdcfdecaf3a628fcc8a0bd"
+      }
+    },
+    {
+      "title": "Grüner Veltliner Schönherr Alte Reben 2022",
+      "ingredients": "",
+      "price": "42.50",
+      "_id": {
+        "$oid": "66bdcff0caf3a628fcc8a0c5"
+      }
+    }
+  ],
+  "image": "menu-img-1.jpg",
+  "category": "drinks",
+  "gallery": []
+},
+{
+  "_id": {
+    "$oid": "66b20b93eca6cef5c4790b08"
+  },
+  "section": "Hot Starters",
+  "content": [
+    {
+      "title": "King Prawn Pan-Fried in a White Wine",
+      "ingredients": "King Prawn Pan-Fried in a White Wine, French Colonial Spice Mix, Fennel Cockles and Sharp Citrus",
+      "price": "13.9",
+      "type": "Seafood"
+    },
+    {
+      "title": "Crispy Fried Calamari Squid",
+      "ingredients": "Deep-Fried Crispy Calamari Squid served with varety of Sauces on the side",
+      "price": "13.9",
+      "type": "Seafood"
+    },
+    {
+      "title": "Mix Seafood in a Coconut Sauce and Citrus",
+      "ingredients": "Mix Clams, Mussels, Octopus, Kig Prown Pan-Fried in a Signature Coconut and Citrus",
+      "price": "15.9",
+      "type": "Seafood"
+    },
+    {
+      "title": "Truffle Arancini",
+      "ingredients": "Arancini Mushrooms Filled with Mushroom and Black Truffle",
+      "price": "11.9",
+      "type": "Vegetarian"
+    },
+    {
+      "title": "Fish Arancini",
+      "ingredients": "Arancini with Salmon & Red Snapper",
+      "price": "12.9",
+      "type": "Seafood"
+    },
+    {
+      "title": "French Fries with Truffle",
+      "ingredients": "French Fries with Truffle Oil and Parmesan Cheese",
+      "price": "8.9",
+      "type": "Vegetarian"
+    }
+  ],
+  "image": "menu-img-2.jpg",
+  "category": "food"
+},
+{
+  "_id": {
+    "$oid": "66b20b93eca6cef5c4790b07"
+  },
+  "section": "Cold Starters and Salads",
+  "content": [
+    {
+      "title": "Tomato and Stracciatella Bruschetta Platter",
+      "ingredients": "Toasted Bread with Tomato, Stracciatella, Greens and Balsamic Vinegar Dressing",
+      "price": "7.9",
+      "type": "Vegetarian"
+    },
+    {
+      "title": "Salmon & Avocado Bruschetta Platter",
+      "ingredients": "Toasted Bread with Salmon, Avocado, Greens and Balsamic Vinegar Dressing",
+      "price": "13.9",
+      "type": "Seafood"
+    },
+    {
+      "title": "Local Red Prawn Bruschetta Platter with Local Red Prawn",
+      "ingredients": "Toasted Bread with Local Red Prawn, Stracciatella and Greens",
+      "price": "14.9",
+      "type": "Seafood"
+    },
+    {
+      "title": "Guacamole served with Nachos",
+      "ingredients": "Avocado, Tomato, Red Onion, Coriander, Homemade Jalapeños, Lime & Extra Virgin Olive Oil",
+      "price": "9.9",
+      "type": "Vegetarian"
+    },
+    {
+      "title": "Red Snapper Pâté",
+      "ingredients": "Red Snapper,  English Pickled Onions, Coriander, Lime & Homemade Mayonnaise",
+      "price": "12.9",
+      "type": "Seafood"
+    },
+    {
+      "title": "Burrata and Tomato Salad",
+      "ingredients": "Tomato, Burrata, Pistachio, Mix Greens, Extra Virgin Olive Oil and Balsamic Vinegar",
+      "price": "12.9",
+      "type": "Vegetarian"
+    },
+    {
+      "title": "Smoked Salmon & Avocado Salad",
+      "ingredients": "Salmon, Avocado, Orange, Mix Greens, Red Onion, Lime & Citrus Dressing",
+      "price": "13.9",
+      "type": "Seafood"
+    },
+    {
+      "title": "King Prawn Salad",
+      "ingredients": "King Prawn,  Avocado, Orange, Mix Greens, Red Onion, Lime & Coconut-Lime Sauce",
+      "price": "14.9",
+      "type": "Seafood"
+    }
+  ],
+  "image": "menu-img-2.jpg",
+  "category": "food"
+}]

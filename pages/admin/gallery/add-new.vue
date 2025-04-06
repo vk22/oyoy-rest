@@ -54,6 +54,7 @@ const addItem = async () => {
   gallery.value.images = []
   /// upload images
   let filesUploadResponse = await uploaderRef.value.startUpload();
+  console.log('filesUploadResponse ', filesUploadResponse)
   if (filesUploadResponse.success) {
     filesUploadResponse.data.forEach((url, index) => {
       gallery.value.images.push({ file: url, index: index })

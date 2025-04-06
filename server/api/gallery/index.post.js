@@ -2,13 +2,19 @@ import { Gallery } from "~~/server/models/gallery-model";
 
 export default defineEventHandler( async (event) => {
     const body = await readBody(event)
+    console.log('gallery post ', body)
     /// images map
-    body.images = body.images.map((item, index) => {
-      item.file = item.file.url
-      item.index = index
-      return item
+    const imagesFiltered = body.images.filter((item, index) => {
+      if (item) {
+        if (item.file) {
+          item.index = index
+          return item
+        }
+      }
+  
     })
     body.date = new Date().toISOString()
+    body.images = imagesFiltered
     const itemNew = await Gallery.create(body)
     if (itemNew) {
       return {
