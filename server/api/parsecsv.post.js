@@ -1,5 +1,6 @@
 import CSVService from "~~/server/services/csvService.js"
 import SubscribersService from "~~/server/services/subscribersService.js"
+const sleep = ms => new Promise(r => setTimeout(r, ms))
 export default defineEventHandler(async (event) => {
   console.log('readcsv')
   const body = await readBody(event)
@@ -12,6 +13,7 @@ export default defineEventHandler(async (event) => {
     const candidate = { name: element[0], email: element[1] }
     const result = await SubscribersService.add(candidate)
     console.log('result ', result)
+    await sleep(1000);
 
   }
   return {
