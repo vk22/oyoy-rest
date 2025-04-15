@@ -320,7 +320,7 @@ ul {
   &.inverse {
     border: 1px solid rgb(207, 207, 207);
     background: #fff;
-    color: #030303;
+    color: #030303!important;
 
     &:hover {
       opacity: .5;
