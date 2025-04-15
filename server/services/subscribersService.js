@@ -26,6 +26,7 @@ class SubscribersService {
         const newItem = new Subscribers(data);
         try {
             const saving = await newItem.save();
+            console.log('saving ', saving)
             if (saving) {
             return result.success
             } else {

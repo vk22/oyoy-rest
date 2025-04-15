@@ -1,5 +1,5 @@
 <template>
-  <section class="menu index-section slideUp fade-in" :id="props.category" v-if="menuData.length">
+  <section class="menu index-section slideUp fade-in" id="menu" v-if="menuData.length">
     <v-container>
       <v-row>
         <v-col class="d-flex justify-center">

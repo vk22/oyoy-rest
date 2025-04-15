@@ -88,9 +88,12 @@
         <v-col>
           <div class="admin-title">
             <h1>Reservations</h1>
-            <!-- <nuxt-link to="/admin/events/add-new" class="admin-main-btn"
-          >Add new
-        </nuxt-link> -->
+            <div class="reservation-check" v-if="reservationAvailable">
+              <v-checkbox
+                v-model="reservationAvailable.isAvailable"
+                label="Reservation availability"
+              ></v-checkbox>
+            </div>
           </div>
         </v-col>
       </v-row>
@@ -130,20 +133,46 @@
 <script setup>
 definePageMeta({
   layout: "admin",
-  middleware: ["auth"]
+  middleware: ["auth"],
 });
+import { onMounted, ref, watch } from "vue";
+import { useAdminStore } from "@/store/admin";
 const { $formatDate } = useNuxtApp();
 const reservationDialogIsOpen = ref(false);
 const reservationSelected = ref();
 const reservationItems = ref();
+const reservationAvailable = ref(undefined);
+const adminStore = useAdminStore();
 
-const { data } = await useFetch("/api/reservations", {
-  method: "get",
-});
-reservationItems.value = data._rawValue.reservations;
-reservationItems.value.map((item) => {
-  item.date = $formatDate(item.date);
-});
+const getReservationAvailableState = async () => {
+  const { data } = await useFetch("/api/reservation-available", {
+    method: "GET",
+  });
+  reservationAvailable.value = data.value.data;
+};
+
+const setReservationAvailableState = async () => {
+  await adminStore.fetchData('reservation-available', 'put', reservationAvailable)
+}
+
+// const setReservationAvailableState = async () => {
+//   const { data } = await useFetch("/api/reservation-available", {
+//     method: "PUT",
+//     body: reservationAvailable
+//   });
+//   console.log('setReservationAvailableState ', data.value)
+//   // reservationAvailable.value = data.value.data.isAvailable;
+// };
+
+const getReservationsList = async () => {
+  const { data } = await useFetch("/api/reservations", {
+    method: "get",
+  });
+  reservationItems.value = data.value.reservations;
+  reservationItems.value.map((item) => {
+    item.date = $formatDate(item.date);
+  });
+};
 
 const selectItem = (item) => {
   reservationSelected.value = item;
@@ -156,12 +185,22 @@ const deleteItem = async (item) => {
   });
   if (data._rawValue.success) {
     reservationDialogIsOpen.value = false;
-    reservationItems.value = data._rawValue.reservations;
+    reservationItems.value = data.value.reservations;
   }
   //
 };
 
-//store.autoGalleryStart()
+getReservationAvailableState()
+getReservationsList()
+
+
+watch(() => reservationAvailable, () => {
+  console.log('myProperty has changed!');
+  setReservationAvailableState()
+}, {
+  deep: true
+});
+
 </script>
 
 

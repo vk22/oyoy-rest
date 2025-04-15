@@ -1,5 +1,4 @@
 <template>
-  
   <div class="main-menu" :class="{ show: mainNavIsOpened }">
     <div class="main-menu__sidebar">
       <div class="close-icon" @click="toggleMenu()">
@@ -37,15 +36,18 @@
             ><v-icon icon="mdi-phone"></v-icon> <span>{{ company.phone }}</span></a
           >
         </div>
-        <div class="btn" v-if="reservationAvailable" @click="getFormModalStateToggle">
+        <!-- <div class="btn" v-if="reservationAvailable" @click="getFormModalStateToggle">
           Reservations
-        </div>
+        </div> -->
+        <NuxtLink class="btn" :to="{ path: '/reservation'}"  v-if="currentRoute.name !== 'reservation' && reservationAvailable">
+            Reservations
+        </NuxtLink>    
       </div>
     </div>
     <div class="main-menu__background" @click="toggleMenu()"></div>
   </div>
 
-  <header class="main-header" :class="[{ small: isScrolled }, {'fadeIn-1': dataReady}]">
+  <header class="main-header" :class="[{ small: isScrolled || currentRoute.name === 'reservation' }, {'fadeIn-1': dataReady}]">
     <div class="header-l">
       <div class="icon-nav" @click="toggleMenu()">
         <div class="line"></div>
@@ -54,13 +56,15 @@
       </div>
     </div>
     <div class="header-c">
+      <NuxtLink :to="{ path: '/'}">
       <div class="logo">
         <img src="/img/logo.svg" class="white" alt="" />
         <img src="/img/logo-b.svg" class="black" alt="" />
       </div>
+      </NuxtLink>
     </div>
     <div class="header-r">
-      <div class="phone">
+      <div class="phone" v-if="currentRoute.name !== 'reservation'">
         <a :href="'tel:'+company.phone"
             ><v-icon icon="mdi-phone"></v-icon> <span>{{ company.phone }}</span></a
         >
@@ -68,7 +72,13 @@
       <!-- <div class="btn-quote-icon" @click="getFormModalStateToggle">
         <img src="/img/book-now.svg" alt="" />
       </div> -->
-      <div class="btn btn-header" v-if="reservationAvailable" @click="getFormModalStateToggle">Reservations</div>
+      <!-- <div class="btn btn-header" v-if="reservationAvailable" @click="getFormModalStateToggle">Reservations</div> -->
+        <NuxtLink class="btn btn-header" :to="{ path: '/reservation'}" v-if="currentRoute.name !== 'reservation' && reservationAvailable">
+          Reservations
+        </NuxtLink>   
+        <NuxtLink :to="{ path: '/'}" v-if="currentRoute.name === 'reservation'">
+          <svg width="30px" height="30px" viewBox="0 0 18 18" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"><g id="Page-1" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd" stroke-linecap="square"><g id="LandingPopup" transform="translate(-983.000000, -267.000000)" stroke="#111"><g id="Group-6"><g id="Group-5" transform="translate(420.000000, 243.000000)"><path d="M571.87315,32.8400752 L582.911677,32.8400752 L571.87315,32.8400752 L571.87315,21.6856907 L571.87315,32.8400752 Z M571.87315,32.8400752 L560.911677,32.8400752 L571.87315,32.8400752 L571.87315,44.0437203 L571.87315,32.8400752 Z" id="Combined-Shape" transform="translate(571.911677, 32.864706) rotate(-315.000000) translate(-571.911677, -32.864706) "></path></g></g></g></g></svg>
+        </NuxtLink> 
     </div>
   </header>
 </template>
@@ -82,6 +92,8 @@ import { useNavigationStore } from "@/store/nav";
 import { useBlogStore } from "@/store/blog";
 
 const route = useRoute();
+const router = useRouter();
+const currentRoute = router.currentRoute;
 
 /// main store
 const mainStore = useMainStore()
@@ -152,6 +164,7 @@ function smoothScrollTo(id) {
 }
 
 onMounted(() => {
+  console.log('currentRoute ', currentRoute.value)
   document.addEventListener("scroll", headerHandler);
   document.querySelectorAll(".main-menu .menu-item").forEach((link, index) => {
     link.addEventListener("click", closeMenu);
@@ -171,11 +184,13 @@ watch(dataReady, (newValue) => {
   }
 })
 
+// watch(() => route.hash, () => {
+//     console.log('route.hash ', route.hash.substring(1))
+//     // smoothScrollTo(route.hash.substring(1))
+// });
 
-watch(() => route.hash, () => {
-    console.log('route.hash ', route.hash.substring(1))
-    // smoothScrollTo(route.hash.substring(1))
-});
+
+
 
 
 

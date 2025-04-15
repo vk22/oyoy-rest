@@ -19,9 +19,15 @@ export const useReservationStore = defineStore('reservation', {
       message: ''
     },
     formModalIsOpen: false,
-    reservationAvailable: true
+    reservationAvailable: undefined
   }),
   actions: {
+    async getReservationAvailableState() {
+      const { data } = await useFetch("/api/reservation-available", {
+        method: "GET"
+      });
+      this.reservationAvailable = data.value.data.isAvailable;
+    },
     async postData(values) {
       const { data } = await useFetch("/api/reservations", {
         method: "POST",

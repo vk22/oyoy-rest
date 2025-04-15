@@ -46,6 +46,7 @@ const mainStore = useMainStore()
 const dataReady = computed(() => mainStore.getDataReady)
 console.log('Layout dataReady ', dataReady.value)
 if (!dataReady.value) {
+  await reservationStore.getReservationAvailableState()
   await customGalleryStore.fetchData('top');
   await topslideStore.fetchData();
   await aboutStore.fetchData();
