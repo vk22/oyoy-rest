@@ -193,9 +193,7 @@ const deleteItem = async (item) => {
 getReservationAvailableState()
 getReservationsList()
 
-
 watch(() => reservationAvailable, () => {
-  console.log('myProperty has changed!');
   setReservationAvailableState()
 }, {
   deep: true
