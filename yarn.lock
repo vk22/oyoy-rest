@@ -1441,6 +1441,13 @@
   resolved "https://registry.npmjs.org/@tiptap/extension-italic/-/extension-italic-2.6.4.tgz"
   integrity sha512-XG/zaKVuorKr1vGEWEgLQTnQwOpNn/JyGxO7oC7wfYx5eYpbbCtMTEMvuqNvkm7kpvVAUx3ugi/D8DWyWZEtYg==
 
+"@tiptap/extension-link@^2.11.7":
+  version "2.11.7"
+  resolved "https://registry.yarnpkg.com/@tiptap/extension-link/-/extension-link-2.11.7.tgz#315588c536a7effe0fa2470c458a9734021a0b88"
+  integrity sha512-qKIowE73aAUrnQCIifYP34xXOHOsZw46cT/LBDlb0T60knVfQoKVE4ku08fJzAV+s6zqgsaaZ4HVOXkQYLoW7g==
+  dependencies:
+    linkifyjs "^4.2.0"
+
 "@tiptap/extension-link@^2.6.2":
   version "2.6.4"
   resolved "https://registry.npmjs.org/@tiptap/extension-link/-/extension-link-2.6.4.tgz"
@@ -3921,6 +3928,11 @@ linkifyjs@^4.1.0:
   version "4.1.3"
   resolved "https://registry.npmjs.org/linkifyjs/-/linkifyjs-4.1.3.tgz"
   integrity sha512-auMesunaJ8yfkHvK4gfg1K0SaKX/6Wn9g2Aac/NwX+l5VdmFZzo/hdPGxEOETj+ryRa4/fiOPjeeKURSAJx1sg==
+
+linkifyjs@^4.2.0:
+  version "4.2.0"
+  resolved "https://registry.yarnpkg.com/linkifyjs/-/linkifyjs-4.2.0.tgz#9dd30222b9cbabec9c950e725ec00031c7fa3f08"
+  integrity sha512-pCj3PrQyATaoTYKHrgWRF3SJwsm61udVh+vuls/Rl6SptiDhgE7ziUIudAedRY9QEfynmM7/RmLEfPUyw1HPCw==
 
 listhen@^1.5.5, listhen@^1.5.6:
   version "1.7.2"

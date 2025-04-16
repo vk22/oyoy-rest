@@ -82,6 +82,9 @@
         redo
       </button>
       <button class="tiptap-btn" @click="addImage">Add image from URL</button>
+      <button class="tiptap-btn" @click="setLink" :class="{ 'is-active': editor.isActive('link') }">
+          Set link
+      </button>
     </div>
     <TiptapEditorContent :editor="editor" class="textarea"/>
   </div>
@@ -90,6 +93,7 @@
 <script setup>
 import { watch } from 'vue'
 import Image from '@tiptap/extension-image'
+import Link from '@tiptap/extension-link'
 const props = defineProps({
   modelValue: String
 })
@@ -98,7 +102,7 @@ const emit = defineEmits({
 })
 const editor = useEditor({
   content: props.modelValue,
-  extensions: [TiptapStarterKit, Image],
+  extensions: [TiptapStarterKit, Image, Link],
   onUpdate: () => {
         // HTML
         emit('update:modelValue', editor.value.getHTML())
@@ -114,6 +118,41 @@ const addImage = () => {
     editor.value.chain().focus().setImage({ src: url }).run()
   }
 }
+
+
+
+const setLink = () => {
+
+      const previousUrl = editor.value.getAttributes('link').href
+      const url = window.prompt('URL', previousUrl)
+
+      // cancelled
+      if (url === null) {
+        return
+      }
+
+      // empty
+      if (url === '') {
+        editor.value
+          .chain()
+          .focus()
+          .extendMarkRange('link')
+          .unsetLink()
+          .run()
+
+        return
+      }
+
+      // update link
+      editor.value
+        .chain()
+        .focus()
+        .extendMarkRange('link')
+        .setLink({ href: url })
+        .run()
+
+}
+
 
 onBeforeUnmount(() => {
   unref(editor).destroy();
@@ -132,11 +171,35 @@ watch(() => props.modelValue, (value) => {
 
 .tiptap {
   border: 1px solid #a4a4a4;
-  padding: 10px;
+  padding: 40px 20px;
   min-height: 200px;
+
+  h1 {
+    font-size: 2.5rem;
+    font-weight: 500;
+    margin-bottom: 20px;
+    line-height: 3rem;
+  }
+  h2 {
+    font-size: 1.5rem;
+    font-weight: 500;
+    margin-bottom: 20px;
+    line-height: 2rem;
+  }
+  h3 {
+    font-size: 1.25rem;
+    font-weight: 500;
+    margin-bottom: 20px;
+    line-height: 1.5rem;
+  }
 
   p {
     margin-bottom: 0;;
+  }
+
+  a {
+    text-decoration: underline;
+    color: blue;
   }
 }
 

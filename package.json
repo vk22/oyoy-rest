@@ -25,6 +25,7 @@
     "@mdi/font": "^7.3.67",
     "@pinia/nuxt": "^0.5.1",
     "@tiptap/extension-image": "^2.11.5",
+    "@tiptap/extension-link": "^2.11.7",
     "@vercel/blob": "^0.23.4",
     "@vuepic/vue-datepicker": "^8.4.0",
     "axios": "^1.6.2",

@@ -136,6 +136,13 @@ useHead({
       line-height: 1.75;
       margin-bottom: 2rem;
     }
+    a {
+      color: #111;
+      text-decoration: underline;
+      &:hover {
+        text-decoration: none;
+      }
+    }
   } 
 
   @keyframes scaleIn {

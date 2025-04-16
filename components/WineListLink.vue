@@ -1,5 +1,5 @@
 <template>
-  <section class="wine-list index-section slideUp fade-in" id="drinks">
+  <section class="wine-list index-section slideUp fade-in" id="wine-list">
     <v-container>
       <v-row>
         <v-col class="d-flex justify-center">
