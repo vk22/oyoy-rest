@@ -91,7 +91,7 @@
             <div class="reservation-check" v-if="reservationAvailable">
               <v-checkbox
                 v-model="reservationAvailable.isAvailable"
-                label="Reservation availability"
+                label="Reservations Enabled"
               ></v-checkbox>
             </div>
           </div>
@@ -154,15 +154,6 @@ const getReservationAvailableState = async () => {
 const setReservationAvailableState = async () => {
   await adminStore.fetchData('reservation-available', 'put', reservationAvailable)
 }
-
-// const setReservationAvailableState = async () => {
-//   const { data } = await useFetch("/api/reservation-available", {
-//     method: "PUT",
-//     body: reservationAvailable
-//   });
-//   console.log('setReservationAvailableState ', data.value)
-//   // reservationAvailable.value = data.value.data.isAvailable;
-// };
 
 const getReservationsList = async () => {
   const { data } = await useFetch("/api/reservations", {

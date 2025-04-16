@@ -6,10 +6,10 @@ export default defineEventHandler( async (event) => {
     if (!item) return false
     item.isAvailable = body.isAvailable
     const saveItem = await item.save()
-    const isActive = (saveItem.isAvailable) ? 'activated' : 'disabled';
+    const isActive = (saveItem.isAvailable) ? 'Enabled' : 'Disabled';
     return {
       success: true,
-      message: `Reservation availability ${isActive}`,
+      message: `Reservations ${isActive}`,
       data: saveItem
     }
 

@@ -39,7 +39,7 @@
         <!-- <div class="btn" v-if="reservationAvailable" @click="getFormModalStateToggle">
           Reservations
         </div> -->
-        <NuxtLink class="btn" :to="{ path: '/reservation'}"  v-if="currentRoute.name !== 'reservation' && reservationAvailable">
+        <NuxtLink class="btn" :to="{ path: '/reservations'}"  v-if="currentRoute.name !== 'reservations' && reservationAvailable">
             Reservations
         </NuxtLink>    
       </div>
@@ -47,7 +47,7 @@
     <div class="main-menu__background" @click="toggleMenu()"></div>
   </div>
 
-  <header class="main-header" :class="[{ small: isScrolled || currentRoute.name === 'reservation' }, {'fadeIn-1': dataReady}]">
+  <header class="main-header" :class="[{ small: isScrolled || currentRoute.name === 'reservations' }, {'fadeIn-1': dataReady}]">
     <div class="header-l">
       <div class="icon-nav" @click="toggleMenu()">
         <div class="line"></div>
@@ -64,7 +64,7 @@
       </NuxtLink>
     </div>
     <div class="header-r">
-      <div class="phone" v-if="currentRoute.name !== 'reservation'">
+      <div class="phone" v-if="currentRoute.name !== 'reservations'">
         <a :href="'tel:'+company.phone"
             ><v-icon icon="mdi-phone"></v-icon> <span>{{ company.phone }}</span></a
         >
@@ -73,10 +73,10 @@
         <img src="/img/book-now.svg" alt="" />
       </div> -->
       <!-- <div class="btn btn-header" v-if="reservationAvailable" @click="getFormModalStateToggle">Reservations</div> -->
-        <NuxtLink class="btn btn-header" :to="{ path: '/reservation'}" v-if="currentRoute.name !== 'reservation' && reservationAvailable">
+        <NuxtLink class="btn btn-header" :to="{ path: '/reservations'}" v-if="currentRoute.name !== 'reservations' && reservationAvailable">
           Reservations
         </NuxtLink>   
-        <NuxtLink :to="{ path: '/'}" v-if="currentRoute.name === 'reservation'">
+        <NuxtLink :to="{ path: '/'}" v-if="currentRoute.name === 'reservations'">
           <svg width="30px" height="30px" viewBox="0 0 18 18" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"><g id="Page-1" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd" stroke-linecap="square"><g id="LandingPopup" transform="translate(-983.000000, -267.000000)" stroke="#111"><g id="Group-6"><g id="Group-5" transform="translate(420.000000, 243.000000)"><path d="M571.87315,32.8400752 L582.911677,32.8400752 L571.87315,32.8400752 L571.87315,21.6856907 L571.87315,32.8400752 Z M571.87315,32.8400752 L560.911677,32.8400752 L571.87315,32.8400752 L571.87315,44.0437203 L571.87315,32.8400752 Z" id="Combined-Shape" transform="translate(571.911677, 32.864706) rotate(-315.000000) translate(-571.911677, -32.864706) "></path></g></g></g></g></svg>
         </NuxtLink> 
     </div>
