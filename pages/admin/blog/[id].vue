@@ -33,18 +33,18 @@
       <v-row>
         <v-col>
           <v-text-field
-            v-model="post.url"
+            v-model="post.title"
             variant="outlined"
-            label="URL"
+            label="Title"
           ></v-text-field>
         </v-col>
       </v-row>
       <v-row>
         <v-col>
           <v-text-field
-            v-model="post.title"
+            v-model="post.url"
             variant="outlined"
-            label="Title"
+            label="URL"
           ></v-text-field>
         </v-col>
       </v-row>
