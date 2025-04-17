@@ -100,6 +100,15 @@ const props = defineProps({
 const emit = defineEmits({
   'update:modelValue': String
 })
+// Link.configure({
+//   HTMLAttributes: {
+//     // Change rel to different value
+//     // Allow search engines to follow links(remove nofollow)
+//     rel: 'noopener noreferrer',
+//     // Remove target entirely so links open in current tab
+//     target: null,
+//   },
+// })
 const editor = useEditor({
   content: props.modelValue,
   extensions: [TiptapStarterKit, Image, Link],
