@@ -175,6 +175,14 @@ onMounted(() => {
     padding-bottom: 5rem;
     margin-bottom: 3rem;
     flex-direction: column;
+  
+    @include for-phone-only {
+      padding-bottom: 2rem;
+    }
+
+    @include for-tablet-portrait-up {
+      padding-bottom: 5rem;
+    }
 
    &.empty {
       height: calc(100vh - 283px);
@@ -202,8 +210,18 @@ onMounted(() => {
     .blog-title {
       position: relative;
       z-index: 99;
-      width: 50vw;
       margin-bottom: 1rem;
+      display: flex;
+      
+      @include for-phone-only {
+        width: 100%;
+        justify-content: center;
+      }
+
+      @include for-tablet-portrait-up {
+        width: 50vw;
+        justify-content: flex-start;
+      }
 
       h2 {
         font-family: $font-sans !important;

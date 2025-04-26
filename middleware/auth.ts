@@ -1,9 +1,11 @@
 import { storeToRefs } from 'pinia';
 import { useAuthStore } from '~/store/auth';
 
-export default defineNuxtRouteMiddleware((to) => {
+export default defineNuxtRouteMiddleware((to, from) => {
   const { authenticated } = storeToRefs(useAuthStore()); // make authenticated state reactive
   const token = useCookie('token'); // get token from cookies
+  // console.log('token.value ', token.value)
+  // console.log('to ', to)
 
   if (token.value) {
     // check if value exists

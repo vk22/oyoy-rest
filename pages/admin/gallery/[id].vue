@@ -8,39 +8,24 @@
           </div>
         </v-col>
       </v-row>
-      <v-row v-if="gallery.images.length">
-        <draggable
-          v-model="gallery.images"
-          item-key="filename"
-          handle=".gallery-item"
-          @start="dragging = true"
-          @end="draggEnd()"
-        >
-            <div class="gallery-item-wrap" v-for="(image, index) in gallery.images" :key="index">
-              <div class="gallery-item-actions">
-                <div class="remove-icon" @click="deleteGalleryItem(index)" alt="remove">
-                  <svg width="17" height="16" viewBox="0 0 17 16" fill="none" xmlns="http://www.w3.org/2000/svg"><rect y="14.3154" width="20.2454" height="2.38181" rx="1.1909" transform="rotate(-45 0 14.3154)" fill="white"></rect><rect x="1.68555" width="20.2454" height="2.38181" rx="1.1909" transform="rotate(45 1.68555 0)" fill="white"></rect></svg>
-                </div>
-              </div>
-              <div class="gallery-item" v-if="image">
-                <img v-if="image.file" :src="image.file.url"/>
-              </div>
-            </div>
-        </draggable>
 
-        <!-- <v-col cols="2" v-for="image in gallery.images" :key="image.filename">
-              <img :src="'/uploads/gallery/'+image.filename" />
-          </v-col> -->
-      </v-row>
       <v-row>
         <v-col>
-          <label for=""></label>
-          <AdminFileUploader
-            :type="'gallery'"
-            @files-dropped2="addFiles"
-            ref="uploaderRef"
-          ></AdminFileUploader>
-          <!-- {{ files }} -->
+          <div class="images-zona">
+            <!-- -->
+            <v-row>
+              <v-col>
+                <label>Images for Gallery</label>
+                <AdminFileUploader :type="'gallery'" @files-dropped2="addFiles" ref="uploaderRef"></AdminFileUploader> 
+                {{ files }}
+              </v-col>
+            </v-row>
+            <v-row>
+              <v-col>
+                <AdminImagesGalleryPreview :images="gallery.images" :imagesType="'gallery'" @drag-end="draggEnd" @delete-gallery-item="deleteGalleryItem"></AdminImagesGalleryPreview>
+              </v-col>
+            </v-row>
+          </div>
         </v-col>
       </v-row>
       <v-row>
@@ -86,8 +71,15 @@ function addFiles(files) {
   console.log('gallery.value.imagesNew ', gallery.value.imagesNew)
 }
 
-const draggEnd = async () => {
-  await editItem();
+
+const draggEnd = async (data) => {
+  console.log('draggEnd type ', data.type)
+  console.log('draggEnd images ', data.images.value)
+  if (data.type === 'gallery') {
+    gallery.value.images = [...data.images.value]
+  } 
+  // await editPost();
+  await adminStore.fetchData('gallery', 'put', gallery) 
 };
 
 const editItem = async () => {
@@ -121,11 +113,7 @@ const deleteItem = async () => {
 const deleteGalleryItem = async (index) => {
   console.log('deleteGalleryItem ', index)
   gallery.value.images.splice(index, 1)
-  await adminStore.fetchData('gallery', 'put', gallery) 
-  // const { success } = await adminStore.fetchData('gallery', 'delete', gallery); 
-  // if (success) {
-  //   router.push({ path: "/admin/gallery" });
-  // }
+  await adminStore.fetchData('gallery', 'put', gallery)
 };
 
 </script>

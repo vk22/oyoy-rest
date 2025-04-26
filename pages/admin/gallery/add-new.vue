@@ -8,12 +8,28 @@
           </div>
         </v-col>
       </v-row>
-      <v-row>
+      <!-- <v-row>
         <v-col>
           <label for=""></label>
           <AdminFileUploader :type="'gallery'" @files-dropped2="addFiles" ref="uploaderRef"></AdminFileUploader>
         </v-col>
+      </v-row> -->
+
+      <v-row>
+        <v-col>
+          <div class="images-zona">
+            <!-- -->
+            <v-row>
+              <v-col>
+                <label>Images for Gallery</label>
+                <AdminFileUploader :type="'gallery'" @files-dropped2="addFiles" ref="uploaderRef"></AdminFileUploader> 
+                {{ files }}
+              </v-col>
+            </v-row>
+          </div>
+        </v-col>
       </v-row>
+
       <v-row>
         <v-col>
           <v-text-field v-model="gallery.name" variant="outlined" label="Name"></v-text-field>

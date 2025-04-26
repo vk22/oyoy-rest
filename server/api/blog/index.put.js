@@ -8,9 +8,6 @@ export default defineEventHandler( async (event) => {
     postItem.title = body.title
     postItem.text = body.text
     postItem.url = body.url
-    // if (body.imageNew) {
-    //   postItem.imageMain = body.imageNew
-    // }
     const imagesFiltered = body.images.filter((item, index) => {
       if (item) {
         if (item.file) {
@@ -18,10 +15,18 @@ export default defineEventHandler( async (event) => {
           return item
         }
       }
-  
+    })
+    const galleryFiltered = body.gallery.filter((item, index) => {
+      if (item) {
+        if (item.file) {
+          item.index = index
+          return item
+        }
+      }
     })
     console.log('imagesFiltered ', imagesFiltered)
     postItem.images = imagesFiltered
+    postItem.gallery = galleryFiltered
     const saveItem = await postItem.save()
     if (saveItem) {
       return {

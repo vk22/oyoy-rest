@@ -135,10 +135,10 @@ const headerHandler = () => {
 ////
 let isScrolled = ref(null);
 function manualSmoothScroll(event) {
-  console.log('event ', event)
+  // console.log('event ', event)
   event.preventDefault();
   const id = event.target.dataset.href.substring(1);
-  console.log('id ', id)
+  //console.log('id ', id)
   if (!id) return;
   const target = document.getElementById(id);
   if (!target) return;
@@ -151,7 +151,7 @@ function manualSmoothScroll(event) {
 }
 
 function smoothScrollTo(id) {
-  console.log('smoothScrollTo ', id)
+  // console.log('smoothScrollTo ', id)
   if (!id) return;
   const target = document.getElementById(id);
   if (!target) return;
@@ -164,7 +164,7 @@ function smoothScrollTo(id) {
 }
 
 onMounted(() => {
-  console.log('currentRoute ', currentRoute.value)
+  // console.log('currentRoute ', currentRoute.value)
   document.addEventListener("scroll", headerHandler);
   document.querySelectorAll(".main-menu .menu-item").forEach((link, index) => {
     link.addEventListener("click", closeMenu);

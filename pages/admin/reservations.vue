@@ -88,7 +88,7 @@
         <v-col>
           <div class="admin-title">
             <h1>Reservations</h1>
-            <div class="reservation-check" v-if="reservationAvailable">
+            <div class="reservation-check" v-if="reservationCheckboxShow">
               <v-checkbox
                 v-model="reservationAvailable.isAvailable"
                 label="Reservations Enabled"
@@ -142,6 +142,7 @@ const reservationDialogIsOpen = ref(false);
 const reservationSelected = ref();
 const reservationItems = ref();
 const reservationAvailable = ref(undefined);
+const reservationCheckboxShow = ref(false);
 const adminStore = useAdminStore();
 
 const getReservationAvailableState = async () => {
@@ -149,6 +150,7 @@ const getReservationAvailableState = async () => {
     method: "GET",
   });
   reservationAvailable.value = data.value.data;
+  reservationCheckboxShow.value = true;
 };
 
 const setReservationAvailableState = async () => {

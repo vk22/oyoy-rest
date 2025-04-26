@@ -63,7 +63,7 @@ definePageMeta({
   middleware: ["auth"]
 });
 const { data } = await useFetch('/api/events')
-const events = data._rawValue.events
+const events = data.value.data
 
 </script>
 

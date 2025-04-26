@@ -113,42 +113,45 @@ const slidesPerView = computed(() => {
       }
     }
   }
-}
 
-.gallery-nav {
-  display: flex;
-  width: 100%;
-  justify-content: center;
-  align-items: center;
-  &__arrow {
-    cursor: pointer;
-    margin: 0 1rem;
-    position: absolute;
-    top: 50%;
-    width: 42px;
-    z-index: 99;
-    background-color: rgba(255, 255, 255, 0.5);
-    padding: 15px;
+  .gallery-nav {
     display: flex;
-    @include base-transition(background-color, 0.25s);
+    width: 100%;
+    justify-content: center;
+    align-items: center;
+    &__arrow {
+      cursor: pointer;
+      margin: 0 1rem;
+      position: absolute;
+      top: 50%;
+      width: 42px;
+      z-index: 99;
+      background-color: rgba(255, 255, 255, 0.5);
+      padding: 15px;
+      display: flex;
+      @include base-transition(background-color, 0.25s);
 
-    &.swiper-next {
-      right: 2rem;
-    }
+      &.swiper-next {
+        right: 2rem;
+      }
 
-    &.swiper-prev {
-      left: 2rem;
-    }
+      &.swiper-prev {
+        left: 2rem;
+      }
 
-    &.hide {
-      opacity: 0.1;
-      pointer-events: none;
-    }
+      &.hide {
+        opacity: 0.1;
+        pointer-events: none;
+      }
 
-    &:hover {
-      // opacity: 0.5;
-      background-color: rgba(255, 255, 255, 0.75);
+      &:hover {
+        // opacity: 0.5;
+        background-color: rgba(255, 255, 255, 0.75);
+      }
     }
   }
+
 }
+
+
 </style>

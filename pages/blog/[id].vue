@@ -10,8 +10,11 @@
     <section class="blog-page-content">
       <v-container class="blog-container">
           <v-row>
-            <v-col cols="12" md="8" class="pr-12">
+            <v-col cols="12" md="8" class="text-col">
               <div v-html="post.text"></div>
+              <div class="post-gallery" v-if="post.gallery">
+                  <SwiperGalleryBlog :gallery="post.gallery" v-if="post.gallery.length"></SwiperGalleryBlog>
+              </div>
             </v-col>
             <v-col cols="12" md="4">
               <FormSubscribe></FormSubscribe>
@@ -70,18 +73,38 @@ useHead({
     .blog-title {
       position: relative;
       z-index: 99;
-      width: 50vw;
       margin-bottom: 1rem;
+      display: flex;
+      justify-content: center;
+
+      @include for-phone-only {
+        width: 100%;
+        padding: 0 1rem;
+      }
+
+      @include for-tablet-portrait-up {
+        width: 50vw;
+      }
+
 
       h1 {
         font-family: $font-sans!important;
-        font-size: 3.5rem;
-        line-height: 4rem;
         text-transform: uppercase;
         font-weight: 400!important;
         color: #fff;
         text-align: center;
         font-weight: 500;
+
+        @include for-phone-only {
+          font-size: 2.5rem;
+          line-height: 3.5rem;
+        }
+
+        @include for-tablet-portrait-up {
+          font-size: 3.5rem;
+          line-height: 4rem;
+        }
+
       }
     }
 
@@ -122,6 +145,16 @@ useHead({
 
   .blog-page-content {
     padding-bottom: 5rem;
+
+    .text-col {
+        @include for-phone-only {
+          padding-right: 1rem;
+        }
+
+        @include for-tablet-portrait-up {
+          padding-right: 2rem;
+        }
+    }
     h3 {
       font-family: $font-sans!important;
       font-size: 1.5rem;

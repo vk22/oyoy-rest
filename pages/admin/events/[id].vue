@@ -8,21 +8,50 @@
           </div>
         </v-col>
       </v-row>
-      <v-row>
-        <v-col cols="2" v-if="event.file">
-          <img :src="event.file.url" v-if="event.file.type !== 'video/mp4'"/>
-          <video muted playsinline="" loop="" controls v-else >
-            <source :src="event.file.url" :type="event.file.type">
-          </video>
-        </v-col>
-      </v-row>
+
+
+
       <v-row>
         <v-col>
-          <label for=""></label>
-          <AdminFileUploader :type="'events'" @files-dropped2="addFiles" ref="uploaderRef"></AdminFileUploader> 
-          {{ files }}
+          <div class="images-zona">
+            <!-- -->
+            <!-- <v-row>
+              <v-col>
+                <label>Images for Gallery</label>
+                <AdminFileUploader :type="'gallery'" @files-dropped2="addFiles" ref="uploaderRef"></AdminFileUploader> 
+                {{ files }}
+              </v-col>
+            </v-row>
+            <v-row>
+              <v-col>
+                <AdminImagesGalleryPreview :images="gallery.images" :imagesType="'gallery'" @drag-end="draggEnd" @delete-gallery-item="deleteGalleryItem"></AdminImagesGalleryPreview>
+              </v-col>
+            </v-row> -->
+
+
+            <v-row>
+              <v-col>
+                <label for=""></label>
+                <AdminFileUploader :type="'events'" @files-dropped2="addFiles" ref="uploaderRef"></AdminFileUploader> 
+                {{ files }}
+              </v-col>
+            </v-row>
+
+            <v-row>
+              <v-col cols="2" v-if="event.file">
+                <!-- <img :src="event.file.url" v-if="event.file.type !== 'video/mp4'"/>
+                <video muted playsinline="" loop="" controls v-else >
+                  <source :src="event.file.url" :type="event.file.type">
+                </video> -->
+                <AdminImagesGalleryPreview :images="[{file: event.file}]" :imagesType="'events'" @delete-gallery-item="deleteGalleryItem"></AdminImagesGalleryPreview>
+              </v-col>
+            </v-row>
+
+
+          </div>
         </v-col>
       </v-row>
+
       <v-row>
         <v-col>
           <v-text-field
@@ -97,6 +126,11 @@ const editEvent= async () => {
   } 
   await adminStore.fetchData('events', 'put', event) 
   // event.value = data
+};
+
+const deleteGalleryItem = async (index) => {
+  event.value.file = []
+  await adminStore.fetchData('events', 'put', event)
 };
 
 const deleteEvent = async () => {

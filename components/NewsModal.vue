@@ -38,9 +38,6 @@ const modalToggle = () => {
     store.resetModalState({newsItemIndex: 0})
 }
 
-const newsType = ref('video')
-console.log('newsType ', newsType.value)
-
 </script>
 
     

@@ -449,7 +449,10 @@ td {
   }
 }
 label {
+  font-size: .85rem;
   font-weight: 600;
+  padding: .5rem 0;
+  display: block;
 }
 
 .files-upload {
@@ -550,4 +553,10 @@ img[lazy="loaded"] {
 
 .flag-icon {
   margin-right: 0.1em;
+}
+
+.images-zona {
+  background: #f1f6f8;
+  padding: 1rem 2rem;
+  border-radius: 10px;
 }

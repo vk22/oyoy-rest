@@ -27,8 +27,8 @@ import { useMainStore } from '@/store/index'
 const route = useRoute();
 const mainStore = useMainStore();
 const dataReady = computed(() => mainStore.getDataReady)
-console.log('LoadingComp route ', route)
-console.log('LoadingComp dataReady ', dataReady.value)
+// console.log('LoadingComp route ', route)
+// console.log('LoadingComp dataReady ', dataReady.value)
 const show = ref(true);
 
 /// if data ready
@@ -37,7 +37,7 @@ if (!dataReady.value) {
   //   show.value = true
   // }, 100);
   watch(dataReady, (newValue) => {
-    console.log('loading comp newValue ', newValue)
+    // console.log('loading comp newValue ', newValue)
     show.value = !newValue
   })
 } 

@@ -8,26 +8,37 @@
           </div>
         </v-col>
       </v-row>
-      <v-row v-if="post.images.length">
-        <draggable
-          v-model="post.images"
-          item-key="filename"
-          handle=".gallery-item"
-          @start="dragging = true"
-          @end="draggEnd()"
-        >
-            <div class="gallery-item" v-for="(image, index) in post.images" :key="index">
-              <span v-if="image">
-                <img v-if="image.file" :src="image.file.url"/>
-              </span>
-            </div>
-        </draggable>
-      </v-row>
+      <!-- -->
       <v-row>
         <v-col>
-          <label for=""></label>
-          <AdminFileUploader :type="'posts'" @files-dropped2="addFiles" ref="uploaderRef"></AdminFileUploader> 
-          {{ files }}
+          <div class="images-zona">
+            <v-row>
+              <v-col>
+                <label>All Images</label>
+                <AdminFileUploader :type="'posts'" @files-dropped2="addFiles" ref="uploaderRef"></AdminFileUploader> 
+                {{ files }}
+              </v-col>
+            </v-row>
+            <v-row>
+              <v-col>
+                <AdminImagesGalleryPreview :images="post.images" :imagesType="'images'" @drag-end="draggEnd" @delete-gallery-item="deleteImagesItem"></AdminImagesGalleryPreview>
+              </v-col>
+            </v-row>
+
+            <!-- -->
+            <v-row>
+              <v-col>
+                <label>Images for Gallery</label>
+                <AdminFileUploader :type="'posts-gallery'" @files-dropped2="addGalleryFiles" ref="uploadeGalleryrRef"></AdminFileUploader> 
+                {{ files }}
+              </v-col>
+            </v-row>
+            <v-row>
+              <v-col>
+                <AdminImagesGalleryPreview :images="post.gallery" :imagesType="'gallery'" @drag-end="draggEnd" @delete-gallery-item="deleteGalleryItem"></AdminImagesGalleryPreview>
+              </v-col>
+            </v-row>
+          </div>
         </v-col>
       </v-row>
       <v-row>
@@ -83,16 +94,29 @@ const route = useRoute()
 const router = useRouter()
 const { data } = await useFetch(`/api/blog/${route.params.id}`)
 const post = ref(data._rawValue)
-const imagesNew = [];
+let imagesNew = [];
+let imagesGalleryNew = [];
 const uploaderRef = ref(null);
+const uploadeGalleryrRef = ref(null);
 const files = ref(null);
 
-function addFiles(files) {
-  imagesNew.push(files)
+const addFiles = (files) => {
+  imagesNew = imagesNew.concat(files)
 }
 
-const draggEnd = async () => {
-  await editPost();
+const addGalleryFiles = (files) => {
+  imagesGalleryNew = imagesGalleryNew.concat(files)
+}
+
+
+const draggEnd = async (data) => {
+  if (data.type === 'gallery') {
+    post.value.gallery = [...data.images.value]
+  } else {
+    post.value.images = [...data.images.value]
+  }
+  // await editPost();
+  await adminStore.fetchData('blog', 'put', post) 
 };
 
 const editPost = async () => {
@@ -101,19 +125,31 @@ const editPost = async () => {
     alert ('Fill in all fields!');
     return
   };
-  if (imagesNew.length) {
-    /// upload images
-    let filesUploadResponse = await uploaderRef.value.startUpload();
-    console.log('filesUploadResponse ', filesUploadResponse)
-    if (filesUploadResponse.success) {
 
-      // file: {url, type}
-      filesUploadResponse.data.forEach((file, index) => {
+  /// upload images
+  if (imagesNew.length) {
+    const filesUploadResponse1 = await uploaderRef.value.startUpload();
+    console.log('filesUploadResponse1 ', filesUploadResponse1)
+    if (filesUploadResponse1.success) {
+      // file: {url, type, section}
+      filesUploadResponse1.data.forEach((file, index) => {
         post.value.images.push({file: file, index: index})
       })
-      
-    }
-  } 
+    }  
+  }
+
+  /// upload gallery
+  if (imagesGalleryNew.length) {
+    let filesUploadResponse2 = await uploadeGalleryrRef.value.startUpload();
+    console.log('filesUploadResponse2 ', filesUploadResponse2)
+    if (filesUploadResponse2.success) {
+      // file: {url, type, section}
+      filesUploadResponse2.data.forEach((file, index) => {
+        post.value.gallery.push({file: file, index: index})
+      })
+    } 
+  }
+
   console.log('post save', post.value)
   /// save data
   const { data } = await adminStore.fetchData('blog', 'put', post) 
@@ -127,9 +163,21 @@ const deletePost = async () => {
   }
 };
 
-// watch(post.value.title, (newValue) => {
-//   console.log('newValue ', newValue)
-// })
+const deleteImagesItem = async (image) => {
+  console.log('deleteImagesItem ', image)
+  // post.value.images.splice(index, 1)
+  // await adminStore.fetchData('blog', 'put', post) 
+  // await adminStore.fetchData('image-storage', 'DELETE', formData)
+};
+
+const deleteGalleryItem = async (image) => {
+  console.log('deleteGalleryItem url ', image.file.url)
+  const findIndex = post.value.gallery.findIndex(el => el.file.url === image.file.url)
+  console.log('findIndex ', findIndex)
+  post.value.gallery.splice(findIndex, 1)
+  await adminStore.fetchData('blog', 'put', post) 
+  await adminStore.fetchData('image-storage', 'DELETE', {url: image.file.url})
+};
 
 </script>
 

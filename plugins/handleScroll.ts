@@ -13,7 +13,7 @@ export default defineNuxtPlugin(nuxtApp => {
             function () {
               var elem = fadeInElements[i];
               if (isElemVisible(elem)) {
-                console.log('isElemVisible ')
+                // console.log('isElemVisible ')
                 elem.style.opacity = "1";
                 elem.style.transform = "translateY(0px)";
               }

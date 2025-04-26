@@ -32,6 +32,21 @@ const SchemaData = new Schema({
       }
     }
   ],
+  gallery: [
+    {
+      file: {
+        url: {
+          type: String,
+        },
+        type: {
+          type: String,
+        }
+      },
+      index: {
+        type: Number
+      }
+    }
+  ],
   date: {
     type: Date
   }

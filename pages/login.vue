@@ -23,7 +23,7 @@
           />
         </div>
         <div class="field">
-          <button @keyup.enter="login()" @click="login()" class="main-btn">Login</button>
+          <button @keyup.enter="login" @click="login" class="main-btn">Login</button>
         </div>
         <div class="error-message">{{ errorMessage }}</div>
       </div>
@@ -32,6 +32,10 @@
 
 </template>
 <script lang="ts" setup>
+definePageMeta({
+  layout: "empty",
+  middleware: ["auth"]
+});
 import { storeToRefs } from 'pinia';
 import { useAuthStore } from '~/store/auth';
 

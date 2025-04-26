@@ -59,7 +59,7 @@ const startUpload = async () => {
 defineExpose({ startUpload });
 </script>
 
-<style lang="scss">
+<style lang="scss" scoped>
 
 .file-uploader-container {
 	height: 100%;
@@ -72,7 +72,7 @@ defineExpose({ startUpload });
 	max-width: 100%;
 	margin: 0 auto;
 	padding: 2rem;
-	background: rgba(255,255,255,0.333);
+	background: rgba(255,255,255,1);
 	transition: 0.2s ease;
     border: 2px dashed #bbbbbb;
     border-radius: 1rem;
@@ -83,7 +83,7 @@ defineExpose({ startUpload });
 label {
 	display: block;
     font-size: 1rem;
-    font-weight: 400!important;
+    font-weight: 400;
     cursor: pointer;
     .link {
         // text-decoration: underline;

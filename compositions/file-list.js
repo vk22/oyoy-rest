@@ -6,12 +6,13 @@ export default function () {
 	function addFiles(newFiles, type) {
 		let newUploadableFiles = [...newFiles].map((file) => new UploadableFile(file)).filter((file) => !fileExists(file.id))
 		// 
-		
-		if (type === 'gallery') {
-			files.value = files.value.concat(newUploadableFiles)
-		} else {
-			files.value = newUploadableFiles
-		}
+
+		files.value = files.value.concat(newUploadableFiles)
+		// if (type === 'gallery') {
+		// 	files.value = files.value.concat(newUploadableFiles)
+		// } else {
+		// 	files.value = newUploadableFiles
+		// }
 	}
 
 	function fileExists(otherId) {

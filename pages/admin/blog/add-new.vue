@@ -8,13 +8,37 @@
           </div>
         </v-col>
       </v-row>
+
       <v-row>
+        <v-col>
+          <div class="images-zona">
+            <v-row>
+              <v-col>
+                <label>All Images</label>
+                <AdminFileUploader :type="'posts'" @files-dropped2="addFiles" ref="uploaderRef"></AdminFileUploader> 
+                {{ files }}
+              </v-col>
+            </v-row>
+
+            <!-- -->
+            <v-row>
+              <v-col>
+                <label>Images for Gallery</label>
+                <AdminFileUploader :type="'posts-gallery'" @files-dropped2="addGalleryFiles" ref="uploadeGalleryrRef"></AdminFileUploader> 
+                {{ files }}
+              </v-col>
+            </v-row>
+          </div>
+        </v-col>
+      </v-row>
+
+      <!-- <v-row>
         <v-col>
           <label for=""></label>
           <AdminFileUploader :type="'posts'" @files-dropped2="addFiles" ref="uploaderRef"></AdminFileUploader>
           {{ files }}
         </v-col>
-      </v-row>
+      </v-row> -->
       <v-row>
         <v-col>
           <v-text-field v-model="post.title" variant="outlined" label="Title"></v-text-field>
@@ -57,14 +81,21 @@ const router = useRouter()
 const post = ref({
   title: '',
   text: '',
-  images: []
+  images: [],
+  gallery: []
 })
 const uploaderRef = ref(null);
+const uploadeGalleryrRef = ref(null);
 const files = ref(null);
 
 function addFiles(files) {
-  post.value.imageMain = files[0].name
+  post.value.images = post.value.images.concat(files)
 }
+
+const addGalleryFiles = (files) => {
+  post.value.gallery = post.value.gallery.concat(files)
+}
+
 
 const addpost = async () => {
   let checkFormField = Object.values(post.value).every((i) => i !== '')
@@ -73,21 +104,38 @@ const addpost = async () => {
     return
   };
   /// upload images
-  let filesUploadResponse = await uploaderRef.value.startUpload();
-  console.log('filesUploadResponse ', filesUploadResponse)
-  if (filesUploadResponse.success) {
-
-    // file: {url, type}
-    filesUploadResponse.data.forEach((file, index) => {
-      post.value.images.push({file: file, index: index})
-    })
-
-    /// save data
-    const { data } = await adminStore.fetchData('blog', 'post', post)
-    if (data) {
-      router.push({ path: "/admin/blog" })
-    }
+  if (post.value.images.length) {
+    post.value.images = [];
+    const filesUploadResponse1 = await uploaderRef.value.startUpload();
+    console.log('filesUploadResponse1 ', filesUploadResponse1)
+    if (filesUploadResponse1.success) {
+      // file: {url, type, section}
+      filesUploadResponse1.data.forEach((file, index) => {
+        post.value.images.push({file: file, index: index})
+      })
+    }  
   }
+
+  /// upload gallery
+  if (post.value.gallery.length) {
+    post.value.gallery = [];
+    let filesUploadResponse2 = await uploadeGalleryrRef.value.startUpload();
+    console.log('filesUploadResponse2 ', filesUploadResponse2)
+    if (filesUploadResponse2.success) {
+      // file: {url, type, section}
+      filesUploadResponse2.data.forEach((file, index) => {
+        post.value.gallery.push({file: file, index: index})
+      })
+    } 
+  }
+
+  /// save data
+  const { data } = await adminStore.fetchData('blog', 'post', post)
+
+  // if (data) {
+  //   router.push({ path: "/admin/blog" })
+  // }
+  
 };
 
 // watch(post.value, (newValue) => {
