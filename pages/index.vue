@@ -3,9 +3,9 @@
     <section class="page-content" v-if="dataReady">
       <AboutUs ></AboutUs>
       <ImageFullWidth :type="'video'" :path="'/video/video2.mp4'" :title="''"></ImageFullWidth>
-      <MenuIndex :category="'food'"></MenuIndex>
-      <ImageFullWidth :type="'image'" :path="'/img/full-w-banner-1.jpg'" :title="''"></ImageFullWidth>
-      <WineListLink></WineListLink> 
+      <MenuIndex :category="'food'" v-if="menuIsActive"></MenuIndex>
+      <ImageFullWidth :type="'image'" :path="'/img/full-w-banner-1.jpg'" :title="''" v-if="menuIsActive"></ImageFullWidth>
+      <WineListLink v-if="wineListIsActive"></WineListLink> 
       <SwiperGallery></SwiperGallery>
       <NewsIndex></NewsIndex>
     </section>
@@ -15,12 +15,25 @@
 <script setup>
 import { onMounted, watch, computed } from 'vue';
 import { useMainStore } from '@/store/index'
+import { useNavigationStore } from "@/store/nav";
 
 //// show after loading all data
 const mainStore = useMainStore()
 const dataReady = computed(() => mainStore.getDataReady)
 
-
+/// Check id sections is active
+const navigationStore = useNavigationStore();
+const navigation = computed(() => navigationStore.getItems);
+const getIfSectionIsActive = (sectionText) => {
+  const getNavData = navigation.value.find(el => el.text === sectionText)
+  if (getNavData) {
+    return true
+  } else {
+     return false
+  }
+}
+const menuIsActive = getIfSectionIsActive('Menu')
+const wineListIsActive = getIfSectionIsActive('Wine List')
 
 
 useHead({

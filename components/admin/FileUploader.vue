@@ -1,7 +1,7 @@
 <template>
 	<div class="file-uploader-container">
 		<AdminDropZone class="drop-area" @files-dropped="filesDropped" #default="{ dropZoneActive }">
-			<label for="file-input">
+			<label :for="'file-input-'+props.type">
 				<span v-if="dropZoneActive">
 					<span>Drop here</span>
 				</span>
@@ -9,7 +9,7 @@
 					<span class="link">Choose files</span><span> or drag&drop</span>
 				</span>
 
-				<input type="file" id="file-input" multiple @change="onInputChange" />
+				<input type="file" :id="'file-input-'+props.type" multiple @change="onInputChange" />
 			</label>
 			<ul class="image-list" v-show="files.length">
 				<AdminFilePreview v-for="file of files" :key="file.id" :file="file" :type="props.type" tag="li" @remove="removeFile" />
@@ -33,14 +33,18 @@ import useFileList from '../../compositions/file-list'
 const { files, addFiles, removeFile, removeFiles } = useFileList()
 
 function filesDropped(files) {
+	console.log('filesDropped files ', files)
 	addFiles(files, props.type)
 	emit('files-dropped2', files)
+	console.log('filesDropped files2 ', files)
 }
 
 function onInputChange(e) {
+	console.log('onInputChange files', e.target.files)
 	addFiles(e.target.files, props.type)
-	e.target.value = null // reset so that selecting the same file again will still cause it to fire this change
-	emit('files-dropped2', files.value)
+	// e.target.value = null // reset so that selecting the same file again will still cause it to fire this change
+	emit('files-dropped2', files)
+	console.log('onInputChange files2 ', files)
 }
 
 
