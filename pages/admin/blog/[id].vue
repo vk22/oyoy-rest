@@ -165,9 +165,11 @@ const deletePost = async () => {
 
 const deleteImagesItem = async (image) => {
   console.log('deleteImagesItem ', image)
-  // post.value.images.splice(index, 1)
-  // await adminStore.fetchData('blog', 'put', post) 
-  // await adminStore.fetchData('image-storage', 'DELETE', formData)
+  const findIndex = post.value.images.findIndex(el => el.file.url === image.file.url)
+  console.log('findIndex ', findIndex)
+  post.value.images.splice(findIndex, 1)
+  await adminStore.fetchData('blog', 'put', post) 
+  await adminStore.fetchData('image-storage', 'DELETE', {url: image.file.url})
 };
 
 const deleteGalleryItem = async (image) => {
