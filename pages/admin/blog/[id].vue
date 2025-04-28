@@ -93,7 +93,8 @@ definePageMeta({
 const route = useRoute()
 const router = useRouter()
 const { data } = await useFetch(`/api/blog/${route.params.id}`)
-const post = ref(data._rawValue)
+const post = ref(data.value)
+console.log('post ', post.value)
 let imagesNew = [];
 let imagesGalleryNew = [];
 const uploaderRef = ref(null);
@@ -103,12 +104,9 @@ const files = ref(null);
 const addFiles = (files) => {
   imagesNew = imagesNew.concat(files)
 }
-
 const addGalleryFiles = (files) => {
   imagesGalleryNew = imagesGalleryNew.concat(files)
 }
-
-
 const draggEnd = async (data) => {
   if (data.type === 'gallery') {
     post.value.gallery = [...data.images.value]
@@ -118,7 +116,6 @@ const draggEnd = async (data) => {
   // await editPost();
   await adminStore.fetchData('blog', 'put', post) 
 };
-
 const editPost = async () => {
   let checkFormField = Object.values(post.value).every((i) => i !== '')
   if (!checkFormField) {
@@ -155,14 +152,12 @@ const editPost = async () => {
   const { data } = await adminStore.fetchData('blog', 'put', post) 
   // post.value = data
 };
-
 const deletePost = async () => {
   const { success } = await adminStore.fetchData('blog', 'delete', post); 
   if (success) {
     router.push({ path: "/admin/blog" });
   }
 };
-
 const deleteImagesItem = async (image) => {
   console.log('deleteImagesItem ', image)
   const findIndex = post.value.images.findIndex(el => el.file.url === image.file.url)
@@ -171,7 +166,6 @@ const deleteImagesItem = async (image) => {
   await adminStore.fetchData('blog', 'put', post) 
   await adminStore.fetchData('image-storage', 'DELETE', {url: image.file.url})
 };
-
 const deleteGalleryItem = async (image) => {
   console.log('deleteGalleryItem url ', image.file.url)
   const findIndex = post.value.gallery.findIndex(el => el.file.url === image.file.url)
@@ -180,6 +174,7 @@ const deleteGalleryItem = async (image) => {
   await adminStore.fetchData('blog', 'put', post) 
   await adminStore.fetchData('image-storage', 'DELETE', {url: image.file.url})
 };
+
 
 </script>
 
