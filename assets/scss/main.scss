@@ -436,3 +436,42 @@ ul {
 /////
 /// 
 
+.info-page {
+  padding: 10rem 2rem;
+
+  header {
+    position: relative;
+    width: 100%;
+    max-width: 980px;
+    margin: 0 auto;
+    margin-bottom: 4rem;
+    display: flex;
+    justify-content: center;
+  }
+  .logo {
+    width: 220px;
+  }
+  .policy {
+    position: relative;
+    width: 100%;
+    max-width: 980px;
+    margin: 0 auto;
+    color: #111;
+    padding-bottom: 2rem;
+
+    p {
+      text-align: justify;
+    }
+
+    h3 {
+      font-size: 2rem;
+      margin-bottom: 2rem;
+    }
+
+    h2 {
+      text-transform: uppercase;
+      margin-bottom: 3rem;
+      text-align: center;
+    }
+  }
+}

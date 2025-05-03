@@ -47,7 +47,7 @@
     <div class="main-menu__background" @click="toggleMenu()"></div>
   </div>
 
-  <header class="main-header" :class="[{ small: isScrolled || currentRoute.name === 'reservations' }, {'fadeIn-1': dataReady}]">
+  <header class="main-header" :class="[{ small: isScrolled || currentRoute.name === 'reservations' || currentRoute.name === 'privacy' || currentRoute.name === 'terms'   }, {'fadeIn-1': dataReady}]">
     <div class="header-l">
       <div class="icon-nav" @click="toggleMenu()">
         <div class="line"></div>

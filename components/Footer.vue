@@ -33,7 +33,7 @@
       <div class="nav" v-if="navigation.length">
         <ul>
           <li v-for="(item, index) in navigation" :key="index">
-            <a
+            <!-- <a
               v-if="item"
               class="menu-item"
               :key="item.href"
@@ -41,7 +41,23 @@
               :data-href="item.href"
             >
               {{ item.text }}
-            </a>
+            </a> -->
+            <span v-if="item">
+              <NuxtLink
+              v-if="item.isHomePageAnchor"
+              class="menu-item"
+              :to="{ path: '/', hash: item.href}"
+            >
+              {{ item.text }}
+            </NuxtLink>
+            <NuxtLink
+              v-else
+              class="menu-item"
+              :to="{ path: '/'+item.href }"
+            >
+              {{ item.text }}
+            </NuxtLink>
+            </span>  
           </li>
         </ul>
         <ul>

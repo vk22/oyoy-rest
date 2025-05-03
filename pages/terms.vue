@@ -1,20 +1,12 @@
 <template>
   <div class="info-page">
-    <header :class="{ onscroll: scrolled }">
-      <div class="logo">
-        <nuxt-link to="/">
-          <img src="/img/logo-b.svg" alt="" />
-        </nuxt-link>
-      </div>
-    </header>
-
     <div class="policy">
       <div>
-        <h2><strong>Terms and Conditions</strong></h2>
+        <h3>Terms and Conditions</h3>
+
         <p>Effective Date: 18 January 2025</p>
 
-
-        <p>Welcome to OyOy Restaurant! </p>
+        <p>Welcome to OyOy Restaurant!</p>
 
         <p>These Terms and Conditions ("Terms") govern your use of the OyOy Restaurant website ("Website") operated by ODYC Ltd ("we," "our," or "us"), a company registered in Malta under registration number C 097903.</p>
 
@@ -98,69 +90,12 @@
   </div>
 </template>
   
-  <script>
-export default {
-  components: {},
-  data() {
-    return {
-      isShow: false,
-      arrowPos: 0,
-      limitPosition: 100,
-      scrolled: true,
-      lastPosition: 0,
-    };
-  },
-  mounted: function () {
-    //this.startRotation();
-    //this.isShow = true;
-    setTimeout(() => {
-      this.isShow = true;
-    }, 100);
-  },
-  methods: {},
-
-  computed: {},
-  beforeRouteLeave(to, from, next) {
-    //this.$modal.hide();
-    next();
-  },
-};
+<script lang="ts" setup>
+  definePageMeta({
+    layout: "default"
+  });
 </script>
   
 <style lang="scss">
-.info-page {
-  padding: 3rem 4rem;
-
-  header {
-    position: relative;
-    width: 100%;
-    max-width: 980px;
-    margin: 0 auto;
-    margin-bottom: 4rem;
-    display: flex;
-    justify-content: center;
-  }
-  .logo {
-    width: 220px;
-  }
-}
-.policy {
-  position: relative;
-  width: 100%;
-  max-width: 980px;
-  margin: 0 auto;
-  color: #111;
-  padding-bottom: 2rem;
-
-  p {
-    text-align: justify;
-  }
-
-  h2 {
-    text-transform: uppercase;
-    margin-bottom: 3rem;
-    text-align: center;
-  }
-}
 </style>
   
