@@ -49,6 +49,8 @@
 
 <script setup>
 import { useAdminStore } from "@/store/admin";
+import { useConfirm } from '../../compositions/useConfirm';
+const { isConfirmed } = useConfirm();
 const adminStore = useAdminStore();
 const loading = computed(() => adminStore.loading);
 
@@ -88,7 +90,6 @@ const editItem = async () => {
     let filesUploadResponse = await uploaderRef.value.startUpload();
     console.log('filesUploadResponse ', filesUploadResponse)
     if (filesUploadResponse.success) {
-
       filesUploadResponse.data.forEach((file, index) => {
         // file: {url, type}
         gallery.value.images.push({file: file, index: index})
@@ -104,16 +105,21 @@ const editItem = async () => {
 };
 
 const deleteItem = async () => {
-  const { success } = await adminStore.fetchData('gallery', 'delete', gallery); 
-  if (success) {
-    router.push({ path: "/admin/gallery" });
+  //// ask confirmation
+  if (await isConfirmed()) {
+    const { success } = await adminStore.fetchData('gallery', 'delete', gallery); 
+    if (success) {
+      router.push({ path: "/admin/gallery" });
+    }
   }
 };
 
 const deleteGalleryItem = async (index) => {
-  console.log('deleteGalleryItem ', index)
-  gallery.value.images.splice(index, 1)
-  await adminStore.fetchData('gallery', 'put', gallery)
+  //// ask confirmation
+  if (await isConfirmed()) {
+    gallery.value.images.splice(index, 1)
+    await adminStore.fetchData('gallery', 'put', gallery)
+  }
 };
 
 </script>

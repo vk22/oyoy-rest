@@ -3,6 +3,6 @@ import { Event } from "~~/server/models/event-model";
 export default defineEventHandler( async (event) => {
     console.log('get event')
     const id = getRouterParam(event, 'id')
-    const eventOne = await Event.findOne({url: id})
+    const eventOne = await Event.findOne({_id: id})
     return eventOne
 }) 

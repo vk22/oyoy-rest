@@ -2,24 +2,28 @@ import { defineStore } from 'pinia'
 import { useToast } from "vue-toast-notification";
 const toast = useToast();
 import 'vue-toast-notification/dist/theme-bootstrap.css';
+import useConfirm from '../../compositions/confirmation';
+
 
 export const useAdminStore = defineStore('admin', {
   state: () => ({
-    loading: false
+    loading: false,
+    dialogIsOpen: false,
+    deleteAnswerResult: false,
   }),
   actions: {
     async setLoading(state) {
       this.loading = state
     },
+
     async fetchData(route, method, body) {
-      this.setLoading(true)
-      // console.log('fetchData STORE')
+      //console.log('fetchData method', route, method, body)
+      
+      this.setLoading(true);
       const { data, status } = await useFetch(`/api/${route}`, {
         method: method,
         body: body
       });
-      // console.log('data ', data.value)
-      // console.log('status ', status.value)
       this.setLoading(false)
       if (process.client) {
         if (data.value.success) {
@@ -32,7 +36,7 @@ export const useAdminStore = defineStore('admin', {
           });
         }
       }
-      
+
       if (status.value === 'success') {
         return {
           success: data.value.success,
@@ -52,6 +56,8 @@ export const useAdminStore = defineStore('admin', {
     }
   },
   getters: {
-
+    getDialogState(state) {
+      return state.dialogIsOpen
+    },
   }
 })

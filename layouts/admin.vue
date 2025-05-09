@@ -1,5 +1,6 @@
 <template>
   <div>
+    <AdminDialogWindow />
     <AdminLoading />
     <AdminHeader />
     <AdminSidebar />

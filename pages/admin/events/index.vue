@@ -16,7 +16,7 @@
           <div class="list-item" v-for="(item, index) in events" :key="index">
             <v-row>
               <v-col md="2">
-                <nuxt-link :to="'/admin/events/' + item.url">
+                <nuxt-link :to="'/admin/events/' + item._id">
                   <img
                     :src="item.file.url"
                     width="100%"

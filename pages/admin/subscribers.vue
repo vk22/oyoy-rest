@@ -23,12 +23,12 @@
           </v-row>
         </div>
       </v-container>
-      <v-card-actions class="pr-4">
+      <v-card-actions class="subscribers-panel__actions">
         <v-spacer></v-spacer>
         <div variant="outlined" class="btn admin-sm-btn" @click="dialogIsOpen = false">
           Cancel
         </div>
-        <div variant="outlined" class="btn admin-sm-btn ml-3" @click="deleteItem(selected)">
+        <div variant="outlined" class="btn admin-sm-btn ml-3 red" @click="deleteItem(selected)">
           Delete
         </div>
       </v-card-actions>
@@ -39,7 +39,7 @@
       <v-row>
         <v-col>
           <div class="admin-title">
-            <h1>Subscribers</h1>
+            <h1>Subscribers ({{subscribers.length}})</h1>
           </div>
         </v-col>
       </v-row>
@@ -86,6 +86,8 @@ definePageMeta({
   middleware: ["auth"],
 });
 import { useAdminStore } from "@/store/admin";
+import { useConfirm } from '../../compositions/useConfirm';
+const { isConfirmed } = useConfirm();
 const adminStore = useAdminStore();
 const { $formatDate } = useNuxtApp();
 const dialogIsOpen = ref(false);
@@ -103,13 +105,15 @@ const selectItem = (item) => {
   dialogIsOpen.value = true;
 };
 const deleteItem = async (item) => {
-  const { data } = await useFetch(`/api/subscribers`, {
-    method: "delete",
-    body: item,
-  });
-  if (data._rawValue.success) {
-    dialogIsOpen.value = false;
-    subscribers.value = data.value.subscribers;
+  if (await isConfirmed()) {
+    const { data } = await useFetch(`/api/subscribers`, {
+      method: "delete",
+      body: item,
+    });
+    if (data._rawValue.success) {
+      dialogIsOpen.value = false;
+      subscribers.value = data.value.subscribers;
+    }
   }
   //
 };
@@ -151,7 +155,6 @@ async function uploadFile() {
 
 .subscribers-panel {
   font-family: $font-sans;
-  padding: 1rem;
 
   h1,
   h2,
@@ -167,12 +170,18 @@ async function uploadFile() {
   }
 
   &__content {
+    padding: 1rem;
     .v-col:nth-child(2) {
       span {
         font-weight: 500;
         display: inline-block;
       }
     }
+  }
+
+  &__actions {
+    border-top: 1px solid #ddd;
+    padding: 1rem;
   }
 }
 

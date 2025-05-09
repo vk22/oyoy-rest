@@ -63,7 +63,7 @@
           </v-row>
         </div>
       </v-container>
-      <v-card-actions class="pr-4">
+      <v-card-actions class="reservation-panel__actions">
         <v-spacer></v-spacer>
         <div
           variant="outlined"
@@ -74,7 +74,7 @@
         </div>
         <div
           variant="outlined"
-          class="btn admin-sm-btn ml-3"
+          class="btn admin-sm-btn ml-3 red"
           @click="deleteItem(reservationSelected)"
         >
           Delete
@@ -86,8 +86,8 @@
     <v-container>
       <v-row>
         <v-col>
-          <div class="admin-title">
-            <h1>Reservations</h1>
+          <div class="admin-title" v-if="reservationItems">
+            <h1>Reservations ({{reservationItems.length}})</h1>
             <div class="reservation-check" v-if="reservationCheckboxShow">
               <v-checkbox
                 v-model="reservationAvailable.isAvailable"
@@ -137,6 +137,8 @@ definePageMeta({
 });
 import { onMounted, ref, watch } from "vue";
 import { useAdminStore } from "@/store/admin";
+import { useConfirm } from '../../compositions/useConfirm';
+const { isConfirmed } = useConfirm();
 const { $formatDate } = useNuxtApp();
 const reservationDialogIsOpen = ref(false);
 const reservationSelected = ref();
@@ -172,14 +174,17 @@ const selectItem = (item) => {
   reservationDialogIsOpen.value = true;
 };
 const deleteItem = async (item) => {
-  const { data } = await useFetch(`/api/reservations`, {
-    method: "delete",
-    body: item,
-  });
-  if (data._rawValue.success) {
-    reservationDialogIsOpen.value = false;
-    reservationItems.value = data.value.reservations;
+  if (await isConfirmed()) {
+    const { data } = await useFetch(`/api/reservations`, {
+      method: "delete",
+      body: item,
+    });
+    if (data._rawValue.success) {
+      reservationDialogIsOpen.value = false;
+      reservationItems.value = data.value.reservations;
+    }
   }
+
   //
 };
 
@@ -201,8 +206,6 @@ watch(() => reservationAvailable, () => {
 
 .reservation-panel {
   font-family: $font-sans;
-  padding: 1rem;
-
   h1,
   h2,
   h3 {
@@ -217,12 +220,17 @@ watch(() => reservationAvailable, () => {
   }
 
   &__content {
+    padding: 1rem;
     .v-col:nth-child(2) {
       span {
         font-weight: 500;
         display: inline-block;
       }
     }
+  }
+  &__actions {
+    border-top: 1px solid #ddd;
+    padding: 1rem;
   }
 }
 

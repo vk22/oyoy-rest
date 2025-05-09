@@ -1,5 +1,5 @@
 <template>
-  <section class="top-banner">
+  <section class="top-banner" id="home">
     <div class="top-banner__container">
       <div class="center">
         <div class="headline" :class="{ 'fadeIn-2': showItem }">

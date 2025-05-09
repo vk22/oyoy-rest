@@ -81,6 +81,8 @@
 <script setup> 
 import { onMounted, watch, computed } from 'vue';
 import { useAdminStore } from "@/store/admin";
+import { useConfirm } from '../../compositions/useConfirm';
+const { isConfirmed } = useConfirm();
 const adminStore = useAdminStore();
 const loading = computed(() => adminStore.loading);
 
@@ -153,26 +155,29 @@ const editPost = async () => {
   // post.value = data
 };
 const deletePost = async () => {
-  const { success } = await adminStore.fetchData('blog', 'delete', post); 
-  if (success) {
-    router.push({ path: "/admin/blog" });
-  }
+    //// ask confirmation
+    if (await isConfirmed()) {
+      const { success } = await adminStore.fetchData('blog', 'delete', post); 
+      if (success) {
+        router.push({ path: "/admin/blog" });
+      }
+    }
 };
 const deleteImagesItem = async (image) => {
-  console.log('deleteImagesItem ', image)
-  const findIndex = post.value.images.findIndex(el => el.file.url === image.file.url)
-  console.log('findIndex ', findIndex)
-  post.value.images.splice(findIndex, 1)
-  await adminStore.fetchData('blog', 'put', post) 
-  await adminStore.fetchData('image-storage', 'DELETE', {url: image.file.url})
+  if (await isConfirmed()) {
+    const findIndex = post.value.images.findIndex(el => el.file.url === image.file.url)
+    post.value.images.splice(findIndex, 1)
+    await adminStore.fetchData('blog', 'put', post) 
+    await adminStore.fetchData('image-storage', 'DELETE', {url: image.file.url})
+  }
 };
 const deleteGalleryItem = async (image) => {
-  console.log('deleteGalleryItem url ', image.file.url)
-  const findIndex = post.value.gallery.findIndex(el => el.file.url === image.file.url)
-  console.log('findIndex ', findIndex)
-  post.value.gallery.splice(findIndex, 1)
-  await adminStore.fetchData('blog', 'put', post) 
-  await adminStore.fetchData('image-storage', 'DELETE', {url: image.file.url})
+  if (await isConfirmed()) {
+    const findIndex = post.value.gallery.findIndex(el => el.file.url === image.file.url)
+    post.value.gallery.splice(findIndex, 1)
+    await adminStore.fetchData('blog', 'put', post) 
+    await adminStore.fetchData('image-storage', 'DELETE', {url: image.file.url})
+  }  
 };
 
 

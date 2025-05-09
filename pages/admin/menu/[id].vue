@@ -101,6 +101,8 @@ definePageMeta({
   middleware: ["auth"]
 });
 import { useAdminStore } from "@/store/admin";
+import { useConfirm } from '../../compositions/useConfirm';
+const { isConfirmed } = useConfirm();
 const adminStore = useAdminStore();
 const route = useRoute()
 const router = useRouter()
@@ -115,8 +117,11 @@ function addItem(files) {
   })
 }
 
-function removeItem(index) {
-  menu.value.content.splice(index, 1)
+async function removeItem(index) {
+   //// ask confirmation
+  if (await isConfirmed()) {
+    menu.value.content.splice(index, 1)   
+  }
 }
 
 const editMenu = async () => {
@@ -126,11 +131,13 @@ const editMenu = async () => {
   // }
 }
 
-
 const deleteMenu = async () => {
-  const { success } = await adminStore.fetchData('menu', 'delete', menu); 
-  if (success) {
-    router.push({ path: "/admin/menu" });
+  //// ask confirmation
+  if (await isConfirmed()) {
+    const { success } = await adminStore.fetchData('menu', 'delete', menu); 
+    if (success) {
+      router.push({ path: "/admin/menu" });
+    }
   }
 };
 

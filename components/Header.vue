@@ -8,6 +8,16 @@
       </div>
       <div class="m-top" v-if="navigation.length">
         <ul>
+          <li>
+            <span>
+              <NuxtLink
+              class="menu-item"
+              :to="{ path: '/', hash: '#home'}"
+            >
+              Home
+            </NuxtLink>
+            </span>  
+          </li>
           <li v-for="(item, index) in navigation" :key="index">
             <span v-if="item">
               <NuxtLink
@@ -56,11 +66,11 @@
       </div>
     </div>
     <div class="header-c">
-      <NuxtLink :to="{ path: '/'}">
-      <div class="logo">
-        <img src="/img/logo.svg" class="white" alt="" />
-        <img src="/img/logo-b.svg" class="black" alt="" />
-      </div>
+      <NuxtLink :to="{ path: linkOnLogo()}">
+        <div class="logo">
+          <img src="/img/logo.svg" class="white" alt="" />
+          <img src="/img/logo-b.svg" class="black" alt="" />
+        </div>
       </NuxtLink>
     </div>
     <div class="header-r">
@@ -94,6 +104,14 @@ import { useBlogStore } from "@/store/blog";
 const route = useRoute();
 const router = useRouter();
 const currentRoute = router.currentRoute;
+
+const linkOnLogo = () => {
+  if (currentRoute.value.name.includes('blog')) {
+    return '/blog'
+  } else {
+    return '/'
+  }
+};
 
 /// main store
 const mainStore = useMainStore()

@@ -89,6 +89,8 @@
 <script setup> 
 import { onMounted, watch, computed } from 'vue';
 import { useAdminStore } from "@/store/admin";
+import { useConfirm } from '../../compositions/useConfirm';
+const { isConfirmed } = useConfirm();
 const adminStore = useAdminStore();
 const loading = computed(() => adminStore.loading);
 
@@ -129,20 +131,22 @@ const editEvent= async () => {
 };
 
 const deleteGalleryItem = async (index) => {
-  event.value.file = []
-  await adminStore.fetchData('events', 'put', event)
-};
-
-const deleteEvent = async () => {
-  const { success } = await adminStore.fetchData('events', 'delete', event); 
-  if (success) {
-    router.push({ path: "/admin/events" });
+  //// ask confirmation
+  if (await isConfirmed()) {
+    event.value.file = []
+    await adminStore.fetchData('events', 'put', event)
   }
 };
 
-// watch(event.value.title, (newValue) => {
-//   console.log('newValue ', newValue)
-// })
+const deleteEvent = async () => {
+  //// ask confirmation
+  if (await isConfirmed()) {
+    const { success } = await adminStore.fetchData('events', 'delete', event); 
+    if (success) {
+      router.push({ path: "/admin/events" });
+    }
+  }
+};
 
 </script>
 
