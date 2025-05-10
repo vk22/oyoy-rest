@@ -11,7 +11,7 @@
       <SwiperGalleryModal></SwiperGalleryModal>
     </Transition>
     <Transition>
-      <NewsModal></NewsModal>
+      <EventsModal></EventsModal>
     </Transition>
     <Header></Header>
     <slot />

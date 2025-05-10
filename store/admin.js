@@ -2,7 +2,6 @@ import { defineStore } from 'pinia'
 import { useToast } from "vue-toast-notification";
 const toast = useToast();
 import 'vue-toast-notification/dist/theme-bootstrap.css';
-import useConfirm from '../../compositions/confirmation';
 
 
 export const useAdminStore = defineStore('admin', {
@@ -24,7 +23,9 @@ export const useAdminStore = defineStore('admin', {
         method: method,
         body: body
       });
-      this.setLoading(false)
+      this.setLoading(false);
+
+      /// toast
       if (process.client) {
         if (data.value.success) {
           toast.success(data.value.message, {

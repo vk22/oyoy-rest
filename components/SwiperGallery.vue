@@ -97,11 +97,10 @@ const slidesPerView = computed(() => {
 @import "assets/scss/variables.scss";
 
 .gallery-index {
-
   background: #fff;
   position: relative;
   padding-bottom: 0!important;
-
+  
   .swiper-slide {
     img {
       cursor: pointer;

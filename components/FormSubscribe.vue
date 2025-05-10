@@ -75,9 +75,10 @@ const selectTime = (event) => {
 @import "assets/scss/variables.scss";
 
 .subscribe-form {
-
+  position: sticky;
+  top: 130px;
   border: 1px solid #ebebeb;
-  padding: 2rem 1.5rem;
+  padding: 2.5rem 2.25rem;
 
   @include for-phone-only {
     width: 100%;

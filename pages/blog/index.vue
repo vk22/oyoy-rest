@@ -45,13 +45,11 @@
             <div class="subscribe-preview__btn">
               <div class="btn" @click="dialogIsOpen = true">Get the Newsletter</div>
             </div>
-
           </div>
-
         </v-col>
       </v-row>
       <v-row v-if="posts.length">
-        <v-col v-for="(post, index) in posts" :key="index" cols="12" sm="4">
+        <v-col v-for="(post, index) in posts" :key="index" cols="12" sm="6">
           <NuxtLink :to="{ name: 'blog-id', params: { id: post.url } }">
             <div class="post-item slideUp fade-in">
               <div class="img-wrap img-1">
@@ -68,7 +66,6 @@
             </div>
           </NuxtLink>
         </v-col>
-
       </v-row>
 
     </v-container>

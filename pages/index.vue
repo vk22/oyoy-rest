@@ -7,7 +7,8 @@
       <ImageFullWidth :type="'image'" :path="'/img/full-w-banner-1.jpg'" :title="''" v-if="menuIsActive"></ImageFullWidth>
       <WineListLink v-if="wineListIsActive"></WineListLink> 
       <SwiperGallery></SwiperGallery>
-      <NewsIndex></NewsIndex>
+      <EventsIndex></EventsIndex>
+      <BlogIndex></BlogIndex>
     </section>
     <Footer></Footer>
 </template>

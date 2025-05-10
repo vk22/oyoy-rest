@@ -22,6 +22,15 @@
           </v-row>
       </v-container>
     </section>
+    <section class="blog-page-related">
+      <v-container class="blog-container">
+          <v-row>
+            <v-col>
+              <BlogRelatedPosts :currentPost="post._id"/>
+            </v-col>
+          </v-row> 
+      </v-container>
+    </section>
     <Footer></Footer>
   </div>
 </template>
@@ -34,14 +43,13 @@ import FormSubscribe from '~/components/FormSubscribe.vue'
 
 const route = useRoute()
 const { data } = await useFetch(`/api/blog/${route.params.id}`)
-const post = ref(data._rawValue)
+const post = ref(data.value)
 const pageTitle = post.value.title.substring(0, 40)
 const pageDescription =  truncate(post.value.text.replace(/<[^>]*>/g, ''), 159)
 
 function truncate(str, n){
   return (str.length > n) ? str.slice(0, n-1) + '...' : str;
 };
-
 
 useHead({
   title: pageTitle + ' | OyOy Restaurant',
@@ -177,6 +185,10 @@ useHead({
       }
     }
   } 
+
+  .blog-page-related {
+    background: #f9fbff;
+  }
 
   @keyframes scaleIn {
   0% {
