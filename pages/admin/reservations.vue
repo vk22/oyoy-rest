@@ -86,20 +86,20 @@
     <v-container>
       <v-row>
         <v-col>
-          <div class="admin-title" v-if="reservationItems">
+          <div class="admin-title">
             <h1>Reservations ({{reservationItems.length}})</h1>
             <div class="reservation-check" v-if="reservationCheckboxShow">
               <v-checkbox
                 v-model="reservationAvailable.isAvailable"
                 label="Reservations Enabled"
+                @update:modelValue="setReservationAvailableState"
               ></v-checkbox>
             </div>
           </div>
         </v-col>
       </v-row>
-      <div class="orders-table">
+      <div class="orders-table" v-if="reservationItems.length">
         <v-row class="orders-table__header">
-          <!-- <v-col cols="1"></v-col> -->
           <v-col cols="2">Name</v-col>
           <v-col cols="2">Phone</v-col>
           <v-col cols="2">Email</v-col>
@@ -115,7 +115,6 @@
           @click="selectItem(item)"
         >
           <v-row>
-            <!-- <v-col cols="1"><v-checkbox></v-checkbox></v-col> -->
             <v-col cols="2">{{ item.name }}</v-col>
             <v-col cols="2">{{ item.phone }}</v-col>
             <v-col cols="2">{{ item.email }}</v-col>
@@ -142,7 +141,7 @@ const { isConfirmed } = useConfirm();
 const { $formatDate } = useNuxtApp();
 const reservationDialogIsOpen = ref(false);
 const reservationSelected = ref();
-const reservationItems = ref();
+const reservationItems = ref([]);
 const reservationAvailable = ref(undefined);
 const reservationCheckboxShow = ref(false);
 const adminStore = useAdminStore();
@@ -179,23 +178,24 @@ const deleteItem = async (item) => {
       method: "delete",
       body: item,
     });
-    if (data._rawValue.success) {
+    if (data.value.success) {
       reservationDialogIsOpen.value = false;
       reservationItems.value = data.value.reservations;
     }
   }
-
   //
 };
 
 getReservationAvailableState()
-getReservationsList()
+//getReservationsList()
 
-watch(() => reservationAvailable, () => {
-  setReservationAvailableState()
-}, {
-  deep: true
-});
+// watch(() => reservationAvailable, (data) => {
+//   if (data.value.isAvailable !== reservationAvailable.value.isAvailable) {
+//     setReservationAvailableState()
+//   }
+// }, {
+//   deep: true
+// });
 
 </script>
 

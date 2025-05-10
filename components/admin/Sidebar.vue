@@ -31,7 +31,7 @@ export default {
         {
           name: "Reservations",
           route: "/admin/reservations",
-          icon: "mdi-basket",
+          icon: "mdi-format-list-bulleted",
         },
         {
           name: "Subscribers",
