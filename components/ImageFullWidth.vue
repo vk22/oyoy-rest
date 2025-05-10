@@ -27,7 +27,7 @@ defineProps(["type","path", "title"]);
   width: 100%;
   height: 75vh;
   position: relative;
-  margin: 2rem 0;
+  margin: 1rem 0;
   
 
   @include for-phone-only {

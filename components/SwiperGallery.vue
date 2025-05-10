@@ -99,7 +99,7 @@ const slidesPerView = computed(() => {
 .gallery-index {
   background: #fff;
   position: relative;
-  padding-bottom: 0!important;
+  padding: 0!important;
   
   .swiper-slide {
     img {

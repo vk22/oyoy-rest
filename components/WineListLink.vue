@@ -32,9 +32,15 @@
 <style lang="scss">
 @import "assets/scss/variables.scss";
 
+.section-title {
+  h2 {
+    margin-bottom: 1.5rem;
+  }
+}
 .wine-list {
   background: #fff;
   padding: 4rem;
+
   .wine-list-sections-nav {
     margin-bottom: 1rem;
     display: flex;

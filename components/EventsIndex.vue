@@ -60,7 +60,6 @@ const modalToggle = (index) => {
 .events-index {
   display: flex;
   background: #f9fbff;
-  padding-top: 10rem !important;
   padding-bottom: 3rem !important;
 
   @include for-phone-only {

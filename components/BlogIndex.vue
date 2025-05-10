@@ -46,7 +46,7 @@ const lastPosts = posts.value.slice(0,2);
 .blog-index {
   display: flex;
   background: #f9fbff;
-  padding-top: 3rem !important;
+  // padding-top: 3rem !important;
 
   @include for-phone-only {
     flex-direction: row;
