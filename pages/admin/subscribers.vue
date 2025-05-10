@@ -58,18 +58,18 @@
           <div class="orders-table">
             <v-row class="orders-table__header">
               <!-- <v-col cols="1"></v-col> -->
-              <v-col cols="3">Name</v-col>
-              <v-col cols="3">Email</v-col>
-              <v-col cols="3">Date</v-col>
-              <v-col cols="3">Time</v-col>
+              <v-col cols="4">Name</v-col>
+              <v-col cols="4">Email</v-col>
+              <v-col cols="4">Created</v-col>
+              <!-- <v-col cols="3">Time</v-col> -->
             </v-row>
             <div class="orders-table__item" v-for="(item, index) in subscribers" :key="index" @click="selectItem(item)">
               <v-row>
                 <!-- <v-col cols="1"><v-checkbox></v-checkbox></v-col> -->
-                <v-col cols="3">{{ item.name }}</v-col>
-                <v-col cols="3">{{ item.email }}</v-col>
-                <v-col cols="3"> {{ item.date }}</v-col>
-                <v-col cols="3">{{ item.time }}</v-col>
+                <v-col cols="4">{{ item.name }}</v-col>
+                <v-col cols="4">{{ item.email }}</v-col>
+                <v-col cols="4"> {{ item.date }}</v-col>
+                <!-- <v-col cols="3">{{ item.time }}</v-col> -->
               </v-row>
             </div>
           </div>
@@ -99,6 +99,11 @@ const { data } = await useFetch("/api/subscribers", {
   method: "get",
 });
 subscribers.value = data.value.subscribers;
+subscribers.value.map((item) => {
+  if (item.date) {
+    item.date = $formatDate(item.date);
+  }
+});
 
 const selectItem = (item) => {
   selected.value = item;

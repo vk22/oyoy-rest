@@ -23,6 +23,7 @@ class SubscribersService {
         console.log('SubscribersService add ', data)
         const candidate = await Subscribers.findOne({ 'email': data.email });
         if (candidate) return result.dublicate;
+        data.date = new Date().toISOString();
         const newItem = new Subscribers(data);
         try {
             const saving = await newItem.save();
