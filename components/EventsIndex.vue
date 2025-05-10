@@ -1,10 +1,10 @@
 <template>
-  <section class="index-section events-index" id="events">
+  <section class="index-section events-index" id="events" v-if="events.length">
     <v-container fluid>
       <v-row>
         <v-col class="d-flex justify-center">
           <div class="section-title fadeIn-2">
-            <h2 v-if="events.length > 0">Events</h2>
+            <h2>Events</h2>
           </div>
         </v-col>
       </v-row>
@@ -39,8 +39,6 @@
             </div>
           </div>
         </v-col>
-
-
       </v-row>
     </v-container>
   </section>
