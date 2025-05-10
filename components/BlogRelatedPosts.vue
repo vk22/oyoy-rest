@@ -4,7 +4,7 @@
       <v-row>
         <v-col class="d-flex justify-center">
           <div class="section-title fadeIn-2">
-            <h3 v-if="posts.length > 0">Relaited Posts</h3>
+            <h3 v-if="posts.length > 0">Related Posts</h3>
           </div>
         </v-col>
       </v-row>
