@@ -9,14 +9,16 @@ const SchemaData = new Schema({
   text: {
     type: String,
   },
-  imageMain: {
-    url: {
-      type: String,
-    },
-    type: {
-      type: String,
+  contentItems: [
+    {
+      type: {
+        type: String,
+      },
+      data: {
+        type: String
+      }
     }
-  },
+  ],
   images: [
     {
       file: {

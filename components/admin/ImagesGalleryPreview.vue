@@ -97,7 +97,7 @@ const deleteGalleryItem = async (image) => {
 
 .gallery-item-wrap {
   position: relative;
-  width: 150px;
+  width: 100px;
   display: inline-flex;
   margin: 0.25rem;
 
@@ -112,23 +112,25 @@ const deleteGalleryItem = async (image) => {
       font-weight: 700;
       cursor: pointer;
       position: relative;
-      width: 24px;
-      height: 24px;
+      width: 20px;
+      height: 20px;
       background: #111;
       color: #fff;
       display: flex;
       align-items: center;
       justify-content: center;
       border-radius: 99px;
+      transition: all 0.15s ease;
 
       svg {
-        transform: scale(0.65);
+        transform: scale(0.5);
         transition: all 0.15s ease;
       }
 
       &:hover {
+        background: #ba0000;
         svg {
-          transform: scale(0.75);
+          transform: scale(0.6);
         }
       }
     }

@@ -7,9 +7,9 @@
           <div class="medium">{{ topslideText.subtitle }}</div>
         </div>
       </div>
-      <!-- <div class="nav fadeIn-4">
+      <div class="nav fadeIn-4">
           <span class="dot" v-for="(item, index) in gallery" :key="index" :class="{'active': index === activeIndex}" @click="goToSlide(index)"></span>
-      </div> -->
+      </div>
       <!-- <div class="go-down fadeIn-4" @click="scrollToElement" :class="{'loop': needToLoop}">
         <img src="/img/arrow-down.svg" alt="" />
       </div> -->

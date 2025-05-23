@@ -55,27 +55,6 @@
                   </div>  
 
               </draggable>
-
-            <!-- <div class="menu-item" v-for="(menuItem, index) in menu.content" :key="index">
-              <div class="item-content">
-                <div class="mb-3">
-                  <v-text-field v-model="menuItem.title" variant="outlined" label="Title"
-                    density="compact"></v-text-field>
-                </div>
-                <div class="mb-3">
-                  <v-text-field v-model="menuItem.ingredients" variant="outlined" label="Ingredients"
-                    density="compact"></v-text-field>
-                </div>
-                <div class="mb-3">
-                  <v-text-field v-model="menuItem.price" variant="outlined" label="Price"
-                    density="compact"></v-text-field>
-                </div>
-              </div>
-              <div class="remove-item">
-                <div class="admin-sec-btn btn-sm mr-2" @click="removeItem(index)">Remove</div>
-              </div>
-            </div> -->
-
           </div>
         </v-col>
       </v-row>
@@ -107,7 +86,7 @@ const adminStore = useAdminStore();
 const route = useRoute()
 const router = useRouter()
 const { data } = await useFetch(`/api/menu/${route.params.id}`)
-const menu = ref(data._rawValue)
+const menu = ref(data.value)
 
 function addItem(files) {
   menu.value.content.push({
@@ -154,16 +133,5 @@ const deleteMenu = async () => {
   border-radius: 8px;
   margin-bottom: 1rem;
   max-width: 900px;
-
-  .handle {
-    cursor: grab;
-    margin-bottom: 2rem;
-    display: flex;
-
-    i {
-      margin-left: .5rem;
-    }
-
-  }
 }
 </style>

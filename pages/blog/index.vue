@@ -1,5 +1,5 @@
 <template>
-  <section class="blog-list" v-if="postsAll.length">
+  <section class="blog-list" v-if="posts.length">
     <v-dialog v-model="dialogIsOpen" persistent max-width="600px">
       <div class="subscribe-form-modal">
         <div class="close" @click="dialogIsOpen = false">
@@ -23,20 +23,7 @@
         <FormSubscribe></FormSubscribe>
       </div>
     </v-dialog>
-    <div class="blog-list__header" v-if="postLast">
-      <v-container class="blog-container">
-        <div class="last-post-info slideUp fade-in">
-          <div class="blog-title">
-            <h2>{{ postLast.title }}</h2>
-          </div>
-          <div class="post-date">{{ useNuxtApp().$formatDate(postLast.date) }}</div>
-          <NuxtLink :to="{ name: 'blog-id', params: { id: postLast.url } }">
-            <div class="btn inverse">Read article</div>
-          </NuxtLink>
-        </div>
-      </v-container>
-      <div class="blog-top-img" :style="{ backgroundImage: 'url(' + postLast.images[0].file.url + ')' }"></div>
-    </div>
+    <BlogLastPostGallery :slides="lastPosts"></BlogLastPostGallery>
     <v-container class="blog-container">
       <v-row>
         <v-col>
@@ -100,9 +87,8 @@ useHead({
 import FormSubscribe from '~/components/FormSubscribe.vue'
 import { useBlogStore } from '@/store/blog'
 const store = useBlogStore()
-const postsAll = computed(() => store.getItems)
-const postLast = postsAll.value[0];
-const posts = postsAll.value.slice(1)
+const posts = computed(() => store.getItems)
+const lastPosts = posts.value.slice(0, 3);
 
 const dialogIsOpen = ref(false)
 
@@ -163,9 +149,10 @@ onMounted(() => {
   padding-bottom: 5rem;
 
   &__header {
+    background: red;
     position: relative;
     width: 100%;
-    height: 550px;
+    height: 650px;
     display: flex;
     align-items: flex-start;
     justify-content: flex-end;
@@ -204,45 +191,7 @@ onMounted(() => {
       z-index: 99;
     }
 
-    .blog-title {
-      position: relative;
-      z-index: 99;
-      margin-bottom: 1rem;
-      display: flex;
-      
-      @include for-phone-only {
-        width: 100%;
-        justify-content: center;
-      }
 
-      @include for-tablet-portrait-up {
-        width: 50vw;
-        justify-content: flex-start;
-      }
-
-      h2 {
-        font-family: $font-sans !important;
-        font-size: 2.5rem;
-        line-height: 3rem;
-        text-transform: uppercase;
-        color: #fff;
-        text-align: left;
-        font-weight: 400;
-      }
-    }
-
-    .post-date {
-      position: relative;
-      z-index: 999;
-      color: #e7e7e7;
-      text-align: left;
-      font-weight: 500;
-      margin-bottom: 2rem;
-    }
-
-    .btn {
-      width: 200px;
-    }
 
     .blog-top-img {
       position: absolute;

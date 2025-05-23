@@ -6,6 +6,7 @@ export default defineEventHandler( async (event) => {
     const postItem = await Blog.findById(body._id)
     if (!postItem) return false
     postItem.title = body.title
+    postItem.contentItems = body.contentItems
     postItem.text = body.text
     postItem.url = body.url
     const imagesFiltered = body.images.filter((item, index) => {

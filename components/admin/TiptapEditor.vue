@@ -1,85 +1,63 @@
 <template>
-  <div>
-    <div v-if="editor">
+  <div class="tiptap-container">
+    <div v-if="editor" class="tiptap-tools">
       <button class="tiptap-btn" @click="editor.chain().focus().toggleBold().run()"
         :disabled="!editor.can().chain().focus().toggleBold().run()" :class="{ 'is-active': editor.isActive('bold') }">
-        bold
+        Bold
       </button>
       <button class="tiptap-btn" @click="editor.chain().focus().toggleItalic().run()"
         :disabled="!editor.can().chain().focus().toggleItalic().run()"
         :class="{ 'is-active': editor.isActive('italic') }">
-        italic
+        Italic
       </button>
       <button class="tiptap-btn" @click="editor.chain().focus().toggleStrike().run()"
         :disabled="!editor.can().chain().focus().toggleStrike().run()"
         :class="{ 'is-active': editor.isActive('strike') }">
-        strike
-      </button>
-      <button class="tiptap-btn" @click="editor.chain().focus().toggleCode().run()"
-        :disabled="!editor.can().chain().focus().toggleCode().run()" :class="{ 'is-active': editor.isActive('code') }">
-        code
-      </button>
-      <button class="tiptap-btn" @click="editor.chain().focus().unsetAllMarks().run()">
-        clear marks
-      </button>
-      <button class="tiptap-btn" @click="editor.chain().focus().clearNodes().run()">
-        clear nodes
+        Strike
       </button>
       <button class="tiptap-btn" @click="editor.chain().focus().setParagraph().run()"
         :class="{ 'is-active': editor.isActive('paragraph') }">
-        paragraph
+        Paragraph
       </button>
       <button class="tiptap-btn" @click="editor.chain().focus().toggleHeading({ level: 1 }).run()"
         :class="{ 'is-active': editor.isActive('heading', { level: 1 }) }">
-        h1
+        H1
       </button>
       <button class="tiptap-btn" @click="editor.chain().focus().toggleHeading({ level: 2 }).run()"
         :class="{ 'is-active': editor.isActive('heading', { level: 2 }) }">
-        h2
+        H2
       </button>
       <button class="tiptap-btn" @click="editor.chain().focus().toggleHeading({ level: 3 }).run()"
         :class="{ 'is-active': editor.isActive('heading', { level: 3 }) }">
-        h3
+        H3
       </button>
       <button class="tiptap-btn" @click="editor.chain().focus().toggleHeading({ level: 4 }).run()"
         :class="{ 'is-active': editor.isActive('heading', { level: 4 }) }">
-        h4
-      </button>
-      <button class="tiptap-btn" @click="editor.chain().focus().toggleHeading({ level: 5 }).run()"
-        :class="{ 'is-active': editor.isActive('heading', { level: 5 }) }">
-        h5
-      </button>
-      <button class="tiptap-btn" @click="editor.chain().focus().toggleHeading({ level: 6 }).run()"
-        :class="{ 'is-active': editor.isActive('heading', { level: 6 }) }">
-        h6
+        H4
       </button>
       <button class="tiptap-btn" @click="editor.chain().focus().toggleBulletList().run()"
         :class="{ 'is-active': editor.isActive('bulletList') }">
-        bullet list
+        Bullet list
       </button>
       <button class="tiptap-btn" @click="editor.chain().focus().toggleOrderedList().run()"
         :class="{ 'is-active': editor.isActive('orderedList') }">
-        ordered list
-      </button>
-      <button class="tiptap-btn" @click="editor.chain().focus().toggleCodeBlock().run()"
-        :class="{ 'is-active': editor.isActive('codeBlock') }">
-        code block
+        Ordered list
       </button>
       <button class="tiptap-btn" @click="editor.chain().focus().toggleBlockquote().run()"
         :class="{ 'is-active': editor.isActive('blockquote') }">
-        blockquote
+        Blockquote
       </button>
       <button class="tiptap-btn" @click="editor.chain().focus().setHorizontalRule().run()">
-        horizontal rule
+        Horizontal rule
       </button>
       <button class="tiptap-btn" @click="editor.chain().focus().setHardBreak().run()">
-        hard break
+        Hard break
       </button>
       <button class="tiptap-btn" @click="editor.chain().focus().undo().run()" :disabled="!editor.can().chain().focus().undo().run()">
-        undo
+        Undo
       </button>
       <button class="tiptap-btn" @click="editor.chain().focus().redo().run()" :disabled="!editor.can().chain().focus().redo().run()">
-        redo
+        Redo
       </button>
       <button class="tiptap-btn" @click="addImage">Add image from URL</button>
       <button class="tiptap-btn" @click="setLink" :class="{ 'is-active': editor.isActive('link') }">
@@ -128,18 +106,13 @@ const addImage = () => {
   }
 }
 
-
-
 const setLink = () => {
-
       const previousUrl = editor.value.getAttributes('link').href
       const url = window.prompt('URL', previousUrl)
-
       // cancelled
       if (url === null) {
         return
       }
-
       // empty
       if (url === '') {
         editor.value
@@ -151,7 +124,6 @@ const setLink = () => {
 
         return
       }
-
       // update link
       editor.value
         .chain()
@@ -162,6 +134,9 @@ const setLink = () => {
 
 }
 
+// const insertContent = () => {
+//   editor.value.commands.insertContent('<h1>Example Text</h1>')
+// }
 
 onBeforeUnmount(() => {
   unref(editor).destroy();
@@ -178,9 +153,18 @@ watch(() => props.modelValue, (value) => {
 
 <style lang="scss">
 
+
+.tiptap-container {
+  // background: #f2f2f2;
+  //border: 1px solid #dfdfdf;
+  padding: 1rem;
+  border-radius: .5rem;
+}
 .tiptap {
-  border: 1px solid #a4a4a4;
-  padding: 40px 20px;
+  background: #fff;
+  border: 1px solid #dfdfdf;
+  border-radius: .5rem;
+  padding: 20px 20px;
   min-height: 200px;
 
   h1 {
@@ -216,12 +200,13 @@ watch(() => props.modelValue, (value) => {
   display: inline-flex;
   align-items: center;
   justify-content: center;
-  padding: 1px 4px;
+  padding: .2rem .5rem;
   margin: 1px;
-  border: 1px solid #bbb;
+  background: rgba($color: #3d2514, $alpha: 0.05);
+  border: 0px solid #3d251414;
   text-align: left;
-  font-weight: 600;
-  font-size: 0.75rem;
+  font-weight: 500;
+  font-size: 0.85rem;
   text-transform: none;
   letter-spacing: 0px;
   color: #111;
@@ -230,7 +215,6 @@ watch(() => props.modelValue, (value) => {
   transition-duration: 0.25s;
   transition-timing-function: ease-out;
   border-radius: 4px;
-  background-color: #fff;
 
   .icon {
     font-size: 16px;
@@ -240,9 +224,15 @@ watch(() => props.modelValue, (value) => {
   }
 
   &:hover {
-    background-color: #e3e3e3;
+    background: rgba($color: #3d2514, $alpha: 0.15);
     color: #111;
   }
+}
+
+.tiptap-tools {
+  background: transparent;
+  padding-bottom: 1rem;
+  
 }
 
 </style>

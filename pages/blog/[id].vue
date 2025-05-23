@@ -11,9 +11,11 @@
       <v-container class="blog-container">
           <v-row>
             <v-col cols="12" md="8" class="text-col">
-              <div v-html="post.text"></div>
-              <div class="post-gallery" v-if="post.gallery">
-                  <SwiperGalleryBlog :gallery="post.gallery" v-if="post.gallery.length"></SwiperGalleryBlog>
+              <div v-for="(item, index) in post.contentItems" :key="index" class="text-paragraph">
+                <div v-if="item.type === 'text'" v-html="item.data"></div>
+                <div v-if="item.type === 'gallery'">
+                    <SwiperGalleryBlog :gallery="post.gallery" v-if="post.gallery.length"></SwiperGalleryBlog>
+                </div>
               </div>
             </v-col>
             <v-col cols="12" md="4">
@@ -44,8 +46,9 @@ import FormSubscribe from '~/components/FormSubscribe.vue'
 const route = useRoute()
 const { data } = await useFetch(`/api/blog/${route.params.id}`)
 const post = ref(data.value)
-const pageTitle = post.value.title.substring(0, 40)
-const pageDescription =  truncate(post.value.text.replace(/<[^>]*>/g, ''), 159)
+const pageTitle = post.value.title.substring(0, 40);
+const textFromContent = post.value.contentItems.find(item => item.type === 'text');
+const pageDescription =  truncate(textFromContent.data.replace(/<[^>]*>/g, ''), 159)
 
 function truncate(str, n){
   return (str.length > n) ? str.slice(0, n-1) + '...' : str;
@@ -162,7 +165,21 @@ useHead({
         @include for-tablet-portrait-up {
           padding-right: 2rem;
         }
+
     }
+
+    .text-paragraph {
+      margin-bottom: 2rem;
+    }  
+    h2 {
+      font-family: $font-sans!important;
+      font-size: 2.25rem;
+      line-height: 2.75rem;
+      text-transform: uppercase;
+      font-weight: 500!important;
+      margin-bottom: 1rem;
+    }
+
     h3 {
       font-family: $font-sans!important;
       font-size: 1.5rem;
@@ -175,7 +192,7 @@ useHead({
     p {
       font-size: 1rem;
       line-height: 1.75;
-      margin-bottom: 2rem;
+      margin-bottom: 1.5rem;
     }
     a {
       color: #111;

@@ -9,7 +9,6 @@
               <div class="img-wrap img-1 slideUp fade-in loop">
                 <NuxtImg src="/img/oyster2.png" />
               </div>
-
             </div>
           </v-col>
           <!-- col -->
