@@ -48,11 +48,11 @@
           ></v-text-field>
         </v-col>
       </v-row>
-      <v-row v-if="post.text">
+      <!-- <v-row v-if="post.text">
         <v-col>
            <AdminTiptapEditor v-model="post.text"></AdminTiptapEditor>
         </v-col>
-      </v-row>
+      </v-row> -->
       <v-row>
         <v-col>
           <div class="content-item-container">  

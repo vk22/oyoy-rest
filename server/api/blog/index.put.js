@@ -2,7 +2,6 @@ import { Blog } from "~~/server/models/blog-model";
 
 export default defineEventHandler( async (event) => {
     const body = await readBody(event)
-    console.log('body.images ', body.images)
     const postItem = await Blog.findById(body._id)
     if (!postItem) return false
     postItem.published = body.published
@@ -26,7 +25,6 @@ export default defineEventHandler( async (event) => {
         }
       }
     })
-    console.log('imagesFiltered ', imagesFiltered)
     postItem.images = imagesFiltered
     postItem.gallery = galleryFiltered
     const saveItem = await postItem.save()

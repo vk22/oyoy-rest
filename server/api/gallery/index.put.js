@@ -2,7 +2,6 @@ import { Gallery } from "~~/server/models/gallery-model";
 
 export default defineEventHandler(async (gallery) => {
   const body = await readBody(gallery)
-  console.log('galleru put body ', body)
   const galleryItem = await Gallery.findById(body._id)
   if (!galleryItem) return false
   galleryItem.name = body.name
@@ -15,7 +14,6 @@ export default defineEventHandler(async (gallery) => {
     }
 
   })
-  console.log('imagesFiltered ', imagesFiltered)
   galleryItem.images = imagesFiltered
   const saveItem = await galleryItem.save()
   if (saveItem) {
