@@ -143,6 +143,8 @@
 <script setup>
 import { onMounted, watch, computed, nextTick } from "vue";
 import { useAdminStore } from "@/store/admin";
+import { useConfirm } from "../../compositions/useConfirm";
+const { isConfirmed } = useConfirm();
 const adminStore = useAdminStore();
 
 definePageMeta({
@@ -176,8 +178,14 @@ const addContentItem = async (type) => {
   }
 };
 
-console.log("uploaderRef ", uploaderRef.value);
-console.log("uploadeGalleryrRef ", uploadeGalleryrRef.value);
+const contentItemGalleryExist = computed(() => {
+  const exist = post.value.contentItems.find((item) => item.type === "gallery");
+  if (exist) {
+    return true
+  } else {
+    return false
+  }
+});
 
 const removeContentItem = async (index) => {
   //// ask confirmation
