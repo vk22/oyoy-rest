@@ -51,6 +51,9 @@ const SchemaData = new Schema({
   ],
   date: {
     type: Date
+  },
+  published: {
+    type: Boolean
   }
 }, { 
   versionKey: false 

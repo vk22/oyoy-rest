@@ -8,24 +8,9 @@
           </div>
         </v-col>
       </v-row>
-
       <v-row v-if="posts.length" class="justify-center">
         <v-col v-for="(post, index) in relatedPosts" :key="index" cols="12" sm="6">
-          <NuxtLink :to="{ name: 'blog-id', params: { id: post.url } }">
-            <div class="post-item slideUp fade-in">
-              <div class="img-wrap img-1">
-                <NuxtImg :src="post.images[0].file.url" class="img-cover" />
-              </div>
-              <div class="text-wrap">
-                <div class="title">
-                  {{ post.title }}
-                </div>
-                <div class="date">
-                  {{ post.date }}
-                </div>
-              </div>
-            </div>
-          </NuxtLink>
+          <BlogPostItem :post="post"></BlogPostItem>
         </v-col>
       </v-row>
     </v-container>

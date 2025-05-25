@@ -94,7 +94,14 @@
           </div>
         </v-col>
       </v-row>
-
+      <v-row>
+        <v-col>
+          <v-checkbox
+            v-model="post.published"
+            label="Published"
+          ></v-checkbox>
+        </v-col>
+      </v-row>
       <v-row>
         <v-col>
           <hr />

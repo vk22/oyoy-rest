@@ -37,24 +37,9 @@
       </v-row>
       <v-row v-if="posts.length">
         <v-col v-for="(post, index) in posts" :key="index" cols="12" sm="6">
-          <NuxtLink :to="{ name: 'blog-id', params: { id: post.url } }">
-            <div class="post-item slideUp fade-in">
-              <div class="img-wrap img-1">
-                <NuxtImg :src="post.images[0].file.url" class="img-cover" />
-              </div>
-              <div class="text-wrap">
-                <div class="title">
-                  {{ post.title }}
-                </div>
-                <div class="date">
-                  {{ post.date }}
-                </div>
-              </div>
-            </div>
-          </NuxtLink>
+          <BlogPostItem :post="post"></BlogPostItem>
         </v-col>
       </v-row>
-
     </v-container>
   </section>
   <section v-else>
@@ -89,7 +74,6 @@ import { useBlogStore } from '@/store/blog'
 const store = useBlogStore()
 const posts = computed(() => store.getItems)
 const lastPosts = posts.value.slice(0, 3);
-
 const dialogIsOpen = ref(false)
 
 /// handleScroll
@@ -214,43 +198,6 @@ onMounted(() => {
         content: ' ';
         z-index: 1;
         display: block;
-      }
-    }
-  }
-
-  .post-item {
-    cursor: pointer;
-
-
-    .img-wrap {
-      position: relative;
-      // height: 400px;
-      padding-top: 65%;
-      margin-bottom: 1rem;
-      overflow: hidden;
-
-      img {
-        @include base-transition(all);
-      }
-    }
-
-    .text-wrap {
-      //padding: 0 2rem;
-    }
-
-    .title {
-      font-size: 1.25rem;
-      text-transform: uppercase;
-      color: #111;
-    }
-
-    .date {
-      color: #999;
-    }
-
-    &:hover {
-      .img-wrap img {
-        transform: scale(1.05);
       }
     }
   }

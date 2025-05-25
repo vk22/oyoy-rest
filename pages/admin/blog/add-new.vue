@@ -48,24 +48,6 @@
           ></v-text-field>
         </v-col>
       </v-row>
-
-      <!-- <v-row v-for="(item, index) in post.contentItems" :key="index">
-        <v-col v-if="item.type === 'text'"> 
-          <AdminTiptapEditor v-model="item.data"></AdminTiptapEditor>
-        </v-col>
-        <v-col v-if="item.type === 'gallery'"> 
-          <div class="images-zona">
-            <v-row>
-              <v-col>
-                <p class="label">Gallery</p>
-                <AdminFileUploader :type="'posts-gallery'" @files-dropped2="addGalleryFiles" ref="uploadeGalleryrRef"></AdminFileUploader> 
-                {{ files }}
-              </v-col>
-            </v-row>
-          </div>
-        </v-col>  
-      </v-row> -->
-
       <v-row>
         <v-col>
           <div class="content-item-container">
@@ -139,25 +121,18 @@
         </v-col>
       </v-row>
 
-      <!-- <v-row>
-        <v-col>
-          <div class="admin-sec-btn" @click="addContentItem('text')">
-            add text
-          </div>
-          <div class="admin-sec-btn" @click="addContentItem('gallery')">
-            add gallery
-          </div>
-        </v-col>
-      </v-row> -->
-
-      <!-- 
       <v-row>
         <v-col>
-          <AdminTiptapEditor v-model="post.text"></AdminTiptapEditor>
+          <v-checkbox
+            v-model="post.published"
+            label="Published"
+          ></v-checkbox>
         </v-col>
-      </v-row> -->
+      </v-row>
       <v-row>
         <v-col>
+          <hr />
+          <br />
           <div class="admin-main-btn" @click="savePost()">Save</div>
         </v-col>
       </v-row>
@@ -180,6 +155,7 @@ const post = ref({
   images: [],
   gallery: [],
   contentItems: [],
+  published: true
 });
 const uploaderRef = ref(null);
 let uploadeGalleryrRef = ref(null);

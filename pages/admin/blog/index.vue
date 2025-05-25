@@ -13,7 +13,7 @@
       </v-row>  
       <v-row>
         <v-col>
-          <div class="list-item" v-for="(item, index) in posts" :key="index">
+          <div class="list-item" v-for="(item, index) in posts" :key="index" :class="{'hidden': !item.published}">
             <v-row>
               <v-col md="2">
                 <nuxt-link :to="'/admin/blog/' + item.url" v-if="item.images.length">
@@ -59,9 +59,14 @@ definePageMeta({
   layout: "admin",
   middleware: ["auth"]
 });
-const { data } = await useFetch('/api/blog')
+const { data } = await useFetch('/api/blog', {
+  method: 'GET',
+  params: {
+      published: 0
+  }
+})
 const posts = data.value.data
-console.log('posts ', posts)
+// console.log('posts ', posts)
 
 </script>
 
@@ -69,6 +74,10 @@ console.log('posts ', posts)
 
 <style lang="scss" scoped>
 @import "assets/scss/admin.scss";
+
+.hidden {
+  opacity: .5;
+}
 
 
 </style>

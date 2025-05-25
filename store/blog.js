@@ -13,7 +13,12 @@ export const useBlogStore = defineStore("BlogStore", {
     },
     actions: {
         async fetchData() {
-          const { data } = await useFetch('/api/blog')
+          const { data } = await useFetch('/api/blog', {
+            method: 'GET',
+            params: {
+                published: 1
+            }
+          })
           this.items = data.value.data
         },
         setModalState(data) {

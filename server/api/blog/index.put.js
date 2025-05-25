@@ -5,6 +5,7 @@ export default defineEventHandler( async (event) => {
     console.log('body.images ', body.images)
     const postItem = await Blog.findById(body._id)
     if (!postItem) return false
+    postItem.published = body.published
     postItem.title = body.title
     postItem.contentItems = body.contentItems
     postItem.text = body.text

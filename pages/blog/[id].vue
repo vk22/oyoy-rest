@@ -41,14 +41,14 @@
 definePageMeta({
   middleware: 'route'
 })
-import FormSubscribe from '~/components/FormSubscribe.vue'
-
-const route = useRoute()
-const { data } = await useFetch(`/api/blog/${route.params.id}`)
-const post = ref(data.value)
+import FormSubscribe from '~/components/FormSubscribe.vue';
+const route = useRoute();
+const { data } = await useFetch(`/api/blog/${route.params.id}`);
+const post = ref(data.value);
 const pageTitle = post.value.title.substring(0, 40);
 const textFromContent = post.value.contentItems.find(item => item.type === 'text');
-const pageDescription =  truncate(textFromContent.data.replace(/<[^>]*>/g, ''), 159)
+const pageDescription = truncate(textFromContent.data.replace(/<[^>]*>/g, ''), 159);
+const metaRobots = (post.value.published) ? 'all' : 'noindex';
 
 function truncate(str, n){
   return (str.length > n) ? str.slice(0, n-1) + '...' : str;
@@ -59,7 +59,8 @@ useHead({
   meta: [
     { name: 'description', content: pageDescription },
     { charset: 'utf-8' },
-    { name: 'viewport', content: 'width=device-width, initial-scale=1' }
+    { name: 'viewport', content: 'width=device-width, initial-scale=1' },
+    { name: 'robots', content: metaRobots }
   ],
   link: [{ rel: 'icon', type: 'image/png', href: "/favicon.png" }]
 })
@@ -87,28 +88,29 @@ useHead({
       margin-bottom: 1rem;
       display: flex;
       justify-content: center;
-
+      
       @include for-phone-only {
         width: 100%;
         padding: 0 1rem;
+        margin-top: 5rem;
       }
 
       @include for-tablet-portrait-up {
         width: 50vw;
+        margin-top: 5rem;
       }
 
 
       h1 {
         font-family: $font-sans!important;
         text-transform: uppercase;
-        font-weight: 400!important;
         color: #fff;
         text-align: center;
         font-weight: 500;
 
         @include for-phone-only {
           font-size: 2.5rem;
-          line-height: 3.5rem;
+          line-height: 3.25rem;
         }
 
         @include for-tablet-portrait-up {
