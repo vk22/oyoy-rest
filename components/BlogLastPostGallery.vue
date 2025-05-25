@@ -210,7 +210,7 @@ onMounted(() => nextTick(() => {}));
         text-transform: uppercase;
         color: #fff;
         text-align: left;
-        font-weight: 400;
+        font-weight: 500;
 
         @include for-phone-only {
           font-size: 2rem;
