@@ -55,7 +55,7 @@ const login = async () => {
     errorMessage.value = authenticate.message
   } 
   // redirect to homepage if user is authenticated
-  router.push('/admin/reservations');
+  router.push('/admin/subscribers');
 };
 </script>
 

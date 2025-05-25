@@ -1,7 +1,7 @@
 <template>
   <nav class="sidebar">
     <div class="sidebar__logo">
-      <nuxt-link :to="'/admin/reservations'" class="">
+      <nuxt-link :to="'/admin/subscribers'" class="">
         <img src="/img/logo.svg" class="dark-logo" />
       </nuxt-link>
     </div>
@@ -28,11 +28,6 @@ export default {
   data() {
     return {
       menuItems: [
-        {
-          name: "Reservations",
-          route: "/admin/reservations",
-          icon: "mdi-format-list-bulleted",
-        },
         {
           name: "Subscribers",
           route: "/admin/subscribers",
@@ -72,6 +67,11 @@ export default {
           name: 'About',
           route: '/admin/about',
           icon: 'mdi-format-list-bulleted'
+        },
+        {
+          name: "Reservations",
+          route: "/admin/reservations",
+          icon: "mdi-format-list-bulleted",
         },
       ],
       navRightIsActive: false,
