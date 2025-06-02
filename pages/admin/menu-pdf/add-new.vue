@@ -21,7 +21,7 @@
           <v-text-field
             v-model="menu.section"
             variant="outlined"
-            label="Section"
+            label="Section ID"
           ></v-text-field>
         </v-col>
       </v-row>

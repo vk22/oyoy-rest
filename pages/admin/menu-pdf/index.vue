@@ -28,12 +28,12 @@
                       <v-icon>mdi-drag</v-icon>
                     </div>
                   </v-col>
-                  <v-col md="6">
+                  <v-col md="3">
                     <div>
-                      {{ element.section }}
+                      {{ element.title }}
                     </div>
                   </v-col>
-                  <v-col md="5">
+                  <v-col md="3">
                     <div>
                       {{ element.category }}
                     </div>
@@ -65,12 +65,12 @@
                       <v-icon>mdi-drag</v-icon>
                     </div>
                   </v-col>
-                  <v-col md="6">
+                  <v-col md="3">
                     <div>
-                      {{ element.section }}
+                      {{ element.title }}
                     </div>
                   </v-col>
-                  <v-col md="5">
+                  <v-col md="3">
                     <div>
                       {{ element.category }}
                     </div>
