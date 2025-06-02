@@ -52,6 +52,7 @@ if (!dataReady.value) {
   await aboutStore.fetchData();
   await companyStore.fetchData();
   await menuStore.fetchData();
+  await menuStore.fetchDataPdf();
   await galleryStore.fetchData();
   await eventsStore.fetchData();
   await blogStore.fetchData()

@@ -5,23 +5,9 @@
         <v-col>
           <div class="admin-title">
             <h1>Menu</h1>
-            <nuxt-link to="/admin/menu/add-new" class="admin-main-btn"
+            <nuxt-link to="/admin/menu-pdf/add-new" class="admin-main-btn"
               >Add new
             </nuxt-link>
-          </div>
-        </v-col>
-      </v-row>
-      <v-row>
-        <v-col>
-          <div class="upload-file-container">
-            <AdminFileUploader
-              :type="'pdf'"
-              @files-dropped2="addFile"
-              ref="uploaderRef"
-            ></AdminFileUploader>
-            <div class="mt-3">
-              <button class="admin-sm-btn" @click="uploadFile">Upload</button>
-            </div>
           </div>
         </v-col>
       </v-row>
@@ -34,7 +20,7 @@
               v-for="(element, index) in food"
               :key="element._id"
             >
-              <nuxt-link :to="'/admin/menu/' + element._id">
+              <nuxt-link :to="'/admin/menu-pdf/' + element._id">
                 <v-row>
                   <v-col md="1">
                     <div class="handle1">
@@ -71,7 +57,7 @@
               v-for="(element, index) in drinks"
               :key="element._id"
             >
-              <nuxt-link :to="'/admin/menu/' + element._id">
+              <nuxt-link :to="'/admin/menu-pdf/' + element._id">
                 <v-row>
                   <v-col md="1">
                     <div class="handle2">
@@ -107,8 +93,8 @@ definePageMeta({
 import { useAdminStore } from "@/store/admin";
 const adminStore = useAdminStore();
 
-const { data } = await useFetch("/api/menu");
-console.log("data ", data);
+const { data } = await useFetch("/api/menu-pdf");
+console.log("data ", data.value);
 const menu = data.value.data;
 const foodItems = menu.filter((item) => item.category === "food");
 const food = ref(foodItems);
@@ -125,30 +111,7 @@ async function dragged(event) {
   const { data } = await adminStore.fetchData("menu-sort", "post", menuNewSort);
 }
 
-/// File Upload
 
-const uploaderRef = ref(null);
-const file = ref('');
-
-function addFile(file) {
-  console.log('file ', file)
-}
-
-async function uploadFile() {
-  let filesUploadResponse = await uploaderRef.value.startUpload();
-  if (filesUploadResponse.success) {
-    const fileUrl = filesUploadResponse.data[0].url;
-    console.log('fileUrl ', fileUrl)
-    // const sendData = { fileUrl: fileUrl };
-    // const { data, success } = await adminStore.fetchData('parsecsv', 'post', sendData)
-    // if (success) {
-    //   const { data } = await useFetch("/api/subscribers", {
-    //     method: "get",
-    //   });
-    //   subscribers.value = data.value.subscribers;
-    // }
-  }
-}
 
 </script>
 

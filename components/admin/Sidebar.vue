@@ -49,6 +49,11 @@ export default {
           icon: "mdi-format-list-bulleted",
         },
         {
+          name: "Menu PDF",
+          route: "/admin/menu-pdf",
+          icon: "mdi-format-list-bulleted",
+        },
+        {
           name: "Menu",
           route: "/admin/menu",
           icon: "mdi-format-list-bulleted",

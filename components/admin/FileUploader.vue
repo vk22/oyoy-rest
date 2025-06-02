@@ -25,33 +25,69 @@ import { useAdminStore } from "@/store/admin";
 const adminStore = useAdminStore();
 const emit = defineEmits(['files-dropped2'])
 const props = defineProps({
-	type: { type: String, required: true }
+	type: { type: String, required: true },
+	limit: { type: Number },
+	allowedFormat: { type: Array },
 })
 
 // File Management
 import useFileList from '../../compositions/file-list'
 const { files, addFiles, removeFile, removeFiles } = useFileList()
 
-function filesDropped(files) {
-	console.log('filesDropped files ', files)
-	addFiles(files, props.type)
-	emit('files-dropped2', files)
-	console.log('filesDropped files2 ', files)
+function checkLimit(filesNew) {
+	if (filesNew.length > props.limit) {
+		alert('Limit: '+props.limit)
+		return true;			
+	} else {
+		if (props.limit) {
+			if (props.limit === files.value.length) {
+				alert('Limit: '+props.limit)
+				return true;
+			} else {
+				return false;
+			}
+		} else {
+			return false;
+		}
+	}
+
+}
+
+function checkAllowedFormat(filesNew) {
+	if (props.allowedFormat) {
+		return Array.from(filesNew).filter(el => {
+			const check = props.allowedFormat.includes(el.type)
+			if (check) {
+				return el;
+			} else {
+				alert ('Bad format')
+				return false;
+			}
+		})
+	}
+}
+
+function filesDropped(filesNew) {
+	const filesChecked = checkAllowedFormat(filesNew);
+	if (filesChecked.length) {
+		if (checkLimit(filesChecked)) return;
+		addFiles(filesChecked, props.type)
+		emit('files-dropped2', filesChecked)
+	}
 }
 
 function onInputChange(e) {
-	console.log('onInputChange files', e.target.files)
-	addFiles(e.target.files, props.type)
-	// e.target.value = null // reset so that selecting the same file again will still cause it to fire this change
-	emit('files-dropped2', files)
-	console.log('onInputChange files2 ', files)
+	const filesChecked = checkAllowedFormat(e.target.files);
+	if (filesChecked.length) {
+		if (checkLimit(filesChecked)) return;
+		addFiles(filesChecked, props.type)
+		emit('files-dropped2', filesChecked)
+	}
 }
-
 
 // Uploader
 import createUploader from '../../compositions/file-uploader'
 const { uploadFiles } = createUploader(adminStore)
-
 
 /// handler from Parent
 const startUpload = async () => {

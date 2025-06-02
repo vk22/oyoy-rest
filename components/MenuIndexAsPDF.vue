@@ -1,22 +1,23 @@
 <template>
-  <section class="wine-list index-section slideUp fade-in" id="wine-list">
+  <section class="wine-list index-section slideUp fade-in" :id="menuPdf.section" v-if="menuPdf">
     <v-container>
       <v-row>
         <v-col class="d-flex justify-center">
           <div class="section-title">
-            <h2>Wine List</h2>
-            <p>Complementing your exquisite meal with a nice selection of wines from various parts of the world. Carefully chosen to satisfy everyone’s taste buds, from wine connoisseurs to a beginner wine enthusiast.</p>
+            <h2>{{ menuPdf.title }}</h2>
+            <p>{{ menuPdf.text }}</p>
+            <!-- <p>Complementing your exquisite meal with a nice selection of wines from various parts of the world. Carefully chosen to satisfy everyone’s taste buds, from wine connoisseurs to a beginner wine enthusiast.</p> -->
           </div>
         </v-col>
       </v-row>
       <v-row>
         <v-col cols="12" md="12">
           <div class="wine-list-link">
-            <a href="/menu/wine-list.pdf" target="_blank">
-              <img src="/menu/wine-list.jpg" alt="">
+            <a :href="menuPdf.link.file.url" target="_blank">
+              <img :src="menuPdf.image_preview.file.url" alt="">
             </a>
-            <a href="/menu/wine-list.pdf" target="_blank">
-              <div class="btn2" @click="getFormModalStateToggle">See Wine List</div>
+            <a :href="menuPdf.link.file.url" target="_blank">
+              <div class="btn2" @click="getFormModalStateToggle">Open {{ menuPdf.title }}</div>
             </a>
           </div>
         </v-col>
@@ -26,6 +27,12 @@
 </template>
 
 <script setup>
+const props = defineProps(["category"]);
+import { useMenuStore } from "@/store/menu";
+const store = useMenuStore();
+const menuData = computed(() => store.getItemsPdf(props.category))
+console.log('menuPdf menuData ', menuData.value)
+const menuPdf = menuData.value[0];
 
 </script>
 

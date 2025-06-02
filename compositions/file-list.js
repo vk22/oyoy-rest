@@ -8,11 +8,7 @@ export default function () {
 		// 
 
 		files.value = files.value.concat(newUploadableFiles)
-		// if (type === 'gallery') {
-		// 	files.value = files.value.concat(newUploadableFiles)
-		// } else {
-		// 	files.value = newUploadableFiles
-		// }
+		console.log('files.value ', files.value)
 	}
 
 	function fileExists(otherId) {

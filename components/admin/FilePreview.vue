@@ -1,5 +1,6 @@
 <template>
-	<component :is="props.tag" class="file-preview" v-if="props.type !== 'svg'">
+	<!-- {{ props.file.file.type }} -->
+	<component :is="props.tag" class="file-preview" v-if="props.file.file.type.split('/')[0] === 'image'">
 		<button @click="$emit('remove', props.file)" class="close-icon">&times;</button>
 		<img :src="props.file.url" :alt="props.file.file.name" :title="props.file.file.name"/>
 		<span class="status-indicator loading-indicator" v-show="props.file.status == 'loading'">In Progress</span>
@@ -9,7 +10,6 @@
 	<component :is="props.tag" class="file-name" v-else>
 		<span>{{props.file.file.name}}</span>
 		<button @click="$emit('remove', props.file)" class="close-icon">&times;</button>
-		
 	</component>
 </template>
 

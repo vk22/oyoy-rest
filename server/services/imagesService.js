@@ -3,6 +3,7 @@ class ImagesService {
   constructor() {
   }
   async upload(file, type) {
+    console.log('upload file ', file)
     try {
       const blob = new Blob([file], { type: file.type });
       const data = await put(`${type}/${file.name}`, blob, { access: 'public' });

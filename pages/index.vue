@@ -4,8 +4,9 @@
       <AboutUs ></AboutUs>
       <ImageFullWidth :type="'video'" :path="'/video/video2.mp4'" :title="''"></ImageFullWidth>
       <MenuIndex :category="'food'" v-if="menuIsActive"></MenuIndex>
-      <ImageFullWidth :type="'image'" :path="'/img/full-w-banner-1.jpg'" :title="''" v-if="menuIsActive"></ImageFullWidth>
-      <WineListLink v-if="wineListIsActive"></WineListLink> 
+      <MenuIndexAsPDF :category="'food'"></MenuIndexAsPDF> 
+      <ImageFullWidth :type="'image'" :path="'/img/full-w-banner-1.jpg'" :title="''"></ImageFullWidth>
+      <MenuIndexAsPDF :category="'drinks'" v-if="wineListIsActive"></MenuIndexAsPDF> 
       <SwiperGallery></SwiperGallery>
       <EventsIndex></EventsIndex>
       <BlogIndex></BlogIndex>

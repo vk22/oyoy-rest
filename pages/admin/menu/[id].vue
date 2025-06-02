@@ -67,7 +67,6 @@
         <v-col>
           <div class="admin-main-btn mr-2" @click="editMenu()">Save</div>
           <div class="admin-sec-btn" @click="deleteMenu()">Delete</div>
-
         </v-col>
       </v-row>
     </v-container>
