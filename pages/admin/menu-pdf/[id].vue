@@ -42,41 +42,46 @@
       <v-row>
         <v-col>
           <div class="upload-file-container">
-            <AdminFileUploader
-              :type="'menu'"
-              :limit="1"
-              :allowedFormat="['application/pdf']"
-              @files-dropped2="addFilePdf"
-              ref="uploaderRefPdf"
-            ></AdminFileUploader>
-            <div class="mt-5">
-              <AdminImagesGalleryPreview
-                :images="[menu.link]"
-                :imagesType="'images'"
-                @delete-gallery-item="deleteItemPdf"
-              ></AdminImagesGalleryPreview>
+            <div class="images-zona">
+              <p class="label">PDF file</p>
+              <AdminFileUploader
+                :type="'menu'"
+                :limit="1"
+                :allowedFormat="['application/pdf']"
+                @files-dropped2="addFilePdf"
+                ref="uploaderRefPdf"
+              ></AdminFileUploader>
+              <div class="mt-5">
+                <AdminImagesGalleryPreview
+                  :images="[menu.link]"
+                  :imagesType="'images'"
+                  @delete-gallery-item="deleteItemPdf"
+                ></AdminImagesGalleryPreview>
+              </div>
             </div>
-
           </div>
         </v-col>
       </v-row>
       <v-row>
         <v-col>
           <div class="upload-file-container">
-            <AdminFileUploader
-              :type="'menu'"
-              :limit="1"
-              :allowedFormat="['image/png', 'image/jpeg', 'image/jpg']"
-              @files-dropped2="addFilePreview"
-              ref="uploaderRefPreview"
-            ></AdminFileUploader>
-            <div class="mt-5">
-              <AdminImagesGalleryPreview
-                :images="[menu.image_preview]"
-                :imagesType="'images'"
-                @delete-gallery-item="deleteItemPreview"
-              ></AdminImagesGalleryPreview>
-            </div>
+            <div class="images-zona">
+              <p class="label">Preview file (jpg, png)</p>
+              <AdminFileUploader
+                :type="'menu'"
+                :limit="1"
+                :allowedFormat="['image/png', 'image/jpeg', 'image/jpg']"
+                @files-dropped2="addFilePreview"
+                ref="uploaderRefPreview"
+              ></AdminFileUploader>
+              <div class="mt-5">
+                <AdminImagesGalleryPreview
+                  :images="[menu.image_preview]"
+                  :imagesType="'images'"
+                  @delete-gallery-item="deleteItemPreview"
+                ></AdminImagesGalleryPreview>
+              </div>
+            </div>  
           </div>
         </v-col>
       </v-row>      

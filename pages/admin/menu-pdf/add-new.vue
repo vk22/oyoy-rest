@@ -42,32 +42,32 @@
       <v-row>
         <v-col>
           <div class="upload-file-container">
-            <AdminFileUploader
-              :type="'menu'"
-              :limit="1"
-              :allowedFormat="['application/pdf']"
-              @files-dropped2="addFilePdf"
-              ref="uploaderRefPdf"
-            ></AdminFileUploader>
-            <!-- <div class="mt-3">
-              <button class="admin-sm-btn" @click="uploadFilePdf">Upload</button>
-            </div> -->
+            <div class="images-zona">
+                <p class="label">PDF file</p>
+                <AdminFileUploader
+                  :type="'menu'"
+                  :limit="1"
+                  :allowedFormat="['application/pdf']"
+                  @files-dropped2="addFilePdf"
+                  ref="uploaderRefPdf"
+                ></AdminFileUploader>
+            </div>
           </div>
         </v-col>
       </v-row>
       <v-row>
         <v-col>
           <div class="upload-file-container">
-            <AdminFileUploader
-              :type="'menu'"
-              :limit="1"
-              :allowedFormat="['image/png', 'image/jpeg', 'image/jpg']"
-              @files-dropped2="addFilePreview"
-              ref="uploaderRefPreview"
-            ></AdminFileUploader>
-            <!-- <div class="mt-3">
-              <button class="admin-sm-btn" @click="uploadFilePreview">Upload</button>
-            </div> -->
+            <div class="images-zona">
+              <p class="label">Preview file (jpg, png)</p>
+              <AdminFileUploader
+                :type="'menu'"
+                :limit="1"
+                :allowedFormat="['image/png', 'image/jpeg', 'image/jpg']"
+                @files-dropped2="addFilePreview"
+                ref="uploaderRefPreview"
+              ></AdminFileUploader>
+            </div>
           </div>
         </v-col>
       </v-row>      
