@@ -49,6 +49,7 @@ const pageTitle = post.value.title.substring(0, 40);
 const textFromContent = post.value.contentItems.find(item => item.type === 'text');
 const pageDescription = truncate(textFromContent.data.replace(/<[^>]*>/g, ''), 159);
 const metaRobots = (post.value.published) ? 'all' : 'noindex';
+const postMainImage = (post.value.images.length) ? post.value.images[0].file.url : 'https://oyoyrestaurant.com/img/full-w-banner-1.jpg'
 
 function truncate(str, n){
   return (str.length > n) ? str.slice(0, n-1) + '...' : str;
@@ -63,6 +64,17 @@ useHead({
     { name: 'robots', content: metaRobots }
   ],
   link: [{ rel: 'icon', type: 'image/png', href: "/favicon.png" }]
+})
+
+useSeoMeta({
+  title: pageTitle + ' | OyOy Restaurant',
+  ogTitle: pageTitle + ' | OyOy Restaurant',
+  description: pageDescription,
+  ogDescription: pageDescription,
+  ogUrl: 'https://oyoyrestaurant.com/blog' + post.value.url,
+  ogType: 'website',
+  ogImage: postMainImage,
+  twitterCard: 'summary_large_image'
 })
 
 </script>

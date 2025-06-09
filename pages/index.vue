@@ -2,6 +2,7 @@
     <TopBannerGallery></TopBannerGallery>
     <section class="page-content" v-show="dataReady">
       <AboutUs ></AboutUs>
+      <Chef></Chef>
       <ImageFullWidth :type="'video'" :path="'/video/video2.mp4'" :title="''"></ImageFullWidth>
       <MenuIndex :category="'food'" v-if="menuIsPublished"></MenuIndex>
       <MenuIndexAsPDF :category="'food'"></MenuIndexAsPDF> 
@@ -50,13 +51,22 @@ const wineListIsActive = getIfSectionIsActive('Wine List')
 
 
 useHead({
-  title: 'OyOy Restaurant',
   meta: [
-    { name: 'description', content: 'OyOy Restaurant' },
     { charset: 'utf-8' },
     { name: 'viewport', content: 'width=device-width, initial-scale=1' }
   ],
   link: [{ rel: 'icon', type: 'image/png', href: "/favicon.png" }]
+})
+
+useSeoMeta({
+  title: 'OyOy Restaurant222',
+  ogTitle: 'OyOy Restaurant222',
+  description: 'We would like to present to you OyOy - a restaurant with spectacular 180 degree views on Spinola Bay.',
+  ogDescription: 'We would like to present to you OyOy - a restaurant with spectacular 180 degree views on Spinola Bay.',
+  ogUrl: 'https://oyoyrestaurant.com/',
+  ogType: 'website',
+  ogImage: 'https://oyoyrestaurant.com/img/full-w-banner-1.jpg',
+  twitterCard: 'summary_large_image'
 })
 
 </script>

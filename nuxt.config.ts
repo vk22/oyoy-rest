@@ -55,7 +55,7 @@ export default defineNuxtConfig({
     sources: ['/api/sitemap'],
   },
   robots: {
-    disallow: ['/admin/'],
+    disallow: ['/login', '/admin/', ],
   },
   vite: {
     vue: {

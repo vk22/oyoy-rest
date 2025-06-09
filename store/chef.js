@@ -1,12 +1,12 @@
 import { defineStore } from 'pinia'
 
-export const useAboutStore = defineStore('aboutStore', {
+export const useChefStore = defineStore('chefStore', {
   state: () => ({
     data: {}
   }),
   actions: {
     async fetchData() {
-      const { data } = await useFetch('/api/about')
+      const { data } = await useFetch('/api/chef')
       this.data = data.value.data
     },
   },

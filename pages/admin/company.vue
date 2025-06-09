@@ -48,7 +48,7 @@ const company = ref();
 const { data } = await useFetch("/api/company", {
   method: "get",
 });
-company.value = data._rawValue.data;
+company.value = data.value.data;
 
 const save = async () => {
   await adminStore.fetchData('company', 'put', company)

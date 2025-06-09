@@ -4,9 +4,11 @@ const SchemaData = new Schema({
     file: {
       url: {
         type: String,
+        required: true
       },
       type: {
         type: String,
+        required: true
       }
     },
     index: {
@@ -23,4 +25,4 @@ const SchemaData = new Schema({
   versionKey: false 
 })
 
-export const About = model("About", SchemaData);
+export const Chef = model("Chef", SchemaData);

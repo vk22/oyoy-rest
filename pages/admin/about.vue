@@ -1,6 +1,6 @@
 <template>
   <section>
-    <v-container>
+    <v-container v-if="about">
       <v-row>
         <v-col>
           <div class="admin-title">
@@ -41,7 +41,8 @@ const about = ref();
 const { data } = await useFetch("/api/about", {
   method: "get",
 });
-about.value = data._rawValue.data;
+console.log('data ', data)
+about.value = data.value.data;
 
 function textUpdate(text) {
   about.value.text = text

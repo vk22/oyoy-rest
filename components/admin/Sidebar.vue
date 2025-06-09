@@ -74,6 +74,11 @@ export default {
           icon: 'mdi-format-list-bulleted'
         },
         {
+          name: 'Chef',
+          route: '/admin/chef',
+          icon: 'mdi-format-list-bulleted'
+        },
+        {
           name: "Reservations",
           route: "/admin/reservations",
           icon: "mdi-format-list-bulleted",

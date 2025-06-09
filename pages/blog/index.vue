@@ -61,13 +61,21 @@ definePageMeta({
   middleware: 'route'
 })
 useHead({
-  title: 'Blog | OyOy Restaurant',
   meta: [
-    { name: 'description', content: 'My amazing blog.' },
     { charset: 'utf-8' },
     { name: 'viewport', content: 'width=device-width, initial-scale=1' }
   ],
   link: [{ rel: 'icon', type: 'image/png', href: "/favicon.png" }]
+})
+useSeoMeta({
+  title: 'Blog | OyOy Restaurant',
+  ogTitle: 'Blog | OyOy Restaurant',
+  description: 'We would like to present to you OyOy - a restaurant with spectacular 180 degree views on Spinola Bay.',
+  ogDescription: 'We would like to present to you OyOy - a restaurant with spectacular 180 degree views on Spinola Bay.',
+  ogUrl: 'https://oyoyrestaurant.com/blog',
+  ogType: 'website',
+  ogImage: 'https://oyoyrestaurant.com/img/full-w-banner-1.jpg',
+  twitterCard: 'summary_large_image'
 })
 import FormSubscribe from '~/components/FormSubscribe.vue'
 import { useBlogStore } from '@/store/blog'
