@@ -60,7 +60,7 @@ const login = async () => {
 </script>
 
 <style lang="scss" scoped>
-@import "assets/scss/main.scss";
+@use "~/assets/scss/main.scss";
 
 .login-page {
   display: flex;

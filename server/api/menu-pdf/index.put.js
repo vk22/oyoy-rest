@@ -13,6 +13,7 @@ export default defineEventHandler( async (event) => {
       item.text = body.text
       item.link = body.link
       item.image_preview = body.image_preview
+      item.published = body.published
       const saveItem = await item.save()    
       if (saveItem) {
         return {

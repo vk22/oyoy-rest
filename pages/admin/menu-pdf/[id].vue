@@ -33,10 +33,14 @@
             label="Title"
           ></v-text-field>
         </v-col>
-      </v-row>  
+      </v-row>
       <v-row>
         <v-col>
-          <v-textarea label="Text" variant="outlined" v-model="menu.text"></v-textarea>
+          <v-textarea
+            label="Text"
+            variant="outlined"
+            v-model="menu.text"
+          ></v-textarea>
         </v-col>
       </v-row>
       <v-row>
@@ -81,10 +85,15 @@
                   @delete-gallery-item="deleteItemPreview"
                 ></AdminImagesGalleryPreview>
               </div>
-            </div>  
+            </div>
           </div>
         </v-col>
-      </v-row>      
+      </v-row>
+      <v-row>
+        <v-col>
+          <v-checkbox v-model="menu.published" label="Published"></v-checkbox>
+        </v-col>
+      </v-row>
       <v-row>
         <v-col>
           <div class="admin-main-btn mr-2" @click="editMenu()">Save</div>
@@ -98,18 +107,16 @@
 <script setup>
 definePageMeta({
   layout: "admin",
-  middleware: ["auth"]
+  middleware: ["auth"],
 });
 import { useAdminStore } from "@/store/admin";
-import { useConfirm } from '../../compositions/useConfirm';
+import { useConfirm } from "@/compositions/useConfirm";
 const { isConfirmed } = useConfirm();
 const adminStore = useAdminStore();
-const route = useRoute()
-const router = useRouter()
-const { data } = await useFetch(`/api/menu-pdf/${route.params.id}`)
-const menu = ref(data.value)
-
-
+const route = useRoute();
+const router = useRouter();
+const { data } = await useFetch(`/api/menu-pdf/${route.params.id}`);
+const menu = ref(data.value);
 
 /// File Upload
 const uploaderRefPdf = ref(null);
@@ -117,30 +124,29 @@ const uploaderRefPreview = ref(null);
 let pdfNew = ref(null);
 let pdfPreviewNew = ref(null);
 
-
 function addFilePdf(file) {
-  console.log('addFilePdf ', file)
-  pdfNew.value = file
+  console.log("addFilePdf ", file);
+  pdfNew.value = file;
 }
 
 function addFilePreview(file) {
-  console.log('addFilePreview ', file)
-  pdfPreviewNew.value = file
+  console.log("addFilePreview ", file);
+  pdfPreviewNew.value = file;
 }
 
 async function uploadFilePdf() {
-   if (pdfNew.value) {
+  if (pdfNew.value) {
     let filesUploadResponse = await uploaderRefPdf.value.startUpload();
     if (filesUploadResponse.success) {
       const file = filesUploadResponse.data[0];
-      console.log('file ', file)
-      menu.value.link = { 
+      console.log("file ", file);
+      menu.value.link = {
         file: {
-          url: file.url, 
-          type: file.type 
+          url: file.url,
+          type: file.type,
         },
-        index: 0
-      }
+        index: 0,
+      };
     }
   }
 }
@@ -149,16 +155,16 @@ async function uploadFilePreview() {
     let filesUploadResponse = await uploaderRefPreview.value.startUpload();
     if (filesUploadResponse.success) {
       const file = filesUploadResponse.data[0];
-      console.log('file ', file)
-      menu.value.image_preview = { 
+      console.log("file ", file);
+      menu.value.image_preview = {
         file: {
-          url: file.url, 
-          type: file.type 
+          url: file.url,
+          type: file.type,
         },
-        index: 0
-      }
+        index: 0,
+      };
     }
-  } 
+  }
 }
 
 //
@@ -181,9 +187,7 @@ const deleteItemPreview = async (image) => {
   }
 };
 
-
 //
-
 
 const editMenu = async () => {
   await uploadFilePdf();
@@ -197,17 +201,16 @@ const editMenu = async () => {
 const deleteMenu = async () => {
   //// ask confirmation
   if (await isConfirmed()) {
-    const { success } = await adminStore.fetchData('menu-pdf', 'delete', menu); 
+    const { success } = await adminStore.fetchData("menu-pdf", "delete", menu);
     if (success) {
       router.push({ path: "/admin/menu-pdf" });
     }
   }
 };
-
 </script>
 
 
 
 <style lang="scss" scoped>
-@import "assets/scss/admin.scss";
+
 </style>

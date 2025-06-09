@@ -215,7 +215,7 @@ watch(dataReady, (newValue) => {
 </script>
 
 <style lang="scss" scoped>
-@import "assets/scss/variables.scss";
+
 
 .main-header {
   display: flex;

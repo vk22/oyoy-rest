@@ -15,6 +15,9 @@ const SchemaData = new Schema({
   isActive: {
     type: Boolean,
   },
+  isPublished: {
+    type: Boolean
+  },
   order: {
     type: Number,
   }

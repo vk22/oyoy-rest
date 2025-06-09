@@ -61,7 +61,7 @@ const onSlideChange = (swiper) => {
 </script>
 
 <style lang="scss">
-@import "assets/scss/variables.scss";
+
 
 .gallery-modal {
   position: fixed;

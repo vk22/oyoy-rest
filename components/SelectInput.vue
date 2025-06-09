@@ -38,7 +38,7 @@ let selected = computed(() => props.default ? props.default : props.options.leng
 </script>
 
 <style lang="scss" scoped>
-@import "assets/scss/variables.scss";
+
 
 .custom-select {
   position: relative;

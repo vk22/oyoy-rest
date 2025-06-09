@@ -68,7 +68,7 @@ useHead({
 </script>
 
 <style lang="scss">
-@import "assets/scss/variables.scss";
+
 .blog-page {
   
   .blog-page-hero {

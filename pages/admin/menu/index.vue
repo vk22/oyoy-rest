@@ -13,20 +13,6 @@
       </v-row>
       <v-row>
         <v-col>
-          <div class="upload-file-container">
-            <AdminFileUploader
-              :type="'pdf'"
-              @files-dropped2="addFile"
-              ref="uploaderRef"
-            ></AdminFileUploader>
-            <div class="mt-3">
-              <button class="admin-sm-btn" @click="uploadFile">Upload</button>
-            </div>
-          </div>
-        </v-col>
-      </v-row>
-      <v-row>
-        <v-col>
           <h3>Food</h3>
           <draggable :list="menuItems.food" handle=".handle1" @change="dragged">
             <div
@@ -95,6 +81,17 @@
           </draggable>
         </v-col>
       </v-row>
+      <v-row>
+        <v-col>
+          <div>
+            <v-checkbox
+              v-model="menuDataNav.isPublished"
+              label="Published"
+              @update:modelValue="setMenuIsPublishedState"
+            ></v-checkbox>
+          </div>
+        </v-col>
+      </v-row>
     </v-container>
   </section>
 </template>
@@ -125,35 +122,25 @@ async function dragged(event) {
   const { data } = await adminStore.fetchData("menu-sort", "post", menuNewSort);
 }
 
-/// File Upload
+//
 
-const uploaderRef = ref(null);
-const file = ref('');
-
-function addFile(file) {
-  console.log('file ', file)
-}
-
-async function uploadFile() {
-  let filesUploadResponse = await uploaderRef.value.startUpload();
-  if (filesUploadResponse.success) {
-    const fileUrl = filesUploadResponse.data[0].url;
-    console.log('fileUrl ', fileUrl)
-    // const sendData = { fileUrl: fileUrl };
-    // const { data, success } = await adminStore.fetchData('parsecsv', 'post', sendData)
-    // if (success) {
-    //   const { data } = await useFetch("/api/subscribers", {
-    //     method: "get",
-    //   });
-    //   subscribers.value = data.value.subscribers;
-    // }
+const menuDataNav = ref(undefined);
+const getMenuIsPublished = async () => {
+  const { data } = await useFetch("/api/nav");
+  if (data.value.success) {
+    const items = data.value.data;
+    const menuItem = items.find((el) => el.text === "Menu");
+    menuDataNav.value = menuItem;
   }
-}
-
+};
+const setMenuIsPublishedState = async () => {
+  await adminStore.fetchData("nav", "put", menuDataNav);
+};
+await getMenuIsPublished();
 </script>
 
 
 
 <style lang="scss" scoped>
-@import "assets/scss/admin.scss";
+
 </style>

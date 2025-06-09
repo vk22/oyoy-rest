@@ -1,9 +1,9 @@
 <template>
     <TopBannerGallery></TopBannerGallery>
-    <section class="page-content" v-if="dataReady">
+    <section class="page-content" v-show="dataReady">
       <AboutUs ></AboutUs>
       <ImageFullWidth :type="'video'" :path="'/video/video2.mp4'" :title="''"></ImageFullWidth>
-      <MenuIndex :category="'food'" v-if="menuIsActive"></MenuIndex>
+      <MenuIndex :category="'food'" v-if="menuIsPublished"></MenuIndex>
       <MenuIndexAsPDF :category="'food'"></MenuIndexAsPDF> 
       <ImageFullWidth :type="'image'" :path="'/img/full-w-banner-1.jpg'" :title="''"></ImageFullWidth>
       <MenuIndexAsPDF :category="'drinks'" v-if="wineListIsActive"></MenuIndexAsPDF> 
@@ -34,6 +34,17 @@ const getIfSectionIsActive = (sectionText) => {
      return false
   }
 }
+
+const getIfMenuIsPublished = (sectionText) => {
+  const getNavData = navigation.value.find(el => el.text === sectionText)
+  if (getNavData) {
+    return getNavData.isPublished
+  } else {
+     return false
+  }
+}
+
+const menuIsPublished = getIfMenuIsPublished('Menu')
 const menuIsActive = getIfSectionIsActive('Menu')
 const wineListIsActive = getIfSectionIsActive('Wine List')
 

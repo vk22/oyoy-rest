@@ -27,7 +27,7 @@ const relatedPosts = posts.value.filter(el => el._id !== props.currentPost).slic
 </script>
 
 <style lang="scss">
-@import "assets/scss/variables.scss";
+
 
 .blog-related {
   display: flex;

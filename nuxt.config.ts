@@ -13,9 +13,10 @@ export default defineNuxtConfig({
 
   css: [
     '@/assets/scss/font.css',
+    // '@/assets/scss/variables.scss'
   ],
 
-  devtools: { enabled: false },
+  devtools: { enabled: true },
 
   build: {
     transpile: ['vuetify', '@vuepic/vue-datepicker']
@@ -31,7 +32,9 @@ export default defineNuxtConfig({
     '@pinia/nuxt',
     'nuxt-swiper',
     '@nuxt/image',
-    'nuxt-tiptap-editor'
+    'nuxt-tiptap-editor',
+    '@nuxtjs/robots',
+    '@nuxtjs/sitemap'
   ],
 
   tiptap: {
@@ -48,15 +51,26 @@ export default defineNuxtConfig({
   plugins: [
     // '~/plugins/vue-lazyload'
   ],
-
+  sitemap: {
+    sources: ['/api/sitemap'],
+  },
+  robots: {
+    disallow: ['/admin/'],
+  },
   vite: {
     vue: {
       template: {
         transformAssetUrls,
       },
     },
+    css: {
+      preprocessorOptions: {
+        scss: {
+          additionalData: '@use "~/assets/scss/variables.scss" as *;'
+        }
+      }
+    }
   },
-
   nitro: {
     plugins: ["~/server/plugins/mongodb.ts"],
   },
@@ -78,5 +92,5 @@ export default defineNuxtConfig({
       scrollBehaviorType: 'smooth'
     }
   },
-  compatibilityDate: '2025-01-18'
+  compatibilityDate: '2025-06-06'
 })

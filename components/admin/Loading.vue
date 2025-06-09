@@ -15,7 +15,7 @@ const loading = computed(() => adminStore.loading);
 </script>
 
 <style lang="scss" scoped>
-@import "assets/scss/admin.scss";
+
 
 .loading {
     background: rgba($color: #fff, $alpha: 0.5);

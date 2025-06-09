@@ -94,7 +94,7 @@ const slidesPerView = computed(() => {
 </script>
 
 <style lang="scss">
-@import "assets/scss/variables.scss";
+
 
 .gallery-index {
   background: #fff;

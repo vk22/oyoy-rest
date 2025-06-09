@@ -68,7 +68,7 @@ const gallery = data._rawValue.items
 
 
 <style lang="scss" scoped>
-@import "assets/scss/admin.scss";
+
 
 
 </style>

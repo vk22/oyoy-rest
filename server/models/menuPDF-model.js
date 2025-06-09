@@ -49,6 +49,9 @@ const SchemaData = new Schema({
   },
   order: {
     type: Number
+  },
+  published: {
+    type: Boolean
   }
 }, {
   versionKey: false

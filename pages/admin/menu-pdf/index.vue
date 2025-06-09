@@ -118,5 +118,5 @@ async function dragged(event) {
 
 
 <style lang="scss" scoped>
-@import "assets/scss/admin.scss";
+
 </style>

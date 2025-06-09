@@ -35,7 +35,7 @@ function declineCookies() {
 </script>
 
 <style lang="scss">
-@import "assets/scss/variables.scss";
+
 
 .consent-banner {
   background: #fff;

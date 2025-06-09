@@ -70,7 +70,7 @@ const events = data.value.data
 
 
 <style lang="scss" scoped>
-@import "assets/scss/admin.scss";
+
 
 
 </style>

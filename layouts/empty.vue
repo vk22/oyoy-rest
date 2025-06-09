@@ -7,5 +7,5 @@
 </script>
 
 <style lang="scss">
-  @import "assets/scss/admin.scss";
+@use "~/assets/scss/admin.scss";
 </style>

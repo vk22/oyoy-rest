@@ -36,12 +36,11 @@
 </template>
 
 <script setup>
-import { useConfirm } from '../../compositions/useConfirm';
+import { useConfirm } from '@/compositions/useConfirm';
 const { confirmConfig } = useConfirm()
 </script>
 
 <style lang="scss" scoped>
-@import "assets/scss/admin.scss";
 
 .confirm-panel {
   font-family: $font-sans;

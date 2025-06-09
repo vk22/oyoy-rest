@@ -42,7 +42,7 @@ const modalToggle = () => {
 
     
 <style lang="scss">
-@import "assets/scss/variables.scss";
+
 
 // .v-move,
 // .v-enter-active,

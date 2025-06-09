@@ -5,35 +5,6 @@ export const useNavigationStore = defineStore('nav', {
   state: () => ({
     mainMenulIsOpen: false,
     items: [],
-    homeItems: [
-      {
-        text: "About",
-        href: "#about",
-      },
-      {
-        text: "Menu",
-        href: "#food",
-      },
-      {
-        text: "Wine List",
-        href: "#drinks",
-      },
-      {
-        text: "Gallery",
-        href: "#gallery",
-      },
-      {
-        text: "Events",
-        href: "#events",
-      }
-    ],
-    allItems: [
-      {
-        text: "Blog",
-        href: "blog",
-      },
-    ],
-
   }),
   actions: {
     async fetchData() {
@@ -56,12 +27,6 @@ export const useNavigationStore = defineStore('nav', {
     getItems(state) {
       const itemsActive = state.items.filter(item => item.isActive);
       return itemsActive
-    },
-    getHomeItems(state) {
-      return state.homeItems
-    },
-    getAllItems(state) {
-      return state.allItems
     },
   }
 })

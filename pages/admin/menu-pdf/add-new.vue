@@ -70,7 +70,12 @@
             </div>
           </div>
         </v-col>
-      </v-row>      
+      </v-row>   
+      <v-row>
+        <v-col>
+          <v-checkbox v-model="menu.published" label="Published"></v-checkbox>
+        </v-col>
+      </v-row>   
       <v-row>
         <v-col>
           <div class="admin-main-btn" @click="addMenu()">Save</div>
@@ -95,6 +100,7 @@ const menu = ref({
   text: "",
   image_preview: {},
   link: {},
+  published: true
 });
 
 
@@ -164,5 +170,5 @@ const addMenu = async () => {
 
 
 <style lang="scss" scoped>
-@import "assets/scss/admin.scss";
+
 </style>

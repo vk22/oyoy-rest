@@ -1,7 +1,7 @@
 import { defineStore } from 'pinia'
 import { useToast } from "vue-toast-notification";
 const toast = useToast();
-import 'vue-toast-notification/dist/theme-bootstrap.css';
+// import 'vue-toast-notification/dist/theme-bootstrap.css';
 
 
 export const useAdminStore = defineStore('admin', {

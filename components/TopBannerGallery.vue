@@ -133,7 +133,7 @@ onMounted(() => {
 </script>
 
 <style lang="scss">
-@import "assets/scss/variables.scss";
+
 
 .top-banner {
   position: relative;

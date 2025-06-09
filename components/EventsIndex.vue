@@ -55,7 +55,7 @@ const modalToggle = (index) => {
 </script>
 
 <style lang="scss">
-@import "assets/scss/variables.scss";
+
 
 .events-index {
   display: flex;

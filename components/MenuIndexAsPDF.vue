@@ -1,5 +1,5 @@
 <template>
-  <section class="wine-list index-section slideUp fade-in" :id="menuPdf.section" v-if="menuPdf">
+  <section class="wine-list index-section slideUp fade-in" :id="menuPdf.section" v-if="published">
     <v-container>
       <v-row>
         <v-col class="d-flex justify-center">
@@ -17,7 +17,7 @@
               <img :src="menuPdf.image_preview.file.url" alt="">
             </a>
             <a :href="menuPdf.link.file.url" target="_blank">
-              <div class="btn2" @click="getFormModalStateToggle">Open {{ menuPdf.title }}</div>
+              <div class="btn2">Open {{ menuPdf.title }}</div>
             </a>
           </div>
         </v-col>
@@ -31,13 +31,19 @@ const props = defineProps(["category"]);
 import { useMenuStore } from "@/store/menu";
 const store = useMenuStore();
 const menuData = computed(() => store.getItemsPdf(props.category))
-console.log('menuPdf menuData ', menuData.value)
 const menuPdf = menuData.value[0];
+const published = computed(() => {
+  if (menuPdf) {
+    return menuPdf.published
+  } else {
+    return false
+  }
+})
 
 </script>
 
 <style lang="scss">
-@import "assets/scss/variables.scss";
+
 
 .section-title {
   h2 {

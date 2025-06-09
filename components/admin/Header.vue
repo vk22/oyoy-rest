@@ -27,7 +27,7 @@ const logout = async () => {
 
 
 <style lang="scss" scoped>
-@import "assets/scss/admin.scss";
+
 
 .admin-header {
   font-family: $font-sans;

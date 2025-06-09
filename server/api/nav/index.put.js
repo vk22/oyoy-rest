@@ -8,6 +8,7 @@ export default defineEventHandler( async (event) => {
     navOne.href = body.href
     navOne.isHomePageAnchor = body.isHomePageAnchor
     navOne.isActive = body.isActive
+    navOne.isPublished = body.isPublished
     navOne.order = body.order
     const saveItem = await navOne.save()
     if (saveItem) {

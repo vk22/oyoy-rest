@@ -89,7 +89,7 @@
 <script setup> 
 import { onMounted, watch, computed } from 'vue';
 import { useAdminStore } from "@/store/admin";
-import { useConfirm } from '../../compositions/useConfirm';
+import { useConfirm } from '@/compositions/useConfirm';
 const { isConfirmed } = useConfirm();
 const adminStore = useAdminStore();
 const loading = computed(() => adminStore.loading);

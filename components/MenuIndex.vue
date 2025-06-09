@@ -92,7 +92,7 @@ function getMiddleOfList(list) {
 </script>
 
 <style lang="scss">
-@import "assets/scss/variables.scss";
+
 
 .myfade-enter-active,
 .myfade-leave-active {

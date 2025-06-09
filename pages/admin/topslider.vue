@@ -51,7 +51,6 @@ const save = async () => {
 
 
 <style lang="scss" scoped>
-@import "assets/scss/admin.scss";
 
 .reservation-panel {
   font-family: $font-sans;

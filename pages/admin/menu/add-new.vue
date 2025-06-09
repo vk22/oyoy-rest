@@ -53,5 +53,4 @@ const addMenu = async () => {
 
 
 <style lang="scss" scoped>
-@import "assets/scss/admin.scss";
 </style>

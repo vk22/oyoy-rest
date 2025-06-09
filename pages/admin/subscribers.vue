@@ -86,7 +86,7 @@ definePageMeta({
   middleware: ["auth"],
 });
 import { useAdminStore } from "@/store/admin";
-import { useConfirm } from '../../compositions/useConfirm';
+import { useConfirm } from '@/compositions/useConfirm';
 const { isConfirmed } = useConfirm();
 const adminStore = useAdminStore();
 const { $formatDate } = useNuxtApp();
@@ -152,7 +152,6 @@ async function uploadFile() {
 
 
 <style lang="scss" scoped>
-@import "assets/scss/admin.scss";
 
 .upload-file-container {
   margin-bottom: 1rem;

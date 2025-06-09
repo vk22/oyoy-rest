@@ -41,7 +41,6 @@ const lastPosts = posts.value.slice(0,2);
 </script>
 
 <style lang="scss">
-@import "assets/scss/variables.scss";
 
 .blog-index {
   display: flex;

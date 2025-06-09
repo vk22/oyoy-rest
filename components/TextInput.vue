@@ -90,7 +90,7 @@ const selectTime = (event) => {
     </p>
   </div>
 
-  <div v-else-if="type == 'number-range'"
+  <!-- <div v-else-if="type == 'number-range'"
     class="text-input"
     :class="{ 'has-error': !!errorMessage, success: meta.valid }"
   >
@@ -112,7 +112,7 @@ const selectTime = (event) => {
     <p class="help-message" v-show="errorMessage">
       {{ errorMessage }}
     </p>
-  </div>
+  </div> -->
 
   <div v-else-if="type == 'datepicker'"
     class="text-input"
@@ -171,7 +171,7 @@ const selectTime = (event) => {
 </template>
 
 <style lang="scss" scoped>
-@import "assets/scss/variables.scss";
+
 .text-input {
   position: relative;
   width: 100%;

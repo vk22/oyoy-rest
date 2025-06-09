@@ -29,7 +29,7 @@ const postMainImage = computed(() => {
 </script>
 
 <style lang="scss">
-@import "assets/scss/variables.scss";
+
 
   .post-item {
     cursor: pointer;

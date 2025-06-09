@@ -136,7 +136,7 @@ definePageMeta({
 });
 import { onMounted, ref, watch } from "vue";
 import { useAdminStore } from "@/store/admin";
-import { useConfirm } from '../../compositions/useConfirm';
+import { useConfirm } from '@/compositions/useConfirm';
 const { isConfirmed } = useConfirm();
 const { $formatDate } = useNuxtApp();
 const reservationDialogIsOpen = ref(false);
@@ -202,7 +202,6 @@ getReservationAvailableState()
 
 
 <style lang="scss" scoped>
-@import "assets/scss/admin.scss";
 
 .reservation-panel {
   font-family: $font-sans;

@@ -86,7 +86,7 @@ function onInputChange(e) {
 }
 
 // Uploader
-import createUploader from '../../compositions/file-uploader'
+import createUploader from '@/compositions/file-uploader'
 const { uploadFiles } = createUploader(adminStore)
 
 /// handler from Parent

@@ -1,5 +1,5 @@
 <template>
-      <Transition name="loading">
+    <Transition name="loading">
       <LoadingComponent></LoadingComponent>  
     </Transition>
     <CookiePolicy></CookiePolicy>  
@@ -82,6 +82,6 @@ useHead({
 
 </script>
 <style lang="scss">
-@import "assets/scss/main.scss";
+@use "~/assets/scss/main.scss";
 </style>
  

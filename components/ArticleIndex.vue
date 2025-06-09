@@ -41,7 +41,7 @@
 </script>
 
 <style lang="scss">
-@import "assets/scss/variables.scss";
+
 
 .article-index {
   display: flex;

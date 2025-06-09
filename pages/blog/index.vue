@@ -85,7 +85,6 @@ onMounted(() => {
 </script>
 
 <style lang="scss">
-@import "assets/scss/variables.scss";
 
 .subscribe-preview {
   text-align: center;

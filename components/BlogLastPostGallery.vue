@@ -124,7 +124,7 @@ onMounted(() => nextTick(() => {}));
 </script>
 
 <style lang="scss">
-@import "assets/scss/variables.scss";
+
 
 .blog-top-slider {
   position: relative;

@@ -51,7 +51,7 @@ const about = aboutStore.getData;
 </script>
 
 <style lang="scss">
-@import "assets/scss/variables.scss";
+
 
 .about-index {
   display: flex;

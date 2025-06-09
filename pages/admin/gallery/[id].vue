@@ -49,7 +49,7 @@
 
 <script setup>
 import { useAdminStore } from "@/store/admin";
-import { useConfirm } from '../../compositions/useConfirm';
+import { useConfirm } from '@/compositions/useConfirm';
 const { isConfirmed } = useConfirm();
 const adminStore = useAdminStore();
 const loading = computed(() => adminStore.loading);
@@ -127,7 +127,7 @@ const deleteGalleryItem = async (index) => {
 
 
 <style lang="scss" scoped>
-@import "assets/scss/admin.scss";
+
 
 .gallery-item-wrap {
   position: relative;

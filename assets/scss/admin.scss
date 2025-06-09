@@ -1,4 +1,4 @@
-@import "assets/scss/variables.scss";
+@use './variables.scss' as *;
 
 $table-header: #282828;
 $table-header-border: #313131;
