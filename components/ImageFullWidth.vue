@@ -25,7 +25,7 @@ defineProps(["type","path", "title"]);
 .full-w-banner {
   display: flex;
   width: 100%;
-  height: 75vh;
+  height: 65vh;
   position: relative;
   margin: 1rem 0;
   
