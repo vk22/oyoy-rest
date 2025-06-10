@@ -2,11 +2,12 @@
     <TopBannerGallery></TopBannerGallery>
     <section class="page-content" v-show="dataReady">
       <AboutUs ></AboutUs>
+      <ImageFullWidth :type="'image'" :path="'/img/full-w-banner-1.jpg'" :title="''"></ImageFullWidth>
       <Chef></Chef>
       <ImageFullWidth :type="'video'" :path="'/video/video2.mp4'" :title="''"></ImageFullWidth>
       <MenuIndex :category="'food'" v-if="menuIsPublished"></MenuIndex>
       <MenuIndexAsPDF :category="'food'"></MenuIndexAsPDF> 
-      <ImageFullWidth :type="'image'" :path="'/img/full-w-banner-1.jpg'" :title="''"></ImageFullWidth>
+      <ImageFullWidth :type="'image'" :path="'/img/full-w-banner-4.jpg'" :title="''"></ImageFullWidth>
       <MenuIndexAsPDF :category="'drinks'" v-if="wineListIsActive"></MenuIndexAsPDF> 
       <SwiperGallery></SwiperGallery>
       <EventsIndex></EventsIndex>

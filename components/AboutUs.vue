@@ -2,7 +2,7 @@
 
     <section class="about-index index-section" id="about" ref="intoContent" >
       <v-container fluid>
-        <v-row>
+        <v-row class="about-index-cols">
           <!-- col -->
           <v-col cols="12" md="6" class="d-flex justify-center align-center">
             <div class="about-index__images">
@@ -67,6 +67,17 @@ const about = aboutStore.getData;
     // margin-bottom: 3rem;
   }
 
+  .about-index-cols {
+    
+    @include for-phone-only {
+      flex-direction: column-reverse;
+    }
+
+    @include for-tablet-portrait-up {
+      // margin-bottom: 3rem;
+    }
+  }
+
   &__block {
     display: flex;
     flex-direction: column;
@@ -107,15 +118,16 @@ const about = aboutStore.getData;
     }
 
     .img-1 {
+      
       @include for-phone-only {
-        margin-top: 1rem;
-        width: 45%;
+        width: 75%;
+        padding: 2rem 0 0 0;
         //display: none;
       }
 
       @include for-tablet-portrait-up {
         // margin-top: 10rem;
-        width: 65%;
+        width: 75%;
       }
     }
 

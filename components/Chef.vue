@@ -4,7 +4,7 @@
       <v-container fluid>
         <v-row>
           <!-- col -->
-          <v-col cols="12" md="12" class="d-flex align-center">
+          <v-col cols="12" md="6" class="d-flex align-center">
             <v-row>
               <v-col class="d-flex justify-center">
                 <div class="chef-index__block centered slideUp fade-in">
@@ -14,15 +14,15 @@
                   <div class="chef-index__block__text">
                     <span v-html="chef.text"></span>
                   </div>
-                  <!-- <div class="chef-index__block__btn">
+                  <div class="chef-index__block__btn">
                     <div class="btn" v-if="reservationAvailable" @click="getFormModalStateToggle">Reservations</div>
-                  </div> -->
+                  </div>
                 </div>
               </v-col>
             </v-row>
           </v-col>
          <!-- col -->
-          <v-col cols="12" md="12" class="d-flex justify-center align-center">
+          <v-col cols="12" md="6" class="d-flex justify-center align-center">
             <div class="chef-index__images">
               <div class="img-wrap img-1 slideUp fade-in">
                 <NuxtImg :src="mainImage" />
@@ -117,7 +117,7 @@ const mainImage = computed(() => {
     .img-1 {
       @include for-phone-only {
         margin-top: 1rem;
-        width: 75%;
+        width: 100%;
         //display: none;
       }
 

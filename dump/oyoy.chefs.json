@@ -1,0 +1,14 @@
+[{
+  "_id": {
+    "$oid": "684735212a7acb1bdbcca087"
+  },
+  "title": "Know our Maltese Chef",
+  "image": {
+    "file": {
+      "url": "https://8hdewv6u55ya8hjg.public.blob.vercel-storage.com/chef/DSC_1369_%20Joel%20Gueller%20Photography-HSldZJv8sKaBytkuX2u5WTrfRDsplq.jpg",
+      "type": "image/jpeg"
+    },
+    "index": 0
+  },
+  "text": "<p>We would like to introduce you to those who give shape, flavour and character to our cuisine. Three Maltese chefs, with roots in this land and their own way of understanding produce and the sea.</p>"
+}]
