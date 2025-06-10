@@ -61,7 +61,7 @@ definePageMeta({
 });
 
 const { data } = await useFetch('/api/gallery')
-const gallery = data._rawValue.items
+const gallery = data.value.items
 
 </script>
 

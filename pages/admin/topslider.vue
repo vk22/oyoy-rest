@@ -40,7 +40,7 @@ const topslide = ref();
 const { data } = await useFetch("/api/topslide", {
   method: "get",
 });
-topslide.value = data._rawValue.data;
+topslide.value = data.value.data;
 
 const save = async () => {
   await adminStore.fetchData('topslide', 'put', topslide)

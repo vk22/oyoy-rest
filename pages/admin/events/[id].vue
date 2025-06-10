@@ -103,7 +103,7 @@ definePageMeta({
 const route = useRoute()
 const router = useRouter()
 const { data } = await useFetch(`/api/events/${route.params.id}`)
-const event = ref(data._rawValue)
+const event = ref(data.value)
 const uploaderRef = ref(null);
 const files = ref(null);
 

@@ -115,7 +115,7 @@ const deleteItem = async (item) => {
       method: "delete",
       body: item,
     });
-    if (data._rawValue.success) {
+    if (data.value.success) {
       dialogIsOpen.value = false;
       subscribers.value = data.value.subscribers;
     }
