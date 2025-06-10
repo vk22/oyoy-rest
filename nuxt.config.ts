@@ -34,8 +34,7 @@ export default defineNuxtConfig({
     '@nuxt/image',
     'nuxt-tiptap-editor',
     '@nuxtjs/robots',
-    '@nuxtjs/sitemap',
-    '@nuxtjs/gtm'
+    '@nuxtjs/sitemap'
   ],
 
   tiptap: {
@@ -51,9 +50,6 @@ export default defineNuxtConfig({
   plugins: [
     // '~/plugins/vue-lazyload'
   ],
-  gtm: {
-    id: 'GTM-5GQBQS5S'
-  },
   sitemap: {
     sources: ['/api/sitemap'],
     discoverImages: false,
