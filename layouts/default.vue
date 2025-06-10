@@ -1,7 +1,7 @@
 <template>
-    <Transition name="loading">
+    <!-- <Transition name="loading">
       <LoadingComponent></LoadingComponent>  
-    </Transition>
+    </Transition> -->
     <CookiePolicy></CookiePolicy>  
     <SendEmailResponse></SendEmailResponse>
     <Transition>
