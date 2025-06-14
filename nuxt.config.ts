@@ -52,8 +52,13 @@ export default defineNuxtConfig({
   ],
   sitemap: {
     sources: ['/api/sitemap'],
+    cacheMaxAgeSeconds: 3600,
     discoverImages: false,
     discoverVideos: false,
+    xslColumns: [
+        { label: 'URL', width: '50%' },
+        { label: 'Last Modified', select: 'sitemap:lastmod', width: '50%' }
+    ],
   },
   robots: {
     disallow: ['/login', '/admin/', ],
@@ -74,8 +79,10 @@ export default defineNuxtConfig({
   },
   nitro: {
     plugins: ["~/server/plugins/mongodb.ts"],
+    externals: {
+      allowlist: ['bcrypt']
+    }
   },
-
   runtimeConfig: {
     ///mode
     mode: process.env.MODE,
@@ -86,7 +93,8 @@ export default defineNuxtConfig({
     public: {
       apiBase: process.env.NUXT_PUBLIC_API_BASE || '/api',
       gtagId: 'AW-16850949987',
-    }
+    },
+    vercelBlobToken: process.env.BLOB_READ_WRITE_TOKEN,
   },
   router: {
     options: {

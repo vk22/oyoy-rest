@@ -13,6 +13,7 @@
         width="100%"
         height=" 100%"
         referrerpolicy="unsafe-url"
+        id="tableo-iframe"
         v-if="reservationAvailable"
       ></iframe>
       <div class="reservation-empty" v-else>

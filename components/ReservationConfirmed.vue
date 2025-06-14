@@ -1,11 +1,10 @@
 <template>
-  <Transition name="fade">
-    <div class="response-message" v-if="sendEmailResponse.mode" :class="sendEmailResponse.status">
-      <img class="logo" src="/img/logo-b.svg" alt="">
-      <h3>{{ sendEmailResponse.message.title }}</h3>
-      <p>{{ sendEmailResponse.message.subtitle }}</p>
+    <div class="reservation-confirmed">
+      <NuxtImg class="icon1 loop" src="/img/booking-icon.svg" />
+      <h3>Reservation has been confirmed</h3>
+      <p>We look forward to seeing you in our restaurant</p>
+      <!-- <NuxtImg class="icon2" src="/img/oyster2.png" alt="" /> -->
     </div>
-  </Transition>
 </template>
 
 <script setup> 
@@ -14,16 +13,12 @@ const store = useReservationStore()
 let sendEmailResponse =  computed(() => store.getSendEmailResponse)
 </script>
 
-    
+  
 <style lang="scss">
 
-
-.response-message {
-    position: fixed;
-    top: 0;
-    left: 0;
+.reservation-confirmed {
     width: 100vw;
-    height: 100%;
+    height: 100vh;
     z-index: 999999;
     color: #262626;
     text-transform: uppercase;
@@ -37,10 +32,15 @@ let sendEmailResponse =  computed(() => store.getSendEmailResponse)
     background: #ffffffea;
     // box-shadow: 0 1px 20px rgba(0, 0, 0, 0.15);
 
-    .logo {
+    .icon1 {
+        width: 100px;
+        margin-bottom: 3rem;
+    }
+    
+    .icon2 {
         position: absolute;
         bottom: 2rem;
-        width: 200px;
+        width: 100px;
         margin-bottom: 2rem;
         fill: transparent;
         z-index: 1;
@@ -61,7 +61,7 @@ let sendEmailResponse =  computed(() => store.getSendEmailResponse)
     p {
         margin-top: 0.5rem;
         text-transform: none;
-        font-size: 1rem;
+        font-size: 1.15rem;
         font-weight: 400;
         font-style: normal;
     }

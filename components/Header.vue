@@ -57,7 +57,7 @@
     <div class="main-menu__background" @click="toggleMenu()"></div>
   </div>
 
-  <header class="main-header" :class="[{ small: isScrolled || currentRoute.name === 'reservations' || currentRoute.name === 'privacy' || currentRoute.name === 'terms'   }, {'fadeIn-1': dataReady}]">
+  <header class="main-header" :class="[{ small: isScrolled || routesForWhiteHeader.includes(currentRoute.name) }, {'fadeIn-1': dataReady}]">
     <div class="header-l">
       <div class="icon-nav" @click="toggleMenu()">
         <div class="line"></div>
@@ -104,6 +104,12 @@ import { useBlogStore } from "@/store/blog";
 const route = useRoute();
 const router = useRouter();
 const currentRoute = router.currentRoute;
+const routesForWhiteHeader = [
+  'reservations',
+  'reservation-confirmed',
+  'privacy',
+  'terms'
+]
 
 const linkOnLogo = () => {
   if (currentRoute.value.name.includes('blog')) {
