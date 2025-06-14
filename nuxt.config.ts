@@ -52,7 +52,7 @@ export default defineNuxtConfig({
   ],
   sitemap: {
     sources: ['/api/sitemap'],
-    cacheMaxAgeSeconds: 3600,
+    cacheMaxAgeSeconds: 60,
     discoverImages: false,
     discoverVideos: false,
     xslColumns: [
