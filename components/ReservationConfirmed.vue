@@ -11,11 +11,13 @@
 </template>
 
 <script setup> 
-import { useReservationStore }  from '@/store/reservation'
-const store = useReservationStore()
-let sendEmailResponse =  computed(() => store.getSendEmailResponse)
-useHead({
-  script: [{ children: "gtag('event', 'conversion', {'send_to': 'AW-16850949987/dt6fCKuT8qAaEOOulOM-'});"}],
+import { onMounted, watch, computed } from "vue";
+const { gtag } = useGtag()
+// useHead({
+//   script: [{ children: "gtag('event', 'conversion', {'send_to': 'AW-16850949987/dt6fCKuT8qAaEOOulOM-'});"}],
+// });
+onMounted(() => {
+    gtag('event', 'conversion', {'send_to': 'AW-16850949987/dt6fCKuT8qAaEOOulOM-'})
 });
 </script>
 

@@ -52,7 +52,8 @@ export default defineNuxtConfig({
     // '~/plugins/vue-lazyload'
   ],
   gtag: {
-    id: 'G-0RF1E5YCG5'
+    id: 'AW-16850949987',
+    //id: 'G-0RF1E5YCG5' /// my test
   },
   sitemap: {
     sources: ['/api/sitemap'],
@@ -96,8 +97,6 @@ export default defineNuxtConfig({
     // Public keys that are exposed to the client
     public: {
       apiBase: process.env.NUXT_PUBLIC_API_BASE || '/api',
-      gtagId: 'AW-16850949987',
-      //gtagId: 'G-0RF1E5YCG5',
       gtmId: 'GTM-N3484GLZ'
     },
     vercelBlobToken: process.env.BLOB_READ_WRITE_TOKEN,
