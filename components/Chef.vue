@@ -123,7 +123,7 @@ const mainImage = computed(() => {
 
       @include for-tablet-portrait-up {
         // margin-top: 10rem;
-        width: 75%;
+        width: 95%;
       }
     }
 

@@ -1,9 +1,12 @@
 <template>
+
     <div class="reservation-confirmed">
-      <NuxtImg class="icon1 loop" src="/img/booking-icon.svg" />
-      <h3>Reservation has been confirmed</h3>
-      <p>We look forward to seeing you in our restaurant</p>
-      <!-- <NuxtImg class="icon2" src="/img/oyster2.png" alt="" /> -->
+      <div class="reservation-confirmed__container slideUp fade-in">
+        <NuxtImg class="icon1 loop" src="/img/booking-icon.svg" />
+        <h3>Reservation has been confirmed</h3>
+        <p>We look forward to seeing you in our restaurant</p>
+        <!-- <NuxtImg class="icon2" src="/img/oyster2.png" alt="" /> -->
+      </div>
     </div>
 </template>
 
@@ -11,6 +14,9 @@
 import { useReservationStore }  from '@/store/reservation'
 const store = useReservationStore()
 let sendEmailResponse =  computed(() => store.getSendEmailResponse)
+useHead({
+  script: [{ children: "gtag('event', 'conversion', {'send_to': 'AW-16850949987/dt6fCKuT8qAaEOOulOM-'});"}],
+});
 </script>
 
   
