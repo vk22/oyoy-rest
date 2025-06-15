@@ -92,8 +92,8 @@ export default defineNuxtConfig({
     // Public keys that are exposed to the client
     public: {
       apiBase: process.env.NUXT_PUBLIC_API_BASE || '/api',
-      //gtagId: 'AW-16850949987',
-      gtagId: 'G-0RF1E5YCG5',
+      gtagId: 'AW-16850949987',
+      //gtagId: 'G-0RF1E5YCG5',
       gtmId: 'GTM-N3484GLZ'
     },
     vercelBlobToken: process.env.BLOB_READ_WRITE_TOKEN,
