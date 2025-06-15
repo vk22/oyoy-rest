@@ -1,8 +1,9 @@
 import { createGtm } from '@gtm-support/vue-gtm';
 
 export default defineNuxtPlugin((nuxtApp) => {
+  const { gtmId } = useRuntimeConfig().public;
   nuxtApp.vueApp.use(createGtm({
-    id: 'GTM-N3484GLZ',
+    id: gtmId,
     defer: false,
     compatibility: false,
     enabled: true,
@@ -10,6 +11,5 @@ export default defineNuxtPlugin((nuxtApp) => {
     loadScript: true,
     vueRouter: useRouter(),
     trackOnNextTick: false,
-
   }))
-  });
+});
