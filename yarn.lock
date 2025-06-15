@@ -1677,7 +1677,7 @@
     hookable "^5.5.3"
     unhead "2.0.10"
 
-"@vercel/blob@^1.4.0":
+"@vercel/blob@^1.0.0":
   version "1.1.1"
   resolved "https://registry.yarnpkg.com/@vercel/blob/-/blob-1.1.1.tgz#c8bdfabc2ec5c0cca3095ac5b8e255d8b7eaa137"
   integrity sha512-heiJGj2qt5qTv6yiShH9f6KRAoZGj+lz61GQ+lBRL4lhvUmKI9A51KYlQTnsUd9ymdFlKHBlvmPeG+yGz2Qsbg==
@@ -4753,6 +4753,16 @@ nth-check@^2.0.1:
   integrity sha512-lqjrjmaOoAnWfMmBPL+XNnynZh2+swxiX3WUE0s4yEHI6m+AwrK2UZOimIRl3X/4QctVqS8AiZjFqyOGrMXb/w==
   dependencies:
     boolbase "^1.0.0"
+
+nuxt-gtag@^3.0.3:
+  version "3.0.3"
+  resolved "https://registry.yarnpkg.com/nuxt-gtag/-/nuxt-gtag-3.0.3.tgz#e1990fba419bbb2f79398a17e4d9b19e9db103b7"
+  integrity sha512-1XZc9I3DiF2GC07P7uQOlGN4v1cbnLwWHaQUIlayp4pg0h7wOrna5Nl733/2rXq7ktPL3fT8NBJR7OsV9BtJRA==
+  dependencies:
+    "@nuxt/kit" "^3.17.5"
+    defu "^6.1.4"
+    pathe "^2.0.3"
+    ufo "^1.6.1"
 
 nuxt-site-config-kit@3.2.0:
   version "3.2.0"
