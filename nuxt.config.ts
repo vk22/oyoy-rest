@@ -57,7 +57,8 @@ export default defineNuxtConfig({
     //id: 'AW-17212492361' /// my test
   },
   gtm: {
-    id: 'GTM-N3484GLZ'
+    //id: 'GTM-N3484GLZ'
+    id: 'GTM-5GQBQS5S'
   },
   sitemap: {
     sources: ['/api/sitemap'],
