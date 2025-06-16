@@ -17,7 +17,7 @@ const { gtag } = useGtag()
 //   script: [{ children: "gtag('event', 'conversion', {'send_to': 'AW-16850949987/dt6fCKuT8qAaEOOulOM-'});"}],
 // });
 onMounted(() => {
-    gtag('event', 'conversion', {'send_to': 'AW-16850949987/dt6fCKuT8qAaEOOulOM-'})
+    gtag('event', 'conversion', {'send_to': 'G-0RF1E5YCG5/dt6fCKuT8qAaEOOulOM-'})
 });
 </script>
 

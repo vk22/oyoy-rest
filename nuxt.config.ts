@@ -35,7 +35,8 @@ export default defineNuxtConfig({
     'nuxt-tiptap-editor',
     '@nuxtjs/robots',
     '@nuxtjs/sitemap',
-    'nuxt-gtag'
+    'nuxt-gtag',
+    '@zadigetvoltaire/nuxt-gtm'
   ],
 
   tiptap: {
@@ -52,8 +53,11 @@ export default defineNuxtConfig({
     // '~/plugins/vue-lazyload'
   ],
   gtag: {
-    id: 'AW-16850949987',
-    //id: 'G-0RF1E5YCG5' /// my test
+    //id: 'AW-16850949987',
+    id: 'G-0RF1E5YCG5' /// my test
+  },
+  gtm: {
+    id: 'GTM-N3484GLZ'
   },
   sitemap: {
     sources: ['/api/sitemap'],
@@ -97,7 +101,7 @@ export default defineNuxtConfig({
     // Public keys that are exposed to the client
     public: {
       apiBase: process.env.NUXT_PUBLIC_API_BASE || '/api',
-      gtmId: 'GTM-N3484GLZ'
+      //gtmId: 'GTM-N3484GLZ'
     },
     vercelBlobToken: process.env.BLOB_READ_WRITE_TOKEN,
   },
