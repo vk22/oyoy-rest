@@ -54,7 +54,7 @@ export default defineNuxtConfig({
   ],
   gtag: {
     //id: 'AW-16850949987',
-    id: 'G-0RF1E5YCG5' /// my test
+    id: 'AW-17212492361' /// my test
   },
   gtm: {
     id: 'GTM-N3484GLZ'
