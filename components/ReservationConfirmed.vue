@@ -15,8 +15,8 @@ import { onMounted, watch, computed } from "vue";
 const { gtag } = useGtag()
 
 onMounted(() => {
-    //gtag('event', 'conversion', {'send_to': 'AW-16850949987/dt6fCKuT8qAaEOOulOM-'});
-    gtag('event', 'conversion', {'send_to': 'AW-17212492361/_FxNCKiOh9waEMmUx49A'}); /// my test
+    gtag('event', 'conversion', {'send_to': 'AW-16850949987/dt6fCKuT8qAaEOOulOM-'});
+    //gtag('event', 'conversion', {'send_to': 'AW-17212492361/_FxNCKiOh9waEMmUx49A'}); /// my test
 });
 </script>
 
