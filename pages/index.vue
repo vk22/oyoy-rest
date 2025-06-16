@@ -60,8 +60,8 @@ useHead({
 })
 
 useSeoMeta({
-  title: 'OyOy Restaurant222',
-  ogTitle: 'OyOy Restaurant222',
+  title: 'OyOy Restaurant',
+  ogTitle: 'OyOy Restaurant',
   description: 'We would like to present to you OyOy - a restaurant with spectacular 180 degree views on Spinola Bay.',
   ogDescription: 'We would like to present to you OyOy - a restaurant with spectacular 180 degree views on Spinola Bay.',
   ogUrl: 'https://oyoyrestaurant.com/',
