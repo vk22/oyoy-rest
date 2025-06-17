@@ -64,10 +64,13 @@ function checkAllowedFormat(filesNew) {
 				return false;
 			}
 		})
+	} else {
+		return filesNew
 	}
 }
 
 function filesDropped(filesNew) {
+	console.log('filesNew ', filesNew)
 	const filesChecked = checkAllowedFormat(filesNew);
 	if (filesChecked.length) {
 		if (checkLimit(filesChecked)) return;

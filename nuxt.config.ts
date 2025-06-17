@@ -36,7 +36,7 @@ export default defineNuxtConfig({
     '@nuxtjs/robots',
     '@nuxtjs/sitemap',
     'nuxt-gtag',
-    '@zadigetvoltaire/nuxt-gtm'
+    //'@zadigetvoltaire/nuxt-gtm'
   ],
 
   tiptap: {
@@ -56,10 +56,10 @@ export default defineNuxtConfig({
     id: 'AW-16850949987',
     //id: 'AW-17212492361' /// my test
   },
-  gtm: {
-    id: 'GTM-N3484GLZ'
-    //id: 'GTM-5GQBQS5S' /// my test
-  },
+  // gtm: {
+  //   id: 'GTM-N3484GLZ'
+  //   //id: 'GTM-5GQBQS5S' /// my test
+  // },
   sitemap: {
     sources: ['/api/sitemap'],
     cacheMaxAgeSeconds: 60,
