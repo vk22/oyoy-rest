@@ -1,44 +1,36 @@
 <template>
-  <div>
-    <h1>Загрузить файл</h1>
-    <input type="file" ref="fileInput" />
-    <button @click="handleSubmit">Загрузить</button>
+  <div class="space-y-4">
+    <input type="file" @change="onChange" />
+    <button class="admin-sec-btn" @click="uploadFile" :disabled="!file">Загрузить</button>
+    <div v-if="progress">Загрузка: {{ progress }}%</div>
+    <div v-if="url">Файл загружен: <a :href="url" target="_blank">{{ url }}</a></div>
   </div>
 </template>
 
-<script>
-import axios from 'axios';
+<script setup>
+import { ref } from 'vue';
+import { upload } from '@vercel/blob/client';
 
-export default {
-  data() {
-    return {
-      fileUrl: null,
-    };
-  },
-  methods: {
-    async handleSubmit() {
-      const file = this.$refs.fileInput.files[0];
+const file = ref(null);
+const url = ref(null);
+const progress = ref(0);
 
-      if (!file) return;
+const onChange = (e) => {
+  const target = e.target;
+  file.value = target.files?.[0] || null;
+};
 
-      try {
+const uploadFile = async () => {
+  if (!file.value) return;
 
-        const response = await axios.post('/api/upload-blob', { file });
-        console.log('response ', response.data)
-
-
-        // const uploadResponse = await axios.put(response.data.url, file, {
-        //   headers: {
-        //     'Content-Type': file.type,
-        //   },
-        // });
-
-
-        // this.fileUrl = uploadResponse.data.url;
-      } catch (error) {
-        console.error('Ошибка загрузки', error.message);
-      }
+  const blob = await upload(file.value.name, file.value, {
+    access: 'public',
+    handleUploadUrl: '/api/blob-upload-url',
+    onUploadProgress(p) {
+      progress.value = Math.round(p.percentage);
     },
-  },
+  });
+
+  url.value = blob.url;
 };
 </script>

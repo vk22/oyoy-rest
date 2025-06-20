@@ -100,6 +100,7 @@
           <div class="admin-sec-btn" @click="deleteMenu()">Delete</div>
         </v-col>
       </v-row>
+      <AdminBlobUploader></AdminBlobUploader>
     </v-container>
   </section>
 </template>

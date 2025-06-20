@@ -4,13 +4,11 @@
 
 <script setup>
 import { onMounted, watch, computed } from 'vue';
-import { useMainStore } from '@/store/index';
-const { gtag } = useGtag();
-gtag('event', 'conversion', {'send_to': 'AW-16850949987/dt6fCKuT8qAaEOOulOM-'});
 
 onMounted(() => {
-    //gtag('event', 'conversion', {'send_to': 'AW-16850949987/dt6fCKuT8qAaEOOulOM-'});
-    //gtag('event', 'conversion', {'send_to': 'AW-17212492361/_FxNCKiOh9waEMmUx49A'}); /// my test
+  const { gtag } = useGtag();
+  gtag('event', 'conversion', {'send_to': 'AW-16850949987/dt6fCKuT8qAaEOOulOM-'});    
+  //gtag('event', 'conversion', {'send_to': 'AW-17212492361/_FxNCKiOh9waEMmUx49A'}); /// my test
 });
 
 useHead({
