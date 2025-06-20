@@ -25,6 +25,7 @@ const uploadFile = async () => {
 
   const blob = await upload(file.value.name, file.value, {
     access: 'public',
+    allowOverwrite: true,
     handleUploadUrl: '/api/blob-upload-url',
     onUploadProgress(p) {
       progress.value = Math.round(p.percentage);
