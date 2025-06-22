@@ -48,7 +48,7 @@
                   :type="'menu'"
                   :limit="1"
                   :allowedFormat="['application/pdf']"
-                  @files-dropped2="addFilePdf"
+                  @files-dropped="addFilePdf"
                   ref="uploaderRefPdf"
                 ></AdminFileUploader>
             </div>
@@ -64,7 +64,7 @@
                 :type="'menu'"
                 :limit="1"
                 :allowedFormat="['image/png', 'image/jpeg', 'image/jpg']"
-                @files-dropped2="addFilePreview"
+                @files-dropped="addFilePreview"
                 ref="uploaderRefPreview"
               ></AdminFileUploader>
             </div>

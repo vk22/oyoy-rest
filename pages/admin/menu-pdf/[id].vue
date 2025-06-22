@@ -50,9 +50,10 @@
               <p class="label">PDF file</p>
               <AdminFileUploader
                 :type="'menu'"
+                :uploadType="'client'"
                 :limit="1"
                 :allowedFormat="['application/pdf']"
-                @files-dropped2="addFilePdf"
+                @files-dropped="addFilePdf"
                 ref="uploaderRefPdf"
               ></AdminFileUploader>
               <div class="mt-5">
@@ -75,7 +76,7 @@
                 :type="'menu'"
                 :limit="1"
                 :allowedFormat="['image/png', 'image/jpeg', 'image/jpg']"
-                @files-dropped2="addFilePreview"
+                @files-dropped="addFilePreview"
                 ref="uploaderRefPreview"
               ></AdminFileUploader>
               <div class="mt-5">
@@ -100,7 +101,12 @@
           <div class="admin-sec-btn" @click="deleteMenu()">Delete</div>
         </v-col>
       </v-row>
-      <AdminBlobUploader></AdminBlobUploader>
+      <v-row>
+        <v-col>
+          <AdminBlobUploader></AdminBlobUploader>
+        </v-col>
+      </v-row>  
+      
     </v-container>
   </section>
 </template>

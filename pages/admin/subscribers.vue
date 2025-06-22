@@ -46,7 +46,7 @@
       <v-row>
         <v-col>
           <div class="upload-file-container">
-            <AdminFileUploader :type="'svg'" @files-dropped2="addFile" ref="uploaderRef"></AdminFileUploader>
+            <AdminFileUploader :type="'svg'" @files-dropped="addFile" ref="uploaderRef"></AdminFileUploader>
             <div class="mt-3">
               <button class="admin-sm-btn" @click="uploadFile">Upload</button>
             </div>

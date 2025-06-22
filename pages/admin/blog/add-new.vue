@@ -19,7 +19,7 @@
                 </p>
                 <AdminFileUploader
                   :type="'posts'"
-                  @files-dropped2="addFiles"
+                  @files-dropped="addFiles"
                   ref="uploaderRef"
                 ></AdminFileUploader>
                 {{ files }}
@@ -67,7 +67,7 @@
                   <p class="label">Gallery</p>
                   <AdminFileUploader
                     :type="'posts-gallery'"
-                    @files-dropped2="addGalleryFiles"
+                    @files-dropped="addGalleryFiles"
                     ref="uploadeGalleryrRef"
                   ></AdminFileUploader>
                   {{ files }}

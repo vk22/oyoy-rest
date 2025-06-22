@@ -18,7 +18,7 @@
             <!-- <v-row>
               <v-col>
                 <label>Images for Gallery</label>
-                <AdminFileUploader :type="'gallery'" @files-dropped2="addFiles" ref="uploaderRef"></AdminFileUploader> 
+                <AdminFileUploader :type="'gallery'" @files-dropped="addFiles" ref="uploaderRef"></AdminFileUploader> 
                 {{ files }}
               </v-col>
             </v-row>
@@ -32,7 +32,7 @@
             <v-row>
               <v-col>
                 <label for=""></label>
-                <AdminFileUploader :type="'events'" @files-dropped2="addFiles" ref="uploaderRef"></AdminFileUploader> 
+                <AdminFileUploader :type="'events'" @files-dropped="addFiles" ref="uploaderRef"></AdminFileUploader> 
                 {{ files }}
               </v-col>
             </v-row>

@@ -8,7 +8,6 @@
 				<span v-else>
 					<span class="link">Choose files</span><span> or drag&drop</span>
 				</span>
-
 				<input type="file" :id="'file-input-'+props.type" multiple @change="onInputChange" />
 			</label>
 			<ul class="image-list" v-show="files.length">
@@ -23,8 +22,9 @@
 import { defineExpose } from 'vue';
 import { useAdminStore } from "@/store/admin";
 const adminStore = useAdminStore();
-const emit = defineEmits(['files-dropped2'])
+const emit = defineEmits(['files-dropped'])
 const props = defineProps({
+	uploadType: { type: String },
 	type: { type: String, required: true },
 	limit: { type: Number },
 	allowedFormat: { type: Array },
@@ -50,7 +50,6 @@ function checkLimit(filesNew) {
 			return false;
 		}
 	}
-
 }
 
 function checkAllowedFormat(filesNew) {
@@ -75,7 +74,7 @@ function filesDropped(filesNew) {
 	if (filesChecked.length) {
 		if (checkLimit(filesChecked)) return;
 		addFiles(filesChecked, props.type)
-		emit('files-dropped2', filesChecked)
+		emit('files-dropped', filesChecked)
 	}
 }
 
@@ -84,17 +83,24 @@ function onInputChange(e) {
 	if (filesChecked.length) {
 		if (checkLimit(filesChecked)) return;
 		addFiles(filesChecked, props.type)
-		emit('files-dropped2', filesChecked)
+		emit('files-dropped', filesChecked)
 	}
 }
 
 // Uploader
 import createUploader from '@/compositions/file-uploader'
-const { uploadFiles } = createUploader(adminStore)
+const { uploadFilesServer, uploadFileClient } = createUploader(adminStore)
 
 /// handler from Parent
 const startUpload = async () => {
-	const response = await uploadFiles(files.value, props.type, adminStore)
+	let response;
+	if (props.uploadType) {
+		response = (props.uploadType === 'client') ? 
+		await uploadFileClient(files.value, props.type) :
+		await uploadFilesServer(files.value, props.type, adminStore)
+	} else {
+		response = await uploadFilesServer(files.value, props.type, adminStore)
+	}
 	removeFiles()
 	return response
 }

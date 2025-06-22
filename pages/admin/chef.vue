@@ -28,7 +28,7 @@
                 :type="'chef'"
                 :limit="1"
                 :allowedFormat="['image/png', 'image/jpeg', 'image/jpg']"
-                @files-dropped2="addFile"
+                @files-dropped="addFile"
                 ref="uploaderRef"
               ></AdminFileUploader>
               <div class="mt-5">

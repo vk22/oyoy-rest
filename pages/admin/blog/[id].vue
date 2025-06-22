@@ -15,7 +15,7 @@
                 <p class="label">All images (The first image will be the cover)</p>
                 <AdminFileUploader
                   :type="'posts'"
-                  @files-dropped2="addFiles"
+                  @files-dropped="addFiles"
                   ref="uploaderRef"
                 ></AdminFileUploader>
                 {{ files }}
@@ -67,7 +67,7 @@
                 </div>
                 <div class="content-item__gallery" v-if="item.type === 'gallery'">
                   <p class="label">Gallery</p>
-                  <AdminFileUploader :type="'posts-gallery'" @files-dropped2="addGalleryFiles" ref="uploadeGalleryrRef"></AdminFileUploader>
+                  <AdminFileUploader :type="'posts-gallery'" @files-dropped="addGalleryFiles" ref="uploadeGalleryrRef"></AdminFileUploader>
                   {{ files }}
                   <div class="mt-5">
                       <AdminImagesGalleryPreview :images="post.gallery" :imagesType="'gallery'" @drag-end="draggEnd" @delete-gallery-item="deleteGalleryItem"></AdminImagesGalleryPreview>
