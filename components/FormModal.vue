@@ -22,7 +22,7 @@ const formModalStateToggle = () => {
 </script>
 
     
-<style lang="scss">
+<style lang="scss" scoped>
 
 
 // .v-move,

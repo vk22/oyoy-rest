@@ -63,6 +63,9 @@
       <button class="tiptap-btn" @click="setLink" :class="{ 'is-active': editor.isActive('link') }">
           Set link
       </button>
+      <button class="tiptap-btn" @click="addYoutubeVideo" :class="{ 'is-active': editor.isActive('link') }">
+          Add YouTube video
+      </button>
     </div>
     <TiptapEditorContent :editor="editor" class="textarea"/>
   </div>
@@ -72,6 +75,24 @@
 import { watch } from 'vue'
 import Image from '@tiptap/extension-image'
 import Link from '@tiptap/extension-link'
+import Youtube from '@tiptap/extension-youtube'
+const CustomYoutube = Youtube.extend({
+  renderHTML({ HTMLAttributes }) {
+    return [
+      'div',
+      { class: 'youtube-container' },
+      [
+        'iframe',
+        {
+          ...HTMLAttributes,
+          allow: 'accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture',
+          allowfullscreen: 'true',
+        },
+      ],
+    ]
+  },
+})
+// import CustomYoutube from '@/compositions/tiptapCustomYoutube';
 const props = defineProps({
   modelValue: String
 })
@@ -89,7 +110,15 @@ const emit = defineEmits({
 // })
 const editor = useEditor({
   content: props.modelValue,
-  extensions: [TiptapStarterKit, Image, Link],
+  extensions: [
+    TiptapStarterKit, 
+    Image, 
+    Link,
+    CustomYoutube.configure({
+      controls: true,
+      nocookie: true,
+    }),
+  ],
   onUpdate: () => {
         // HTML
         emit('update:modelValue', editor.value.getHTML())
@@ -131,7 +160,47 @@ const setLink = () => {
         .extendMarkRange('link')
         .setLink({ href: url })
         .run()
+}
 
+function getYouTubeEmbedUrl(inputUrl) {
+  try {
+    const url = new URL(inputUrl)
+
+    // Поддержка стандартного вида: https://www.youtube.com/watch?v=...
+    if (url.hostname.includes('youtube.com') && url.pathname === '/watch') {
+      const videoId = url.searchParams.get('v')
+      if (videoId) {
+        return `https://www.youtube.com/embed/${videoId}`
+      }
+    }
+
+    // Поддержка короткого вида: https://youtu.be/...
+    if (url.hostname === 'youtu.be') {
+      const videoId = url.pathname.split('/')[1]
+      if (videoId) {
+        return `https://www.youtube.com/embed/${videoId}`
+      }
+    }
+
+    // Поддержка embed-ссылок (оставляем как есть)
+    if (url.hostname.includes('youtube.com') && url.pathname.startsWith('/embed/')) {
+      return inputUrl
+    }
+
+    return null
+  } catch (e) {
+    return null
+  }
+}
+
+const addYoutubeVideo = () => {
+    const url = window.prompt('Enter YouTube URL')
+    const embedUrl = getYouTubeEmbedUrl(url)
+    editor.value.commands.setYoutubeVideo({
+      src: embedUrl,
+      width: '100%',
+      height: 480,
+    })
 }
 
 // const insertContent = () => {

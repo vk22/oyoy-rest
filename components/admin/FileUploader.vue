@@ -19,7 +19,7 @@
 </template>
 
 <script setup>
-import { defineExpose } from 'vue';
+import { ref, defineExpose } from 'vue';
 import { useAdminStore } from "@/store/admin";
 const adminStore = useAdminStore();
 const emit = defineEmits(['files-dropped'])
@@ -29,79 +29,47 @@ const props = defineProps({
 	limit: { type: Number },
 	allowedFormat: { type: Array },
 })
+import FileUploader from '@/compositions/file-uploader';
+const fileUploader = new FileUploader(props.allowedFormat, props.limit);
+const files = ref(fileUploader.fileList())
 
 // File Management
-import useFileList from '../../compositions/file-list'
-const { files, addFiles, removeFile, removeFiles } = useFileList()
+// import useFileList from '../../compositions/file-list'
+// const { files, addFiles, removeFile, removeFiles } = useFileList()
 
-function checkLimit(filesNew) {
-	if (filesNew.length > props.limit) {
-		alert('Limit: '+props.limit)
-		return true;			
-	} else {
-		if (props.limit) {
-			if (props.limit === files.value.length) {
-				alert('Limit: '+props.limit)
-				return true;
-			} else {
-				return false;
-			}
-		} else {
-			return false;
-		}
-	}
-}
-
-function checkAllowedFormat(filesNew) {
-	if (props.allowedFormat) {
-		return Array.from(filesNew).filter(el => {
-			const check = props.allowedFormat.includes(el.type)
-			if (check) {
-				return el;
-			} else {
-				alert ('Bad format')
-				return false;
-			}
-		})
-	} else {
-		return filesNew
-	}
+function removeFile(file) {
+	fileUploader.removeFile(file)
 }
 
 function filesDropped(filesNew) {
 	console.log('filesNew ', filesNew)
-	const filesChecked = checkAllowedFormat(filesNew);
+	const filesChecked = fileUploader.checkAllowedFormat(filesNew);
 	if (filesChecked.length) {
-		if (checkLimit(filesChecked)) return;
-		addFiles(filesChecked, props.type)
+		if (fileUploader.checkLimit(filesChecked)) return;
+		fileUploader.addFiles(filesChecked, props.type)
 		emit('files-dropped', filesChecked)
 	}
 }
 
 function onInputChange(e) {
-	const filesChecked = checkAllowedFormat(e.target.files);
+	const filesChecked = fileUploader.checkAllowedFormat(e.target.files);
 	if (filesChecked.length) {
-		if (checkLimit(filesChecked)) return;
-		addFiles(filesChecked, props.type)
+		if (fileUploader.checkLimit(filesChecked)) return;
+		fileUploader.addFiles(filesChecked, props.type)
 		emit('files-dropped', filesChecked)
 	}
 }
 
-// Uploader
-import createUploader from '@/compositions/file-uploader'
-const { uploadFilesServer, uploadFileClient } = createUploader(adminStore)
-
-/// handler from Parent
 const startUpload = async () => {
 	let response;
 	if (props.uploadType) {
 		response = (props.uploadType === 'client') ? 
-		await uploadFileClient(files.value, props.type) :
-		await uploadFilesServer(files.value, props.type, adminStore)
+		await fileUploader.uploadFileClient(files.value, props.type) :
+		await fileUploader.uploadFilesServer(files.value, props.type)
 	} else {
-		response = await uploadFilesServer(files.value, props.type, adminStore)
+		response = await fileUploader.uploadFilesServer(files.value, props.type)
 	}
-	removeFiles()
+	fileUploader.removeFiles()
 	return response
 }
 

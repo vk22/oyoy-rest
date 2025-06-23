@@ -101,11 +101,11 @@
           <div class="admin-sec-btn" @click="deleteMenu()">Delete</div>
         </v-col>
       </v-row>
-      <v-row>
+      <!-- <v-row>
         <v-col>
           <AdminBlobUploader></AdminBlobUploader>
         </v-col>
-      </v-row>  
+      </v-row>   -->
       
     </v-container>
   </section>
@@ -144,22 +144,23 @@ function addFilePreview(file) {
 async function uploadFilePdf() {
   if (pdfNew.value) {
     let filesUploadResponse = await uploaderRefPdf.value.startUpload();
-    if (filesUploadResponse.success) {
-      const file = filesUploadResponse.data[0];
-      console.log("file ", file);
+    console.log('filesUploadResponse uploadFilePdf ', filesUploadResponse)
+    if (filesUploadResponse) {
       menu.value.link = {
         file: {
-          url: file.url,
-          type: file.type,
+          url: filesUploadResponse.url,
+          type: filesUploadResponse.contentType,
         },
         index: 0,
       };
+      pdfNew.value = null
     }
   }
 }
 async function uploadFilePreview() {
   if (pdfPreviewNew.value) {
     let filesUploadResponse = await uploaderRefPreview.value.startUpload();
+    console.log('filesUploadResponse uploadFilePreview ', filesUploadResponse)
     if (filesUploadResponse.success) {
       const file = filesUploadResponse.data[0];
       console.log("file ", file);
@@ -170,6 +171,7 @@ async function uploadFilePreview() {
         },
         index: 0,
       };
+      pdfPreviewNew.value = null
     }
   }
 }

@@ -31,7 +31,7 @@ const reservationAvailable = reservationStore.reservationAvailable;
 </script>
 
     
-<style lang="scss">
+<style lang="scss" scoped>
 
 
 // .v-move,
@@ -135,13 +135,13 @@ iframe {
   border: none;
 
   @include for-phone-only {
-    min-height: 650px;
+    min-height: 850px;
     height: 100%;
   }
 
   @include for-tablet-portrait-up {
-    min-height: 650px;
-    height: 650px;
+    min-height: 850px;
+    height: 850px;
   }
 }
 </style>

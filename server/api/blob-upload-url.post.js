@@ -12,7 +12,9 @@ export default defineEventHandler(async (event) => {
     token: config.vercelBlobToken, // ⚠️ обязательно локально
     onBeforeGenerateToken: async () => ({
       access: 'public',
-      maximumSizeInBytes: 50 * 1024 * 1024, // 50MB
+      maximumSizeInBytes: 100 * 1024 * 1024, // 100MB
+      allowOverwrite: true,
+	    //addRandomSuffix: true,
       allowedContentTypes: [
         'image/jpeg',
         'image/png',
