@@ -76,22 +76,22 @@ import { watch } from 'vue'
 import Image from '@tiptap/extension-image'
 import Link from '@tiptap/extension-link'
 import Youtube from '@tiptap/extension-youtube'
-const CustomYoutube = Youtube.extend({
-  renderHTML({ HTMLAttributes }) {
-    return [
-      'div',
-      { class: 'youtube-container' },
-      [
-        'iframe',
-        {
-          ...HTMLAttributes,
-          allow: 'accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture',
-          allowfullscreen: 'true',
-        },
-      ],
-    ]
-  },
-})
+// const CustomYoutube = Youtube.extend({
+//   renderHTML({ HTMLAttributes }) {
+//     return [
+//       'div',
+//       { class: 'youtube-container' },
+//       [
+//         'iframe',
+//         {
+//           ...HTMLAttributes,
+//           allow: 'accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture',
+//           allowfullscreen: 'true',
+//         },
+//       ],
+//     ]
+//   },
+// })
 // import CustomYoutube from '@/compositions/tiptapCustomYoutube';
 const props = defineProps({
   modelValue: String
@@ -99,22 +99,14 @@ const props = defineProps({
 const emit = defineEmits({
   'update:modelValue': String
 })
-// Link.configure({
-//   HTMLAttributes: {
-//     // Change rel to different value
-//     // Allow search engines to follow links(remove nofollow)
-//     rel: 'noopener noreferrer',
-//     // Remove target entirely so links open in current tab
-//     target: null,
-//   },
-// })
+
 const editor = useEditor({
   content: props.modelValue,
   extensions: [
     TiptapStarterKit, 
     Image, 
     Link,
-    CustomYoutube.configure({
+    Youtube.configure({
       controls: true,
       nocookie: true,
     }),

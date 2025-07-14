@@ -64,6 +64,8 @@ definePageMeta({
   middleware: ["auth"],
 });
 import { useAdminStore } from "@/store/admin";
+import { useConfirm } from "@/compositions/useConfirm";
+const { isConfirmed } = useConfirm();
 const adminStore = useAdminStore();
 const chef = ref();
 
