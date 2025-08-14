@@ -197,7 +197,16 @@ const route = useRoute();
 const router = useRouter();
 const { data } = await useFetch(`/api/blog/${route.params.id}`);
 const post = ref(data.value);
-const contentItems = ref([]);
+if (!post.value.mainImage) {
+  post.value.mainImage = {
+    file: {
+      url: '',
+      type: ''
+    },
+    index: 0
+  };
+  post.value.previewImage = post.value.images[0];
+}
 
 const contentItemGallery = post.value.contentItems.find(
   (item) => item.type === "gallery"

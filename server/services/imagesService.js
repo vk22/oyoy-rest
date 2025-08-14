@@ -59,7 +59,7 @@ class ImagesService {
   // }
   async geneatePreviewBuffer(file) {
     const buffer = Buffer.from(await file.arrayBuffer());
-    return await sharp(buffer).resize({ width: 400 }).toBuffer();
+    return await sharp(buffer).resize({ width: 1200, height: 630 }).toBuffer();
   }
   checkFileExtention(mime) {
     const types = {
