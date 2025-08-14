@@ -17,7 +17,7 @@
               :type="'posts'"
               :needPreview="true"
               :limit="1"
-              :allowedFormat="['image/png', 'image/jpeg', 'image/jpg']"
+              :allowedFormat="['image/png', 'image/jpeg', 'image/jpg', 'image/webp']"
               @files-dropped="addMainImage"
               ref="uploaderMainImageRef"
             ></AdminFileUploader>
@@ -45,7 +45,7 @@
                 </p>
                 <AdminFileUploader
                   :type="'posts'"
-                  :allowedFormat="['image/png', 'image/jpeg', 'image/jpg']"
+                  :allowedFormat="['image/png', 'image/jpeg', 'image/jpg', 'image/webp']"
                   @files-dropped="addFiles"
                   ref="uploaderRef"
                 ></AdminFileUploader>

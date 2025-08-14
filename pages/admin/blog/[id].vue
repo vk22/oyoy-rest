@@ -18,7 +18,7 @@
               :type="'posts'"
               :needPreview="true"
               :limit="1"
-              :allowedFormat="['image/png', 'image/jpeg', 'image/jpg']"
+              :allowedFormat="['image/png', 'image/jpeg', 'image/jpg', 'image/webp']"
               @files-dropped="addMainImage"
               ref="uploaderMainImageRef"
             ></AdminFileUploader>
@@ -49,7 +49,7 @@
               <AdminImagesGalleryPreview
                 :images="post.images"
                 :imagesType="'images'"
-                :allowedFormat="['image/png', 'image/jpeg', 'image/jpg']"
+                :allowedFormat="['image/png', 'image/jpeg', 'image/jpg', 'image/webp']"
                 @drag-end="draggEnd"
                 @delete-gallery-item="deleteImagesItem"
               ></AdminImagesGalleryPreview>
