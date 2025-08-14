@@ -69,7 +69,7 @@ const pageDescription = truncate(
 );
 const metaRobots = post.value.published ? "all" : "noindex";
 const postOgImage = post.value.previewImage
-  ? post.value.previewImage.file.url
+  ? `${post.value.previewImage.file.url}?v=2`
   : "https://oyoyrestaurant.com/img/full-w-banner-1.jpg";
 const postDate = post.value.date;
 
@@ -97,8 +97,8 @@ useSeoMeta({
   ogUrl: "https://oyoyrestaurant.com/blog" + post.value.url,
   ogType: "website",
   ogImage: postOgImage,
-  ogImageWidth: "1000",
-  ogImageHeight: "672",
+  ogImageWidth: "1200",
+  ogImageHeight: "630",
   ogSiteName: "OyOy Restaurant",
   articlePublisher: "https://www.facebook.com/oyoy.mlt",
   articlePublishedTime: postDate,
