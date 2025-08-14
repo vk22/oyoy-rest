@@ -88,7 +88,7 @@ useHead({
   link: [{ rel: "icon", type: "image/png", href: "/favicon.png" }],
 });
 
-useSeoMeta({
+useServerSeoMeta({
   title: pageTitle + " | OyOy Restaurant",
   ogLocale: "en_US",
   ogTitle: pageTitle + " | OyOy Restaurant",
