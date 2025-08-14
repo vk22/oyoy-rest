@@ -94,7 +94,7 @@ useServerSeoMeta({
   ogTitle: pageTitle + " | OyOy Restaurant",
   description: pageDescription,
   ogDescription: pageDescription,
-  ogUrl: "https://oyoyrestaurant.com/blog" + post.value.url,
+  ogUrl: "https://oyoyrestaurant.com/blog/" + post.value.url,
   ogType: "website",
   ogImage: postOgImage,
   ogImageWidth: "1200",
