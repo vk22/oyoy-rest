@@ -121,7 +121,13 @@ const linkOnLogo = () => {
 
 /// main store
 const mainStore = useMainStore()
-const dataReady = computed(() => mainStore.getDataReady)
+const dataReady = computed(() => {
+  if (currentRoute.value.name.includes('blog')) {
+  return true;
+  } else {
+    return mainStore.getDataReady;
+  }
+})
 /// reservation
 const reservationStore = useReservationStore();
 const reservationAvailable = reservationStore.reservationAvailable;

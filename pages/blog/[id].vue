@@ -1,13 +1,13 @@
 <template>
   <div class="blog-page">
     <section class="blog-page-hero">
-      <div class="blog-title">
+      <div class="blog-title fadeIn-0">
         <h1>{{ post.title }}</h1>
       </div>
-      <div class="post-date">{{ useNuxtApp().$formatDate(post.date) }}</div>
+      <div class="post-date fadeIn-1">{{ useNuxtApp().$formatDate(post.date) }}</div>
       <div
         class="blog-top-img"
-        :style="{ backgroundImage: 'url(' + post.images[0].file.url + ')' }"
+        :style="{ backgroundImage: 'url(' + post.mainImage.file.url + ')' }"
       ></div>
     </section>
     <section class="blog-page-content">
@@ -55,6 +55,10 @@ import FormSubscribe from "~/components/FormSubscribe.vue";
 const route = useRoute();
 const { data } = await useFetch(`/api/blog/${route.params.id}`);
 const post = ref(data.value);
+if (!post.value.mainImage) {
+  post.value.mainImage = post.value.images[0];
+  post.value.previewImage = post.value.images[0];
+}
 const pageTitle = post.value.title.substring(0, 40);
 const textFromContent = post.value.contentItems.find(
   (item) => item.type === "text"
@@ -64,8 +68,8 @@ const pageDescription = truncate(
   159
 );
 const metaRobots = post.value.published ? "all" : "noindex";
-const postMainImage = post.value.images.length
-  ? post.value.images[0].file.url
+const postOgImage = post.value.previewImage
+  ? post.value.previewImage.file.url
   : "https://oyoyrestaurant.com/img/full-w-banner-1.jpg";
 const postDate = post.value.date;
 
@@ -92,7 +96,7 @@ useSeoMeta({
   ogDescription: pageDescription,
   ogUrl: "https://oyoyrestaurant.com/blog" + post.value.url,
   ogType: "website",
-  ogImage: postMainImage,
+  ogImage: postOgImage,
   ogImageWidth: "1000",
   ogImageHeight: "672",
   ogSiteName: "OyOy Restaurant",

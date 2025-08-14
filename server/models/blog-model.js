@@ -49,6 +49,36 @@ const SchemaData = new Schema({
       }
     }
   ],
+  mainImage: {
+    file: {
+      url: {
+        type: String,
+        required: true
+      },
+      type: {
+        type: String,
+        required: true
+      }
+    },
+    index: {
+      type: Number
+    }
+  },
+  previewImage: {
+    file: {
+      url: {
+        type: String,
+        required: true
+      },
+      type: {
+        type: String,
+        required: true
+      }
+    },
+    index: {
+      type: Number
+    }
+  },
   date: {
     type: Date
   },

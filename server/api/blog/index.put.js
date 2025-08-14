@@ -27,6 +27,8 @@ export default defineEventHandler( async (event) => {
     })
     postItem.images = imagesFiltered
     postItem.gallery = galleryFiltered
+    postItem.mainImage = body.mainImage
+    postItem.previewImage = body.previewImage
     const saveItem = await postItem.save()
     if (saveItem) {
       return {

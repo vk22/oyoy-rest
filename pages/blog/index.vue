@@ -99,7 +99,7 @@ onMounted(() => {
   display: flex;
   flex-direction: column;
   // border: 1px solid #ddd;
-  background: #EBEDF0;
+  background: #e7f1ff;
   padding: 1rem 1rem 2rem 1rem;
 
   &__title {

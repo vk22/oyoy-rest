@@ -9,24 +9,51 @@
         </v-col>
       </v-row>
       <!-- -->
+
       <v-row>
         <v-col>
           <div class="images-zona">
-                <p class="label">All images (The first image will be the cover)</p>
-                <AdminFileUploader
-                  :type="'posts'"
-                  @files-dropped="addFiles"
-                  ref="uploaderRef"
-                ></AdminFileUploader>
-                {{ files }}
-                <div class="mt-5">
-                  <AdminImagesGalleryPreview
-                    :images="post.images"
-                    :imagesType="'images'"
-                    @drag-end="draggEnd"
-                    @delete-gallery-item="deleteImagesItem"
-                  ></AdminImagesGalleryPreview>
-                </div>
+            <p class="label">Main Image</p>
+            <AdminFileUploader
+              :type="'posts'"
+              :needPreview="true"
+              :limit="1"
+              :allowedFormat="['image/png', 'image/jpeg', 'image/jpg']"
+              @files-dropped="addMainImage"
+              ref="uploaderMainImageRef"
+            ></AdminFileUploader>
+            {{ files }}
+            <div class="mt-5">
+              <AdminImagesGalleryPreview
+                :images="[post.mainImage]"
+                :imagesType="'images'"
+                @drag-end="draggEnd"
+                @delete-gallery-item="deleteImagesItem"
+              ></AdminImagesGalleryPreview>
+            </div>
+          </div>
+        </v-col>
+      </v-row>
+
+      <v-row>
+        <v-col>
+          <div class="images-zona">
+            <p class="label">All images</p>
+            <AdminFileUploader
+              :type="'posts'"
+              @files-dropped="addFiles"
+              ref="uploaderRef"
+            ></AdminFileUploader>
+            {{ files }}
+            <div class="mt-5">
+              <AdminImagesGalleryPreview
+                :images="post.images"
+                :imagesType="'images'"
+                :allowedFormat="['image/png', 'image/jpeg', 'image/jpg']"
+                @drag-end="draggEnd"
+                @delete-gallery-item="deleteImagesItem"
+              ></AdminImagesGalleryPreview>
+            </div>
           </div>
         </v-col>
       </v-row>
@@ -55,7 +82,7 @@
       </v-row> -->
       <v-row>
         <v-col>
-          <div class="content-item-container">  
+          <div class="content-item-container">
             <draggable :list="post.contentItems" handle=".handle">
               <div
                 class="content-item"
@@ -65,20 +92,56 @@
                 <div class="content-item__text" v-if="item.type === 'text'">
                   <AdminTiptapEditor v-model="item.data"></AdminTiptapEditor>
                 </div>
-                <div class="content-item__gallery" v-if="item.type === 'gallery'">
+                <div
+                  class="content-item__gallery"
+                  v-if="item.type === 'gallery'"
+                >
                   <p class="label">Gallery</p>
-                  <AdminFileUploader :type="'posts-gallery'" @files-dropped="addGalleryFiles" ref="uploadeGalleryrRef"></AdminFileUploader>
+                  <AdminFileUploader
+                    :type="'posts-gallery'"
+                    @files-dropped="addGalleryFiles"
+                    :allowedFormat="['image/png', 'image/jpeg', 'image/jpg']"
+                    ref="uploadeGalleryrRef"
+                  ></AdminFileUploader>
                   {{ files }}
                   <div class="mt-5">
-                      <AdminImagesGalleryPreview :images="post.gallery" :imagesType="'gallery'" @drag-end="draggEnd" @delete-gallery-item="deleteGalleryItem"></AdminImagesGalleryPreview>
+                    <AdminImagesGalleryPreview
+                      :images="post.gallery"
+                      :imagesType="'gallery'"
+                      @drag-end="draggEnd"
+                      @delete-gallery-item="deleteGalleryItem"
+                    ></AdminImagesGalleryPreview>
                   </div>
                 </div>
                 <div class="content-item__actions">
-                  <div class="handle"> 
-                    <v-icon>mdi-drag</v-icon> 
+                  <div class="handle">
+                    <v-icon>mdi-drag</v-icon>
                   </div>
                   <div class="admin-icon-btn" @click="removeContentItem(index)">
-                    <svg width="17" height="16" viewBox="0 0 17 16" fill="none" xmlns="http://www.w3.org/2000/svg"><rect y="14.3154" width="20.2454" height="2.38181" rx="1.1909" transform="rotate(-45 0 14.3154)" fill="black"></rect><rect x="1.68555" width="20.2454" height="2.38181" rx="1.1909" transform="rotate(45 1.68555 0)" fill="black"></rect></svg>
+                    <svg
+                      width="17"
+                      height="16"
+                      viewBox="0 0 17 16"
+                      fill="none"
+                      xmlns="http://www.w3.org/2000/svg"
+                    >
+                      <rect
+                        y="14.3154"
+                        width="20.2454"
+                        height="2.38181"
+                        rx="1.1909"
+                        transform="rotate(-45 0 14.3154)"
+                        fill="black"
+                      ></rect>
+                      <rect
+                        x="1.68555"
+                        width="20.2454"
+                        height="2.38181"
+                        rx="1.1909"
+                        transform="rotate(45 1.68555 0)"
+                        fill="black"
+                      ></rect>
+                    </svg>
                   </div>
                 </div>
               </div>
@@ -87,7 +150,11 @@
               <div class="admin-sm-btn mr-2" @click="addContentItem('text')">
                 Add text
               </div>
-              <div class="admin-sm-btn" :class="{'disable': contentItemGalleryExist}" @click="addContentItem('gallery')">
+              <div
+                class="admin-sm-btn"
+                :class="{ disable: contentItemGalleryExist }"
+                @click="addContentItem('gallery')"
+              >
                 Add gallery
               </div>
             </div>
@@ -96,10 +163,7 @@
       </v-row>
       <v-row>
         <v-col>
-          <v-checkbox
-            v-model="post.published"
-            label="Published"
-          ></v-checkbox>
+          <v-checkbox v-model="post.published" label="Published"></v-checkbox>
         </v-col>
       </v-row>
       <v-row>
@@ -142,9 +206,9 @@ const contentItemGallery = post.value.contentItems.find(
 const contentItemGalleryExist = computed(() => {
   const exist = post.value.contentItems.find((item) => item.type === "gallery");
   if (exist) {
-    return true
+    return true;
   } else {
-    return false
+    return false;
   }
 });
 
@@ -167,12 +231,17 @@ async function removeContentItem(index) {
   }
 }
 
+const mainImageNew = ref(null);
 let imagesNew = [];
 let imagesGalleryNew = [];
+const uploaderMainImageRef = ref(null);
 const uploaderRef = ref(null);
 const uploadeGalleryrRef = ref(null);
 const files = ref(null);
 
+const addMainImage = (file) => {
+  mainImageNew.value = file;
+};
 const addFiles = (files) => {
   imagesNew = imagesNew.concat(files);
 };
@@ -190,6 +259,35 @@ const draggEnd = async (data) => {
 };
 
 const uploadImages = async (array) => {
+  /// upload main Image
+  if (mainImageNew.value) {
+    const filesUploadResponse0 = await uploaderMainImageRef.value.startUpload();
+    console.log("filesUploadResponse0 ", filesUploadResponse0);
+    if (filesUploadResponse0.success) {
+      const file = filesUploadResponse0.data[0];
+      const preview = filesUploadResponse0.preview ? filesUploadResponse0.preview : false;
+      console.log("file ", file);
+      post.value.mainImage = {
+        file: {
+          url: file.url,
+          type: file.type,
+        },
+        index: 0,
+      };
+      if (preview) {
+        post.value.previewImage = {
+          file: {
+            url: preview.url,
+            type: preview.type,
+          },
+          index: 0,
+        };
+      }
+
+      mainImageNew.value = null;
+    }
+  }
+
   /// upload images
   if (imagesNew.length) {
     const filesUploadResponse1 = await uploaderRef.value.startUpload();
@@ -263,6 +361,12 @@ const deleteGalleryItem = async (image) => {
     });
   }
 };
+
+onMounted(() => {
+  console.log("uploaderMainImageRef", uploaderMainImageRef.value);
+  console.log("uploaderRef 1", uploaderRef.value);
+});
+
 </script>
 
 <style lang="scss" scoped>

@@ -40,7 +40,7 @@
       }"
     >
       <swiper-slide v-for="slide in slides" :key="slide">
-        <img :src="slide.images[0].file.url" alt="" class="img-cover" />
+        <img :src="slide.mainImage.file.url" alt="" class="img-cover" />
       </swiper-slide>
     </swiper>
   </div>

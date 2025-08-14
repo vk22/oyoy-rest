@@ -21,12 +21,14 @@ export default class FileUploader {
 		return this.files
 	}
 	checkLimit(filesNew) {
-		if (filesNew.length > this.limit) {
+		console.log('filesNew ', filesNew)
+		console.log('this.limit ', this.limit)
+		if (this.files.value.length > this.limit) {
 			alert('Limit: '+this.limit)
 			return true;			
 		} else {
 			if (this.limit) {
-				if (this.limit === this.files.length) {
+				if (this.limit === this.files.value.length) {
 					alert('Limit: '+this.limit)
 					return true;
 				} else {
@@ -40,7 +42,10 @@ export default class FileUploader {
 	checkAllowedFormat(filesNew) {
 		if (this.allowedFormat) {
 			return Array.from(filesNew).filter(el => {
+				console.log('el.type ', el.type)
 				const check = this.allowedFormat.includes(el.type)
+				console.log('this.allowedFormat ', this.allowedFormat)
+				console.log('check', check)
 				if (check) {
 					return el;
 				} else {
@@ -71,13 +76,16 @@ export default class FileUploader {
 	removeFiles() {
 		this.files.value = []
 	}
-	async uploadFilesServer(files, type) {
+	async uploadFilesServer(files, type, needPreview) {
 		const adminStore = useAdminStore();
 		let formData = new FormData()
 		files.forEach((file) => {
 			formData.append(`file`, file.file)
 		});
 		formData.append(`type`, type)
+		if (needPreview) {
+			formData.append(`needPreview`, needPreview)
+		}
 		const result = await adminStore.fetchData('image-storage', 'POST', formData)
 		return result
 	}
@@ -91,7 +99,7 @@ export default class FileUploader {
 			access: 'public',
 			handleUploadUrl: '/api/blob-upload-url',
 			onUploadProgress(p) {
-				console.log('p 2121', Math.round(p.percentage))
+				console.log('onUploadProgress ', Math.round(p.percentage))
 				//progress.value = Math.round(p.percentage);
 			},
 		});
@@ -99,44 +107,3 @@ export default class FileUploader {
 		return blob; 
 	};       
 }
-
-// async function uploadFilesServer(files, type) {
-// 	const adminStore = useAdminStore();
-// 	let formData = new FormData()
-// 	files.forEach((file) => {
-// 		formData.append(`file`, file.file)
-// 	});
-// 	formData.append(`type`, type)
-// 	const result = await adminStore.fetchData('image-storage', 'POST', formData)
-// 	return result
-// }
-
-// async function uploadFileClient (files) {
-//   if (!files) return;
-//   const adminStore = useAdminStore();
-//   adminStore.setLoading(true);
-//   const file = files[0].file
-//   const fileName = files[0].file.name
-//   const blob = await upload(fileName, file, {
-//     access: 'public',
-//     handleUploadUrl: '/api/blob-upload-url',
-//     onUploadProgress(p) {
-// 		console.log('p ', Math.round(p.percentage))
-//     	//progress.value = Math.round(p.percentage);
-//     },
-//   });
-//   adminStore.setLoading(false);
-//   return blob; 
-// };
-
-// export default function createUploader() {
-// 	return {
-// 		uploadFilesServer: function (files, type) {
-// 			return uploadFilesServer(files, type)
-// 		},
-// 		uploadFileClient: function (files, type) {
-// 			return uploadFileClient(files, type)
-// 		},
-// 	}
-// }
-

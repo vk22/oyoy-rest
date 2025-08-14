@@ -12,6 +12,32 @@
       <v-row>
         <v-col>
           <div class="images-zona">
+            <p class="label">Main Image</p>
+            <AdminFileUploader
+              :type="'posts'"
+              :needPreview="true"
+              :limit="1"
+              :allowedFormat="['image/png', 'image/jpeg', 'image/jpg']"
+              @files-dropped="addMainImage"
+              ref="uploaderMainImageRef"
+            ></AdminFileUploader>
+            {{ files }}
+            <div class="mt-5">
+              <AdminImagesGalleryPreview
+                :images="[post.mainImage]"
+                :imagesType="'images'"
+                @drag-end="draggEnd"
+                @delete-gallery-item="deleteImagesItem"
+              ></AdminImagesGalleryPreview>
+            </div>
+          </div>
+        </v-col>
+      </v-row>
+
+
+      <v-row>
+        <v-col>
+          <div class="images-zona">
             <v-row>
               <v-col>
                 <p class="label">
@@ -19,6 +45,7 @@
                 </p>
                 <AdminFileUploader
                   :type="'posts'"
+                  :allowedFormat="['image/png', 'image/jpeg', 'image/jpg']"
                   @files-dropped="addFiles"
                   ref="uploaderRef"
                 ></AdminFileUploader>
@@ -159,6 +186,7 @@ const post = ref({
   contentItems: [],
   published: true
 });
+const uploaderMainImageRef = ref(null);
 const uploaderRef = ref(null);
 let uploadeGalleryrRef = ref(null);
 const files = ref(null);
@@ -192,6 +220,10 @@ const removeContentItem = async (index) => {
   if (await isConfirmed()) {
     post.value.contentItems.splice(index, 1);
   }
+};
+
+const addMainImage = (file) => {
+  post.value.mainImage = file;
 };
 
 const addFiles = (files) => {
@@ -302,10 +334,10 @@ watch(
   { deep: true }
 );
 
-onMounted(() => {
-  console.log("uploaderRef 1", uploaderRef.value);
-  console.log("uploadeGalleryrRef 1", uploadeGalleryrRef.value);
-});
+// onMounted(() => {
+//   console.log("uploaderRef 1", uploaderRef.value);
+//   console.log("uploadeGalleryrRef 1", uploadeGalleryrRef.value);
+// });
 </script>
 
 

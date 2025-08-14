@@ -16,9 +16,9 @@
           <div class="list-item" v-for="(item, index) in posts" :key="index" :class="{'hidden': !item.published}">
             <v-row>
               <v-col md="2">
-                <nuxt-link :to="'/admin/blog/' + item.url" v-if="item.images.length">
+                <nuxt-link :to="'/admin/blog/' + item.url" v-if="item.previewImage">
                   <img
-                    :src="item.images[0].file.url"
+                    :src="item.previewImage.file.url"
                     width="100%"
                     alt=""
                   />

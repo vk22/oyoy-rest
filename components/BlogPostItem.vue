@@ -20,8 +20,8 @@
 import { onMounted, watch, computed } from "vue";
 const props = defineProps(["post"]);
 const postMainImage = computed(() => {
-  if (props.post.images.length) {
-    return props.post.images[0].file.url
+  if (props.post.previewImage) {
+    return props.post.previewImage.file.url
   } else {
     return null
   }

@@ -73,7 +73,7 @@
             <div class="images-zona">
               <p class="label">Preview file (jpg, png)</p>
               <AdminFileUploader
-                :type="'menu'"
+                :type="'menu-preview'"
                 :limit="1"
                 :allowedFormat="['image/png', 'image/jpeg', 'image/jpg']"
                 @files-dropped="addFilePreview"

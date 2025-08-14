@@ -42,7 +42,8 @@ export const useAdminStore = defineStore('admin', {
         return {
           success: data.value.success,
           message: data.value.message,
-          data: data.value.data
+          data: data.value.data,
+          preview: data.value.preview
         }
         
       } else {

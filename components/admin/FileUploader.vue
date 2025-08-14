@@ -28,21 +28,18 @@ const props = defineProps({
 	type: { type: String, required: true },
 	limit: { type: Number },
 	allowedFormat: { type: Array },
+	needPreview: { type: Boolean, default: false }
 })
 import FileUploader from '@/compositions/file-uploader';
 const fileUploader = new FileUploader(props.allowedFormat, props.limit);
 const files = ref(fileUploader.fileList())
-
-// File Management
-// import useFileList from '../../compositions/file-list'
-// const { files, addFiles, removeFile, removeFiles } = useFileList()
 
 function removeFile(file) {
 	fileUploader.removeFile(file)
 }
 
 function filesDropped(filesNew) {
-	console.log('filesNew ', filesNew)
+	console.log('filesDropped ', filesNew)
 	const filesChecked = fileUploader.checkAllowedFormat(filesNew);
 	if (filesChecked.length) {
 		if (fileUploader.checkLimit(filesChecked)) return;
@@ -52,7 +49,14 @@ function filesDropped(filesNew) {
 }
 
 function onInputChange(e) {
-	const filesChecked = fileUploader.checkAllowedFormat(e.target.files);
+
+	const filesNew = []
+	for (const file of e.target.files) {
+		filesNew.push(file)
+	}
+	console.log('onInputChange ', filesNew)
+
+	const filesChecked = fileUploader.checkAllowedFormat(filesNew);
 	if (filesChecked.length) {
 		if (fileUploader.checkLimit(filesChecked)) return;
 		fileUploader.addFiles(filesChecked, props.type)
@@ -65,9 +69,9 @@ const startUpload = async () => {
 	if (props.uploadType) {
 		response = (props.uploadType === 'client') ? 
 		await fileUploader.uploadFileClient(files.value, props.type) :
-		await fileUploader.uploadFilesServer(files.value, props.type)
+		await fileUploader.uploadFilesServer(files.value, props.type, props.needPreview)
 	} else {
-		response = await fileUploader.uploadFilesServer(files.value, props.type)
+		response = await fileUploader.uploadFilesServer(files.value, props.type, props.needPreview)
 	}
 	fileUploader.removeFiles()
 	return response

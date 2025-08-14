@@ -33,7 +33,11 @@ export const useBlogStore = defineStore("BlogStore", {
     getters: {
         getItems(state) {
             const items = state.items.map((item) => {
-              item.date = useNuxtApp().$formatDate(item.date)
+              item.date = useNuxtApp().$formatDate(item.date);
+              if (!item.mainImage) {
+                item.mainImage = item.images[0];
+                item.previewImage = item.images[0];
+              }
               return item
             });
             return items
