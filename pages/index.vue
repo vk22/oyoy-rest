@@ -66,7 +66,7 @@ useSeoMeta({
   ogDescription: 'We would like to present to you OyOy - a restaurant with spectacular 180 degree views on Spinola Bay.',
   ogUrl: 'https://oyoyrestaurant.com/',
   ogType: 'website',
-  ogImage: 'https://oyoyrestaurant.com/img/full-w-banner-1.jpg',
+  ogImage: 'https://oyoyrestaurant.com/img/oyoy-og.jpg',
   twitterCard: 'summary_large_image'
 })
 

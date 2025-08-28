@@ -70,7 +70,7 @@ const pageDescription = truncate(
 const metaRobots = post.value.published ? "all" : "noindex";
 const postOgImage = post.value.previewImage
   ? `${post.value.previewImage.file.url}?v=2`
-  : "https://oyoyrestaurant.com/img/full-w-banner-1.jpg";
+  : "https://oyoyrestaurant.com/img/oyoy-og.jpg";
 const postDate = post.value.date;
 
 function truncate(str, n) {
@@ -89,23 +89,23 @@ useHead({
 });
 
 useSeoMeta({
-  title: pageTitle + " | OyOy Restaurant",
-  ogLocale: "en_US",
-  ogTitle: pageTitle + " | OyOy Restaurant",
-  description: pageDescription,
-  ogDescription: pageDescription,
-  ogUrl: "https://oyoyrestaurant.com/blog/" + post.value.url,
+  title: () => pageTitle + " | OyOy Restaurant" || 'OyOy Restaurant',
+  ogTitle: () => pageTitle + " | OyOy Restaurant" || 'OyOy Restaurant',
+  description: () => pageDescription || 'We would like to present to you OyOy - a restaurant with spectacular 180 degree views on Spinola Bay.',
+  ogDescription: () => pageDescription || 'We would like to present to you OyOy - a restaurant with spectacular 180 degree views on Spinola Bay.',
+  ogUrl: () => "https://oyoyrestaurant.com/blog/" + post.value.url || "https://oyoyrestaurant.com/blog/",
   ogType: "website",
-  ogImage: postOgImage,
+  ogImage: () => postOgImage,
   ogImageWidth: "1200",
   ogImageHeight: "630",
   ogSiteName: "OyOy Restaurant",
   articlePublisher: "https://www.facebook.com/oyoy.mlt",
-  articlePublishedTime: postDate,
-  articleModifiedTime: postDate,
+  articlePublishedTime: () => postDate,
+  articleModifiedTime: () => postDate,
   twitterCard: "summary_large_image",
   twitterCreator: "@oyoy",
   twitterSite: "@oyoy",
+  ogLocale: "en_US",
 });
 </script>
 
