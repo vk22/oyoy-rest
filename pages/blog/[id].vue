@@ -95,7 +95,7 @@ useSeoMeta({
   ogDescription: () => pageDescription || 'We would like to present to you OyOy - a restaurant with spectacular 180 degree views on Spinola Bay.',
   ogUrl: () => "https://oyoyrestaurant.com/blog/" + post.value.url || "https://oyoyrestaurant.com/blog/",
   ogType: "website",
-  ogImage: () => postOgImage,
+  // ogImage: () => postOgImage,
   ogImageWidth: "1200",
   ogImageHeight: "630",
   ogSiteName: "OyOy Restaurant",
@@ -107,6 +107,13 @@ useSeoMeta({
   twitterSite: "@oyoy",
   ogLocale: "en_US",
 });
+
+defineOgImageComponent('NuxtSeo', {
+  headline: '',
+  title: pageTitle,
+  description: pageDescription,
+})
+
 </script>
 
 <style lang="scss">

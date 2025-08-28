@@ -44,6 +44,7 @@
     "mongoose": "^8.0.3",
     "multer": "^1.4.5-lts.1",
     "nuxt-gtag": "^3.0.3",
+    "nuxt-og-image": "^5.1.9",
     "nuxt-swiper": "^1.2.2",
     "pinia": "^2.1.7",
     "sharp": "^0.34.3",

@@ -36,6 +36,7 @@ export default defineNuxtConfig({
     '@nuxtjs/robots',
     '@nuxtjs/sitemap',
     'nuxt-gtag',
+    'nuxt-og-image'
     //'@zadigetvoltaire/nuxt-gtm'
   ],
 
