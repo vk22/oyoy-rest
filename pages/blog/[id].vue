@@ -88,7 +88,7 @@ useHead({
   link: [{ rel: "icon", type: "image/png", href: "/favicon.png" }],
 });
 
-useServerSeoMeta({
+useSeoMeta({
   title: pageTitle + " | OyOy Restaurant",
   ogLocale: "en_US",
   ogTitle: pageTitle + " | OyOy Restaurant",
@@ -106,7 +106,7 @@ useServerSeoMeta({
   twitterCard: "summary_large_image",
   twitterCreator: "@oyoy",
   twitterSite: "@oyoy",
-}, { priority: 1 });
+});
 </script>
 
 <style lang="scss">
