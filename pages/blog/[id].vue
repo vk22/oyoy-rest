@@ -106,7 +106,7 @@ useServerSeoMeta({
   twitterCard: "summary_large_image",
   twitterCreator: "@oyoy",
   twitterSite: "@oyoy",
-});
+}, { priority: 1 });
 </script>
 
 <style lang="scss">
