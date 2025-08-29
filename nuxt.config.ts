@@ -36,7 +36,6 @@ export default defineNuxtConfig({
     '@nuxtjs/robots',
     '@nuxtjs/sitemap',
     'nuxt-gtag',
-    'nuxt-og-image'
     //'@zadigetvoltaire/nuxt-gtm'
   ],
 
@@ -112,5 +111,8 @@ export default defineNuxtConfig({
       scrollBehaviorType: 'smooth'
     }
   },
-  compatibilityDate: '2025-06-06'
+  compatibilityDate: '2025-06-06',
+  experimental: {
+     headNext: true
+  }
 })
