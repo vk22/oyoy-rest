@@ -19,7 +19,8 @@ export default defineNuxtConfig({
   devtools: { enabled: true },
 
   build: {
-    transpile: ['vuetify', '@vuepic/vue-datepicker']
+    transpile: ['vuetify', '@vuepic/vue-datepicker'],
+    extractCSS: true
   },
 
   modules: [
@@ -113,6 +114,7 @@ export default defineNuxtConfig({
   },
   compatibilityDate: '2025-06-06',
   experimental: {
-     headNext: true
+     headNext: true,
+     inlineSSRStyles: false
   }
 })

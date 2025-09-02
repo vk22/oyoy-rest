@@ -14,7 +14,7 @@
 
 
 <style lang="scss">
-@import "assets/scss/main.scss";
+@use "~/assets/scss/main.scss";
 
 // .v-move,
 // .v-enter-active,
