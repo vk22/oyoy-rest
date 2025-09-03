@@ -21,15 +21,15 @@
               @files-dropped="addMainImage"
               ref="uploaderMainImageRef"
             ></AdminFileUploader>
-            {{ files }}
-            <div class="mt-5">
+   
+            <!-- <div class="mt-5">
               <AdminImagesGalleryPreview
                 :images="[post.mainImage]"
                 :imagesType="'images'"
                 @drag-end="draggEnd"
                 @delete-gallery-item="deleteImagesItem"
               ></AdminImagesGalleryPreview>
-            </div>
+            </div> -->
           </div>
         </v-col>
       </v-row>
@@ -49,7 +49,7 @@
                   @files-dropped="addFiles"
                   ref="uploaderRef"
                 ></AdminFileUploader>
-                {{ files }}
+      
               </v-col>
             </v-row>
 
@@ -181,6 +181,7 @@ definePageMeta({
 const router = useRouter();
 const post = ref({
   title: "",
+  mainImage: {},
   images: [],
   gallery: [],
   contentItems: [],
@@ -190,6 +191,10 @@ const uploaderMainImageRef = ref(null);
 const uploaderRef = ref(null);
 let uploadeGalleryrRef = ref(null);
 const files = ref(null);
+
+function isEmpty(obj) {
+    return Object.keys(obj).length === 0;
+}
 
 const addContentItem = async (type) => {
   // const data = (type === 'text') ? '' : [];
@@ -234,37 +239,41 @@ const addGalleryFiles = (files) => {
   post.value.gallery = post.value.gallery.concat(files);
 };
 
-const deleteImagesItem = async (image) => {
-  if (await isConfirmed()) {
-    const findIndex = post.value.images.findIndex(
-      (el) => el.file.url === image.file.url
-    );
-    post.value.images.splice(findIndex, 1);
-  }
-};
-const deleteGalleryItem = async (image) => {
-  if (await isConfirmed()) {
-    const findIndex = post.value.gallery.findIndex(
-      (el) => el.file.url === image.file.url
-    );
-    post.value.gallery.splice(findIndex, 1);
-  }
-};
-
-const draggEnd = async (data) => {
-  if (data.type === "gallery") {
-    post.value.gallery = [...data.images.value];
-  } else {
-    post.value.images = [...data.images.value];
-  }
-};
-
 const uploadImages = async (array) => {
+
+  /// upload main Image
+  if (!isEmpty(post.value.mainImage)) {
+    const filesUploadResponse0 = await uploaderMainImageRef.value.startUpload();
+    // console.log("filesUploadResponse0 ", filesUploadResponse0);
+    if (filesUploadResponse0.success) {
+      const file = filesUploadResponse0.data[0];
+      const preview = filesUploadResponse0.preview ? filesUploadResponse0.preview : false;
+      // console.log("file ", file.url);
+      post.value.mainImage = {
+        file: {
+          url: file.url,
+          type: file.type,
+        },
+        index: 0,
+      };
+      if (preview) {
+        post.value.previewImage = {
+          file: {
+            url: preview.url,
+            type: preview.type,
+          },
+          index: 0,
+        };
+      }
+    }
+  }
+
+
   /// upload all images
   if (post.value.images.length) {
     post.value.images = [];
     const filesUploadResponse1 = await uploaderRef.value.startUpload();
-    console.log("filesUploadResponse images ", filesUploadResponse1);
+    // console.log("filesUploadResponse images ", filesUploadResponse1);
     if (filesUploadResponse1.data.length) {
       // file: {url, type, section, success}
       filesUploadResponse1.data.forEach((file, index) => {
@@ -279,7 +288,7 @@ const uploadImages = async (array) => {
   if (post.value.gallery.length) {
     post.value.gallery = [];
     let filesUploadResponse2 = await uploadeGalleryrRef.value[0].startUpload();
-    console.log("filesUploadResponse gallery ", filesUploadResponse2);
+    // console.log("filesUploadResponse gallery ", filesUploadResponse2);
     if (filesUploadResponse2.data.length) {
       // file: {url, type, section, success}
       filesUploadResponse2.data.forEach((file, index) => {

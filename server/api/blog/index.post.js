@@ -1,7 +1,8 @@
 import { Blog } from "~~/server/models/blog-model";
 
 export default defineEventHandler( async (event) => {
-    const body = await readBody(event)
+    const body = await readBody(event);
+    console.log('post blog: ', body)
     body.date = new Date().toISOString()
     const itemNew = await Blog.create(body)
     if (itemNew) {
