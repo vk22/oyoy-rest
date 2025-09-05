@@ -152,7 +152,7 @@ useSeoMeta({
         text-transform: uppercase;
         color: #fff;
         text-align: center;
-        font-weight: 500;
+        font-weight: 400;
 
         @include for-phone-only {
           font-size: 2.5rem;
@@ -160,7 +160,7 @@ useSeoMeta({
         }
 
         @include for-tablet-portrait-up {
-          font-size: 3.5rem;
+          font-size: 3rem;
           line-height: 4rem;
         }
       }
@@ -219,19 +219,19 @@ useSeoMeta({
     }
     h2 {
       font-family: $font-sans !important;
-      font-size: 2.25rem;
+      font-size: 1.75rem;
       line-height: 2.75rem;
       text-transform: uppercase;
-      font-weight: 500 !important;
+      font-weight: 400 !important;
       margin-bottom: 1rem;
     }
 
     h3 {
       font-family: $font-sans !important;
       font-size: 1.5rem;
-      line-height: 1.75rem;
+      line-height: 1.5rem;
       text-transform: uppercase;
-      font-weight: 500 !important;
+      font-weight: 400 !important;
       margin-bottom: 1rem;
     }
 

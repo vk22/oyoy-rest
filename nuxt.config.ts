@@ -86,7 +86,8 @@ export default defineNuxtConfig({
           additionalData: '@use "~/assets/scss/variables.scss" as *;'
         }
       }
-    }
+    },
+    inspect: false
   },
   nitro: {
     plugins: ["~/server/plugins/mongodb.ts"],
