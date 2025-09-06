@@ -3,25 +3,45 @@
     <div class="top-banner__container">
       <div class="center">
         <div class="headline" :class="{ 'fadeIn-2': showItem }">
-          <div class="big"><h1>{{ topslideText.title }}</h1></div>
+          <div class="big">
+            <h1>{{ topslideText.title }}</h1>
+          </div>
           <div class="medium">{{ topslideText.subtitle }}</div>
         </div>
       </div>
       <div class="nav fadeIn-4">
-          <span class="dot" v-for="(item, index) in gallery" :key="index" :class="{'active': index === activeIndex}" @click="goToSlide(index)"></span>
+        <span
+          class="dot"
+          v-for="(item, index) in gallery"
+          :key="index"
+          :class="{ active: index === activeIndex }"
+          @click="goToSlide(index)"
+        ></span>
       </div>
       <!-- <div class="go-down fadeIn-4" @click="scrollToElement" :class="{'loop': needToLoop}">
         <img src="/img/arrow-down.svg" alt="" />
       </div> -->
     </div>
-    <div class="gallery" @click="toggleGallery()" :class="{ show: showItem, active: galleryIsActive }" v-if="gallery.length">
-      <div class="gallery__wrap" :class="{
-        'slide-active': galleryItem.index === activeIndex,
-        'slide-to-left': galleryItem.index === activeNext && galleryIsWork,
-      }" v-for="galleryItem in gallery" :key="galleryItem.index">
-        <div class="gallery__item" :class="'image-' + galleryItem.index"
-          :style="{ backgroundImage: 'url(' + galleryItem.file.url + ')' }"></div>
-
+    <div
+      class="gallery"
+      @click="toggleGallery()"
+      :class="{ show: showItem, active: galleryIsActive }"
+      v-if="gallery.length"
+    >
+      <div
+        class="gallery__wrap"
+        :class="{
+          'slide-active': galleryItem.index === activeIndex,
+          'slide-to-left': galleryItem.index === activeNext && galleryIsWork,
+        }"
+        v-for="galleryItem in gallery"
+        :key="galleryItem.index"
+      >
+        <div
+          class="gallery__item"
+          :class="'image-' + galleryItem.index"
+          :style="{ backgroundImage: 'url(' + galleryItem.file.url + ')' }"
+        ></div>
       </div>
     </div>
   </section>
@@ -84,7 +104,7 @@ for (const galleryImage of gallery) {
 }
 
 function handleImageLoaded(url) {
-  console.log('handleImageLoaded ', url)
+  console.log("handleImageLoaded ", url);
 }
 
 const readyToGo = () => {
@@ -103,16 +123,17 @@ const readyToGo = () => {
 const showItem = ref(false);
 if (!dataReady.value) {
   watch(dataReady, (newValue) => {
-  setTimeout(() => {
+    // setTimeout(() => {
+    //   showItem.value = newValue;
+    // }, 100);
     showItem.value = newValue;
-  }, 1000);
-});
+  });
 } else {
-  setTimeout(() => {
-    showItem.value = true;
-  }, 1000);
+  // setTimeout(() => {
+  //   showItem.value = true;
+  // }, 100);
+  showItem.value = true;
 }
-
 
 //// about
 import { useTopslideStore } from "@/store/topslide";
@@ -133,8 +154,6 @@ onMounted(() => {
 </script>
 
 <style lang="scss">
-
-
 .top-banner {
   position: relative;
   top: 0;
@@ -201,9 +220,11 @@ onMounted(() => {
       margin-bottom: 1rem;
       padding: 0 1rem;
 
-      @include for-phone-only {}
+      @include for-phone-only {
+      }
 
-      @include for-tablet-portrait-up {}
+      @include for-tablet-portrait-up {
+      }
     }
 
     .headline {
@@ -259,10 +280,7 @@ onMounted(() => {
             line-height: 8rem;
             padding: 0.45rem 0 0.65rem;
           }
-
         }
-
-
       }
 
       .medium {
@@ -300,7 +318,8 @@ onMounted(() => {
         // }
       }
 
-      div {}
+      div {
+      }
     }
 
     .nav {

@@ -61,10 +61,11 @@ if (!dataReady.value) {
   await blogStore.fetchData()
   await navStore.fetchData()
   /// set data ready
-  setTimeout(() => {
-    mainStore.setDataReady();    
-  }, 1000);
+  // setTimeout(() => {
+  //   mainStore.setDataReady();    
+  // }, 1000);
 
+  mainStore.setDataReady();  
 }
 
 /// handleScroll

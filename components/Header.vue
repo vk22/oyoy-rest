@@ -125,7 +125,7 @@ const dataReady = computed(() => {
   if (currentRoute.value.name.includes('blog')) {
   return true;
   } else {
-    return mainStore.getDataReady;
+return mainStore.getDataReady;
   }
 })
 /// reservation
