@@ -31,7 +31,7 @@
       @swiper="onSwiper"
     >
       <SwiperSlide v-for="slide in gallery" :key="slide">
-        <img :src="slide.url" alt="" />
+        <NuxtImg format="webp" :src="slide.file.url" alt=""/>
       </SwiperSlide>
     </Swiper>
   </div>

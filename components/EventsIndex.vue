@@ -12,7 +12,7 @@
         <v-col v-for="(oneevents, index) in events" :key="index" cols="12" sm="4">
           <div class="events-index__item" @click="modalToggle(index)" v-if="oneevents.file.type !== 'video/mp4'">
             <div class="img-wrap img-1">
-              <NuxtImg :src="oneevents.file.url" class="img-cover" />
+              <NuxtImg format="webp" :src="oneevents.file.url" class="img-cover" />
             </div>
             <div class="text-wrap">
               <div class="title">

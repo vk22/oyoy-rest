@@ -48,7 +48,8 @@ export default defineNuxtConfig({
 
   image: {
     quality: 80,
-    format: ['webp']
+    format: ['webp'],
+    domains: ['8hdewv6u55ya8hjg.public.blob.vercel-storage.com'],
   },
   plugins: [
     // '~/plugins/vue-lazyload'

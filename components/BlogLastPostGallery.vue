@@ -40,7 +40,7 @@
       }"
     >
       <swiper-slide v-for="slide in slides" :key="slide">
-        <img :src="slide.mainImage.file.url" alt="" class="img-cover" />
+        <NuxtImg format="webp" :src="slide.mainImage.file.url" alt="" class="img-cover" />
       </swiper-slide>
     </swiper>
   </div>

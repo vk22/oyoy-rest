@@ -41,7 +41,7 @@
             }"
           >
             <SwiperSlide v-for="slide in props.gallery" :key="slide">
-              <img :src="slide.file.url" alt=""/>
+              <NuxtImg format="webp" :src="slide.file.url" alt=""/>
             </SwiperSlide>
           </Swiper>
   </section>

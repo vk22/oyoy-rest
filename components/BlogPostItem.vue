@@ -2,7 +2,7 @@
   <NuxtLink :to="{ name: 'blog-id', params: { id: post.url } }">
     <div class="post-item slideUp fade-in">
       <div class="img-wrap img-1">
-        <NuxtImg :src="postMainImage" class="img-cover" />
+        <NuxtImg format="webp" :src="postMainImage" class="img-cover" />
       </div>
       <div class="text-wrap">
         <div class="title">

@@ -25,7 +25,7 @@
           <v-col cols="12" md="6" class="d-flex justify-center align-center">
             <div class="chef-index__images">
               <div class="img-wrap img-1 slideUp fade-in">
-                <NuxtImg :src="mainImage" />
+                <NuxtImg format="webp" :src="mainImage" />
               </div>
               
             </div>

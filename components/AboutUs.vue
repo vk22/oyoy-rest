@@ -7,7 +7,7 @@
           <v-col cols="12" md="6" class="d-flex justify-center align-center">
             <div class="about-index__images">
               <div class="img-wrap img-1 slideUp fade-in loop">
-                <NuxtImg src="/img/oyster2.png" />
+                <NuxtImg format="webp" src="/img/oyster2.png" />
               </div>
             </div>
           </v-col>
