@@ -79,8 +79,11 @@ useSeoMeta({
 })
 import FormSubscribe from '~/components/FormSubscribe.vue'
 import { useBlogStore } from '@/store/blog'
-const store = useBlogStore()
-const posts = computed(() => store.getItems)
+const store = useBlogStore();
+if (!store.items.length) {
+  await store.fetchData();
+}
+const posts = computed(() => store.getItems);
 const lastPosts = posts.value.slice(0, 3);
 const dialogIsOpen = ref(false)
 

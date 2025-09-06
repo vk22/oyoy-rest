@@ -47,19 +47,26 @@ const modalsIsOpen =  computed(() => eventsStore.getModalState.isOpen || reserva
 const mainStore = useMainStore()
 const dataReady = computed(() => mainStore.getDataReady)
 console.log('Layout dataReady ', dataReady.value)
+
+async function fetchAllContent() {
+
+}
+
 if (!dataReady.value) {
-  await reservationStore.getReservationAvailableState()
-  await customGalleryStore.fetchData('top');
-  await topslideStore.fetchData();
-  await aboutStore.fetchData();
-  await chefStore.fetchData();
-  await companyStore.fetchData();
-  await menuStore.fetchData();
-  await menuStore.fetchDataPdf();
-  await galleryStore.fetchData();
-  await eventsStore.fetchData();
-  await blogStore.fetchData()
-  await navStore.fetchData()
+
+  console.time('fetchAllContent')
+    
+    await customGalleryStore.fetchData('top');
+    //await topslideStore.fetchData();
+    //await aboutStore.fetchData();
+    //await chefStore.fetchData();
+    await companyStore.fetchData();
+    //await menuStore.fetchDataPdf();
+    //await blogStore.fetchData();
+    await navStore.fetchData();
+    await reservationStore.getReservationAvailableState();
+    console.timeEnd('fetchAllContent')
+  
   /// set data ready
   // setTimeout(() => {
   //   mainStore.setDataReady();    

@@ -45,9 +45,12 @@
 </template>
 
 <script setup>
-import { useEventStore } from '@/store/events'
-const store = useEventStore()
-const events = computed(() => store.getItems)
+import { useEventStore } from '@/store/events';
+const store = useEventStore();
+if (!store.items.length) {
+  await store.fetchData();
+}
+const events = computed(() => store.getItems);
 const modalToggle = (index) => {
   store.setModalState({ index: index })
 }

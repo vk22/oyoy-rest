@@ -22,6 +22,7 @@
         <img src="/img/arrow-down.svg" alt="" />
       </div> -->
     </div>
+
     <div
       class="gallery"
       @click="toggleGallery()"
@@ -44,6 +45,7 @@
         ></div>
       </div>
     </div>
+
   </section>
 </template>
 
@@ -113,12 +115,6 @@ const readyToGo = () => {
   startGallery(6000);
 };
 
-// const needToLoop = ref(null)
-// const scrollToElement = () => {
-//   const startContentPos = document.getElementById('startContent').offsetTop;
-//   window.scrollTo({ top: startContentPos-100, behavior: "smooth" });
-// }
-
 //// show after loading all data
 const showItem = ref(false);
 if (!dataReady.value) {
@@ -135,9 +131,10 @@ if (!dataReady.value) {
   showItem.value = true;
 }
 
-//// about
+//// topslide text
 import { useTopslideStore } from "@/store/topslide";
 const topslideStore = useTopslideStore();
+await topslideStore.fetchData();
 const topslideText = topslideStore.getData;
 
 onMounted(() => {

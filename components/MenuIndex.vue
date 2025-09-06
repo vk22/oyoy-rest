@@ -75,6 +75,9 @@ const props = defineProps(["category"]);
 import { ref } from "vue";
 import { useMenuStore } from "@/store/menu";
 const store = useMenuStore();
+if (!store.itemsPdf.length) {
+  await store.fetchData();
+}
 const menuData = computed(() => store.getItems(props.category))
 
 let acviveMenuIndex = ref(0);

@@ -46,8 +46,11 @@ const getFormModalStateToggle = () => {
 
 //// chef
 import { useChefStore } from "@/store/chef";
-const chefStore = useChefStore();
-const chef = chefStore.getData;
+const store = useChefStore();
+if (!store.data.title) {
+  await store.fetchData();
+}
+const chef = store.getData;
 const mainImage = computed(() => {
   if (chef.image) {
     return chef.image.file.url

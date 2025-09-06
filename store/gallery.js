@@ -28,13 +28,8 @@ export const useGalleryStore = defineStore("galleryStore", {
     },
     getters: {
         getData: (state) => (name) => {
-          const gallery = state.items.find(item => item.name === name)
-          // const images = gallery.images.map((item, index) => {
-          //   return {
-          //     index: index,
-          //     url: item.filename
-          //   }
-          // })
+          const gallery = state.items.find(item => item.name === name);
+          if (!gallery) return;
           return gallery.images
         },
         getModalState(state) {

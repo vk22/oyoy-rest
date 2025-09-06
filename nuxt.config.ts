@@ -93,7 +93,7 @@ export default defineNuxtConfig({
     plugins: ["~/server/plugins/mongodb.ts"],
     externals: {
       allowlist: ['bcrypt']
-    }
+    },
   },
   runtimeConfig: {
     ///mode

@@ -59,7 +59,9 @@
 import { ref } from "vue";
 import { useGalleryStore } from "@/store/gallery";
 const store = useGalleryStore();
-//await store.fetchData()
+if (!store.items.length) {
+  await store.fetchData();
+}
 const gallery = computed(() => store.getData('main'))
 
 let slidesCount = ref(0);

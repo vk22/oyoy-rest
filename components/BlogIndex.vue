@@ -20,7 +20,11 @@
 
 <script setup>
 import { useBlogStore } from '@/store/blog';
+
 const store = useBlogStore();
+if (!store.items.length) {
+  await store.fetchData();
+}
 const posts = computed(() => store.getItems);
 const lastPosts = posts.value.slice(0,2);
 

@@ -30,6 +30,9 @@
 const props = defineProps(["category"]);
 import { useMenuStore } from "@/store/menu";
 const store = useMenuStore();
+if (!store.itemsPdf.length) {
+  await store.fetchDataPdf();
+}
 const menuData = computed(() => store.getItemsPdf(props.category))
 const menuPdf = menuData.value[0];
 const published = computed(() => {
