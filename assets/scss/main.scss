@@ -78,6 +78,11 @@ img {
   z-index: 10;
 }
 
+.img-round {
+  border-radius: 100%;
+  overflow: hidden;
+}
+
 .desktop-only {
 
   @include for-phone-only {

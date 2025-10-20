@@ -195,30 +195,40 @@ definePageMeta({
 // console.log('params: ', `/api/posts/${route.params.id}`)
 const route = useRoute();
 const router = useRouter();
-const { data } = await useFetch(`/api/blog/${route.params.id}`);
-const post = ref(data.value);
-if (!post.value.mainImage) {
-  post.value.mainImage = {
-    file: {
-      url: '',
-      type: ''
-    },
-    index: 0
-  };
-  post.value.previewImage = post.value.images[0];
+const post = ref();
+
+const getPostData = async () => {
+
+  const { data } = await useFetch(`/api/blog/${route.params.id}`);
+  console.log('data ', data)
+  post.value = data.value;
+  console.log('post.value ', post.value)
+  if (post.value && !post.value.mainImage) {
+    post.value.mainImage = {
+      file: {
+        url: '',
+        type: ''
+      },
+      index: 0
+    };
+    post.value.previewImage = post.value.images[0];
+  }
+
 }
 
-const contentItemGallery = post.value.contentItems.find(
-  (item) => item.type === "gallery"
-);
 
 const contentItemGalleryExist = computed(() => {
-  const exist = post.value.contentItems.find((item) => item.type === "gallery");
-  if (exist) {
-    return true;
+  if (post.value) {
+    const exist = post.value.contentItems.find((item) => item.type === "gallery");
+    if (exist) {
+      return true;
+    } else {
+      return false;
+    }
   } else {
     return false;
   }
+
 });
 
 const addContentItem = async (type) => {
@@ -372,8 +382,7 @@ const deleteGalleryItem = async (image) => {
 };
 
 onMounted(() => {
-  console.log("uploaderMainImageRef", uploaderMainImageRef.value);
-  console.log("uploaderRef 1", uploaderRef.value);
+    getPostData()
 });
 
 </script>

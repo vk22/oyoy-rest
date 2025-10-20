@@ -24,10 +24,9 @@
          <!-- col -->
           <v-col cols="12" md="6" class="d-flex justify-center align-center">
             <div class="chef-index__images">
-              <div class="img-wrap img-1 slideUp fade-in">
+              <div class="img-wrap img-1 slideUp fade-in ">
                 <NuxtImg format="webp" :src="mainImage" />
               </div>
-              
             </div>
           </v-col>
         </v-row>
@@ -106,11 +105,13 @@ const mainImage = computed(() => {
     @include for-phone-only {
       align-items: center;
       flex-direction: column;
+      width: 70%;
     }
 
     @include for-tablet-portrait-up {
       align-items: center;
       flex-direction: column;
+      width: 70%;
     }
 
     .img-wrap {

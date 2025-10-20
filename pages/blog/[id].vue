@@ -55,7 +55,8 @@ import FormSubscribe from "~/components/FormSubscribe.vue";
 const route = useRoute();
 const { data } = await useFetch(`/api/blog/${route.params.id}`);
 const post = ref(data.value);
-if (!post.value.mainImage) {
+// console.log('post.value ', post.value)
+if (post.value && !post.value.mainImage) {
   post.value.mainImage = post.value.images[0];
   post.value.previewImage = post.value.images[0];
 }

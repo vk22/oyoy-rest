@@ -21,6 +21,24 @@
       <!-- <div class="go-down fadeIn-4" @click="scrollToElement" :class="{'loop': needToLoop}">
         <img src="/img/arrow-down.svg" alt="" />
       </div> -->
+      <div
+        id="TA_certificateOfExcellence629"
+        class="TA_certificateOfExcellence fadeIn-4"
+      >
+        <ul id="5DR6me1n" class="TA_links tBn2VATt81">
+          <li id="LVJ5SvUgfl" class="rritFr">
+            <a
+              target="_blank"
+              href="https://www.tripadvisor.com/Restaurant_Review-g227101-d24188815-Reviews-OyOy_Restaurant-Saint_Julian_s_Island_of_Malta.html"
+              ><img
+                src="https://static.tacdn.com/img2/travelers_choice/widgets/tchotel_2025_L.png"
+                alt="TripAdvisor"
+                class="widCOEImg"
+                id="CDSWIDCOELOGO"
+            /></a>
+          </li>
+        </ul>
+      </div>
     </div>
 
     <div
@@ -45,11 +63,20 @@
         ></div>
       </div>
     </div>
-
   </section>
 </template>
 
 <script setup>
+useHead({
+  script: [
+    {
+      async: true,
+      src: 'https://www.jscache.com/wejs?wtype=certificateOfExcellence&amp;uniq=629&amp;locationId=24188815&amp;lang=en_US&amp;year=2025&amp;display_version=2',
+      'data-loadtrk': true,
+      onload: 'this.loadtrk=true'
+    }
+  ]
+})
 import { ref } from "vue";
 import { useMainStore } from "@/store/index";
 const mainStore = useMainStore();
@@ -150,7 +177,28 @@ onMounted(() => {
 });
 </script>
 
-<style lang="scss">
+<style lang="scss" scoped>
+
+
+.TA_certificateOfExcellence {
+  
+  position: absolute;
+  bottom: 4rem;
+
+  @include for-phone-only {
+    width: 100px;
+  }
+
+  @include for-tablet-portrait-up {
+    width: 120px;
+  }
+
+  @include for-desktop-up {
+    width: 150px;
+  }
+
+}
+
 .top-banner {
   position: relative;
   top: 0;
