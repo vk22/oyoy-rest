@@ -177,13 +177,13 @@ h2 {
 h3 {
 
   @include for-phone-only {
-    font-size: 1.5rem;
-    line-height: 2rem;
+    font-size: 2.5rem;
+    line-height: 3rem;
   }
 
   @include for-tablet-portrait-up {
-    font-size: 1.5rem;
-    line-height: 2rem;
+    font-size: 3rem;
+    line-height: 3.5rem;
   }
 }
 

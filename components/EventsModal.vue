@@ -1,49 +1,89 @@
 <template>
-  <div class="news-modal modal-window" v-if="newsModalState.isOpen">  
+  <div class="news-modal modal-window" v-if="newsModalState.isOpen">
     <div class="news-modal__container">
       <div class="close" @click="modalToggle()">
-        <svg width="30px" height="30px" viewBox="0 0 18 18" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"><g id="Page-1" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd" stroke-linecap="square"><g id="LandingPopup" transform="translate(-983.000000, -267.000000)" stroke="#111"><g id="Group-6"><g id="Group-5" transform="translate(420.000000, 243.000000)"><path d="M571.87315,32.8400752 L582.911677,32.8400752 L571.87315,32.8400752 L571.87315,21.6856907 L571.87315,32.8400752 Z M571.87315,32.8400752 L560.911677,32.8400752 L571.87315,32.8400752 L571.87315,44.0437203 L571.87315,32.8400752 Z" id="Combined-Shape" transform="translate(571.911677, 32.864706) rotate(-315.000000) translate(-571.911677, -32.864706) "></path></g></g></g></g></svg>
+        <svg
+          width="30px"
+          height="30px"
+          viewBox="0 0 18 18"
+          version="1.1"
+          xmlns="http://www.w3.org/2000/svg"
+          xmlns:xlink="http://www.w3.org/1999/xlink"
+        >
+          <g
+            id="Page-1"
+            stroke="none"
+            stroke-width="1"
+            fill="none"
+            fill-rule="evenodd"
+            stroke-linecap="square"
+          >
+            <g
+              id="LandingPopup"
+              transform="translate(-983.000000, -267.000000)"
+              stroke="#111"
+            >
+              <g id="Group-6">
+                <g id="Group-5" transform="translate(420.000000, 243.000000)">
+                  <path
+                    d="M571.87315,32.8400752 L582.911677,32.8400752 L571.87315,32.8400752 L571.87315,21.6856907 L571.87315,32.8400752 Z M571.87315,32.8400752 L560.911677,32.8400752 L571.87315,32.8400752 L571.87315,44.0437203 L571.87315,32.8400752 Z"
+                    id="Combined-Shape"
+                    transform="translate(571.911677, 32.864706) rotate(-315.000000) translate(-571.911677, -32.864706) "
+                  ></path>
+                </g>
+              </g>
+            </g>
+          </g>
+        </svg>
       </div>
       <div class="news-block">
-        <div class="img-wrap img-1" v-if="newsModalState.item.file.type !== 'video/mp4'">
+        <div
+          class="img-wrap img-1"
+          v-if="newsModalState.item.file.type !== 'video/mp4'"
+        >
           <img :src="newsModalState.item.file.url" />
         </div>
         <div class="video-wrap img-1" v-else>
-          <video autoplay="" playsinline="" loop="" controls v-if="newsModalState.item.file.url">
-            <source :src="newsModalState.item.file.url" :type="newsModalState.item.file.type">
+          <video
+            autoplay=""
+            playsinline=""
+            loop=""
+            controls
+            v-if="newsModalState.item.file.url"
+          >
+            <source
+              :src="newsModalState.item.file.url"
+              :type="newsModalState.item.file.type"
+            />
           </video>
         </div>
         <div class="text-wrap">
+          <div class="date">
+            {{ newsModalState.item.eventDate }}
+          </div>
           <div class="title">
             {{ newsModalState.item.title }}
           </div>
           <div class="content">
-            <div v-html="newsModalState.item.text "></div>
-          </div>
-          <div class="date">
-            {{ newsModalState.item.date }}
+            <div v-html="newsModalState.item.text"></div>
           </div>
         </div>
       </div>
-
     </div>
   </div>
 </template>
 
-<script setup> 
-import { useEventStore }  from '@/store/events'
-const store = useEventStore()
-const newsModalState =  computed(() => store.getModalState)
+<script setup>
+import { useEventStore } from "@/store/events";
+const store = useEventStore();
+const newsModalState = computed(() => store.getModalState);
 const modalToggle = () => {
-    store.resetModalState({newsItemIndex: 0})
-}
-
+  store.resetModalState({ newsItemIndex: 0 });
+};
 </script>
 
     
 <style lang="scss">
-
-
 // .v-move,
 // .v-enter-active,
 // .v-leave-active {
@@ -98,21 +138,21 @@ const modalToggle = () => {
     }
   }
 
-  .news-title {
-    font-family: $font-serif;
-    font-size: 4rem;
-    text-align: center;
-    margin-bottom: 2rem;
-  }
+  // .news-title {
+  //   font-family: $font-serif;
+  //   font-size: 4rem;
+  //   text-align: center;
+  //   margin-bottom: 2rem;
+  // }
 
   .news-block {
     display: flex;
-
+    padding-top: 10%;
 
     .video-wrap {
       width: 300px;
       flex-basis: 50%;
-      padding: 1rem;
+      padding: 2rem;
 
       @include for-phone-only {
         width: 100%;
@@ -122,21 +162,16 @@ const modalToggle = () => {
 
       @include for-tablet-portrait-up {
         width: 300px;
-        flex-basis: 50%;
+        flex-basis: 30%;
         padding: 1rem;
       }
 
       video {
         width: 100%;
       }
-
-    } 
+    }
 
     .img-wrap {
-      width: 300px;
-      flex-basis: 50%;
-      padding: 1rem;
-
       @include for-phone-only {
         width: 100%;
         flex-basis: 100%;
@@ -145,11 +180,10 @@ const modalToggle = () => {
 
       @include for-tablet-portrait-up {
         width: 300px;
-        flex-basis: 50%;
-        padding: 1rem;
+        flex-basis: 30%;
+        padding: 1.5rem 2rem;
       }
-
-    }   
+    }
     .text-wrap {
       //padding: 0 2rem;
       @include for-phone-only {
@@ -158,22 +192,42 @@ const modalToggle = () => {
       }
 
       @include for-tablet-portrait-up {
-        flex-basis: 50%;
+        flex-basis: 70%;
         padding: 1rem;
       }
-
     }
     .title {
-      font-size: 2rem;
-      line-height: 2.5rem;
+      font-size: 2.75rem;
+      line-height: 3rem;
       text-transform: uppercase;
-      margin-bottom: 1rem;
+      margin-bottom: 2rem;
     }
     .content {
       margin-bottom: 1rem;
+
+      h1,
+      h2,
+      h3 {
+        font-family: $font-sans;
+        font-size: 1.5rem;
+        font-weight: 600;
+        line-height: 1.5;
+        margin-bottom: 1.5rem;
+      }
+
+      a {
+        color: $colorBlue;
+      }
+
+      p {
+        font-size: 1rem;
+        line-height: 1.5;
+        margin-bottom: 1.5rem;
+      }
     }
     .date {
-      color: #999;
+      color: #444;
+      margin-bottom: 1rem;
     }
 
     @include for-phone-only {
@@ -185,7 +239,6 @@ const modalToggle = () => {
     }
   }
 }
-
 
 .overlay {
   // background: #0d6b80ba;
@@ -199,6 +252,4 @@ const modalToggle = () => {
   height: 100%;
   z-index: 99;
 }
-
-
 </style>

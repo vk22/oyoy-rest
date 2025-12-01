@@ -19,7 +19,7 @@
                 {{ oneevents.title }}
               </div>
               <div class="date">
-                {{ oneevents.date }}
+                {{ oneevents.eventDate }}
               </div>
             </div>
           </div>
@@ -34,7 +34,7 @@
                 {{ oneevents.title }}
               </div>
               <div class="date">
-                {{ oneevents.date }}
+                {{ oneevents.eventDate }}
               </div>
             </div>
           </div>

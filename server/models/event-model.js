@@ -23,6 +23,9 @@ const SchemaData = new Schema({
   gallery: {
     type: Array,
   },
+  eventDate: {
+    type: Date
+  },
   date: {
     type: Date
   }

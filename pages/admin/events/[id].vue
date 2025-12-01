@@ -71,9 +71,18 @@
         </v-col>
       </v-row>
       <v-row>
+        <v-col cols="3">
+          <div class="mb-5">
+            <p class="mb-2">Event date:</p>
+            <vue-date-picker v-model="event.eventDate"></vue-date-picker>
+          </div>
+        </v-col>
+      </v-row>
+      <v-row>
         <v-col>
-          <!-- <v-textarea label="Text" variant="outlined" v-model="event.text"></v-textarea> -->
-          <AdminTiptapEditor v-model="event.text"></AdminTiptapEditor>
+          <div class="content-item-container">
+               <AdminTiptapEditor v-model="event.text"></AdminTiptapEditor>
+          </div>
         </v-col>
       </v-row>
       <v-row>

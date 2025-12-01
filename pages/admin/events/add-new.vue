@@ -11,18 +11,36 @@
       <v-row>
         <v-col>
           <label for=""></label>
-          <AdminFileUploader :type="'events'" @files-dropped="addFiles" ref="uploaderRef"></AdminFileUploader>
+          <AdminFileUploader
+            :type="'events'"
+            @files-dropped="addFiles"
+            ref="uploaderRef"
+          ></AdminFileUploader>
           {{ files }}
         </v-col>
       </v-row>
       <v-row>
         <v-col>
-          <v-text-field v-model="event.title" variant="outlined" label="Title"></v-text-field>
+          <v-text-field
+            v-model="event.title"
+            variant="outlined"
+            label="Title"
+          ></v-text-field>
+        </v-col>
+      </v-row>
+      <v-row>
+        <v-col cols="3">
+          <div class="mb-5">
+            <p class="mb-2">Event date:</p>
+            <vue-date-picker v-model="event.eventDate"></vue-date-picker>
+          </div>
         </v-col>
       </v-row>
       <v-row>
         <v-col>
-          <v-textarea label="Text" variant="outlined" v-model="event.text"></v-textarea>
+          <div class="content-item-container">
+            <AdminTiptapEditor v-model="event.text"></AdminTiptapEditor>
+          </div>
         </v-col>
       </v-row>
       <v-row>
@@ -40,46 +58,44 @@ const adminStore = useAdminStore();
 
 definePageMeta({
   layout: "admin",
-  middleware: ["auth"]
+  middleware: ["auth"],
 });
-const router = useRouter()
+const router = useRouter();
 const event = ref({
-  title: '',
-  text: '',
-  image: ''
-})
+  title: "",
+  text: "",
+  image: "",
+  eventDate: new Date(),
+});
 const uploaderRef = ref(null);
 const files = ref(null);
 
 function addFiles(files) {
-  event.value.image = files[0].name
+  event.value.image = files[0].name;
 }
 
 const addEvent = async () => {
-  let checkFormField = Object.values(event.value).every((i) => i !== '')
+  let checkFormField = Object.values(event.value).every((i) => i !== "");
   if (!checkFormField) {
-    alert('Fill in all fields!');
-    return
-  };
+    alert("Fill in all fields!");
+    return;
+  }
   /// upload images
   let filesUploadResponse = await uploaderRef.value.startUpload();
-  console.log('filesUploadResponse ', filesUploadResponse)
+  console.log("filesUploadResponse ", filesUploadResponse);
   if (filesUploadResponse.success) {
-    let oneFileUpload = filesUploadResponse.data[0]
-    event.value.file = oneFileUpload
+    let oneFileUpload = filesUploadResponse.data[0];
+    event.value.file = oneFileUpload;
     /// save data
-    const { data } = await adminStore.fetchData('events', 'post', event)
+    const { data } = await adminStore.fetchData("events", "post", event);
     if (data) {
-      router.push({ path: "/admin/events" })
+      router.push({ path: "/admin/events" });
     }
   }
 };
-
-
 </script>
 
 
 
 <style lang="scss" scoped>
-
 </style>

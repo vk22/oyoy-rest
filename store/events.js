@@ -29,6 +29,7 @@ export const useEventStore = defineStore("EventStore", {
         getItems(state) {
             const items = state.items.map((item) => {
               item.date = useNuxtApp().$formatDate(item.date)
+              item.eventDate = useNuxtApp().$formatDate(item.eventDate)
               return item
             });
             return items
