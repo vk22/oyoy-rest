@@ -86,6 +86,11 @@
         </v-col>
       </v-row>
       <v-row>
+        <v-col>
+          <v-checkbox v-model="event.published" label="Published"></v-checkbox>
+        </v-col>
+      </v-row>
+      <v-row>
         <v-col> 
           <div class="admin-main-btn mr-2" @click="editEvent()">Save</div>
           <div class="admin-sec-btn" @click="deleteEvent()">Delete</div>

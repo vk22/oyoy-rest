@@ -1,13 +1,14 @@
 <template>
     <TopBannerGallery></TopBannerGallery>
     <section class="page-content" v-show="true">
+      <Awards :title="'Awards'"></Awards>
       <AboutUs ></AboutUs>
       <ClientOnly>
-        <ImageFullWidth :type="'image'" :path="'/img/full-w-banner-1.jpg'" :title="''"></ImageFullWidth>
+        <ImageFullWidth :type="'video'" :path="'/video/video2.mp4'" :title="''"></ImageFullWidth>
       </ClientOnly>
       <Chef></Chef>
       <ClientOnly>
-        <ImageFullWidth :type="'video'" :path="'/video/video2.mp4'" :title="''"></ImageFullWidth>
+        <ImageFullWidth :type="'image'" :path="'/img/full-w-banner-1.jpg'" :title="''"></ImageFullWidth>
       </ClientOnly>
       <ClientOnly>
         <MenuIndex :category="'food'" v-if="menuIsPublished"></MenuIndex>

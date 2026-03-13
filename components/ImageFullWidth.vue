@@ -65,6 +65,10 @@ defineProps(["type","path", "title"]);
     top: 0;
     width: 100%;
     z-index: 0;
+
+    img {
+      filter: grayscale(100%);
+    }
   }
 
   &__video {

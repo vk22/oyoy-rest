@@ -12,6 +12,7 @@ export default defineEventHandler( async (event) => {
     if (body.imageNew) {
       eventOne.file = body.imageNew
     }
+    eventOne.published = body.published
     const saveItem = await eventOne.save()
     if (saveItem) {
       return {

@@ -227,7 +227,7 @@ onMounted(() => {
     width: 100%;
     display: flex;
     align-items: center;
-    justify-content: center;
+    justify-content: flex-end;
     flex-direction: column;
     z-index: 99;
     padding: 3rem 0 3rem;
@@ -263,7 +263,7 @@ onMounted(() => {
       align-items: center;
       justify-content: center;
       margin-bottom: 1rem;
-      padding: 0 1rem;
+      padding: 2rem 1rem;
 
       @include for-phone-only {
       }
@@ -279,16 +279,6 @@ onMounted(() => {
       font-weight: 600;
       color: #fff;
       text-align: center;
-      // text-transform: uppercase;
-      // margin-bottom: 7vh;
-
-      // @include for-700-height-only {
-      //   margin-bottom: 8vh;
-      // }
-
-      // @include for-800-height-only {
-      //   margin-bottom: 10vh;
-      // }
 
       .big {
         padding: 1rem 0 1.35rem;
@@ -313,14 +303,14 @@ onMounted(() => {
           }
 
           @include for-desktop-up {
-            font-size: 8.5rem;
+            font-size: 7.5rem;
             letter-spacing: 3px;
             line-height: 8rem;
             padding: 0.45rem 0 0.65rem;
           }
 
           @include for-big-desktop-up {
-            font-size: 8.5rem;
+            font-size: 7.5rem;
             letter-spacing: 3px;
             line-height: 8rem;
             padding: 0.45rem 0 0.65rem;
