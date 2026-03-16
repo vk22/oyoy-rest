@@ -1,9 +1,7 @@
 <template>
   <section class="awards slideUp fade-in">
     <div class="awards__images">
-      <img :src="path" alt="" />
-      <img :src="path" alt="" />
-      <img :src="path" alt="" />
+      <img :src="image.file.url" alt="" v-for="(image, index) in gallery" :key="index"/>
     </div>
   </section>
 </template>
@@ -11,6 +9,10 @@
 <script setup>
 defineProps(["type", "path", "title"]);
 const path = "/img/award.webp";
+import { useGalleryStore } from "@/store/gallery";
+const store = useGalleryStore();
+const gallery = computed(() => store.getData('awards'))
+
 </script>
 
 <style lang="scss">

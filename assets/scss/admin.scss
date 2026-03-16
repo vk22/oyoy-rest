@@ -190,7 +190,7 @@ h3 {
   font-size: 0.85rem;
   text-transform: none;
   letter-spacing: 0px;
-  color: #111;
+  color: #111!important;
   cursor: pointer;
   transition-property: all;
   transition-duration: 0.25s;
@@ -199,7 +199,7 @@ h3 {
   background-color: #fff;
 
   &.red {
-    color: #fff;
+    color: #fff!important;;
     background-color: $colorError;
     border: 1px solid $colorError;
 

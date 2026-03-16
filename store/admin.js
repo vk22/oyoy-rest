@@ -16,7 +16,10 @@ export const useAdminStore = defineStore('admin', {
     },
 
     async fetchData(route, method, body) {
-      //console.log('fetchData method', route, method, body)
+      
+      console.log('fetchData route', route)
+      console.log('fetchData method', method)
+      console.log('fetchData body', body.value)
       
       this.setLoading(true);
       const { data, status } = await useFetch(`/api/${route}`, {

@@ -41,7 +41,6 @@ const about = ref();
 const { data } = await useFetch("/api/about", {
   method: "get",
 });
-console.log('data ', data)
 about.value = data.value.data;
 
 function textUpdate(text) {

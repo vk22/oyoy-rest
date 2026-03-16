@@ -17,7 +17,7 @@
               <v-col>
                 <label>Images for Gallery</label>
                 <AdminFileUploader :type="'gallery'" @files-dropped="addFiles" ref="uploaderRef"></AdminFileUploader> 
-                {{ files }}
+                <!-- {{ files }} -->
               </v-col>
             </v-row>
             <v-row>
@@ -62,15 +62,16 @@ const route = useRoute();
 const router = useRouter()
 const { data } = await useFetch(`/api/gallery/${route.params.id}`);
 const gallery = ref(data.value);
-gallery.value.imagesNew = [];
+// imagesNew.value = [];
+const imagesNew = shallowRef([])
 const uploaderRef = ref(null);
-// const files = ref([]);
 const dragging = ref(false);
 
 function addFiles(files) {
   console.log('files ', files)
-  gallery.value.imagesNew.push(files);
-  console.log('gallery.value.imagesNew ', gallery.value.imagesNew)
+  // imagesNew.value.push(files);
+  imagesNew.value = [...imagesNew.value, ...files]
+  console.log('imagesNew.value ', imagesNew.value)
 }
 
 
@@ -85,7 +86,7 @@ const draggEnd = async (data) => {
 };
 
 const editItem = async () => {
-  if (gallery.value.imagesNew.length) {
+  if (imagesNew.value.length) {
     /// upload images
     let filesUploadResponse = await uploaderRef.value.startUpload();
     console.log('filesUploadResponse ', filesUploadResponse)
