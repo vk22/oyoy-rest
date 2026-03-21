@@ -1,7 +1,13 @@
 <template>
   <section class="awards slideUp fade-in">
+    <div class="awards__title"><h2>Awards</h2></div>
     <div class="awards__images">
-      <img :src="image.file.url" alt="" v-for="(image, index) in gallery" :key="index"/>
+      <img
+        :src="image.file.url"
+        alt=""
+        v-for="(image, index) in gallery"
+        :key="index"
+      />
     </div>
   </section>
 </template>
@@ -11,16 +17,16 @@ defineProps(["type", "path", "title"]);
 const path = "/img/award.webp";
 import { useGalleryStore } from "@/store/gallery";
 const store = useGalleryStore();
-const gallery = computed(() => store.getData('awards'))
-
+const gallery = computed(() => store.getData("awards"));
 </script>
 
 <style lang="scss">
 .awards {
   display: flex;
+  flex-direction: column;
   width: 100%;
   position: relative;
-  margin: 1rem 0;
+  margin: 4rem 0 1rem;
 
   @include for-phone-only {
   }
@@ -29,6 +35,10 @@ const gallery = computed(() => store.getData('awards'))
   }
 
   @include for-desktop-up {
+  }
+
+  &__title {
+    text-align: center;
   }
 
   &__images {

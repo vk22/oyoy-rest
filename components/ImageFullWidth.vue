@@ -67,7 +67,7 @@ defineProps(["type","path", "title"]);
     z-index: 0;
 
     img {
-      filter: grayscale(100%);
+      filter: grayscale(20%);
     }
   }
 
