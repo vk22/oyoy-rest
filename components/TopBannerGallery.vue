@@ -18,34 +18,13 @@
           @click="goToSlide(index)"
         ></span>
       </div>
-      <!-- <div class="go-down fadeIn-4" @click="scrollToElement" :class="{'loop': needToLoop}">
-        <img src="/img/arrow-down.svg" alt="" />
-      </div> -->
-      <!-- <div
-        id="TA_certificateOfExcellence629"
-        class="TA_certificateOfExcellence fadeIn-4"
-      >
-        <ul id="5DR6me1n" class="TA_links tBn2VATt81">
-          <li id="LVJ5SvUgfl" class="rritFr">
-            <a
-              target="_blank"
-              href="https://www.tripadvisor.com/Restaurant_Review-g227101-d24188815-Reviews-OyOy_Restaurant-Saint_Julian_s_Island_of_Malta.html"
-              ><img
-                src="https://static.tacdn.com/img2/travelers_choice/widgets/tchotel_2025_L.png"
-                alt="TripAdvisor"
-                class="widCOEImg"
-                id="CDSWIDCOELOGO"
-            /></a>
-          </li>
-        </ul>
-      </div> -->
     </div>
 
     <div
       class="gallery"
       @click="toggleGallery()"
       :class="{ show: showItem, active: galleryIsActive }"
-      v-if="gallery.length"
+      v-if="gallery.length && allImagesLoaded"
     >
       <div
         class="gallery__wrap"
@@ -58,8 +37,15 @@
       >
         <div
           class="gallery__item"
-          :class="'image-' + galleryItem.index"
-          :style="{ backgroundImage: 'url(' + galleryItem.file.url + ')' }"
+          :class="[
+            'image-' + galleryItem.index,
+            { loaded: loadedImages[galleryItem.file.url] },
+          ]"
+          :style="
+            loadedImages[galleryItem.file.url]
+              ? { backgroundImage: 'url(' + galleryItem.file.url + ')' }
+              : {}
+          "
         ></div>
       </div>
     </div>
@@ -67,16 +53,6 @@
 </template>
 
 <script setup>
-// useHead({
-//   script: [
-//     {
-//       async: true,
-//       src: 'https://www.jscache.com/wejs?wtype=certificateOfExcellence&amp;uniq=629&amp;locationId=24188815&amp;lang=en_US&amp;year=2025&amp;display_version=2',
-//       'data-loadtrk': true,
-//       onload: 'this.loadtrk=true'
-//     }
-//   ]
-// })
 import { ref } from "vue";
 import { useMainStore } from "@/store/index";
 const mainStore = useMainStore();
@@ -84,6 +60,9 @@ const dataReady = computed(() => mainStore.getDataReady);
 import { useCustomGalleryStore } from "@/store/galleryCustom";
 const customGalleryStore = useCustomGalleryStore();
 //customGalleryStore.fetchData('top')
+
+const loadedImages = ref({});
+const allImagesLoaded = ref(false);
 
 const galleryIsActive = ref(0);
 const activeIndex = computed(() => customGalleryStore.activeIndex);
@@ -93,7 +72,7 @@ const interval = ref(undefined);
 const startGallery = (time) => {
   interval.value = setInterval(
     () => customGalleryStore.autoGalleryNext(),
-    time
+    time,
   );
 };
 const stopGallery = (time) => {
@@ -111,26 +90,26 @@ const gallery = customGalleryStore.getGallery;
 
 // console.log("gallery ", gallery);
 
-let imageCheck = 0;
-for (const galleryImage of gallery) {
-  if (process.client) {
-    const imageUrl = galleryImage.file.url;
-    const preloaderImg = document.createElement("img");
-    preloaderImg.src = imageUrl;
-    preloaderImg.addEventListener("load", (event) => {
-      // console.log("event ", event);
-      imageCheck++;
-      if (imageCheck === gallery.length) {
-        if (!dataReady.value) {
-          // setTimeout(() => {
-          //   readyToGo();
-          // }, 1000);
-          readyToGo();
-        }
-      }
-    });
-  }
-}
+// let imageCheck = 0;
+// for (const galleryImage of gallery) {
+//   if (process.client) {
+//     const imageUrl = galleryImage.file.url;
+//     const preloaderImg = document.createElement("img");
+//     preloaderImg.src = imageUrl;
+//     preloaderImg.addEventListener("load", (event) => {
+//       // console.log("event ", event);
+//       imageCheck++;
+//       if (imageCheck === gallery.length) {
+//         if (!dataReady.value) {
+//           // setTimeout(() => {
+//           //   readyToGo();
+//           // }, 1000);
+//           readyToGo();
+//         }
+//       }
+//     });
+//   }
+// }
 
 function handleImageLoaded(url) {
   console.log("handleImageLoaded ", url);
@@ -165,6 +144,39 @@ await topslideStore.fetchData();
 const topslideText = topslideStore.getData;
 
 onMounted(() => {
+  if (!process.client || !gallery.length) return;
+
+  let loadedCount = 0;
+
+  gallery.forEach((item) => {
+    const url = item.file.url;
+    const img = new Image();
+
+    img.onload = () => {
+      loadedImages.value[url] = true;
+      loadedCount++;
+
+      if (loadedCount === gallery.length) {
+        allImagesLoaded.value = true;
+        if (!dataReady.value) {
+          readyToGo();
+        }
+      }
+    };
+
+    img.onerror = () => {
+      loadedCount++;
+      if (loadedCount === gallery.length) {
+        allImagesLoaded.value = true;
+        if (!dataReady.value) {
+          readyToGo();
+        }
+      }
+    };
+
+    img.src = url;
+  });
+
   if (process.client) {
     document.addEventListener("visibilitychange", () => {
       if (document.hidden) {
@@ -178,10 +190,7 @@ onMounted(() => {
 </script>
 
 <style lang="scss" scoped>
-
-
 .TA_certificateOfExcellence {
-  
   position: absolute;
   bottom: 4rem;
 
@@ -196,7 +205,6 @@ onMounted(() => {
   @include for-desktop-up {
     width: 150px;
   }
-
 }
 
 .top-banner {
@@ -376,6 +384,24 @@ onMounted(() => {
       }
     }
   }
+}
+
+.gallery__item {
+  position: absolute;
+  top: 0;
+  width: 100vw;
+  height: 100%;
+  background-color: #222325;
+  background-size: cover;
+  background-repeat: no-repeat;
+  background-position: 50%;
+  opacity: 0;
+  transform: scale(1.1);
+  transition: opacity 0.3s ease;
+}
+
+.gallery__item.loaded {
+  opacity: 0.75;
 }
 
 .gallery {
