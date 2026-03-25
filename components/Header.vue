@@ -10,54 +10,61 @@
         <ul>
           <li>
             <span>
-              <NuxtLink
-              class="menu-item"
-              :to="{ path: '/', hash: '#home'}"
-            >
-              Home
-            </NuxtLink>
-            </span>  
+              <NuxtLink class="menu-item" :to="{ path: '/', hash: '#home' }">
+                Home
+              </NuxtLink>
+            </span>
           </li>
           <li v-for="(item, index) in navigation" :key="index">
             <span v-if="item">
               <NuxtLink
-              v-if="item.isHomePageAnchor"
-              class="menu-item"
-              :to="{ path: '/', hash: item.href}"
-            >
-              {{ item.text }}
-            </NuxtLink>
-            <NuxtLink
-              v-else
-              class="menu-item"
-              :to="{ path: '/'+item.href }"
-            >
-              {{ item.text }}
-            </NuxtLink>
-            </span>  
-            
+                v-if="item.isHomePageAnchor"
+                class="menu-item"
+                :to="{ path: '/', hash: item.href }"
+              >
+                {{ item.text }}
+              </NuxtLink>
+              <NuxtLink
+                v-else
+                class="menu-item"
+                :to="{ path: '/' + item.href }"
+              >
+                {{ item.text }}
+              </NuxtLink>
+            </span>
           </li>
         </ul>
       </div>
       <hr />
       <div class="m-bottom">
         <div class="phone">
-          <a :href="'tel:'+company.phone"
-            ><v-icon icon="mdi-phone"></v-icon> <span>{{ company.phone }}</span></a
+          <a :href="'tel:' + company.phone"
+            ><v-icon icon="mdi-phone"></v-icon>
+            <span>{{ company.phone }}</span></a
           >
         </div>
         <!-- <div class="btn" v-if="reservationAvailable" @click="getFormModalStateToggle">
           Reservations
         </div> -->
-        <NuxtLink class="btn" :to="{ path: '/reservations'}"  v-if="currentRoute.name !== 'reservations' && reservationAvailable">
-            Reservations
-        </NuxtLink>    
+        <NuxtLink
+          class="btn"
+          :to="{ path: '/reservations' }"
+          v-if="currentRoute.name !== 'reservations' && reservationAvailable"
+        >
+          Reservations
+        </NuxtLink>
       </div>
     </div>
     <div class="main-menu__background" @click="toggleMenu()"></div>
   </div>
 
-  <header class="main-header" :class="[{ small: isScrolled || routesForWhiteHeader.includes(currentRoute.name) }, {'fadeIn-1': dataReady}]">
+  <header
+    class="main-header"
+    :class="[
+      { small: isScrolled || routesForWhiteHeader.includes(currentRoute.name) },
+      { 'fadeIn-1': dataReady },
+    ]"
+  >
     <div class="header-l">
       <div class="icon-nav" @click="toggleMenu()">
         <div class="line"></div>
@@ -66,7 +73,7 @@
       </div>
     </div>
     <div class="header-c">
-      <NuxtLink :to="{ path: linkOnLogo()}">
+      <NuxtLink :to="{ path: linkOnLogo() }">
         <div class="logo">
           <img src="/img/logo.svg" class="white" alt="" />
           <img src="/img/logo-b.svg" class="black" alt="" />
@@ -75,28 +82,65 @@
     </div>
     <div class="header-r">
       <div class="phone" v-if="currentRoute.name !== 'reservations'">
-        <a :href="'tel:'+company.phone"
-            ><v-icon icon="mdi-phone"></v-icon> <span>{{ company.phone }}</span></a
+        <a :href="'tel:' + company.phone"
+          ><v-icon icon="mdi-phone"></v-icon>
+          <span>{{ company.phone }}</span></a
         >
       </div>
       <!-- <div class="btn-quote-icon" @click="getFormModalStateToggle">
         <img src="/img/book-now.svg" alt="" />
       </div> -->
       <!-- <div class="btn btn-header" v-if="reservationAvailable" @click="getFormModalStateToggle">Reservations</div> -->
-        <NuxtLink class="btn btn-header" :to="{ path: '/reservations'}" v-if="currentRoute.name !== 'reservations' && reservationAvailable">
-          Reservations
-        </NuxtLink>   
-        <NuxtLink :to="{ path: '/'}" v-if="currentRoute.name === 'reservations'">
-          <svg width="30px" height="30px" viewBox="0 0 18 18" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"><g id="Page-1" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd" stroke-linecap="square"><g id="LandingPopup" transform="translate(-983.000000, -267.000000)" stroke="#111"><g id="Group-6"><g id="Group-5" transform="translate(420.000000, 243.000000)"><path d="M571.87315,32.8400752 L582.911677,32.8400752 L571.87315,32.8400752 L571.87315,21.6856907 L571.87315,32.8400752 Z M571.87315,32.8400752 L560.911677,32.8400752 L571.87315,32.8400752 L571.87315,44.0437203 L571.87315,32.8400752 Z" id="Combined-Shape" transform="translate(571.911677, 32.864706) rotate(-315.000000) translate(-571.911677, -32.864706) "></path></g></g></g></g></svg>
-        </NuxtLink> 
+      <NuxtLink
+        class="btn btn-header"
+        :to="{ path: '/reservations' }"
+        v-if="currentRoute.name !== 'reservations' && reservationAvailable"
+      >
+        Reservations
+      </NuxtLink>
+      <NuxtLink :to="{ path: '/' }" v-if="currentRoute.name === 'reservations'">
+        <svg
+          width="30px"
+          height="30px"
+          viewBox="0 0 18 18"
+          version="1.1"
+          xmlns="http://www.w3.org/2000/svg"
+          xmlns:xlink="http://www.w3.org/1999/xlink"
+        >
+          <g
+            id="Page-1"
+            stroke="none"
+            stroke-width="1"
+            fill="none"
+            fill-rule="evenodd"
+            stroke-linecap="square"
+          >
+            <g
+              id="LandingPopup"
+              transform="translate(-983.000000, -267.000000)"
+              stroke="#111"
+            >
+              <g id="Group-6">
+                <g id="Group-5" transform="translate(420.000000, 243.000000)">
+                  <path
+                    d="M571.87315,32.8400752 L582.911677,32.8400752 L571.87315,32.8400752 L571.87315,21.6856907 L571.87315,32.8400752 Z M571.87315,32.8400752 L560.911677,32.8400752 L571.87315,32.8400752 L571.87315,44.0437203 L571.87315,32.8400752 Z"
+                    id="Combined-Shape"
+                    transform="translate(571.911677, 32.864706) rotate(-315.000000) translate(-571.911677, -32.864706) "
+                  ></path>
+                </g>
+              </g>
+            </g>
+          </g>
+        </svg>
+      </NuxtLink>
     </div>
   </header>
 </template>
-  
+
 <script setup>
 import { onMounted, ref, watch } from "vue";
 import { useCompanyStore } from "@/store/company";
-import { useMainStore }  from '@/store/index'
+import { useMainStore } from "@/store/index";
 import { useReservationStore } from "@/store/reservation";
 import { useNavigationStore } from "@/store/nav";
 import { useBlogStore } from "@/store/blog";
@@ -105,29 +149,29 @@ const route = useRoute();
 const router = useRouter();
 const currentRoute = router.currentRoute;
 const routesForWhiteHeader = [
-  'reservations',
-  'reservation-confirmed',
-  'privacy',
-  'terms'
-]
+  "reservations",
+  "reservation-confirmed",
+  "privacy",
+  "terms",
+];
 
 const linkOnLogo = () => {
-  if (currentRoute.value.name.includes('blog')) {
-    return '/blog'
+  if (currentRoute.value.name.includes("blog")) {
+    return "/blog";
   } else {
-    return '/'
+    return "/";
   }
 };
 
 /// main store
-const mainStore = useMainStore()
+const mainStore = useMainStore();
 const dataReady = computed(() => {
-  if (currentRoute.value.name.includes('blog')) {
-  return true;
+  if (currentRoute.value.name.includes("blog")) {
+    return true;
   } else {
     return mainStore.getDataReady;
   }
-})
+});
 /// reservation
 const reservationStore = useReservationStore();
 const reservationAvailable = reservationStore.reservationAvailable;
@@ -152,7 +196,7 @@ const closeMenu = () => {
 };
 //// getcompany
 const companyStore = useCompanyStore();
-const company = companyStore.getCompany
+const company = companyStore.getCompany;
 ///
 const headerHandler = () => {
   if (window.scrollY > 50) {
@@ -200,35 +244,25 @@ onMounted(() => {
     link.addEventListener("click", closeMenu);
   });
   // console.log('onMounted route.hash ', route.hash.substring(1))
-;  
 });
 
 watch(dataReady, (newValue) => {
   if (newValue) {
     if (route.hash) {
       setTimeout(() => {
-        smoothScrollTo(route.hash.substring(1))
+        smoothScrollTo(route.hash.substring(1));
       }, 3000);
     }
-
   }
-})
+});
 
 // watch(() => route.hash, () => {
 //     console.log('route.hash ', route.hash.substring(1))
 //     // smoothScrollTo(route.hash.substring(1))
 // });
-
-
-
-
-
-
 </script>
 
 <style lang="scss" scoped>
-
-
 .main-header {
   display: flex;
   justify-content: space-between;
@@ -324,6 +358,9 @@ watch(dataReady, (newValue) => {
   }
 
   .logo {
+    transform: none;
+    filter: none;
+    will-change: auto;
     img {
       width: 225px;
 
@@ -522,7 +559,9 @@ watch(dataReady, (newValue) => {
   justify-content: center;
   align-items: center;
   z-index: 999;
-  transition: opacity 0.75s ease, visibility 0.75s ease;
+  transition:
+    opacity 0.75s ease,
+    visibility 0.75s ease;
   display: flex;
   z-index: 99999;
   opacity: 0;
@@ -541,15 +580,15 @@ watch(dataReady, (newValue) => {
       text-align: left;
 
       @include for-phone-only {
-        padding: .25rem 0;
+        padding: 0.25rem 0;
       }
 
       @include for-tablet-portrait-up {
-        padding: .25rem 0;
+        padding: 0.25rem 0;
       }
 
       @include for-tablet-landscape-up {
-        padding: .35rem 0;
+        padding: 0.35rem 0;
       }
 
       a {
@@ -599,7 +638,9 @@ watch(dataReady, (newValue) => {
     align-items: flex-start;
     z-index: 999;
     transform: translateX(-300px);
-    transition: transform 0.75s ease, visibility 0.75s ease;
+    transition:
+      transform 0.75s ease,
+      visibility 0.75s ease;
     display: flex;
     flex-direction: column;
     z-index: 999;
@@ -646,7 +687,7 @@ watch(dataReady, (newValue) => {
     left: 0;
     width: 100%;
     height: 100%;
-    background: rgba(0, 0, 0, .45);
+    background: rgba(0, 0, 0, 0.45);
     z-index: 99;
   }
 
@@ -717,8 +758,6 @@ watch(dataReady, (newValue) => {
       visibility: visible;
       transform: translateX(0px);
 
-
-
       li {
         opacity: 1;
         transform: translateY(0px);
@@ -745,7 +784,7 @@ watch(dataReady, (newValue) => {
       li:nth-child(7) {
         transition-delay: 0.6s;
       }
-     
+
       hr {
         opacity: 1;
         transform: translateY(0px);
