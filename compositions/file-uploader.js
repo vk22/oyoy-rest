@@ -21,8 +21,8 @@ export default class FileUploader {
 		return this.files
 	}
 	checkLimit(filesNew) {
-		console.log('filesNew ', filesNew)
-		console.log('this.limit ', this.limit)
+		//console.log('filesNew ', filesNew)
+		//console.log('this.limit ', this.limit)
 		if (this.files.value.length > this.limit) {
 			alert('Limit: '+this.limit)
 			return true;			
@@ -42,10 +42,10 @@ export default class FileUploader {
 	checkAllowedFormat(filesNew) {
 		if (this.allowedFormat) {
 			return Array.from(filesNew).filter(el => {
-				console.log('el.type ', el.type)
+				//console.log('el.type ', el.type)
 				const check = this.allowedFormat.includes(el.type)
-				console.log('this.allowedFormat ', this.allowedFormat)
-				console.log('check', check)
+				//console.log('this.allowedFormat ', this.allowedFormat)
+				//console.log('check', check)
 				if (check) {
 					return el;
 				} else {
@@ -60,7 +60,7 @@ export default class FileUploader {
 	addFiles(newFiles, type) {
 		let newUploadableFiles = [...newFiles].map((file) => new UploadableFile(file)).filter((file) => !this.fileExists(file.id))
 		this.files.value = this.files.value.concat(newUploadableFiles)
-		console.log('FileUploader addFiles ', this.files.value)
+		//console.log('FileUploader addFiles ', this.files.value)
 	}
 
 	fileExists(otherId) {
@@ -68,7 +68,7 @@ export default class FileUploader {
 	}
 
 	removeFile(file) {
-		console.log('FileUploader removeFile ', file)
+		//console.log('FileUploader removeFile ', file)
 		const index = this.files.value.indexOf(file)
 		if (index > -1) this.files.value.splice(index, 1)
 	}
@@ -99,7 +99,7 @@ export default class FileUploader {
 			access: 'public',
 			handleUploadUrl: '/api/blob-upload-url',
 			onUploadProgress(p) {
-				console.log('onUploadProgress ', Math.round(p.percentage))
+				//console.log('onUploadProgress ', Math.round(p.percentage))
 				//progress.value = Math.round(p.percentage);
 			},
 		});

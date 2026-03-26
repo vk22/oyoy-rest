@@ -1,66 +1,62 @@
 import { defineStore } from 'pinia'
 
+const TRANSITION_MS = 1000
+
 export const useCustomGalleryStore = defineStore('customGalleryStore', {
   state: () => ({
     activeIndex: 0,
-    activeNext: 1,
+    activeNext: null,
     dir: 1,
-    galleryIsWork: false,
-    timerId: null,
-    interval: null,
-    gallery: []
+    isAnimating: false,
+    gallery: [],
   }),
+
+  getters: {
+    hasSlides: (state) => state.gallery.length > 0,
+    lastIndex: (state) => Math.max(state.gallery.length - 1, 0),
+  },
+
   actions: {
     async fetchData(name) {
       const { data } = await useFetch('/api/gallery')
-      const res = data.value.items
-      const images = res.find(item => item.name == name).images
-      this.gallery = images
-    },
-    autoGalleryNext() {
-        this.galleryIsWork = true
-        if (this.activeIndex >= this.gallery.length - 1) {
-            this.activeNext = 0;
-        } else {
-            this.activeNext += 1;
-        }
-        this.dir = 1;
-        setTimeout(() => {
-            this.activeIndex = (this.activeNext !== null) ? this.activeNext : this.activeIndex;
-            // this.activeNext = null;
-            this.galleryIsWork = false
-        }, 1000);
-    },
-    goToSlide(index) {
-      if (this.galleryIsWork) return;
-      // if (this.interval) {
-      //   commit('CLEAR_GALLERY_INTERVAL');
-      // }
+      const items = data.value?.items ?? []
+      const entry = items.find(item => item.name === name)
 
-      this.activeNext = index
-      if (this.activeIndex < index) {
-        this.dir = -1;
-      } 
-      if (this.activeIndex > index) {
-        this.dir = 1;
-      } 
-      
+      this.gallery = entry?.images ?? []
+      this.activeIndex = 0
+      this.activeNext = null
+      this.isAnimating = false
+    },
+
+    next() {
+      if (this.isAnimating || !this.gallery.length) return
+
+      const nextIndex =
+        this.activeIndex >= this.gallery.length - 1
+          ? 0
+          : this.activeIndex + 1
+
+      this.startTransition(nextIndex, 1)
+    },
+
+    goTo(index) {
+      if (this.isAnimating || index === this.activeIndex || !this.gallery.length) return
+      if (index < 0 || index >= this.gallery.length) return
+
+      const dir = index > this.activeIndex ? -1 : 1
+      this.startTransition(index, dir)
+    },
+
+    startTransition(nextIndex, dir) {
+      this.activeNext = nextIndex
+      this.dir = dir
+      this.isAnimating = true
+
       setTimeout(() => {
-          this.activeIndex = (this.activeNext !== null) ? this.activeNext : this.activeIndex;
-          this.activeNext = null;
-          this.galleryIsWork = false
-      }, 1000);
+        this.activeIndex = this.activeNext ?? this.activeIndex
+        this.activeNext = null
+        this.isAnimating = false
+      }, TRANSITION_MS)
     },
   },
-  getters: {
-    getGallery: (state) => {
-      // const gallery = state.gallery.map(item => {
-      //   return {
-      //     index: item.index,
-      //     file: item.filename
-      //   }
-      // }) 
-      return state.gallery
-    }
-  }
 })

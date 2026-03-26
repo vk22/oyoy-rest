@@ -30,7 +30,7 @@
         class="gallery__wrap"
         :class="{
           'slide-active': galleryItem.index === activeIndex,
-          'slide-to-left': galleryItem.index === activeNext && galleryIsWork,
+          'slide-to-left': galleryItem.index === activeNext && isAnimating,
         }"
         v-for="galleryItem in gallery"
         :key="galleryItem.index"
@@ -53,140 +53,104 @@
 </template>
 
 <script setup>
-import { ref } from "vue";
-import { useMainStore } from "@/store/index";
-const mainStore = useMainStore();
-const dataReady = computed(() => mainStore.getDataReady);
-import { useCustomGalleryStore } from "@/store/galleryCustom";
-const customGalleryStore = useCustomGalleryStore();
-//customGalleryStore.fetchData('top')
+import { ref, computed, watch, onMounted, onUnmounted } from 'vue'
+import { storeToRefs } from 'pinia'
+import { useMainStore } from '@/store/index'
+import { useCustomGalleryStore } from '@/store/galleryCustom'
+import { useTopslideStore } from '@/store/topslide'
 
-const loadedImages = ref({});
-const allImagesLoaded = ref(false);
+const mainStore = useMainStore()
+const galleryStore = useCustomGalleryStore()
+const topslideStore = useTopslideStore()
 
-const galleryIsActive = ref(0);
-const activeIndex = computed(() => customGalleryStore.activeIndex);
-const activeNext = computed(() => customGalleryStore.activeNext);
-const galleryIsWork = computed(() => customGalleryStore.galleryIsWork);
-const interval = ref(undefined);
-const startGallery = (time) => {
-  interval.value = setInterval(
-    () => customGalleryStore.autoGalleryNext(),
-    time,
-  );
-};
-const stopGallery = (time) => {
-  clearInterval(interval.value);
-};
-const goToSlide = (index) => {
-  if (interval) {
-    clearTimeout(interval);
+const { activeIndex, activeNext, isAnimating, gallery, dir } = storeToRefs(galleryStore)
+const dataReady = computed(() => mainStore.getDataReady)
+
+const loadedImages = ref({})
+const allImagesLoaded = ref(false)
+const galleryIsActive = ref(false)
+const intervalId = ref(null)
+
+const showItem = ref(false)
+
+const startGallery = (time = 6000) => {
+  stopGallery()
+  intervalId.value = setInterval(() => {
+    galleryStore.next()
+  }, time)
+}
+
+const stopGallery = () => {
+  if (intervalId.value) {
+    clearInterval(intervalId.value)
+    intervalId.value = null
   }
-  customGalleryStore.goToSlide(index);
-};
+}
 
-///
-const gallery = customGalleryStore.getGallery;
-
-// console.log("gallery ", gallery);
-
-// let imageCheck = 0;
-// for (const galleryImage of gallery) {
-//   if (process.client) {
-//     const imageUrl = galleryImage.file.url;
-//     const preloaderImg = document.createElement("img");
-//     preloaderImg.src = imageUrl;
-//     preloaderImg.addEventListener("load", (event) => {
-//       // console.log("event ", event);
-//       imageCheck++;
-//       if (imageCheck === gallery.length) {
-//         if (!dataReady.value) {
-//           // setTimeout(() => {
-//           //   readyToGo();
-//           // }, 1000);
-//           readyToGo();
-//         }
-//       }
-//     });
-//   }
-// }
-
-function handleImageLoaded(url) {
-  console.log("handleImageLoaded ", url);
+const goToSlide = (index) => {
+  stopGallery()
+  galleryStore.goTo(index)
+  startGallery()
 }
 
 const readyToGo = () => {
-  // mainStore.setDataReady();
-  galleryIsActive.value = true;
-  startGallery(6000);
-};
-
-//// show after loading all data
-const showItem = ref(false);
-if (!dataReady.value) {
-  watch(dataReady, (newValue) => {
-    // setTimeout(() => {
-    //   showItem.value = newValue;
-    // }, 100);
-    showItem.value = newValue;
-  });
-} else {
-  // setTimeout(() => {
-  //   showItem.value = true;
-  // }, 100);
-  showItem.value = true;
+  galleryIsActive.value = true
+  startGallery()
 }
 
-//// topslide text
-import { useTopslideStore } from "@/store/topslide";
-const topslideStore = useTopslideStore();
-await topslideStore.fetchData();
-const topslideText = topslideStore.getData;
+const handleVisibilityChange = () => {
+  if (document.hidden) {
+    stopGallery()
+  } else if (allImagesLoaded.value) {
+    startGallery()
+  }
+}
+
+watch(dataReady, (value) => {
+  showItem.value = value
+}, { immediate: true })
+
+await topslideStore.fetchData()
+const topslideText = topslideStore.getData
 
 onMounted(() => {
-  if (!process.client || !gallery.length) return;
+  if (!process.client || !gallery.value.length) return
 
-  let loadedCount = 0;
+  let loadedCount = 0
 
-  gallery.forEach((item) => {
-    const url = item.file.url;
-    const img = new Image();
+  gallery.value.forEach((item) => {
+    const url = item.file.url
+    const img = new Image()
 
     img.onload = () => {
-      loadedImages.value[url] = true;
-      loadedCount++;
+      loadedImages.value[url] = true
+      loadedCount++
 
-      if (loadedCount === gallery.length) {
-        allImagesLoaded.value = true;
-        if (!dataReady.value) {
-          readyToGo();
-        }
+      if (loadedCount === gallery.value.length) {
+        allImagesLoaded.value = true
+        readyToGo()
       }
-    };
+    }
 
     img.onerror = () => {
-      loadedCount++;
-      if (loadedCount === gallery.length) {
-        allImagesLoaded.value = true;
-        if (!dataReady.value) {
-          readyToGo();
-        }
-      }
-    };
+      loadedCount++
 
-    img.src = url;
-  });
-
-  if (process.client) {
-    document.addEventListener("visibilitychange", () => {
-      if (document.hidden) {
-        stopGallery();
-      } else {
-        startGallery(6000);
+      if (loadedCount === gallery.value.length) {
+        allImagesLoaded.value = true
+        readyToGo()
       }
-    });
-  }
-});
+    }
+
+    img.src = url
+  })
+
+  document.addEventListener('visibilitychange', handleVisibilityChange)
+})
+
+onUnmounted(() => {
+  stopGallery()
+  document.removeEventListener('visibilitychange', handleVisibilityChange)
+})
 </script>
 
 <style lang="scss" scoped>

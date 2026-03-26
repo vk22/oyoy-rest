@@ -86,7 +86,7 @@ const images = computed({
   },
 });
 
-console.log('images ', images.value)
+//console.log('images ', images.value)
 
 const draggEnd = async () => {
   const data = {

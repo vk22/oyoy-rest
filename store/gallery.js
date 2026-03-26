@@ -14,7 +14,6 @@ export const useGalleryStore = defineStore("galleryStore", {
     actions: {
         async fetchData() {
           const { data } = await useFetch('/api/gallery')
-          console.log('fetcg gallery ', data.value.items)
           this.items = data.value.items
         },
         setModalState(data) {

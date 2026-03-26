@@ -39,7 +39,7 @@ function removeFile(file) {
 }
 
 function filesDropped(filesNew) {
-	console.log('filesDropped ', filesNew)
+	//('filesDropped ', filesNew)
 	const filesChecked = fileUploader.checkAllowedFormat(filesNew);
 	if (filesChecked.length) {
 		if (fileUploader.checkLimit(filesChecked)) return;
@@ -54,7 +54,7 @@ function onInputChange(e) {
 	for (const file of e.target.files) {
 		filesNew.push(file)
 	}
-	console.log('onInputChange ', filesNew)
+	//console.log('onInputChange ', filesNew)
 
 	const filesChecked = fileUploader.checkAllowedFormat(filesNew);
 	if (filesChecked.length) {

@@ -8,7 +8,7 @@ export default function () {
 		// 
 
 		files.value = files.value.concat(newUploadableFiles)
-		console.log('files.value ', files.value)
+		//console.log('files.value ', files.value)
 	}
 
 	function fileExists(otherId) {

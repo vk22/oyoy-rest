@@ -46,7 +46,7 @@ if (!store.itemsPdf.length) {
   await store.fetchDataPdf();
 }
 const menuData = computed(() => store.getItemsPdf(props.category));
-console.log("menuData !!!", menuData.value);
+
 const menuPdfList = menuData.value;
 // const published = computed(() => {
 //   if (menuPdfList.length) {

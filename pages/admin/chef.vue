@@ -83,7 +83,7 @@ const uploaderRef = ref(null);
 let pdfPreviewNew = ref(null);
 
 function addFile(file) {
-  console.log("addFilePreview ", file);
+  //console.log("addFilePreview ", file);
   pdfPreviewNew.value = file;
 }
 
@@ -92,7 +92,7 @@ async function uploadFile() {
     let filesUploadResponse = await uploaderRef.value.startUpload();
     if (filesUploadResponse.success) {
       const file = filesUploadResponse.data[0];
-      console.log("file ", file);
+      //console.log("file ", file);
       chef.value.image = {
         file: {
           url: file.url,

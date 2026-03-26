@@ -6,7 +6,7 @@
         <div class="form-modal__container">
             <h2>Reservations</h2>
             <!-- <Form></Form> -->
-            <iframe src="https://app.tableo.com/r/g9BzkED" width="100%" height=" 100%" referrerpolicy="unsafe-url"></iframe>
+            <iframe v-if="formModalOpened" src="https://app.tableo.com/r/g9BzkED" width="100%" height=" 100%" referrerpolicy="unsafe-url"></iframe>
         </div>
       </div>
 </template>
