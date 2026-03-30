@@ -54,7 +54,7 @@ const gallery = computed(() => store.getData("awards"));
       }
 
       @include for-tablet-portrait-up {
-        width: 200px;
+        width: 170px;
       }
     }
   }
