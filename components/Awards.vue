@@ -1,5 +1,5 @@
 <template>
-  <section class="awards slideUp fade-in">
+  <section class="awards slideUp fade-in" v-if="gallery?.length">
     <div class="awards__title"><h2>Awards</h2></div>
     <div class="awards__images">
       <img
@@ -48,7 +48,7 @@ const gallery = computed(() => store.getData("awards"));
     margin: 0 auto;
     justify-content: space-between;
     img {
-      filter: grayscale(100%);
+      // filter: grayscale(100%);
       @include for-phone-only {
         width: 30%;
       }
