@@ -79,6 +79,7 @@ if (!store.itemsPdf.length) {
   await store.fetchData();
 }
 const menuData = computed(() => store.getItems(props.category))
+console.log('menuData ', menuData.value)
 
 let acviveMenuIndex = ref(0);
 let loaded = ref(true)

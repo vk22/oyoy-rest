@@ -16,7 +16,6 @@
               <div class="section-title">
                 <h3>{{ menuPdf.title }}</h3>
                 <p>{{ menuPdf.text }}</p>
-                <!-- <p>Complementing your exquisite meal with a nice selection of wines from various parts of the world. Carefully chosen to satisfy everyone’s taste buds, from wine connoisseurs to a beginner wine enthusiast.</p> -->
               </div>
             </v-col>
           </v-row>

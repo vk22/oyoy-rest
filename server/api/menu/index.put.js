@@ -6,6 +6,7 @@ export default defineEventHandler( async (event) => {
     if (!item) return false
     item.section = body.section
     item.content = body.content
+    item.published = body.published
     const saveItem = await item.save()    
     if (saveItem) {
       return {
