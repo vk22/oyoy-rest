@@ -1,7 +1,7 @@
 <template>
   <section
     class="wine-list index-section slideUp fade-in"
-    :id="menuPdfList[0].section"
+    :id="menuPdfList[0]?.section"
   >
     <v-container>
       <v-row>
