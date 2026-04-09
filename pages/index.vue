@@ -20,7 +20,10 @@
         <ImageFullWidth :type="'image'" :path="'/img/full-w-banner-4.jpg'" :title="''"></ImageFullWidth>
       </ClientOnly>
       <ClientOnly>
-        <MenuIndexAsPDF :category="'drinks'" v-if="wineListIsActive"></MenuIndexAsPDF> 
+        <MenuIndex :category="'drinks'" v-if="wineListIsActive"></MenuIndex>
+      </ClientOnly>
+      <ClientOnly>
+        <MenuIndexAsPDF :category="'drinks'"></MenuIndexAsPDF> 
       </ClientOnly>
       <ClientOnly>
         <SwiperGallery></SwiperGallery>
