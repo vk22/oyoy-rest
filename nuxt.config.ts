@@ -55,6 +55,7 @@ export default defineNuxtConfig({
     // '~/plugins/vue-lazyload'
   ],
   gtag: {
+    initMode: 'manual',
     id: 'AW-16850949987',
     //id: 'AW-17212492361' /// my test
   },
@@ -101,6 +102,7 @@ export default defineNuxtConfig({
     mode: process.env.MODE,
     // mongodbUri
     mongodbUri: process.env.MONGO_URI,
+    jwtSecret: process.env.JWT_SECRET,
 
     // Public keys that are exposed to the client
     public: {

@@ -1,6 +1,7 @@
 import { Gallery } from "~~/server/models/gallery-model";
 
 export default defineEventHandler( async (event) => {
+    await requireAuth(event);
     const body = await readBody(event)
     const deleted = await Gallery.deleteOne({ _id: body._id })
     if (!deleted) return false

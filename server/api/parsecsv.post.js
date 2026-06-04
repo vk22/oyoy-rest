@@ -2,6 +2,7 @@ import CSVService from "~~/server/services/csvService.js"
 import SubscribersService from "~~/server/services/subscribersService.js"
 const sleep = ms => new Promise(r => setTimeout(r, ms))
 export default defineEventHandler(async (event) => {
+    await requireAuth(event);
   console.log('readcsv')
   const body = await readBody(event)
   const csvData = await CSVService.fetchFile(body.fileUrl)

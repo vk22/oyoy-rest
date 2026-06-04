@@ -1,6 +1,7 @@
 import { User } from "~~/server/models/user-model";
 
 export default defineEventHandler( async (event) => {
+    await requireAuth(event);
     const users = await User.find()
     return {
       users: users

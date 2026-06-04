@@ -1,6 +1,7 @@
 import { put } from '@vercel/blob';
 import ImagesService from "~~/server/services/imagesService.js"
 export default defineEventHandler(async (event) => {
+    await requireAuth(event);
   try {
     /// vercel blob
     const formData = await readFormData(event);

@@ -2,6 +2,7 @@ import { User } from "~~/server/models/user-model";
 import { Reservation } from "~~/server/models/reservation-model";
 
 export default defineEventHandler( async (event) => {
+    await requireAuth(event);
   const body = await readBody(event)
   const deleted = await Reservation.deleteOne({ _id: body._id })
   if (!deleted) return false;

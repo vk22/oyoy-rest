@@ -22,6 +22,7 @@ import { put } from '@vercel/blob';
 // });
 
 export default defineEventHandler(async (event) => {
+    await requireAuth(event);
   //console.log('process.env.UPLOAD_DIR ', process.env.UPLOAD_DIR)
   try {
     // const res = await callNodeListener(upload.array('file', 10), event.node.req, event.node.res);

@@ -1,6 +1,7 @@
 import { Nav } from "~~/server/models/nav-model";
 
 export default defineEventHandler( async (event) => {
+    await requireAuth(event);
     const body = await readBody(event)
     const navOne = await Nav.findById(body._id)
     if (!navOne) return false

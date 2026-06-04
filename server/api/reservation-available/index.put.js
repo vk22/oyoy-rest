@@ -1,6 +1,7 @@
 import { ReservationAvailable } from "~~/server/models/reservation-available-model";
 
 export default defineEventHandler( async (event) => {
+    await requireAuth(event);
     const body = await readBody(event)
     const item = await ReservationAvailable.findById(body._id)
     if (!item) return false

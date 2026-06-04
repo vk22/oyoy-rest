@@ -1,6 +1,7 @@
 import { Company } from "~~/server/models/company-model";
 
 export default defineEventHandler( async (event) => {
+    await requireAuth(event);
     const body = await readBody(event)
     const company = await Company.findById(body._id)
     if (!company) return false

@@ -1,6 +1,7 @@
 import { Menu } from "~~/server/models/menu-model";
 
 export default defineEventHandler( async (event) => {
+    await requireAuth(event);
     const body = await readBody(event)
     const deleted = await Menu.deleteOne({ _id: body._id })
     if (!deleted) return false

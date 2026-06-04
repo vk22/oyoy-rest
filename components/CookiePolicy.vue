@@ -1,11 +1,11 @@
 <template>
   <Transition>
-    <div class="consent-banner" v-if="!user && dataReady">
+    <div class="consent-banner" v-if="!hasCookieDecision && dataReady">
       <div class="text">
         <div class="title">We value your privacy</div>
         <p>
-          We use tracking cookies to understand how you use the product and help
-          us improve it. Please accept cookies to help us improve.
+          We use analytics and marketing cookies to understand how you use the
+          website and improve our ads. You can accept or decline these cookies.
         </p>
       </div>
       <div class="buttons">
@@ -24,7 +24,14 @@ const mainStore = useMainStore();
 const dataReady = computed(() => mainStore.getDataReady);
 
 ///
-const user = useCookie("user_cookies");
+const user = useCookie("user_cookies", {
+  maxAge: 60 * 60 * 24 * 180,
+  sameSite: "lax",
+});
+
+const hasCookieDecision = computed(
+  () => typeof user.value?.accept_cookies === "boolean",
+);
 
 function acceptCookies() {
   user.value = { accept_cookies: true };

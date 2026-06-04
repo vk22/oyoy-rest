@@ -1,6 +1,7 @@
 import { Chef } from "~~/server/models/chef-model";
 
 export default defineEventHandler( async (event) => {
+    await requireAuth(event);
     const body = await readBody(event)
     const item = await Chef.findById(body._id)
     if (!item) return false

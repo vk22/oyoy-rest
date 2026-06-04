@@ -1,6 +1,7 @@
 import { Topslide } from "~~/server/models/topslide-model";
 
 export default defineEventHandler( async (event) => {
+    await requireAuth(event);
     const body = await readBody(event)
     const item = await Topslide.findById(body._id)
     if (!item) return false

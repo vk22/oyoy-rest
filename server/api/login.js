@@ -2,42 +2,64 @@ import { Auth } from "~~/server/models/auth-model";
 import jwt from "jsonwebtoken";
 import bcrypt from "bcrypt";
 
-export default defineEventHandler( async (event) => {
+export default defineEventHandler(async (event) => {
+  const config = useRuntimeConfig();
 
-    try {
-      const body = await readBody(event)
-      const { username, password } = body;
-      console.log('username, password ', username, password)
-      const users = await Auth.find();
-      const user = await Auth.findOne({ username: username });
-      console.log('user ', users)
-      if (!user) {
-        return {
-          success: false,
-          message: "User not found"
-        }
-      }
-      const validPassword = bcrypt.compareSync(password, user.passwordHash);
-      if (!validPassword) {
-        return {
-          success: false,
-          message: "Wrong password"
-        }
-      }
-      const jwtToken = '7383dj2948fk0';
-      const token = jwt.sign({ username, password }, jwtToken);
-      return { 
-        success: true, 
-        token: token, 
-        username: username 
-      }
-
-    } catch (err) {
-      console.log(err);
+  try {
+    if (!config.jwtSecret) {
+      console.error("JWT_SECRET is not configured");
       return {
         success: false,
-        message: "Error access"
-      }
+        message: "Authentication is not configured",
+      };
     }
 
-})
+    const body = await readBody(event);
+    const { username, password } = body;
+
+    if (!username || !password) {
+      return {
+        success: false,
+        message: "Username and password are required",
+      };
+    }
+
+    const user = await Auth.findOne({ username });
+    if (!user) {
+      return {
+        success: false,
+        message: "Invalid username or password",
+      };
+    }
+
+    const validPassword = bcrypt.compareSync(password, user.passwordHash);
+    if (!validPassword) {
+      return {
+        success: false,
+        message: "Invalid username or password",
+      };
+    }
+
+    const token = jwt.sign(
+      {
+        sub: user._id.toString(),
+        username: user.username,
+        usergroup: user.usergroup,
+      },
+      config.jwtSecret,
+      { expiresIn: "8h" },
+    );
+
+    return {
+      success: true,
+      token,
+      username: user.username,
+    };
+  } catch (err) {
+    console.error(err);
+    return {
+      success: false,
+      message: "Error access",
+    };
+  }
+});

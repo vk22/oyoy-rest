@@ -1,6 +1,7 @@
 import { Event } from "~~/server/models/event-model";
 
 export default defineEventHandler( async (event) => {
+    await requireAuth(event);
     const body = await readBody(event)
     console.log('body ', body)
     const eventOne = await Event.findById(body._id)

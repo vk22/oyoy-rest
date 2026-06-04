@@ -1,6 +1,7 @@
 import { MenuPDF } from "~~/server/models/menuPDF-model";
 
 export default defineEventHandler( async (event) => {
+    await requireAuth(event);
   
   try {
       const body = await readBody(event)

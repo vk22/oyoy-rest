@@ -1,6 +1,7 @@
 import { Gallery } from "~~/server/models/gallery-model";
 
 export default defineEventHandler( async (event) => {
+    await requireAuth(event);
     const body = await readBody(event)
     console.log('gallery post ', body)
     /// images map

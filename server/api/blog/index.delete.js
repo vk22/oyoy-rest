@@ -2,6 +2,7 @@ import { Blog } from "~~/server/models/blog-model";
 import ImagesService from "~~/server/services/imagesService.js"
 
 export default defineEventHandler( async (event) => {
+    await requireAuth(event);
     const body = await readBody(event);
     const itemForDelete = await Blog.findOne({_id: body._id});
     const imagesForDelete = itemForDelete.images.concat(itemForDelete.gallery);

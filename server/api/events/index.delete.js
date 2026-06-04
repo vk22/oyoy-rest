@@ -1,6 +1,7 @@
 import { Event } from "~~/server/models/event-model";
 
 export default defineEventHandler( async (event) => {
+    await requireAuth(event);
     const body = await readBody(event)
     const deleted = await Event.deleteOne({ _id: body._id })
     if (!deleted) return false

@@ -1,6 +1,7 @@
 import { Gallery } from "~~/server/models/gallery-model";
 
 export default defineEventHandler(async (gallery) => {
+    await requireAuth(gallery);
   const body = await readBody(gallery)
   const galleryItem = await Gallery.findById(body._id)
   if (!galleryItem) return false

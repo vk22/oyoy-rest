@@ -1,6 +1,7 @@
 import { Blog } from "~~/server/models/blog-model";
 
 export default defineEventHandler( async (event) => {
+    await requireAuth(event);
     const body = await readBody(event)
     const postItem = await Blog.findById(body._id)
     if (!postItem) return false

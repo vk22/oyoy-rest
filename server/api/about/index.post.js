@@ -1,6 +1,7 @@
 import { About } from "~~/server/models/about-model";
 
 export default defineEventHandler( async (event) => {
+    await requireAuth(event);
     const body = await readBody(event)
     const itemNew = await About.create(body)
     return {

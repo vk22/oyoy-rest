@@ -1,6 +1,7 @@
 import { handleUpload } from '@vercel/blob/client';
 
 export default defineEventHandler(async (event) => {
+    await requireAuth(event);
   const body = await readBody(event);
   const config = useRuntimeConfig();
 
