@@ -36,7 +36,6 @@ export default defineNuxtConfig({
     'nuxt-tiptap-editor',
     '@nuxtjs/robots',
     '@nuxtjs/sitemap',
-    'nuxt-gtag',
     //'@zadigetvoltaire/nuxt-gtm'
   ],
 
@@ -54,15 +53,6 @@ export default defineNuxtConfig({
   plugins: [
     // '~/plugins/vue-lazyload'
   ],
-  gtag: {
-    initMode: 'manual',
-    id: 'AW-16850949987',
-    //id: 'AW-17212492361' /// my test
-  },
-  // gtm: {
-  //   id: 'GTM-N3484GLZ'
-  //   //id: 'GTM-5GQBQS5S' /// my test
-  // },
   sitemap: {
     sources: ['/api/sitemap'],
     cacheMaxAgeSeconds: 60,
@@ -107,7 +97,7 @@ export default defineNuxtConfig({
     // Public keys that are exposed to the client
     public: {
       apiBase: process.env.NUXT_PUBLIC_API_BASE || '/api',
-      //gtmId: 'GTM-N3484GLZ'
+      gtmId: process.env.NUXT_PUBLIC_GTM_ID || 'GTM-N3484GLZ',
     },
     vercelBlobToken: process.env.BLOB_READ_WRITE_TOKEN,
   },

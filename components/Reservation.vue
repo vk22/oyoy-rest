@@ -8,13 +8,19 @@
     <div class="reservation-page__container">
       <h2>Reservations</h2>
       <!-- <Form></Form> -->
-      <iframe
+      <!-- <iframe
         src="https://app.tableo.com/r/g9BzkED"
         width="100%"
         height=" 100%"
         referrerpolicy="unsafe-url"
         id="tableo-iframe"
         v-if="reservationAvailable"
+      ></iframe> -->
+      <iframe
+        src="https://widget.thefork.com/909e5f74-34a8-4e9a-be75-6a834b42e5f4"
+        allow="payment *"
+        style="width: 100%; min-height:800px; border:none; overflow:scroll;"
+         v-if="reservationAvailable"
       ></iframe>
       <div class="reservation-empty" v-else>
         The reservation form is currently disabled
