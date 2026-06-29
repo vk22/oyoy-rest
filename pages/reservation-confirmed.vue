@@ -3,25 +3,28 @@
 </template>
 
 <script setup>
-import { watch } from 'vue';
+import { onMounted, watch } from 'vue';
 
 const consent = useCookie('user_cookies');
-let conversionSent = false;
 
-watch(
-  () => consent.value?.accept_cookies,
-  (hasConsent) => {
-    if (!hasConsent || conversionSent) return;
+onMounted(() => {
+  let conversionSent = false;
 
-    window.dataLayer = window.dataLayer || [];
-    window.dataLayer.push({
-      event: 'reservation_confirmed',
-      google_ads_send_to: 'AW-16850949987/dt6fCKuT8qAaEOOulOM-',
-    });
-    conversionSent = true;
-  },
-  { immediate: true },
-);
+  watch(
+    () => consent.value?.accept_cookies,
+    (hasConsent) => {
+      if (!hasConsent || conversionSent) return;
+
+      window.dataLayer = window.dataLayer || [];
+      window.dataLayer.push({
+        event: 'reservation_confirmed',
+        google_ads_send_to: 'AW-16850949987/dt6fCKuT8qAaEOOulOM-',
+      });
+      conversionSent = true;
+    },
+    { immediate: true },
+  );
+});
 
 useHead({
   title: 'OyOy Restaurant',
