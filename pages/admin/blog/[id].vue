@@ -18,7 +18,12 @@
               :type="'posts'"
               :needPreview="true"
               :limit="1"
-              :allowedFormat="['image/png', 'image/jpeg', 'image/jpg', 'image/webp']"
+              :allowedFormat="[
+                'image/png',
+                'image/jpeg',
+                'image/jpg',
+                'image/webp',
+              ]"
               @files-dropped="addMainImage"
               ref="uploaderMainImageRef"
             ></AdminFileUploader>
@@ -49,7 +54,12 @@
               <AdminImagesGalleryPreview
                 :images="post.images"
                 :imagesType="'images'"
-                :allowedFormat="['image/png', 'image/jpeg', 'image/jpg', 'image/webp']"
+                :allowedFormat="[
+                  'image/png',
+                  'image/jpeg',
+                  'image/jpg',
+                  'image/webp',
+                ]"
                 @drag-end="draggEnd"
                 @delete-gallery-item="deleteImagesItem"
               ></AdminImagesGalleryPreview>
@@ -197,29 +207,25 @@ const route = useRoute();
 const router = useRouter();
 const post = ref();
 
-const getPostData = async () => {
+const { data } = await useFetch(`/api/blog/${route.params.id}`);
 
-  const { data } = await useFetch(`/api/blog/${route.params.id}`);
-  console.log('data ', data)
-  post.value = data.value;
-  console.log('post.value ', post.value)
-  if (post.value && !post.value.mainImage) {
-    post.value.mainImage = {
-      file: {
-        url: '',
-        type: ''
-      },
-      index: 0
-    };
-    post.value.previewImage = post.value.images[0];
-  }
-
+post.value = data.value;
+if (post.value && !post.value.mainImage) {
+  post.value.mainImage = {
+    file: {
+      url: "",
+      type: "",
+    },
+    index: 0,
+  };
+  post.value.previewImage = post.value.images[0];
 }
-
 
 const contentItemGalleryExist = computed(() => {
   if (post.value) {
-    const exist = post.value.contentItems.find((item) => item.type === "gallery");
+    const exist = post.value.contentItems.find(
+      (item) => item.type === "gallery",
+    );
     if (exist) {
       return true;
     } else {
@@ -228,7 +234,6 @@ const contentItemGalleryExist = computed(() => {
   } else {
     return false;
   }
-
 });
 
 const addContentItem = async (type) => {
@@ -284,7 +289,9 @@ const uploadImages = async (array) => {
     console.log("filesUploadResponse0 ", filesUploadResponse0);
     if (filesUploadResponse0.success) {
       const file = filesUploadResponse0.data[0];
-      const preview = filesUploadResponse0.preview ? filesUploadResponse0.preview : false;
+      const preview = filesUploadResponse0.preview
+        ? filesUploadResponse0.preview
+        : false;
       console.log("file ", file);
       post.value.mainImage = {
         file: {
@@ -359,7 +366,7 @@ const deletePost = async () => {
 const deleteImagesItem = async (image) => {
   if (await isConfirmed()) {
     const findIndex = post.value.images.findIndex(
-      (el) => el.file.url === image.file.url
+      (el) => el.file.url === image.file.url,
     );
     post.value.images.splice(findIndex, 1);
     await adminStore.fetchData("blog", "put", post);
@@ -371,7 +378,7 @@ const deleteImagesItem = async (image) => {
 const deleteGalleryItem = async (image) => {
   if (await isConfirmed()) {
     const findIndex = post.value.gallery.findIndex(
-      (el) => el.file.url === image.file.url
+      (el) => el.file.url === image.file.url,
     );
     post.value.gallery.splice(findIndex, 1);
     await adminStore.fetchData("blog", "put", post);
@@ -382,9 +389,8 @@ const deleteGalleryItem = async (image) => {
 };
 
 onMounted(() => {
-    getPostData()
+  //getPostData()
 });
-
 </script>
 
 <style lang="scss" scoped>
