@@ -7,34 +7,14 @@
         </div> -->
     <div class="reservation-page__container">
       <h2>Reservations</h2>
-      <!-- <Form></Form> -->
-      <!-- <iframe
-        src="https://app.tableo.com/r/g9BzkED"
-        width="100%"
-        height=" 100%"
-        referrerpolicy="unsafe-url"
-        id="tableo-iframe"
-        v-if="reservationAvailable"
-      ></iframe> -->
       <iframe
         src="https://widget.thefork.com/909e5f74-34a8-4e9a-be75-6a834b42e5f4"
         allow="payment *"
         style="width: 100%; min-height:800px; border:none; overflow:scroll;"
-         v-if="reservationAvailable"
       ></iframe>
-      <div class="reservation-empty" v-else>
-        The reservation form is currently disabled
-      </div>
     </div>
   </div>
 </template>
-
-<script setup>
-import { useReservationStore } from "@/store/reservation";
-const reservationStore = useReservationStore();
-const reservationAvailable = reservationStore.reservationAvailable;
-
-</script>
 
     
 <style lang="scss" scoped>
@@ -57,7 +37,7 @@ const reservationAvailable = reservationStore.reservationAvailable;
   background: #fff;
 
   @include for-phone-only {
-    padding-top: 4rem;
+    padding-top: 5.5rem;
   }
 
   @include for-tablet-portrait-up {
@@ -89,7 +69,7 @@ const reservationAvailable = reservationStore.reservationAvailable;
     overflow: auto;
 
     @include for-phone-only {
-      padding-top: 4rem;
+      padding-top: 2rem;
       align-items: center;
       justify-content: center;
     }

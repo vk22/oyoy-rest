@@ -75,8 +75,8 @@
     <div class="header-c">
       <NuxtLink :to="{ path: linkOnLogo() }">
         <div class="logo">
-          <img src="/img/logo.svg" class="white" alt="" />
-          <img src="/img/logo-b.svg" class="black" alt="" />
+          <img src="/img/logo.svg" class="white" alt="OyOy Restaurant" />
+          <img src="/img/logo-b.svg" class="black" alt="OyOy Restaurant" />
         </div>
       </NuxtLink>
     </div>

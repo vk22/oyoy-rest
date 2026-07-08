@@ -5,6 +5,10 @@
 <script setup>
 import { onMounted, watch } from 'vue';
 
+definePageMeta({
+  layout: "reservation"
+});
+
 const consent = useCookie('user_cookies');
 
 onMounted(() => {

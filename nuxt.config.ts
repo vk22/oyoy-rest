@@ -11,6 +11,11 @@ export default defineNuxtConfig({
     // pageTransition: { name: 'page', mode: 'out-in' }
   },
 
+  routeRules: {
+    '/reservations': { prerender: true },
+    '/reservation-confirmed': { prerender: true },
+  },
+
   css: [
     '@/assets/scss/font.css',
     // '@/assets/scss/variables.scss'

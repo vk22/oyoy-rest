@@ -1,7 +1,7 @@
 <template>
 
     <div class="reservation-confirmed">
-      <div class="reservation-confirmed__container slideUp fade-in">
+      <div class="reservation-confirmed__container">
         <NuxtImg class="icon1 loop" src="/img/booking-icon.svg" />
         <h3>Reservation has been confirmed</h3>
         <p>We look forward to seeing you in our restaurant</p>

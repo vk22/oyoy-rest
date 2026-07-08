@@ -3,15 +3,9 @@
 </template>
 
 <script setup>
-import { onMounted, watch, computed } from 'vue';
-import { useMainStore } from '@/store/index'
-
-//// show after loading all data
-const mainStore = useMainStore()
-const dataReady = computed(() => mainStore.getDataReady)
-
-
-
+definePageMeta({
+  layout: "reservation"
+});
 
 useHead({
   title: 'OyOy Restaurant',
