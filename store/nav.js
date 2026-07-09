@@ -1,4 +1,5 @@
 import { defineStore } from 'pinia'
+import { fetchApiData } from './api'
 
 
 export const useNavigationStore = defineStore('nav', {
@@ -8,10 +9,7 @@ export const useNavigationStore = defineStore('nav', {
   }),
   actions: {
     async fetchData() {
-      const { data } = await useFetch('/api/nav')
-      if (data) {
-        this.items = data.value.data
-      }
+      this.items = await fetchApiData('/api/nav', {}, [])
     },
     toggleMenu() {
       this.mainMenulIsOpen = !this.mainMenulIsOpen

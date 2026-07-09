@@ -1,9 +1,21 @@
 import { Topslide } from "~~/server/models/topslide-model";
 
 export default defineEventHandler( async (event) => {
-    const item = await Topslide.find()
+  if (event.context.mongoUnavailable) {
     return {
-      data: item[0]
+      data: {}
     }
+  }
 
+  try {
+    const item = await Topslide.findOne()
+    return {
+      data: item ?? {}
+    }
+  } catch (error) {
+    console.error("Failed to load topslide", error);
+    return {
+      data: {}
+    }
+  }
 })

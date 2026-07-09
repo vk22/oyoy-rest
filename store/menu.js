@@ -1,4 +1,5 @@
 import { defineStore } from "pinia";
+import { fetchApiData } from "./api";
 
 export const useMenuStore = defineStore("menuStore", {
   state: () => {
@@ -10,28 +11,21 @@ export const useMenuStore = defineStore("menuStore", {
   actions: {
     async fetchData() {
 
-      const { data } = await useFetch("/api/menu", {
+      this.items = await fetchApiData("/api/menu", {
         method: "GET",
         params: {
           published: 1,
         },
-      });
-
-      if (data) {
-        this.items = data.value.data;
-      }
+      }, []);
     },
     async fetchDataPdf() {
 
-      const { data } = await useFetch("/api/menu-pdf", {
+      this.itemsPdf = await fetchApiData("/api/menu-pdf", {
         method: "GET",
         params: {
           published: 1,
         },
-      });
-      if (data) {
-        this.itemsPdf = data.value.data;
-      }
+      }, []);
     },
   },
   getters: {

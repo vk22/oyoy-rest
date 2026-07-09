@@ -1,9 +1,21 @@
 import { Chef } from "~~/server/models/chef-model";
 
 export default defineEventHandler( async (event) => {
-    const item = await Chef.find()
+  if (event.context.mongoUnavailable) {
     return {
-      data: item[0]
+      data: {}
     }
+  }
 
+  try {
+    const item = await Chef.findOne()
+    return {
+      data: item ?? {}
+    }
+  } catch (error) {
+    console.error("Failed to load chef", error);
+    return {
+      data: {}
+    }
+  }
 })

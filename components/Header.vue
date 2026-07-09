@@ -156,7 +156,7 @@ const routesForWhiteHeader = [
 ];
 
 const linkOnLogo = () => {
-  if (currentRoute.value.name.includes("blog")) {
+  if (String(currentRoute.value.name || "").includes("blog")) {
     return "/blog";
   } else {
     return "/";
@@ -166,7 +166,7 @@ const linkOnLogo = () => {
 /// main store
 const mainStore = useMainStore();
 const dataReady = computed(() => {
-  if (currentRoute.value.name.includes("blog")) {
+  if (String(currentRoute.value.name || "").includes("blog")) {
     return true;
   } else {
     return mainStore.getDataReady;
@@ -174,7 +174,7 @@ const dataReady = computed(() => {
 });
 /// reservation
 const reservationStore = useReservationStore();
-const reservationAvailable = reservationStore.reservationAvailable;
+const reservationAvailable = computed(() => reservationStore.reservationAvailable ?? true);
 const getFormModalStateToggle = () => {
   reservationStore.setFormModalState();
 };

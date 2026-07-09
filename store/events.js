@@ -1,4 +1,5 @@
 import { defineStore } from "pinia";
+import { fetchApiData } from "./api";
 // import { useCommentStore } from "./CommentStore";
 
 export const useEventStore = defineStore("EventStore", {
@@ -13,13 +14,12 @@ export const useEventStore = defineStore("EventStore", {
   },
   actions: {
     async fetchData() {
-      const { data } = await useFetch("/api/events", {
+      this.items = await fetchApiData("/api/events", {
         method: "GET",
         params: {
           published: 1,
         },
-      });
-      this.items = data.value.data;
+      }, []);
     },
     setModalState(data) {
       this.modalState.isOpen = !this.modalState.isOpen;

@@ -1,4 +1,5 @@
 import { defineStore } from 'pinia'
+import { fetchApiData } from './api'
 
 export const useChefStore = defineStore('chefStore', {
   state: () => ({
@@ -6,8 +7,7 @@ export const useChefStore = defineStore('chefStore', {
   }),
   actions: {
     async fetchData() {
-      const { data } = await useFetch('/api/chef')
-      this.data = data.value.data
+      this.data = await fetchApiData('/api/chef', {}, {})
     },
   },
   getters: {

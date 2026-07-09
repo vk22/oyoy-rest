@@ -17,7 +17,7 @@
   <slot />
 </template>
 <script lang="ts" setup>
-import { onMounted, watch, computed } from "vue";
+import { onMounted, computed } from "vue";
 import { useMainStore } from "@/store/index";
 import { useCompanyStore } from "@/store/company";
 import { useCustomGalleryStore } from "@/store/galleryCustom";
@@ -40,12 +40,18 @@ const dataReady = computed(() => mainStore.getDataReady);
 
 
 if (!dataReady.value) {
-  //console.time('fetchAllContent')
+  const results = await Promise.allSettled([
+    customGalleryStore.fetchData("top"),
+    companyStore.fetchData(),
+    navStore.fetchData(),
+    reservationStore.getReservationAvailableState(),
+  ]);
 
-  await customGalleryStore.fetchData("top");
-  await companyStore.fetchData();
-  await navStore.fetchData();
-  await reservationStore.getReservationAvailableState();
+  results.forEach((result) => {
+    if (result.status === "rejected") {
+      console.error("Default layout data fetch failed", result.reason);
+    }
+  });
 
   mainStore.setDataReady();
 }

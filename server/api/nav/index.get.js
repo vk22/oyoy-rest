@@ -12,10 +12,11 @@ const getItems = async () => {
 }
 
 const checkIfDataExist = async (data, itemsForCheck) => {
+  const items = await getItems();
+
   return Promise.all(
     data.map(async (el) => {
       if (itemsForCheck.indexOf(el.text) > -1) {
-        const items = await getItems();
         el.isActive = items[el.text] ? true : false;
       }
       return el
@@ -24,11 +25,25 @@ const checkIfDataExist = async (data, itemsForCheck) => {
 }
 
 export default defineEventHandler( async (event) => {
+  if (event.context.mongoUnavailable) {
+    return {
+      success: true,
+      data: []
+    }
+  }
+
+  try {
     const data = await Nav.find().sort({ order: 1 });
     const dataChecked = await checkIfDataExist(data, ['Events', 'Blog']);
-    // console.log('dataChecked ', dataChecked)
     return {
       success: true,
       data: dataChecked
     }
+  } catch (error) {
+    console.error("Failed to load nav", error);
+    return {
+      success: true,
+      data: []
+    }
+  }
 })

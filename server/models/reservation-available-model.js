@@ -1,7 +1,8 @@
 import { Schema, model } from "mongoose";
 const SchemaData = new Schema({
   isAvailable: {
-    type: Boolean
+    type: Boolean,
+    default: true
   }
 }, { 
   versionKey: false 

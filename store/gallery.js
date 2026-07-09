@@ -1,4 +1,5 @@
 import { defineStore } from "pinia";
+import { fetchApiItems } from "./api";
 // import { useCommentStore } from "./CommentStore";
 
 export const useGalleryStore = defineStore("galleryStore", {
@@ -13,8 +14,7 @@ export const useGalleryStore = defineStore("galleryStore", {
     },
     actions: {
         async fetchData() {
-          const { data } = await useFetch('/api/gallery')
-          this.items = data.value.items
+          this.items = await fetchApiItems('/api/gallery')
         },
         setModalState(data) {
             this.modalState.isOpen = !this.modalState.isOpen
@@ -29,8 +29,7 @@ export const useGalleryStore = defineStore("galleryStore", {
     getters: {
         getData: (state) => (name) => {
           const gallery = state.items.find(item => item.name === name);
-          if (!gallery) return;
-          return gallery.images
+          return gallery?.images ?? []
         },
         getModalState(state) {
             return state.modalState

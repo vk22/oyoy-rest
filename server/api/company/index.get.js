@@ -1,9 +1,21 @@
 import { Company } from "~~/server/models/company-model";
 
 export default defineEventHandler( async (event) => {
-    const company = await Company.find()
+  if (event.context.mongoUnavailable) {
     return {
-      data: company[0]
+      data: {}
     }
+  }
 
+  try {
+    const company = await Company.findOne()
+    return {
+      data: company ?? {}
+    }
+  } catch (error) {
+    console.error("Failed to load company", error);
+    return {
+      data: {}
+    }
+  }
 })

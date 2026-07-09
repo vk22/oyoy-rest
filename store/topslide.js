@@ -1,4 +1,5 @@
 import { defineStore } from 'pinia'
+import { fetchApiData } from './api'
 
 export const useTopslideStore = defineStore('topslide', {
   state: () => ({
@@ -6,8 +7,7 @@ export const useTopslideStore = defineStore('topslide', {
   }),
   actions: {
     async fetchData() {
-      const { data } = await useFetch('/api/topslide')
-      this.data = data.value.data
+      this.data = await fetchApiData('/api/topslide', {}, {})
     },
   },
   getters: {

@@ -1,4 +1,5 @@
 import { defineStore } from "pinia";
+import { fetchApiData } from "./api";
 // import { useCommentStore } from "./CommentStore";
 
 export const useBlogStore = defineStore("BlogStore", {
@@ -13,13 +14,12 @@ export const useBlogStore = defineStore("BlogStore", {
     },
     actions: {
         async fetchData() {
-          const { data } = await useFetch('/api/blog', {
+          this.items = await fetchApiData('/api/blog', {
             method: 'GET',
             params: {
                 published: 1
             }
-          })
-          this.items = data.value.data
+          }, [])
         },
         setModalState(data) {
             this.modalState.isOpen = !this.modalState.isOpen
@@ -35,8 +35,8 @@ export const useBlogStore = defineStore("BlogStore", {
             const items = state.items.map((item) => {
               item.date = useNuxtApp().$formatDate(item.date);
               if (!item.mainImage) {
-                item.mainImage = item.images[0];
-                item.previewImage = item.images[0];
+                item.mainImage = item.images?.[0];
+                item.previewImage = item.images?.[0];
               }
               return item
             });

@@ -1,4 +1,5 @@
 import { defineStore } from 'pinia'
+import { fetchApiItems } from './api'
 
 const TRANSITION_MS = 1000
 
@@ -18,8 +19,7 @@ export const useCustomGalleryStore = defineStore('customGalleryStore', {
 
   actions: {
     async fetchData(name) {
-      const { data } = await useFetch('/api/gallery')
-      const items = data.value?.items ?? []
+      const items = await fetchApiItems('/api/gallery')
       const entry = items.find(item => item.name === name)
 
       this.gallery = entry?.images ?? []

@@ -1,5 +1,6 @@
 import { defineStore } from 'pinia'
 import { useNavigationStore } from "./nav";
+import { fetchApiData } from "./api";
 
 export const useReservationStore = defineStore('reservation', {
   state: () => ({
@@ -23,10 +24,10 @@ export const useReservationStore = defineStore('reservation', {
   }),
   actions: {
     async getReservationAvailableState() {
-      const { data } = await useFetch("/api/reservation-available", {
+      const data = await fetchApiData("/api/reservation-available", {
         method: "GET"
-      });
-      this.reservationAvailable = data.value.data.isAvailable;
+      }, { isAvailable: true });
+      this.reservationAvailable = data.isAvailable ?? true;
     },
     async postData(values) {
       const { data } = await useFetch("/api/reservations", {
