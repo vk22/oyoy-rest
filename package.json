@@ -6,7 +6,7 @@
     "node": "24.x"
   },
   "scripts": {
-    "build": "NODE_OPTIONS=--max-old-space-size=8192 nuxt build",
+    "build": "nuxt build",
     "dev": "dotenv -e .env.local -- nuxt dev",
     "generate": "nuxt generate",
     "preview": "nuxt preview",
