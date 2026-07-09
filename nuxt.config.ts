@@ -87,7 +87,6 @@ export default defineNuxtConfig({
     inspect: false
   },
   nitro: {
-    plugins: ["~/server/plugins/mongodb.ts"],
     externals: {
       allowlist: ['bcrypt']
     },
