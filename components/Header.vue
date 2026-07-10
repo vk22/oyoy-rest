@@ -228,13 +228,35 @@ function smoothScrollTo(id) {
   // console.log('smoothScrollTo ', id)
   if (!id) return;
   const target = document.getElementById(id);
-  if (!target) return;
+  if (!target) return false;
   const yOffset = -75;
   const y = target.getBoundingClientRect().top + window.pageYOffset + yOffset;
   window.scrollTo({ top: y, behavior: "smooth" });
   setTimeout(() => {
     closeMenu();
   }, 500);
+  return true;
+}
+
+let hashScrollAttempts = 0;
+let hashScrollTimeout = null;
+function scrollToRouteHash() {
+  if (!route.hash) return;
+  const id = route.hash.substring(1);
+  hashScrollAttempts = 0;
+
+  const tryScroll = () => {
+    hashScrollAttempts += 1;
+    const scrolled = smoothScrollTo(id);
+    if (!scrolled && hashScrollAttempts < 20) {
+      hashScrollTimeout = setTimeout(tryScroll, 250);
+    }
+  };
+
+  if (hashScrollTimeout) {
+    clearTimeout(hashScrollTimeout);
+  }
+  hashScrollTimeout = setTimeout(tryScroll, 300);
 }
 
 onMounted(() => {
@@ -244,15 +266,14 @@ onMounted(() => {
     link.addEventListener("click", closeMenu);
   });
   // console.log('onMounted route.hash ', route.hash.substring(1))
+  if (dataReady.value) {
+    scrollToRouteHash();
+  }
 });
 
 watch(dataReady, (newValue) => {
   if (newValue) {
-    if (route.hash) {
-      setTimeout(() => {
-        smoothScrollTo(route.hash.substring(1));
-      }, 3000);
-    }
+    scrollToRouteHash();
   }
 });
 
