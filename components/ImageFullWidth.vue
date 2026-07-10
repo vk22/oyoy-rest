@@ -58,7 +58,7 @@ defineProps(["type","path", "title"]);
   }
 
   &__image {
-    filter: brightness(.9);
+    //filter: brightness(.9);
     height: 100%;
     left: 0;
     position: absolute;
@@ -67,7 +67,7 @@ defineProps(["type","path", "title"]);
     z-index: 0;
 
     img {
-      filter: grayscale(20%);
+      //filter: grayscale(20%);
     }
   }
 
