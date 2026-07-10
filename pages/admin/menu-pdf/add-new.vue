@@ -46,6 +46,7 @@
                 <p class="label">PDF file</p>
                 <AdminFileUploader
                   :type="'menu'"
+                  :uploadType="'client'"
                   :limit="1"
                   :allowedFormat="['application/pdf']"
                   @files-dropped="addFilePdf"
@@ -123,13 +124,11 @@ function addFilePreview(file) {
 async function uploadFilePdf() {
   if (menu.value.link) {
     let filesUploadResponse = await uploaderRefPdf.value.startUpload();
-    if (filesUploadResponse.success) {
-      const file = filesUploadResponse.data[0];
-      console.log('file ', file)
+    if (filesUploadResponse) {
       menu.value.link = { 
         file: {
-          url: file.url, 
-          type: file.type 
+          url: filesUploadResponse.url, 
+          type: filesUploadResponse.contentType 
         },
         index: 0
       }
