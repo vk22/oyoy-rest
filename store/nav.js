@@ -11,6 +11,9 @@ export const useNavigationStore = defineStore('nav', {
     async fetchData() {
       this.items = await fetchApiData('/api/nav', {}, [])
     },
+    setData(items) {
+      this.items = items ?? []
+    },
     toggleMenu() {
       this.mainMenulIsOpen = !this.mainMenulIsOpen
     },

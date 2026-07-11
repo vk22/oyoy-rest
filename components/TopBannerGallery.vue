@@ -110,7 +110,9 @@ watch(dataReady, (value) => {
   showItem.value = value
 }, { immediate: true })
 
-await topslideStore.fetchData()
+if (!topslideStore.data.title) {
+  await topslideStore.fetchData()
+}
 const topslideText = topslideStore.getData
 
 onMounted(() => {

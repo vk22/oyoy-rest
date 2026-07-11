@@ -1,6 +1,10 @@
 import mongoose from "mongoose";
 
-let connectionPromise;
+const mongoState = globalThis.__oyoyMongo ?? {
+  connectionPromise: undefined,
+  instanceId: crypto.randomUUID(),
+};
+globalThis.__oyoyMongo = mongoState;
 
 const publicGetApiPrefixes = [
   "/api/reservation-available",
@@ -16,13 +20,32 @@ const publicGetApiPrefixes = [
   "/api/gallery",
 ];
 
+const dbApiPrefixes = [
+  ...publicGetApiPrefixes,
+  "/api/blob-upload-url",
+  "/api/blog-migrate",
+  "/api/getusers",
+  "/api/image-storage",
+  "/api/login",
+  "/api/menu-sort",
+  "/api/parsecsv",
+  "/api/public/home",
+  "/api/reservations",
+  "/api/sitemap",
+  "/api/subscribers",
+  "/api/uploadgallery_old",
+];
+
 export default defineEventHandler(async (event) => {
   const pathname = getRequestURL(event).pathname;
   const isPublicGetApi =
     event.method === "GET" &&
     publicGetApiPrefixes.some((prefix) => pathname === prefix || pathname.startsWith(`${prefix}/`));
+  const needsMongo =
+    pathname.startsWith("/api/") &&
+    dbApiPrefixes.some((prefix) => pathname === prefix || pathname.startsWith(`${prefix}/`));
 
-  if (!pathname.startsWith("/api/")) {
+  if (!needsMongo) {
     return;
   }
 
@@ -34,14 +57,24 @@ export default defineEventHandler(async (event) => {
 
   try {
     if (mongoose.connection.readyState !== 2) {
-      connectionPromise = mongoose.connect(config.mongodbUri, {
+      console.log("MongoDB connection created", {
+        instanceId: mongoState.instanceId,
+        deployment: process.env.VERCEL_DEPLOYMENT_ID,
+        region: process.env.VERCEL_REGION,
+      });
+
+      mongoState.connectionPromise = mongoose.connect(config.mongodbUri, {
+        appName: "oyoy-rest-vercel",
+        maxPoolSize: 1,
+        minPoolSize: 0,
+        maxIdleTimeMS: 30_000,
         serverSelectionTimeoutMS: 5000,
       });
     }
 
-    await connectionPromise;
+    await mongoState.connectionPromise;
   } catch (error) {
-    connectionPromise = undefined;
+    mongoState.connectionPromise = undefined;
 
     if (isPublicGetApi) {
       event.context.mongoUnavailable = true;

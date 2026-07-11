@@ -27,6 +27,12 @@ export const useCustomGalleryStore = defineStore('customGalleryStore', {
       this.activeNext = null
       this.isAnimating = false
     },
+    setData(images) {
+      this.gallery = images ?? []
+      this.activeIndex = 0
+      this.activeNext = null
+      this.isAnimating = false
+    },
 
     next() {
       if (this.isAnimating || !this.gallery.length) return

@@ -9,6 +9,9 @@ export const useCompanyStore = defineStore('company', {
     async fetchData() {
       this.company = await fetchApiData('/api/company', {}, {})
     },
+    setData(company) {
+      this.company = company ?? {}
+    },
   },
   getters: {
     getCompany(state) {

@@ -16,6 +16,9 @@ export const useGalleryStore = defineStore("galleryStore", {
         async fetchData() {
           this.items = await fetchApiItems('/api/gallery')
         },
+        setData(items) {
+          this.items = items ?? []
+        },
         setModalState(data) {
             this.modalState.isOpen = !this.modalState.isOpen
             this.modalState.item = data.item

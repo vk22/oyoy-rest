@@ -21,6 +21,9 @@ export const useBlogStore = defineStore("BlogStore", {
             }
           }, [])
         },
+        setData(items) {
+            this.items = items ?? []
+        },
         setModalState(data) {
             this.modalState.isOpen = !this.modalState.isOpen
             this.modalState.item = this.items[data.index]

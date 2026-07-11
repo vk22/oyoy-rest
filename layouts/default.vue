@@ -24,12 +24,24 @@ import { useCustomGalleryStore } from "@/store/galleryCustom";
 import { useEventStore } from "@/store/events";
 import { useReservationStore } from "@/store/reservation";
 import { useNavigationStore } from "@/store/nav";
+import { useAboutStore } from "@/store/about";
+import { useChefStore } from "@/store/chef";
+import { useTopslideStore } from "@/store/topslide";
+import { useMenuStore } from "@/store/menu";
+import { useGalleryStore } from "@/store/gallery";
+import { useBlogStore } from "@/store/blog";
 
 const customGalleryStore = useCustomGalleryStore();
 const companyStore = useCompanyStore();
 const eventsStore = useEventStore();
 const reservationStore = useReservationStore();
 const navStore = useNavigationStore();
+const aboutStore = useAboutStore();
+const chefStore = useChefStore();
+const topslideStore = useTopslideStore();
+const menuStore = useMenuStore();
+const galleryStore = useGalleryStore();
+const blogStore = useBlogStore();
 const modalsIsOpen = computed(
   () => eventsStore.getModalState.isOpen || reservationStore.getFormModalState,
 );
@@ -40,18 +52,25 @@ const dataReady = computed(() => mainStore.getDataReady);
 
 
 if (!dataReady.value) {
-  const results = await Promise.allSettled([
-    customGalleryStore.fetchData("top"),
-    companyStore.fetchData(),
-    navStore.fetchData(),
-    reservationStore.getReservationAvailableState(),
-  ]);
+  const { data, error } = await useFetch("/api/public/home");
 
-  results.forEach((result) => {
-    if (result.status === "rejected") {
-      console.error("Default layout data fetch failed", result.reason);
-    }
-  });
+  if (error.value) {
+    console.error("Default layout data fetch failed", error.value);
+  }
+
+  const homeData = data.value?.data ?? {};
+  customGalleryStore.setData(homeData.topGallery);
+  companyStore.setData(homeData.company);
+  aboutStore.setData(homeData.about);
+  chefStore.setData(homeData.chef);
+  topslideStore.setData(homeData.topslide);
+  navStore.setData(homeData.nav);
+  galleryStore.setData(homeData.gallery);
+  menuStore.setData(homeData.menu);
+  menuStore.setDataPdf(homeData.menuPdf);
+  eventsStore.setData(homeData.events);
+  blogStore.setData(homeData.blog);
+  reservationStore.setReservationAvailableState(homeData.reservationAvailable);
 
   mainStore.setDataReady();
 }

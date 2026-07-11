@@ -9,6 +9,9 @@ export const useAboutStore = defineStore('aboutStore', {
     async fetchData() {
       this.data = await fetchApiData('/api/about', {}, {})
     },
+    setData(data) {
+      this.data = data ?? {}
+    },
   },
   getters: {
     getData(state) {

@@ -27,6 +27,12 @@ export const useMenuStore = defineStore("menuStore", {
         },
       }, []);
     },
+    setData(items) {
+      this.items = items ?? [];
+    },
+    setDataPdf(items) {
+      this.itemsPdf = items ?? [];
+    },
   },
   getters: {
     getItems: (state) => (category) => {

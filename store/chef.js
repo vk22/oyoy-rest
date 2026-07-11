@@ -9,6 +9,9 @@ export const useChefStore = defineStore('chefStore', {
     async fetchData() {
       this.data = await fetchApiData('/api/chef', {}, {})
     },
+    setData(data) {
+      this.data = data ?? {}
+    },
   },
   getters: {
     getData(state) {

@@ -29,6 +29,9 @@ export const useReservationStore = defineStore('reservation', {
       }, { isAvailable: true });
       this.reservationAvailable = data.isAvailable ?? true;
     },
+    setReservationAvailableState(data) {
+      this.reservationAvailable = data?.isAvailable ?? true;
+    },
     async postData(values) {
       const { data } = await useFetch("/api/reservations", {
         method: "POST",
