@@ -18,6 +18,7 @@ const publicGetApiPrefixes = [
   "/api/blog",
   "/api/events",
   "/api/gallery",
+  "/api/public/mobile-home",
 ];
 
 const dbApiPrefixes = [
@@ -30,6 +31,7 @@ const dbApiPrefixes = [
   "/api/menu-sort",
   "/api/parsecsv",
   "/api/public/home",
+  "/api/public/mobile-home",
   "/api/reservations",
   "/api/sitemap",
   "/api/subscribers",
