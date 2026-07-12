@@ -75,6 +75,7 @@ if (!dataReady.value) {
   }
 
   const homeData = data.value?.data ?? {};
+  console.log('homeData.company ', homeData.company)
   customGalleryStore.setData(homeData.topGallery);
   companyStore.setData(homeData.company);
   aboutStore.setData(homeData.about);

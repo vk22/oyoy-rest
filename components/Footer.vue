@@ -157,7 +157,14 @@ footer {
 
   .left,
   .right {
-    width: 300px;
+    
+      @include for-phone-only {
+        width: 100%;
+      }
+
+      @include for-tablet-portrait-up {
+        width: 300px;
+      }
   }
 
   .left {

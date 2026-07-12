@@ -38,7 +38,7 @@ export default defineEventHandler(async (event) => {
   try {
     const [company, galleryItems, reservationAvailable, menuPdf] =
       await Promise.all([
-        Company.findOne().select("address phone map").lean(),
+        Company.findOne().select("address phone map email").lean(),
         Gallery.find({ name: { $in: ["main", "top"] } })
           .select("name images.title images.file images.index")
           .lean(),
