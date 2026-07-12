@@ -42,6 +42,7 @@ const topslideStore = useTopslideStore();
 const menuStore = useMenuStore();
 const galleryStore = useGalleryStore();
 const blogStore = useBlogStore();
+const route = useRoute();
 const modalsIsOpen = computed(
   () => eventsStore.getModalState.isOpen || reservationStore.getFormModalState,
 );
@@ -50,9 +51,21 @@ const mainStore = useMainStore();
 const dataReady = computed(() => mainStore.getDataReady);
 //console.log('Layout dataReady ', dataReady.value)
 
+const requestHeaders = useRequestHeaders(["user-agent"]);
+const userAgent = process.server
+  ? requestHeaders["user-agent"] || ""
+  : navigator.userAgent;
+const isMobileHomeRequest =
+  route.name === "index" &&
+  /Android|webOS|iPhone|iPod|BlackBerry|IEMobile|Opera Mini|Mobile/i.test(
+    userAgent,
+  );
+const publicHomeEndpoint = isMobileHomeRequest
+  ? "/api/public/mobile-home"
+  : "/api/public/home";
 
 if (!dataReady.value) {
-  const { data, error } = await useFetch("/api/public/home");
+  const { data, error } = await useFetch(publicHomeEndpoint);
 
   if (error.value) {
     console.error("Default layout data fetch failed", error.value);
