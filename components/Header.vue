@@ -383,19 +383,19 @@ watch(dataReady, (newValue) => {
     filter: none;
     will-change: auto;
     img {
-      width: 225px;
+      width: 250px;
 
       @include for-phone-only {
-        width: 225px;
+        width: 250px;
       }
       @include for-tablet-portrait-up {
-        width: 225px;
+        width: 250px;
       }
       @include for-desktop-up {
-        width: 225px;
+        width: 250px;
       }
       @include for-700-height-only {
-        width: 225px;
+        width: 250px;
       }
     }
     .black {

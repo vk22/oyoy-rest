@@ -3,31 +3,50 @@
     <div class="left">
       <div>
         <div class="address">
-          <div>94 Triq Spinola St, <br>Saint Julian's, <br>Malta</div>       
+          <div>94 Triq Spinola St, <br />Saint Julian's, <br />Malta</div>
         </div>
         <div class="map">
-            <v-icon icon="mdi-map-marker"></v-icon>
-            <a class="btn-link" href="https://www.google.com/maps/place/OyOy+Bar/@35.919872,14.492764,18z/data=!4m6!3m5!1s0x130e45c8ce17dbff:0xdaa73ebf3a91c9bd!8m2!3d35.9196351!4d14.4926563!16s%2Fg%2F11ryrfcfkx?hl=ru-RU&entry=ttu" target="_blank">See on map</a>
-        </div>  
+          <v-icon icon="mdi-map-marker"></v-icon>
+          <a
+            class="btn-link"
+            href="https://www.google.com/maps/place/OyOy+Bar/@35.919872,14.492764,18z/data=!4m6!3m5!1s0x130e45c8ce17dbff:0xdaa73ebf3a91c9bd!8m2!3d35.9196351!4d14.4926563!16s%2Fg%2F11ryrfcfkx?hl=ru-RU&entry=ttu"
+            target="_blank"
+            >See on map</a
+          >
+        </div>
       </div>
       <div>
-        <div class="phone"><a :href="'tel:'+company.phone"><v-icon icon="mdi-phone"></v-icon> <span>{{ company.phone }}</span></a></div>
-        <div class="mail"><v-icon icon="mdi-email"></v-icon> <a :href="'mailto:'+company.email">{{ company.email }}</a></div>
+        <div class="phone">
+          <a :href="'tel:' + company.phone"
+            ><v-icon icon="mdi-phone"></v-icon>
+            <span>{{ company.phone }}</span></a
+          >
+        </div>
+        <div class="mail">
+          <v-icon icon="mdi-email"></v-icon>
+          <a :href="'mailto:' + company.email">{{ company.email }}</a>
+        </div>
         <div class="map"></div>
       </div>
-
     </div>
     <div class="center">
       <div class="logo">
-          <img src="/img/logo-b.svg" alt="" />
+        <img src="/img/logo-b.svg" alt="" />
       </div>
       <div class="social">
-        <a class="social-icon icon-inst" href="https://www.instagram.com/oyoyrestaurant?igsh=M3h3NDcyMml6MGp2" target="_blank"></a>
-        <a class="social-icon icon-fb" href="https://www.facebook.com/oyoy.mlt" target="_blank"></a>
+        <a
+          class="social-icon icon-inst"
+          href="https://www.instagram.com/oyoyrestaurant?igsh=M3h3NDcyMml6MGp2"
+          target="_blank"
+        ></a>
+        <a
+          class="social-icon icon-fb"
+          href="https://www.facebook.com/oyoy.mlt"
+          target="_blank"
+        ></a>
         <div class="social-icon icon-spotify"></div>
         <div class="social-icon icon-tiktok"></div>
       </div>
-
     </div>
     <div class="right">
       <div class="nav" v-if="navigation.length">
@@ -44,33 +63,41 @@
             </a> -->
             <span v-if="item">
               <NuxtLink
-              v-if="item.isHomePageAnchor"
-              class="menu-item"
-              :to="{ path: '/', hash: item.href}"
-            >
-              {{ item.text }}
-            </NuxtLink>
-            <NuxtLink
-              v-else
-              class="menu-item"
-              :to="{ path: '/'+item.href }"
-            >
-              {{ item.text }}
-            </NuxtLink>
-            </span>  
+                v-if="item.isHomePageAnchor"
+                class="menu-item"
+                :to="{ path: '/', hash: item.href }"
+              >
+                {{ item.text }}
+              </NuxtLink>
+              <NuxtLink
+                v-else
+                class="menu-item"
+                :to="{ path: '/' + item.href }"
+              >
+                {{ item.text }}
+              </NuxtLink>
+            </span>
           </li>
         </ul>
         <ul>
           <li>
-            <div><router-link to="/privacy" target="_blank">Privacy Policy</router-link></div>
-            <div><router-link to="/terms" target="_blank">Terms & Conditions</router-link></div>
+            <div>
+              <router-link to="/privacy" target="_blank"
+                >Privacy Policy</router-link
+              >
+            </div>
+            <div>
+              <router-link to="/terms" target="_blank"
+                >Terms & Conditions</router-link
+              >
+            </div>
           </li>
         </ul>
       </div>
     </div>
   </footer>
 </template>
-  
+
 <script setup>
 import { useNavigationStore } from "@/store/nav";
 import { useCompanyStore } from "@/store/company";
@@ -79,7 +106,7 @@ const navStore = useNavigationStore();
 const navigation = computed(() => navStore.getItems);
 //// getcompany
 const companyStore = useCompanyStore();
-const company = companyStore.getCompany
+const company = companyStore.getCompany;
 
 ////
 function manualSmoothScroll(event) {
@@ -96,7 +123,6 @@ function manualSmoothScroll(event) {
   setTimeout(() => {
     toggleMenu();
   }, 500);
-
 }
 
 onMounted(() => {
@@ -104,26 +130,32 @@ onMounted(() => {
     link.addEventListener("click", manualSmoothScroll);
   });
 });
-
-
 </script>
 
 <style lang="scss" scoped>
-
 footer {
-  background-color: #EBEDF0;
-  padding: 2rem;
+  background-color: #ebedf0;
   display: flex;
   justify-content: space-between;
   color: #393939;
-  font-size: .9rem;
+  font-size: 0.9rem;
+
+  @include for-phone-only {
+    padding: 2rem;
+    padding-bottom: 4rem;
+  }
+
+  @include for-tablet-portrait-up {
+    padding: 2rem;
+  }
 
   a {
     text-decoration: none;
     color: #393939;
   }
 
-  .left, .right {
+  .left,
+  .right {
     width: 300px;
   }
 
@@ -135,15 +167,17 @@ footer {
     .address {
       font-size: 1.1rem;
       color: #565656;
-      margin-bottom: .5rem;
+      margin-bottom: 0.5rem;
     }
 
-    .phone, .mail, .map{
+    .phone,
+    .mail,
+    .map {
       line-height: 1.75rem;
       display: flex;
       align-items: center;
-      font-size: .9rem;
-     
+      font-size: 0.9rem;
+
       i {
         font-size: 20px;
         margin-right: 0.5rem;
@@ -158,7 +192,7 @@ footer {
 
   .logo {
     margin-bottom: 1.5rem;
-    
+
     @include for-phone-only {
       width: 100px;
     }
@@ -177,22 +211,20 @@ footer {
       background-repeat: no-repeat;
       width: 24px;
       height: 24px;
-      margin: .5rem;
+      margin: 0.5rem;
     }
-    .icon-inst{
-      background-image: url('/img/icon-inst-b.svg');
+    .icon-inst {
+      background-image: url("/img/icon-inst-b.svg");
     }
-    .icon-fb{
-      background-image: url('/img/icon-fb-b.svg');
+    .icon-fb {
+      background-image: url("/img/icon-fb-b.svg");
     }
-    .icon-spotify{
-      background-image: url('/img/icon-spotify.svg');
+    .icon-spotify {
+      background-image: url("/img/icon-spotify.svg");
     }
-    .icon-tiktok{
-      background-image: url('/img/icon-tiktok.svg');
+    .icon-tiktok {
+      background-image: url("/img/icon-tiktok.svg");
     }
-
-
   }
 
   .right {
@@ -222,5 +254,4 @@ footer {
     }
   }
 }
-
 </style>

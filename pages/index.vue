@@ -1,4 +1,6 @@
 <template>
+    <MobileHome v-if="isMobile !== false"></MobileHome>
+    <div v-if="isMobile === false" class="desktop-home">
     <TopBannerGallery></TopBannerGallery>
     <section class="page-content" v-show="true">
       <Awards :title="'Awards'"></Awards>
@@ -31,17 +33,35 @@
       <EventsIndex></EventsIndex>
       <BlogIndex></BlogIndex>
     </section>
+    
+    </div>
     <Footer></Footer>
 </template>
 
 <script setup>
-import { onMounted, watch, computed } from 'vue';
+import { onBeforeUnmount, onMounted, ref, computed } from 'vue';
 import { useMainStore } from '@/store/index'
 import { useNavigationStore } from "@/store/nav";
 
 //// show after loading all data
 const mainStore = useMainStore()
 const dataReady = computed(() => mainStore.getDataReady)
+const isMobile = ref(true)
+let mediaQuery
+
+const updateViewportMode = () => {
+  isMobile.value = mediaQuery.matches
+}
+
+onMounted(() => {
+  mediaQuery = window.matchMedia("(max-width: 599px)")
+  updateViewportMode()
+  mediaQuery.addEventListener("change", updateViewportMode)
+})
+
+onBeforeUnmount(() => {
+  mediaQuery?.removeEventListener("change", updateViewportMode)
+})
 
 /// Check id sections is active
 const navigationStore = useNavigationStore();
@@ -90,4 +110,10 @@ useSeoMeta({
 
 </script>
 
-<style lang="scss"></style>
+<style lang="scss">
+.desktop-home {
+  @include for-phone-only {
+    display: none;
+  }
+}
+</style>

@@ -7,6 +7,12 @@
             <h1>{{ topslideText.title }}</h1>
           </div>
           <div class="medium">{{ topslideText.subtitle }}</div>
+          <!-- <a
+            class="btn link-to-menu"
+            :href="primaryMenuLink"
+          >
+            View Menu
+          </a> -->
         </div>
       </div>
       <div class="nav fadeIn-4">
@@ -53,106 +59,134 @@
 </template>
 
 <script setup>
-import { ref, computed, watch, onMounted, onUnmounted } from 'vue'
-import { storeToRefs } from 'pinia'
-import { useMainStore } from '@/store/index'
-import { useCustomGalleryStore } from '@/store/galleryCustom'
-import { useTopslideStore } from '@/store/topslide'
+import { ref, computed, watch, onMounted, onUnmounted } from "vue";
+import { storeToRefs } from "pinia";
+import { useMainStore } from "@/store/index";
+import { useMenuStore } from "@/store/menu";
+import { useCustomGalleryStore } from "@/store/galleryCustom";
+import { useTopslideStore } from "@/store/topslide";
 
-const mainStore = useMainStore()
-const galleryStore = useCustomGalleryStore()
-const topslideStore = useTopslideStore()
+const mainStore = useMainStore();
+const galleryStore = useCustomGalleryStore();
+const topslideStore = useTopslideStore();
+const menuStore = useMenuStore();
 
-const { activeIndex, activeNext, isAnimating, gallery, dir } = storeToRefs(galleryStore)
-const dataReady = computed(() => mainStore.getDataReady)
+const { activeIndex, activeNext, isAnimating, gallery, dir } =
+  storeToRefs(galleryStore);
+const dataReady = computed(() => mainStore.getDataReady);
 
-const loadedImages = ref({})
-const allImagesLoaded = ref(false)
-const galleryIsActive = ref(false)
-const intervalId = ref(null)
+const loadedImages = ref({});
+const allImagesLoaded = ref(false);
+const galleryIsActive = ref(false);
+const intervalId = ref(null);
 
-const showItem = ref(false)
+const showItem = ref(false);
+
+const menuLinks = computed(() => {
+  const links = menuStore.itemsPdf
+    .filter((item) => item?.published !== false && item?.link?.file?.url)
+    .map((item) => ({
+      label: item.category === "drinks" ? "Drinks & Wine" : item.title || "Food Menu",
+      href: item.link.file.url,
+      category: item.category,
+    }));
+
+  if (links.length) return links;
+
+  return [
+    { label: "Food Menu", href: "/menu/main-menu.pdf", category: "food" },
+    { label: "Wine List", href: "/menu/wine-list.pdf", category: "drinks" },
+  ];
+});
+
+const primaryMenuLink = computed(() => {
+  return menuLinks.value.find((item) => item.category === "food")?.href || menuLinks.value[0].href;
+});
 
 const startGallery = (time = 6000) => {
-  stopGallery()
+  stopGallery();
   intervalId.value = setInterval(() => {
-    galleryStore.next()
-  }, time)
-}
+    galleryStore.next();
+  }, time);
+};
 
 const stopGallery = () => {
   if (intervalId.value) {
-    clearInterval(intervalId.value)
-    intervalId.value = null
+    clearInterval(intervalId.value);
+    intervalId.value = null;
   }
-}
+};
 
 const goToSlide = (index) => {
-  stopGallery()
-  galleryStore.goTo(index)
-  startGallery()
-}
+  stopGallery();
+  galleryStore.goTo(index);
+  startGallery();
+};
 
 const readyToGo = () => {
-  galleryIsActive.value = true
-  startGallery()
-}
+  galleryIsActive.value = true;
+  startGallery();
+};
 
 const handleVisibilityChange = () => {
   if (document.hidden) {
-    stopGallery()
+    stopGallery();
   } else if (allImagesLoaded.value) {
-    startGallery()
+    startGallery();
   }
-}
+};
 
-watch(dataReady, (value) => {
-  showItem.value = value
-}, { immediate: true })
+watch(
+  dataReady,
+  (value) => {
+    showItem.value = value;
+  },
+  { immediate: true },
+);
 
 if (!topslideStore.data.title) {
-  await topslideStore.fetchData()
+  await topslideStore.fetchData();
 }
-const topslideText = topslideStore.getData
+const topslideText = topslideStore.getData;
 
 onMounted(() => {
-  if (!process.client || !gallery.value.length) return
+  if (!process.client || !gallery.value.length) return;
 
-  let loadedCount = 0
+  let loadedCount = 0;
 
   gallery.value.forEach((item) => {
-    const url = item.file.url
-    const img = new Image()
+    const url = item.file.url;
+    const img = new Image();
 
     img.onload = () => {
-      loadedImages.value[url] = true
-      loadedCount++
+      loadedImages.value[url] = true;
+      loadedCount++;
 
       if (loadedCount === gallery.value.length) {
-        allImagesLoaded.value = true
-        readyToGo()
+        allImagesLoaded.value = true;
+        readyToGo();
       }
-    }
+    };
 
     img.onerror = () => {
-      loadedCount++
+      loadedCount++;
 
       if (loadedCount === gallery.value.length) {
-        allImagesLoaded.value = true
-        readyToGo()
+        allImagesLoaded.value = true;
+        readyToGo();
       }
-    }
+    };
 
-    img.src = url
-  })
+    img.src = url;
+  });
 
-  document.addEventListener('visibilitychange', handleVisibilityChange)
-})
+  document.addEventListener("visibilitychange", handleVisibilityChange);
+});
 
 onUnmounted(() => {
-  stopGallery()
-  document.removeEventListener('visibilitychange', handleVisibilityChange)
-})
+  stopGallery();
+  document.removeEventListener("visibilitychange", handleVisibilityChange);
+});
 </script>
 
 <style lang="scss" scoped>
@@ -256,7 +290,6 @@ onUnmounted(() => {
 
       .big {
         padding: 1rem 0 1.35rem;
-        margin-bottom: 1.5rem;
         text-shadow: 1px 1px 10px #0000003f;
 
         h1 {
@@ -327,7 +360,8 @@ onUnmounted(() => {
         // }
       }
 
-      div {
+      .link-to-menu {
+        margin: 2rem 0 0rem;
       }
     }
 
