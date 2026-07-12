@@ -1,6 +1,6 @@
 <template>
-    <MobileHome v-if="isMobile !== false"></MobileHome>
-    <div v-if="isMobile === false" class="desktop-home">
+    <MobileHome v-if="isMobile"></MobileHome>
+    <div v-else class="desktop-home">
     <TopBannerGallery></TopBannerGallery>
     <section class="page-content" v-show="true">
       <Awards :title="'Awards'"></Awards>
@@ -42,11 +42,18 @@
 import { onBeforeUnmount, onMounted, ref, computed } from 'vue';
 import { useMainStore } from '@/store/index'
 import { useNavigationStore } from "@/store/nav";
+import { isMobileUserAgent } from "@/utils/device";
 
 //// show after loading all data
 const mainStore = useMainStore()
 const dataReady = computed(() => mainStore.getDataReady)
-const isMobile = ref(true)
+const requestHeaders = process.server ? useRequestHeaders(["user-agent"]) : {};
+const initialViewportMode = useState("initialViewportMode", () => ({
+  isMobile: process.server
+    ? isMobileUserAgent(requestHeaders["user-agent"] || "")
+    : true,
+}));
+const isMobile = ref(initialViewportMode.value.isMobile)
 let mediaQuery
 
 const updateViewportMode = () => {

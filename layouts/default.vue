@@ -30,6 +30,7 @@ import { useTopslideStore } from "@/store/topslide";
 import { useMenuStore } from "@/store/menu";
 import { useGalleryStore } from "@/store/gallery";
 import { useBlogStore } from "@/store/blog";
+import { isMobileUserAgent } from "@/utils/device";
 
 const customGalleryStore = useCustomGalleryStore();
 const companyStore = useCompanyStore();
@@ -55,11 +56,13 @@ const requestHeaders = useRequestHeaders(["user-agent"]);
 const userAgent = process.server
   ? requestHeaders["user-agent"] || ""
   : navigator.userAgent;
+const mobileUserAgent = isMobileUserAgent(userAgent);
+const initialViewportMode = useState("initialViewportMode", () => ({
+  isMobile: mobileUserAgent,
+}));
+initialViewportMode.value.isMobile = mobileUserAgent;
 const isMobileHomeRequest =
-  route.name === "index" &&
-  /Android|webOS|iPhone|iPod|BlackBerry|IEMobile|Opera Mini|Mobile/i.test(
-    userAgent,
-  );
+  route.name === "index" && mobileUserAgent;
 const publicHomeEndpoint = isMobileHomeRequest
   ? "/api/public/mobile-home"
   : "/api/public/home";
