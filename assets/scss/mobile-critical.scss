@@ -1,0 +1,27 @@
+@media (max-width: 599px) {
+  .mobile-home__sticky {
+    position: fixed;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    z-index: 900;
+    box-sizing: border-box;
+    padding: 1rem 1rem;
+    backdrop-filter: blur(12px);
+  }
+
+  .mobile-home__sticky a {
+    width: 100%;
+    min-height: 48px;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 40px;
+    font-weight: 700;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    background: #b3a369;
+    color: #111 !important;
+    text-decoration: none;
+  }
+}

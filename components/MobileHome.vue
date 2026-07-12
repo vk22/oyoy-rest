@@ -19,7 +19,7 @@
           src="/img/logo.svg"
           alt="OyOy Restaurant"
         /> -->
-        <div class="mobile-home__text-animation mobile-home__text-animation--fade-in-up" style="--delay: 0.2s">
+        <div class="mobile-home__text-animation mobile-home__text-animation--fade-in-up" style="--delay: 0.5s">
           <div class="out">
             <div class="in">
               <p class="mobile-home__intro">
@@ -28,7 +28,7 @@
             </div>
           </div>
         </div>
-        <div class="mobile-home__text-animation mobile-home__text-animation--fade-in-up" style="--delay: 0.45s">
+        <div class="mobile-home__text-animation mobile-home__text-animation--fade-in-up" style="--delay: 0.95s">
           <div class="out">
             <div class="in">
               <div class="mobile-home__actions">
@@ -241,9 +241,21 @@ const galleryModalInitialSlide = ref(0);
 const heroContentIsAnimatedIn = ref(false);
 
 onMounted(() => {
-  requestAnimationFrame(() => {
-    heroContentIsAnimatedIn.value = true;
-  });
+  const runHeroAnimation = () => {
+    requestAnimationFrame(() => {
+      heroContentIsAnimatedIn.value = true;
+    });
+  };
+
+  if (!process.client || !document.fonts?.load) {
+    runHeroAnimation();
+    return;
+  }
+
+  document.fonts
+    .load("normal 3.75rem Melodrama")
+    .then(runHeroAnimation)
+    .catch(runHeroAnimation);
 });
 
 const openGallery = (index) => {
@@ -268,9 +280,9 @@ onBeforeUnmount(() => {
 });
 </script>
 
-<style lang="scss" scoped>
+<style lang="scss" >
 .mobile-home {
-  display: none;
+
 
   @include for-phone-only {
     display: block;
@@ -358,19 +370,21 @@ onBeforeUnmount(() => {
   }
 
   .is-animated &__text-animation--fade-in-up {
-    .out {
-      transform: translateY(-100%);
+    .out,
+    .in {
+      transform: none;
     }
 
     .in {
-      transform: translateY(100%) translateY(30px);
+      opacity: 0;
     }
   }
 
   .is-animated_in &__text-animation--fade-in-up {
-    .out,
     .in {
-      transform: none;
+      animation: fadeIn 1s;
+      animation-delay: var(--delay, 0s);
+      animation-fill-mode: forwards;
     }
   }
 
@@ -659,7 +673,8 @@ onBeforeUnmount(() => {
     right: 0;
     bottom: 0;
     z-index: 900;
-    padding: 0.75rem 1rem calc(0.75rem + env(safe-area-inset-bottom));
+    box-sizing: border-box;
+    padding: 1rem 1rem;
     //background: rgba(17, 17, 17, 0.88);
     backdrop-filter: blur(12px);
 
@@ -671,7 +686,7 @@ onBeforeUnmount(() => {
       align-items: center;
       justify-content: center;
       border-radius: 40px;
-      font-size: 0.82rem;
+      //font-size: 0.82rem;
       font-weight: 700;
       letter-spacing: 0.08em;
       text-transform: uppercase;

@@ -2,6 +2,17 @@
 import vuetify, { transformAssetUrls } from 'vite-plugin-vuetify'
 export default defineNuxtConfig({
   app: {
+    head: {
+      link: [
+        {
+          rel: 'preload',
+          href: '/fonts/Melodrama-Regular.woff2',
+          as: 'font',
+          type: 'font/woff2',
+          crossorigin: '',
+        },
+      ],
+    },
     // head: {
     //   title: 'OyOy Restaurant',
     //   charset: 'utf-8',
@@ -21,7 +32,7 @@ export default defineNuxtConfig({
     // '@/assets/scss/variables.scss'
   ],
 
-  devtools: { enabled: true },
+  devtools: { enabled: false },
 
   build: {
     transpile: ['vuetify', '@vuepic/vue-datepicker'],

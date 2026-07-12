@@ -142,7 +142,8 @@ footer {
 
   @include for-phone-only {
     padding: 2rem;
-    padding-bottom: 4rem;
+    padding-bottom: 7rem;
+    flex-direction: column;
   }
 
   @include for-tablet-portrait-up {
@@ -160,14 +161,35 @@ footer {
   }
 
   .left {
+    @include for-phone-only {
+      display: flex;
+      flex-direction: column;
+      text-align: center;
+    }
+
+    @include for-tablet-portrait-up {
+      text-align: left;
+    }
     & > div {
       margin-bottom: 1.5rem;
+
+      @include for-phone-only {
+        display: flex;
+        flex-direction: column;
+        text-align: center;
+        justify-content: center;
+        align-items: center;
+      }
+
+      @include for-tablet-portrait-up {
+        text-align: left;
+      }
     }
 
     .address {
       font-size: 1.1rem;
       color: #565656;
-      margin-bottom: 0.5rem;
+      margin-bottom: 1.5rem;
     }
 
     .phone,
@@ -188,13 +210,23 @@ footer {
         color: #393939;
       }
     }
+
+    .phone {
+      @include for-phone-only {
+        margin-bottom: 1.5rem;
+      }
+      @include for-tablet-portrait-up {
+       margin-bottom: 0.25rem;
+      }
+    }
   }
 
   .logo {
     margin-bottom: 1.5rem;
 
     @include for-phone-only {
-      width: 100px;
+      width: 140px;
+      margin-top: 1.5rem;
     }
 
     @include for-tablet-portrait-up {
@@ -251,6 +283,16 @@ footer {
           }
         }
       }
+    }
+  }
+
+  .center {
+    @include for-phone-only {
+      display: flex;
+      flex-direction: column;
+      text-align: center;
+      justify-content: center;
+      align-items: center;
     }
   }
 }

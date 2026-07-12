@@ -16,7 +16,7 @@
   z-index: 999;
   top: 0;
   left: 0;
-  width: 100%;
+  width: 100vw;
   min-height: 84px;
   padding: 1.25rem 2rem;
   display: flex;
@@ -40,18 +40,17 @@
 
   &__close {
     position: absolute;
-    right: 2rem;
-    top: 50%;
-    width: 42px;
-    height: 42px;
-    transform: translateY(-50%);
+    right: .5rem;
+    top: 1rem;
+    width: 32px;
+    height: 32px;
     display: flex;
     align-items: center;
     justify-content: center;
 
     span {
       position: absolute;
-      width: 38px;
+      width: 28px;
       height: 1.5px;
       background: #111;
       transform-origin: center;
