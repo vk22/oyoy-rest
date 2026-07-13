@@ -410,6 +410,13 @@ ul {
   }
 }
 
+.fadeIn {
+  opacity: 0;
+  animation: fadeInStart 1.25s;
+  animation-delay: 0.25s;
+  animation-fill-mode: forwards;
+}
+
 .fadeIn-0 {
   opacity: 0;
   animation: fadeIn 1s;

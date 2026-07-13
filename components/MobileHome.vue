@@ -3,6 +3,7 @@
     <section class="mobile-home__hero">
       <div class="mobile-home__hero-media">
         <img
+          class="fadeIn"
           v-if="heroImage"
           :src="heroImage"
           alt="OyOy Restaurant"
@@ -11,15 +12,15 @@
         />
       </div>
       <div
-        class="mobile-home__hero-content is-animated"
-        :class="{ 'is-animated_in': heroContentIsAnimatedIn }"
+        class="mobile-home__hero-content"
+        
       >
         <!-- <img
           class="mobile-home__logo"
           src="/img/logo.svg"
           alt="OyOy Restaurant"
         /> -->
-        <div class="mobile-home__text-animation mobile-home__text-animation--fade-in-up" style="--delay: 0.5s">
+        <div class="mobile-home__text-animation fadeIn-2">
           <div class="out">
             <div class="in">
               <p class="mobile-home__intro">
@@ -28,7 +29,7 @@
             </div>
           </div>
         </div>
-        <div class="mobile-home__text-animation mobile-home__text-animation--fade-in-up" style="--delay: 0.95s">
+        <div class="mobile-home__text-animation fadeIn-3" >
           <div class="out">
             <div class="in">
               <div class="mobile-home__actions">
