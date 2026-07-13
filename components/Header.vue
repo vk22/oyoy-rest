@@ -408,7 +408,7 @@ watch(dataReady, (newValue) => {
       width: 250px;
 
       @include for-phone-only {
-        width: 225px;
+        width: 200px;
       }
       @include for-tablet-portrait-up {
         width: 250px;

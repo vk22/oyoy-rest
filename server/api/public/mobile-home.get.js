@@ -1,5 +1,6 @@
 import { Company } from "~~/server/models/company-model";
 import { Gallery } from "~~/server/models/gallery-model";
+import { Nav } from "~~/server/models/nav-model";
 import { ReservationAvailable } from "~~/server/models/reservation-available-model";
 import { MenuPDF } from "~~/server/models/menuPDF-model";
 
@@ -7,6 +8,7 @@ const GALLERY_LIMIT = 8;
 
 const fallbackData = {
   company: {},
+  nav: [],
   gallery: [],
   topGallery: [],
   reservationAvailable: { isAvailable: true },
@@ -36,9 +38,13 @@ export default defineEventHandler(async (event) => {
   }
 
   try {
-    const [company, galleryItems, reservationAvailable, menuPdf] =
+    const [company, nav, galleryItems, reservationAvailable, menuPdf] =
       await Promise.all([
         Company.findOne().select("address phone map email").lean(),
+        Nav.find()
+          .sort({ order: 1 })
+          .select("text href type isHomePageAnchor isActive isPublished order")
+          .lean(),
         Gallery.find({ name: { $in: ["main", "top"] } })
           .select("name images.title images.file images.index")
           .lean(),
@@ -58,6 +64,7 @@ export default defineEventHandler(async (event) => {
       success: true,
       data: {
         company: company ?? {},
+        nav: nav ?? [],
         gallery: mainImages.length
           ? [{ name: "main", images: mainImages }]
           : [],

@@ -181,6 +181,7 @@ import { useCompanyStore } from "@/store/company";
 import { useGalleryStore } from "@/store/gallery";
 import { useCustomGalleryStore } from "@/store/galleryCustom";
 import { useMenuStore } from "@/store/menu";
+import { useNavigationStore } from "@/store/nav";
 
 const defaultMapLink =
   "https://www.google.com/maps/place/OyOy+Bar/@35.919872,14.492764,18z/data=!4m6!3m5!1s0x130e45c8ce17dbff:0xdaa73ebf3a91c9bd!8m2!3d35.9196351!4d14.4926563!16s%2Fg%2F11ryrfcfkx";
@@ -190,13 +191,31 @@ const companyStore = useCompanyStore();
 const galleryStore = useGalleryStore();
 const topGalleryStore = useCustomGalleryStore();
 const menuStore = useMenuStore();
+const navigationStore = useNavigationStore();
 
 const company = computed(() => companyStore.getCompany);
 const mapLink = computed(() => company.value.map || defaultMapLink);
+const navigation = computed(() => navigationStore.getItems);
+
+const navSectionIsAvailable = (sectionText) => {
+  if (!navigation.value.length) return true;
+
+  const section = navigation.value.find((item) => item.text === sectionText);
+  return Boolean(section?.isPublished !== false);
+};
+
+const menuPdfIsAvailable = (item) => {
+  if (item.category === "drinks") {
+    return navSectionIsAvailable("Wine List");
+  }
+
+  return navSectionIsAvailable("Menu");
+};
 
 const menuLinks = computed(() => {
   const links = menuStore.itemsPdf
     .filter((item) => item?.published !== false && item?.link?.file?.url)
+    .filter(menuPdfIsAvailable)
     .map((item) => ({
       label:
         item.category === "drinks"
@@ -217,7 +236,8 @@ const menuLinks = computed(() => {
 const primaryMenuLink = computed(() => {
   return (
     menuLinks.value.find((item) => item.category === "food")?.href ||
-    menuLinks.value[0].href
+    menuLinks.value[0]?.href ||
+    "/menu/main-menu.pdf"
   );
 });
 
