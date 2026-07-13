@@ -1,5 +1,21 @@
 import { Blog } from "~~/server/models/blog-model";
 
+const isValidImage = (item) => {
+  return Boolean(item?.file?.url && item?.file?.type);
+};
+
+const normalizeImage = (item) => {
+  if (!isValidImage(item)) return undefined;
+
+  return {
+    file: {
+      url: item.file.url,
+      type: item.file.type,
+    },
+    index: item.index ?? 0,
+  };
+};
+
 export default defineEventHandler( async (event) => {
     await requireAuth(event);
     const body = await readBody(event)
@@ -10,26 +26,18 @@ export default defineEventHandler( async (event) => {
     postItem.contentItems = body.contentItems
     postItem.text = body.text
     postItem.url = body.url
-    const imagesFiltered = body.images.filter((item, index) => {
-      if (item) {
-        if (item.file) {
-          item.index = index
-          return item
-        }
-      }
-    })
-    const galleryFiltered = body.gallery.filter((item, index) => {
-      if (item) {
-        if (item.file) {
-          item.index = index
-          return item
-        }
-      }
-    })
+    const imagesFiltered = body.images.filter(isValidImage).map((item, index) => ({
+      ...item,
+      index,
+    }))
+    const galleryFiltered = body.gallery.filter(isValidImage).map((item, index) => ({
+      ...item,
+      index,
+    }))
     postItem.images = imagesFiltered
     postItem.gallery = galleryFiltered
-    postItem.mainImage = body.mainImage
-    postItem.previewImage = body.previewImage
+    postItem.mainImage = normalizeImage(body.mainImage)
+    postItem.previewImage = normalizeImage(body.previewImage)
     const saveItem = await postItem.save()
     if (saveItem) {
       return {

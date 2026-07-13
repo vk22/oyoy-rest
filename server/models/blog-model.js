@@ -52,12 +52,10 @@ const SchemaData = new Schema({
   mainImage: {
     file: {
       url: {
-        type: String,
-        required: true
+        type: String
       },
       type: {
-        type: String,
-        required: true
+        type: String
       }
     },
     index: {
@@ -67,12 +65,10 @@ const SchemaData = new Schema({
   previewImage: {
     file: {
       url: {
-        type: String,
-        required: true
+        type: String
       },
       type: {
-        type: String,
-        required: true
+        type: String
       }
     },
     index: {

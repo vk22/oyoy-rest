@@ -17,7 +17,10 @@ export const useAuthStore = defineStore('auth', {
       }); 
       this.loading = pending;
       if (data.value.success) {
-        const token = useCookie('token'); 
+        const token = useCookie('token', {
+          maxAge: 60 * 60 * 8,
+          sameSite: 'lax',
+        }); 
         token.value = data?.value?.token; 
         this.authenticated = true; 
         return data.value

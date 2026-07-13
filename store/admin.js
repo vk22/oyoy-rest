@@ -22,20 +22,33 @@ export const useAdminStore = defineStore('admin', {
       console.log('fetchData body', body.value)
       
       this.setLoading(true);
-      const { data, status } = await useFetch(`/api/${route}`, {
+      const { data, status, error } = await useFetch(`/api/${route}`, {
         method: method,
-        body: body
+        body: body,
+        async onResponseError({ response }) {
+          if (response.status === 401) {
+            const token = useCookie('token');
+            token.value = null;
+            await navigateTo('/login');
+          }
+        },
       });
       this.setLoading(false);
 
+      console.log('data ', data)
+
       /// toast
       if (process.client) {
-        if (data.value.success) {
-          toast.success(data.value.message, {
+        if (data.value?.success) {
+          toast.success(data.value?.message, {
+            timeout: 2000
+          });
+        } else if (error.value?.statusCode === 401) {
+          toast.error('Session expired. Please log in again.', {
             timeout: 2000
           });
         } else {
-          toast.error(data.value.message, {
+          toast.error(data.value?.message, {
             timeout: 2000
           });
         }

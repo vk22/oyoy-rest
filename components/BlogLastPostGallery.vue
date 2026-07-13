@@ -39,7 +39,7 @@
         disableOnInteraction: true,
       }"
     >
-      <swiper-slide v-for="slide in slides" :key="slide">
+      <swiper-slide v-for="slide in validSlides" :key="slide._id || slide.url">
         <NuxtImg format="webp" :src="slide.mainImage.file.url" alt="" class="img-cover" />
       </swiper-slide>
     </swiper>
@@ -47,12 +47,16 @@
 </template>
 
 <script setup>
-import { ref } from "vue";
+import { computed, ref } from "vue";
 import { EffectFade, Autoplay, Pagination } from "swiper/modules";
 const modules = [EffectFade, Autoplay, Pagination];
 
 const props = defineProps({
   slides: { type: Array },
+});
+
+const validSlides = computed(() => {
+  return (props.slides || []).filter((slide) => slide?.mainImage?.file?.url);
 });
 
 let slidesCount = ref(0);
@@ -92,9 +96,11 @@ const sliderToggleText = () => {
   sliderInfo.style.transform = "translateY(10px)";
   setTimeout(() => {
     postInfo.value = {
-      title: props.slides[activeSlide.value].title,
-      date: useNuxtApp().$formatDate(props.slides[activeSlide.value].date),
-      url: props.slides[activeSlide.value].url,
+      title: validSlides.value[activeSlide.value]?.title || "",
+      date: validSlides.value[activeSlide.value]?.date
+        ? useNuxtApp().$formatDate(validSlides.value[activeSlide.value].date)
+        : "",
+      url: validSlides.value[activeSlide.value]?.url || "",
     };
 
     sliderInfo.style.opacity = "1";

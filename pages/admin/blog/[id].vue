@@ -30,10 +30,10 @@
             {{ files }}
             <div class="mt-5">
               <AdminImagesGalleryPreview
-                :images="[post.mainImage]"
+                :images="mainImagePreview"
                 :imagesType="'images'"
                 @drag-end="draggEnd"
-                @delete-gallery-item="deleteImagesItem"
+                @delete-gallery-item="deleteMainImage"
               ></AdminImagesGalleryPreview>
             </div>
           </div>
@@ -210,16 +210,14 @@ const post = ref();
 const { data } = await useFetch(`/api/blog/${route.params.id}`);
 
 post.value = data.value;
-if (post.value && !post.value.mainImage) {
-  post.value.mainImage = {
-    file: {
-      url: "",
-      type: "",
-    },
-    index: 0,
-  };
+if (post.value && !post.value.previewImage) {
   post.value.previewImage = post.value.images[0];
 }
+
+const isValidImage = (image) => Boolean(image?.file?.url && image?.file?.type);
+const mainImagePreview = computed(() => {
+  return isValidImage(post.value?.mainImage) ? [post.value.mainImage] : [];
+});
 
 const contentItemGalleryExist = computed(() => {
   if (post.value) {
@@ -360,6 +358,19 @@ const deletePost = async () => {
     const { success } = await adminStore.fetchData("blog", "delete", post);
     if (success) {
       router.push({ path: "/admin/blog" });
+    }
+  }
+};
+const deleteMainImage = async (image) => {
+  if (await isConfirmed()) {
+    post.value.mainImage = undefined;
+    post.value.previewImage = post.value.images.find(isValidImage);
+
+    await adminStore.fetchData("blog", "put", post);
+    if (image?.file?.url) {
+      await adminStore.fetchData("image-storage", "DELETE", {
+        url: image.file.url,
+      });
     }
   }
 };
