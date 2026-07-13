@@ -66,7 +66,7 @@
     ]"
   >
     <div class="header-l">
-      <div class="icon-nav" @click="toggleMenu()">
+      <div class="icon-nav" @click="toggleMenu()" v-if="!isMobile">
         <div class="line"></div>
         <div class="line"></div>
         <div class="line"></div>
@@ -145,6 +145,13 @@ import { useReservationStore } from "@/store/reservation";
 import { useNavigationStore } from "@/store/nav";
 import { useBlogStore } from "@/store/blog";
 
+const initialViewportMode = useState("initialViewportMode", () => ({
+  isMobile: process.server
+    ? isMobileUserAgent(requestHeaders["user-agent"] || "")
+    : true,
+}));
+const isMobile = ref(initialViewportMode.value.isMobile);
+
 const route = useRoute();
 const router = useRouter();
 const currentRoute = router.currentRoute;
@@ -174,7 +181,9 @@ const dataReady = computed(() => {
 });
 /// reservation
 const reservationStore = useReservationStore();
-const reservationAvailable = computed(() => reservationStore.reservationAvailable ?? true);
+const reservationAvailable = computed(
+  () => reservationStore.reservationAvailable ?? true,
+);
 const getFormModalStateToggle = () => {
   reservationStore.setFormModalState();
 };
@@ -286,7 +295,7 @@ watch(dataReady, (newValue) => {
 <style lang="scss" scoped>
 .main-header {
   display: flex;
-  justify-content: space-between;
+
   align-items: center;
   position: fixed;
   z-index: 999;
@@ -294,13 +303,26 @@ watch(dataReady, (newValue) => {
   padding: 1.5rem 2rem;
   opacity: 0;
 
+  @include for-phone-only {
+    justify-content: center;
+  }
+  @include for-tablet-portrait-up {
+    justify-content: space-between;
+  }
+
   .header-l,
   .header-r {
     width: 40%;
-    display: flex;
     align-items: flex-start;
     // padding-top: 2rem;
     color: #fff;
+
+    @include for-phone-only {
+      display: none;
+    }
+    @include for-tablet-portrait-up {
+      display: flex;
+    }
   }
 
   .icon-nav {
@@ -386,7 +408,7 @@ watch(dataReady, (newValue) => {
       width: 250px;
 
       @include for-phone-only {
-        width: 250px;
+        width: 225px;
       }
       @include for-tablet-portrait-up {
         width: 250px;
