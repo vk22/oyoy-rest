@@ -2,6 +2,7 @@ import { Company } from "~~/server/models/company-model";
 import { About } from "~~/server/models/about-model";
 import { Chef } from "~~/server/models/chef-model";
 import { Topslide } from "~~/server/models/topslide-model";
+import { MobileHome } from "~~/server/models/mobile-home-model";
 import { Nav } from "~~/server/models/nav-model";
 import { Blog } from "~~/server/models/blog-model";
 import { Event } from "~~/server/models/event-model";
@@ -15,6 +16,7 @@ const fallbackData = {
   about: {},
   chef: {},
   topslide: {},
+  mobileHome: {},
   nav: [],
   gallery: [],
   topGallery: [],
@@ -64,6 +66,7 @@ export default defineEventHandler(async (event) => {
       about,
       chef,
       topslide,
+      mobileHome,
       nav,
       galleryItems,
       reservationAvailable,
@@ -76,6 +79,7 @@ export default defineEventHandler(async (event) => {
       About.findOne(),
       Chef.findOne(),
       Topslide.findOne(),
+      MobileHome.findOne(),
       Nav.find().sort({ order: 1 }),
       Gallery.find(),
       ReservationAvailable.findOne(),
@@ -95,6 +99,7 @@ export default defineEventHandler(async (event) => {
         about: about ?? {},
         chef: chef ?? {},
         topslide: topslide ?? {},
+        mobileHome: mobileHome ?? {},
         nav: navChecked,
         gallery: galleryItems,
         topGallery,

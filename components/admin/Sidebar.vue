@@ -20,7 +20,6 @@
 </template>
 
 <script>
-
 export default {
   layout: "admin",
   middleware: ["auth"],
@@ -59,29 +58,34 @@ export default {
           icon: "mdi-format-list-bulleted",
         },
         {
-          name: 'Company',
-          route: '/admin/company',
-          icon: 'mdi-format-list-bulleted'
+          name: "Company",
+          route: "/admin/company",
+          icon: "mdi-format-list-bulleted",
         },
         {
-          name: 'Top slider',
-          route: '/admin/topslider',
-          icon: 'mdi-format-list-bulleted'
+          name: "Top slider",
+          route: "/admin/topslider",
+          icon: "mdi-format-list-bulleted",
         },
         {
-          name: 'About',
-          route: '/admin/about',
-          icon: 'mdi-format-list-bulleted'
+          name: "About",
+          route: "/admin/about",
+          icon: "mdi-format-list-bulleted",
         },
         {
-          name: 'Chef',
-          route: '/admin/chef',
-          icon: 'mdi-format-list-bulleted'
+          name: "Chef",
+          route: "/admin/chef",
+          icon: "mdi-format-list-bulleted",
         },
         {
           name: "Reservations",
           route: "/admin/reservations",
           icon: "mdi-format-list-bulleted",
+        },
+        {
+          name: "Mobile Home",
+          route: "/admin/mobile",
+          icon: "mdi-cellphone",
         },
       ],
       navRightIsActive: false,
@@ -100,8 +104,6 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-
-
 .sidebar {
   position: fixed;
   top: 0;

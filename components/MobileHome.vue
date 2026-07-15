@@ -24,7 +24,7 @@
           <div class="out">
             <div class="in">
               <p class="mobile-home__intro">
-                Mediterranean restaurant in Spinola Bay
+                {{ mobileText.intro }}
               </p>
             </div>
           </div>
@@ -37,7 +37,7 @@
                   Book a Table
                 </NuxtLink> -->
                 <a class="mobile-home__button-sm" :href="primaryMenuLink">
-                  View Menu
+                  {{ mobileText.menuButtonLabel }}
                 </a>
               </div>
             </div>
@@ -48,7 +48,7 @@
 
     <section class="mobile-home__section mobile-home__quick-info">
       <div>
-        <p class="mobile-home__eyebrow">Find us</p>
+        <p class="mobile-home__eyebrow">{{ mobileText.findUsEyebrow }}</p>
         <p class="mobile-home__address">{{ company.address || defaultAddress }}</p>
         
       </div>
@@ -60,7 +60,7 @@
           rel="noopener"
         >
         <v-icon icon="mdi-map-marker"></v-icon>
-          Open in Google Maps
+          {{ mobileText.mapLinkLabel }}
         </a>
         <a
           v-if="company.phone"
@@ -92,8 +92,8 @@
     </section> -->
 
     <section class="mobile-home__section mobile-home__photos" id="gallery">
-      <p class="mobile-home__eyebrow">Photos</p>
-      <h2>Spinola Bay views, terrace, food and drinks</h2>
+      <p class="mobile-home__eyebrow">{{ mobileText.photosEyebrow }}</p>
+      <h2>{{ mobileText.photosTitle }}</h2>
       <div class="mobile-home__photo-grid">
         <button
           v-for="(photo, index) in photos"
@@ -170,7 +170,7 @@
     </div>
 
     <div class="mobile-home__sticky">
-      <NuxtLink to="/reservations">Book a Table</NuxtLink>
+      <NuxtLink to="/reservations">{{ mobileText.bookingButtonLabel }}</NuxtLink>
     </div>
   </main>
 </template>
@@ -182,6 +182,7 @@ import { useGalleryStore } from "@/store/gallery";
 import { useCustomGalleryStore } from "@/store/galleryCustom";
 import { useMenuStore } from "@/store/menu";
 import { useNavigationStore } from "@/store/nav";
+import { useMobileHomeStore } from "@/store/mobileHome";
 
 const defaultMapLink =
   "https://www.google.com/maps/place/OyOy+Bar/@35.919872,14.492764,18z/data=!4m6!3m5!1s0x130e45c8ce17dbff:0xdaa73ebf3a91c9bd!8m2!3d35.9196351!4d14.4926563!16s%2Fg%2F11ryrfcfkx";
@@ -192,10 +193,25 @@ const galleryStore = useGalleryStore();
 const topGalleryStore = useCustomGalleryStore();
 const menuStore = useMenuStore();
 const navigationStore = useNavigationStore();
+const mobileHomeStore = useMobileHomeStore();
 
 const company = computed(() => companyStore.getCompany);
 const mapLink = computed(() => company.value.map || defaultMapLink);
 const navigation = computed(() => navigationStore.getItems);
+const mobileContent = computed(() => mobileHomeStore.getData ?? {});
+const mobileText = computed(() => ({
+  intro:
+    mobileContent.value.intro || "Mediterranean restaurant in Spinola Bay",
+  menuButtonLabel: mobileContent.value.menuButtonLabel || "View Menu",
+  findUsEyebrow: mobileContent.value.findUsEyebrow || "Find us",
+  mapLinkLabel: mobileContent.value.mapLinkLabel || "Open in Google Maps",
+  photosEyebrow: mobileContent.value.photosEyebrow || "Photos",
+  photosTitle:
+    mobileContent.value.photosTitle ||
+    "Spinola Bay views, terrace, food and drinks",
+  bookingButtonLabel:
+    mobileContent.value.bookingButtonLabel || "Book a Table",
+}));
 
 const navSectionIsAvailable = (sectionText) => {
   if (!navigation.value.length) return true;

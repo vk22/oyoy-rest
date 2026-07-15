@@ -5,19 +5,19 @@
     </div>
 <!-- 
     <section class="mobile-home-v2__primary">
-      <a class="mobile-home-v2__button mobile-home-v2__button--secondary" :href="primaryMenuLink">
-        View Menu
+        <a class="mobile-home-v2__button mobile-home-v2__button--secondary" :href="primaryMenuLink">
+        {{ mobileText.menuButtonLabel }}
       </a>
     </section> -->
 
     <section class="mobile-home-v2__section mobile-home-v2__quick-info">
       <div>
-        <p class="mobile-home-v2__eyebrow">Find us</p>
+        <p class="mobile-home-v2__eyebrow">{{ mobileText.findUsEyebrow }}</p>
         <h2>{{ company.address || defaultAddress }}</h2>
       </div>
       <div class="mobile-home-v2__quick-actions">
         <a class="mobile-home-v2__text-link" :href="mapLink" target="_blank" rel="noopener">
-          Open in Google Maps
+          {{ mobileText.mapLinkLabel }}
         </a>
         <a v-if="company.phone" class="mobile-home-v2__text-link" :href="'tel:' + company.phone">
           {{ company.phone }}
@@ -27,7 +27,7 @@
 
     <section class="mobile-home-v2__section mobile-home-v2__menu" id="menu">
       <p class="mobile-home-v2__eyebrow">Menu</p>
-      <h2>View our menu</h2>
+      <h2>{{ mobileText.menuButtonLabel }}</h2>
       <div class="mobile-home-v2__menu-actions">
         <a
           v-for="item in menuLinks"
@@ -44,8 +44,8 @@
     </section>
 
     <section class="mobile-home-v2__section mobile-home-v2__photos" id="gallery">
-      <p class="mobile-home-v2__eyebrow">Photos</p>
-      <h2>Spinola Bay views, terrace, food and drinks</h2>
+      <p class="mobile-home-v2__eyebrow">{{ mobileText.photosEyebrow }}</p>
+      <h2>{{ mobileText.photosTitle }}</h2>
       <div class="mobile-home-v2__photo-grid">
         <img
           v-for="photo in photos"
@@ -59,7 +59,7 @@
     </section>
 
     <div class="mobile-home-v2__sticky">
-      <NuxtLink to="/reservations">Book a Table</NuxtLink>
+      <NuxtLink to="/reservations">{{ mobileText.bookingButtonLabel }}</NuxtLink>
     </div>
   </main>
 </template>
@@ -71,6 +71,7 @@ import { useGalleryStore } from "@/store/gallery";
 import { useCustomGalleryStore } from "@/store/galleryCustom";
 import { useMenuStore } from "@/store/menu";
 import { useNavigationStore } from "@/store/nav";
+import { useMobileHomeStore } from "@/store/mobileHome";
 
 const defaultMapLink =
   "https://www.google.com/maps/place/OyOy+Bar/@35.919872,14.492764,18z/data=!4m6!3m5!1s0x130e45c8ce17dbff:0xdaa73ebf3a91c9bd!8m2!3d35.9196351!4d14.4926563!16s%2Fg%2F11ryrfcfkx";
@@ -81,10 +82,25 @@ const galleryStore = useGalleryStore();
 const topGalleryStore = useCustomGalleryStore();
 const menuStore = useMenuStore();
 const navigationStore = useNavigationStore();
+const mobileHomeStore = useMobileHomeStore();
 
 const company = computed(() => companyStore.getCompany);
 const mapLink = computed(() => company.value.map || defaultMapLink);
 const navigation = computed(() => navigationStore.getItems);
+const mobileContent = computed(() => mobileHomeStore.getData ?? {});
+const mobileText = computed(() => ({
+  intro:
+    mobileContent.value.intro || "Mediterranean restaurant in Spinola Bay",
+  menuButtonLabel: mobileContent.value.menuButtonLabel || "View Menu",
+  findUsEyebrow: mobileContent.value.findUsEyebrow || "Find us",
+  mapLinkLabel: mobileContent.value.mapLinkLabel || "Open in Google Maps",
+  photosEyebrow: mobileContent.value.photosEyebrow || "Photos",
+  photosTitle:
+    mobileContent.value.photosTitle ||
+    "Spinola Bay views, terrace, food and drinks",
+  bookingButtonLabel:
+    mobileContent.value.bookingButtonLabel || "Book a Table",
+}));
 
 const navSectionIsAvailable = (sectionText) => {
   if (!navigation.value.length) return true;

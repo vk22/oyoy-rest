@@ -13,6 +13,7 @@ const publicGetApiPrefixes = [
   "/api/about",
   "/api/chef",
   "/api/topslide",
+  "/api/mobile-home",
   "/api/menu",
   "/api/menu-pdf",
   "/api/blog",

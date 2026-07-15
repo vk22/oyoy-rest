@@ -27,6 +27,7 @@ import { useNavigationStore } from "@/store/nav";
 import { useAboutStore } from "@/store/about";
 import { useChefStore } from "@/store/chef";
 import { useTopslideStore } from "@/store/topslide";
+import { useMobileHomeStore } from "@/store/mobileHome";
 import { useMenuStore } from "@/store/menu";
 import { useGalleryStore } from "@/store/gallery";
 import { useBlogStore } from "@/store/blog";
@@ -40,6 +41,7 @@ const navStore = useNavigationStore();
 const aboutStore = useAboutStore();
 const chefStore = useChefStore();
 const topslideStore = useTopslideStore();
+const mobileHomeStore = useMobileHomeStore();
 const menuStore = useMenuStore();
 const galleryStore = useGalleryStore();
 const blogStore = useBlogStore();
@@ -75,12 +77,12 @@ if (!dataReady.value) {
   }
 
   const homeData = data.value?.data ?? {};
-  console.log('homeData.company ', homeData.company)
   customGalleryStore.setData(homeData.topGallery);
   companyStore.setData(homeData.company);
   aboutStore.setData(homeData.about);
   chefStore.setData(homeData.chef);
   topslideStore.setData(homeData.topslide);
+  mobileHomeStore.setData(homeData.mobileHome);
   navStore.setData(homeData.nav);
   galleryStore.setData(homeData.gallery);
   menuStore.setData(homeData.menu);

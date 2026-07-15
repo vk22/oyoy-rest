@@ -18,7 +18,6 @@
           <v-text-field v-model="topslide.subtitle" variant="outlined" label="Subtitle" density="compact"></v-text-field>
         </v-col>
       </v-row>
-
       <v-row>
         <v-col> 
           <div class="admin-main-btn mr-2" @click="save()">Save</div>
@@ -103,4 +102,5 @@ const save = async () => {
     }
   }
 }
+
 </style>
