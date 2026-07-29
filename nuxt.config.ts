@@ -3,6 +3,12 @@ import vuetify, { transformAssetUrls } from 'vite-plugin-vuetify'
 export default defineNuxtConfig({
   app: {
     head: {
+      meta: [
+        { 
+          name: 'google-site-verification', 
+          content: 'JBVbMFlQp-diGTgDwynmCQSUqMne9pdP8hfB3Gd4RHg' 
+        }
+      ],
       link: [
         {
           rel: 'preload',
