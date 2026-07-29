@@ -60,7 +60,8 @@ if (post.value && !post.value.mainImage) {
   post.value.mainImage = post.value.images[0];
   post.value.previewImage = post.value.images[0];
 }
-const pageTitle = post.value.title.substring(0, 40);
+//const pageTitle = post.value.title.substring(0, 40);
+const pageTitle = post.value.title;
 const textFromContent = post.value.contentItems.find(
   (item) => item.type === "text"
 );
