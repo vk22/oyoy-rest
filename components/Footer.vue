@@ -44,8 +44,11 @@
           href="https://www.facebook.com/oyoy.mlt"
           target="_blank"
         ></a>
-        <div class="social-icon icon-spotify"></div>
-        <div class="social-icon icon-tiktok"></div>
+        <a
+          class="social-icon icon-tiktok"
+          href="https://www.tiktok.com/@oyoyrestaurant"
+          target="_blank"
+        ></a>
       </div>
     </div>
     <div class="right">
