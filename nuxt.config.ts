@@ -1,6 +1,26 @@
 // https://nuxt.com/docs/api/configuration/nuxt-config
 import vuetify, { transformAssetUrls } from 'vite-plugin-vuetify'
+import mongoose from 'mongoose'
 export default defineNuxtConfig({
+  hooks: {
+    // `nuxt build` prerenders /reservations and /reservation-confirmed,
+    // which connect to MongoDB via server/middleware/mongodb.js. The driver
+    // keeps background topology-monitor sockets open for the lifetime of
+    // the connection, which otherwise keeps the build process alive forever
+    // after prerendering finishes (it never crashes or errors — it just
+    // never exits, which hangs CI/host build steps, e.g. Vercel). Doesn't
+    // affect the actual running server: this hook only fires during the
+    // build's own prerender step, not at request-serving runtime.
+    'nitro:init': (nitro) => {
+      nitro.hooks.hook('prerender:done', async () => {
+        try {
+          await mongoose.disconnect()
+        } catch {
+          // best-effort cleanup, never block the build on this
+        }
+      })
+    },
+  },
   app: {
     head: {
       meta: [

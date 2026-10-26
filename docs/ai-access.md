@@ -341,14 +341,23 @@ Bay") — the spec is explicit that only confirmed structured facts go here.
 Production deployment is a separate action for the owner — **not performed
 as part of this pilot**. When ready:
 
-0. Note: `yarn build` prints `[nitro] ✔ You can preview this build using node
-   .output/server/index.mjs` as soon as the build artifact is complete, but
-   the `nuxt build` process itself may not exit on its own afterwards (open
-   Mongoose sockets to the Atlas cluster keep Node's event loop alive). This
-   was observed during this pilot's verification and is independent of
-   whether the build succeeded — once that line is printed, `.output/` is
-   complete and the build command can be safely interrupted (Ctrl+C) if it
-   doesn't return.
+0. **Build-hang fix (required for CI/host build runners, e.g. Vercel)**:
+   `nuxt build` prerenders `/reservations` and `/reservation-confirmed`
+   (`routeRules` in `nuxt.config.ts`), which connect to MongoDB through
+   `server/middleware/mongodb.js`. The MongoDB driver keeps background
+   topology-monitor sockets open for the life of that connection — it never
+   errors, it just never lets the build process exit on its own. A plain
+   terminal run still *looks* finished once it prints
+   `[nitro] ✔ You can preview this build using node .output/server/index.mjs`,
+   but an automated build runner that waits for the process to actually exit
+   (Vercel's `vercel build` included) will hang indefinitely and eventually
+   time out. Fixed in `nuxt.config.ts` via a `hooks['nitro:init']` hook that
+   calls `mongoose.disconnect()` right after Nitro's `prerender:done` hook
+   fires — verified locally: `nuxt build` now exits with code 0 on its own
+   (confirmed by running the build command directly, not through a pipe).
+   This only runs during the build's prerender step, not at request-serving
+   runtime, so it doesn't affect the deployed server's normal DB connection
+   handling.
 1. `git diff main` / review the PR for this branch.
 2. Standard project deploy path (pm2 reload behind `.output/server/index.mjs`,
    per `ecosystem.config.js`), after `yarn build`.
