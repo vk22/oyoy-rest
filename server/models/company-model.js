@@ -15,8 +15,9 @@ const SchemaData = new Schema({
   coords: {
     type: String
   }
-}, { 
-  versionKey: false 
+}, {
+  versionKey: false,
+  timestamps: true,
 })
 
 export const Company = model("Company", SchemaData);

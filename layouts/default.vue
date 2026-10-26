@@ -14,6 +14,7 @@
     <EventsModal></EventsModal>
   </Transition>
   <Header></Header>
+  <RestaurantJsonLd></RestaurantJsonLd>
   <slot />
 </template>
 <script lang="ts" setup>

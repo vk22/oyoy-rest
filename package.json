@@ -11,7 +11,8 @@
     "generate": "nuxt generate",
     "preview": "nuxt preview",
     "postinstall": "nuxt prepare",
-    "start": "nuxt start"
+    "start": "nuxt start",
+    "test": "vitest run"
   },
   "devDependencies": {
     "@nuxt/devtools": "latest",
@@ -22,6 +23,7 @@
     "nuxt-tiptap-editor": "^1.2.1",
     "sass": "^1.69.5",
     "vite-plugin-vuetify": "^2.0.1",
+    "vitest": "3.2.4",
     "vue": "^3.3.10",
     "vue-router": "^4.2.5",
     "vuetify": "^3.5.10"
@@ -29,6 +31,7 @@
   "dependencies": {
     "@gtm-support/vue-gtm": "^3.1.0",
     "@mdi/font": "^7.3.67",
+    "@modelcontextprotocol/sdk": "^1.32.2",
     "@nuxtjs/gtm": "^2.4.0",
     "@nuxtjs/robots": "^5.2.10",
     "@nuxtjs/sitemap": "^7.3.1",
@@ -58,7 +61,11 @@
     "vue-lazyload": "^3.0.0",
     "vue-toast-notification": "^3",
     "vue3-mount": "^0.6.5",
-    "vuedraggable": "^4.1.0"
+    "vuedraggable": "^4.1.0",
+    "zod": "^3.25.0"
   },
-  "packageManager": "yarn@1.22.19+sha1.4ba7fc5c6e704fce2066ecbfb0b0d8976fe62447"
+  "packageManager": "yarn@1.22.19+sha1.4ba7fc5c6e704fce2066ecbfb0b0d8976fe62447",
+  "resolutions": {
+    "zod": "^3.25.0"
+  }
 }

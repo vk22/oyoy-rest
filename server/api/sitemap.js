@@ -2,15 +2,28 @@ import { Blog } from "~~/server/models/blog-model";
 
 export default defineEventHandler(async () => {
 
-    try {    
+    const urls = [];
+
+    try {
+      const menus = await getFullMenuCatalog();
+      const lastmod = menus.reduce((latest, menu) => {
+        if (!menu.updatedAt) return latest;
+        return !latest || menu.updatedAt > latest ? menu.updatedAt : latest;
+      }, null);
+      urls.push({ loc: "/full-menu", ...(lastmod ? { lastmod } : {}) });
+    } catch (error) {
+      console.log("error ", error);
+      urls.push({ loc: "/full-menu" });
+    }
+
+    try {
       const allBlogPosts = await Blog.find({published: true}).sort({ date: -1 });
-      const urls = allBlogPosts.map(el => { 
-        return { loc: `/blog/${el.url}` } 
+      allBlogPosts.forEach(el => {
+        urls.push({ loc: `/blog/${el.url}` });
       })
-      return urls
-        
     } catch (error) {
         console.log('error ', error)
-        return []
     }
+
+    return urls
 });

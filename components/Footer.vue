@@ -85,6 +85,9 @@
         <ul>
           <li>
             <div>
+              <router-link to="/full-menu">Full Menu</router-link>
+            </div>
+            <div>
               <router-link to="/privacy" target="_blank"
                 >Privacy Policy</router-link
               >

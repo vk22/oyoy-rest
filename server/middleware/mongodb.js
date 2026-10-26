@@ -20,10 +20,18 @@ const publicGetApiPrefixes = [
   "/api/events",
   "/api/gallery",
   "/api/public/mobile-home",
+  "/api/public/restaurant",
+  "/api/public/menu",
 ];
+
+// Not GET-only like publicGetApiPrefixes: MCP tools are invoked via POST and
+// must get the same honest "data unavailable" fallback as the public GET API
+// rather than a hard 500 if Mongo can't be reached.
+const publicAnyMethodPrefixes = ["/mcp"];
 
 const dbApiPrefixes = [
   ...publicGetApiPrefixes,
+  ...publicAnyMethodPrefixes,
   "/api/blob-upload-url",
   "/api/blog-migrate",
   "/api/getusers",
@@ -41,12 +49,12 @@ const dbApiPrefixes = [
 
 export default defineEventHandler(async (event) => {
   const pathname = getRequestURL(event).pathname;
+  const matchesPrefix = (prefixes) =>
+    prefixes.some((prefix) => pathname === prefix || pathname.startsWith(`${prefix}/`));
   const isPublicGetApi =
-    event.method === "GET" &&
-    publicGetApiPrefixes.some((prefix) => pathname === prefix || pathname.startsWith(`${prefix}/`));
-  const needsMongo =
-    pathname.startsWith("/api/") &&
-    dbApiPrefixes.some((prefix) => pathname === prefix || pathname.startsWith(`${prefix}/`));
+    (event.method === "GET" && matchesPrefix(publicGetApiPrefixes)) ||
+    matchesPrefix(publicAnyMethodPrefixes);
+  const needsMongo = matchesPrefix(dbApiPrefixes);
 
   if (!needsMongo) {
     return;

@@ -1,5 +1,6 @@
 <template>
   <HeaderReservation />
+  <RestaurantJsonLd></RestaurantJsonLd>
   <main class="reservation-layout">
     <slot />
   </main>
